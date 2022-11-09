@@ -1,0 +1,270 @@
+/* Variables */
+:root{
+    --primary: #549950;
+    --secondary: #126408;
+    --terciary: #4B8948;
+    --gray: #8E9297;
+    --light-gray: #F0F0F0;
+    --black: #000000;
+    --white: #FFFFFF;
+}
+
+/* Globals */
+
+html{
+    font-size: 62.5%;
+    font-family: Monospaced, Arial, "Times New Roman", sans-serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+select{
+    width: 80%;
+    height: 80%;
+    margin: 10px auto 10px 0;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    padding: 5px;
+    vertical-align: middle;
+    font-size: 1.5rem;
+}
+
+select option{
+    background-color: var(--light-gray);
+    color: var(--gray);
+    font-size: 1.5rem;
+}
+
+input[type="text"]:focus,
+select:focus{
+    outline: 2px solid var(--gray);
+}
+
+/* Utilities */
+.main-container{
+    margin: 0 auto;
+    width: 90%;
+    min-height: 80vh;
+    height: auto;
+}
+
+.tabs{
+    display: block;
+}
+
+.tabs button{
+    padding: 5px;
+    margin-right: 15px;
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: var(--secondary);
+    border-radius: 5px;
+    transition: all 300ms;
+    border-bottom: 3px solid var(--secondary);
+}
+
+.tabs button:hover{
+    background-color: var(--primary);
+    color: var(--white);
+    animation: expand-button 300ms both;
+    cursor: pointer;
+}
+
+.input-columns-2{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.input-columns-2 div{
+    width: 50%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.input-columns-2 label{
+    color: var(--gray);
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.d-none{
+    display: none;
+}
+
+.mt-1{
+    margin-top: 10px;
+}
+
+.mt-2{
+    margin-top: 20px;
+}
+
+.mb-1{
+    margin-bottom: 10px;
+}
+
+.mb-2{
+    margin-bottom: 20px;
+}
+
+/* Header */
+
+header{
+    width: 100%;
+    height: 150px;
+}
+
+/* Header - Heading */
+
+.header--icons{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header--icons div:first-child{
+    width: 25%;
+    height: 100%;
+}
+
+.header--icons div:last-child{
+    height: 100%;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    padding-left: 25%;
+}
+
+.header--icons--title{
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+.header--icons--title span{
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+/* Header - User Data */
+
+.header--user-data{
+    width: 100%;
+    height: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 1%;
+    background-color: var(--light-gray);
+}
+
+.header--user-data div:first-child span{
+    margin-left: 10px;
+    margin-right: 20px;
+    color: var(--gray);
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.header--user-data button{
+    background-color: transparent;
+    border: none;
+    font-size: 1.3rem;
+    color: var(--gray);
+}
+
+.header--user-data button:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* Navbar */
+
+.header--navbar{
+    height: 35px;
+    width: 97.5%;
+    list-style: none;
+    display: flex;
+    background-color: var(--primary);
+}
+
+.header--navbar li{
+    height: 100%;
+}
+
+.header--navbar li a{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    background-color: var(--secondary);
+    color: var(--white);
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 400ms;
+}
+
+.header--navbar li a:hover{
+    background-color: var(--primary);
+}
+
+.header--navbar li:first-child a{
+    background-color: var(--primary);
+}
+
+.header--navbar li:first-child a:hover{
+    background-color: var(--secondary);
+}
+
+header div:last-child{
+    display: flex;
+}
+
+#header--navbar--button{
+    width: 2.5%;
+    background-color: var(--terciary);
+    padding: 5px;
+    color: white;
+    border: 0.5px solid var(--secondary);
+}
+
+/* */
+
+/* Footer */
+
+footer{
+    width: 100%;
+    height: auto;
+}
+
+footer div:first-child{
+    border-top: 5px solid var(--gray);
+}
+
+/* Animations */
+@keyframes expand-button {
+    from{
+        transform: scale(1);
+        font-weight: normal;
+    }
+
+    to{
+        transform: scale(1.1, 1.1);
+        /*font-weight: bold;*/
+    }
+}
