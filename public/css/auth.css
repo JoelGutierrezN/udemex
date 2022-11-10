@@ -1,0 +1,155 @@
+/* Variables */
+:root{
+    --primary: #549950;
+    --secondary: #126408;
+    --terciary: #4B8948;
+    --gray: #8E9297;
+    --light-gray: #F0F0F0;
+    --black: #000000;
+    --white: #FFFFFF;
+}
+
+html{
+    font-size: 62.5%;
+    font-family: Monospaced, Arial, "Times New Roman", serif;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main{
+    width: 100vw;
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("../assets/img/auth/background.jpg");
+}
+
+h1{
+    text-align: center;
+    font-size: 2.8rem;
+    margin: 10px auto 15px auto;
+    font-weight: 500;
+}
+
+.divisor-line{
+    height: 10px;
+    border-bottom: 5px solid var(--primary);
+    border-radius: 10px;
+}
+
+h2{
+    margin: 10px auto 10px auto;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: normal;
+}
+
+input[type="password"],
+input[type="email"]{
+    width: 100%;
+    height: 35px;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    padding: 5px;
+    vertical-align: middle;
+    font-size: 1.6rem;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus{
+    outline: 2px solid var(--primary);
+}
+
+label{
+    display: block;
+    width: 100%;
+    font-size: 1.6rem;
+    color: var(--terciary);
+    text-align: start;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#login-image{
+    display: none;
+    width: 25%;
+}
+
+@media (min-width: 1280px) {
+    #login-image{
+        display: inline-block;
+    }
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 70%;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    box-shadow: 0 0 5px 1px var(--gray);
+    border: 1px solid var(--gray);
+}
+
+@media (min-width: 798px) {
+    form{
+        width: 35%;
+    }
+}
+
+@media (min-width: 1280px) {
+    form{
+        width: 25%;
+    }
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px auto;
+    width: 85%;
+}
+
+@media (min-width: 578px) {
+    .form-group{
+        margin: 20px auto;
+    }
+}
+
+.form-group-button{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+    margin-top: 30px;
+}
+
+.form-group-button button{
+    border: none;
+    background-color: var(--primary);
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    width: 150px;
+    transition: all 300ms;
+}
+
+.form-group-button button:hover{
+    background-color: var(--terciary);
+    cursor: pointer;
+}
+
+.form-group-images{
+    display: flex;
+    justify-content: space-around;
+}
