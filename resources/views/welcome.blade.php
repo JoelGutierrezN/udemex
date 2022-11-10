@@ -12,7 +12,7 @@
 
         <div class="tabs">
             <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
-            <button type="button" data-tab-target="2">Datos de la Carrera Profesional &blacktriangledown;</button>
+            <button type="button" data-tab-target="2">Datos del Historial Académico &blacktriangledown;</button>
         </div>
 
         {{-- Datos personales --}}
@@ -68,15 +68,28 @@
                 </div>
 
                 <div>
+                    <label for="text-input">Confirmación de Email Personal</label>
+                    <input type="text" placeholder="Coloque su email personal" id="text-input">
+                </div>
+
+                <div>
+                    <label for="select-input">Sexo</label>
+                    <label><input type="radio" name="#" value="#">Femenino</label>
+                    <label><input type="radio" name="#" value="#" required>Masculino</label>
+                </div>
+
+                <div>
                     <label for="text-input">Fotografia</label>
                     <input type="file" placeholder="Coloque su fotografia" id="text-input">
                 </div>
+
+
             </div>
         </div>
         {{--Fin Datos personales --}}
 
         <div class="mt-2" data-tab-id="2">
-            <h3 class="tab--title">Datos de la Carrera Profesional</h3>
+            <h3 class="tab--title">Datos del Historial Académico</h3>
             <div class="input-columns-2">
                 <div>
                     <label for="text-input-2">Nombre del campo 2</label>
