@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
+Route::get('/test_pdf', function(){
+    return view('pdf/index');
 });
