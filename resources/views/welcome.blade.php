@@ -8,14 +8,16 @@
         @csrf
         @method('POST')
 
+        <h3 class="form-screen-title">Registro de Información Personal</h3>
+
         <div class="tabs">
-            <button type="button" data-tab-target="1">Datos Personales</button>
-            <button type="button" data-tab-target="2">Datos de la Carrera Profesional</button>
+            <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
+            <button type="button" data-tab-target="2">Datos de la Carrera Profesional &blacktriangledown;</button>
         </div>
 
         {{-- Datos personales --}}
         <div class="mt-2" data-tab-id="1">
-            <h3>Datos Personales</h3>
+            <h3 class="tab--title">Datos Personales</h3>
             <div class="input-columns-2">
                 <div>
                     <label for="text-input">Nombres</label>
@@ -74,7 +76,7 @@
         {{--Fin Datos personales --}}
 
         <div class="mt-2" data-tab-id="2">
-            <h3>Datos de la Carrera Profesional</h3>
+            <h3 class="tab--title">Datos de la Carrera Profesional</h3>
             <div class="input-columns-2">
                 <div>
                     <label for="text-input-2">Nombre del campo 2</label>
