@@ -1,4 +1,4 @@
-<header class="mb-2">
+<header>
 
     <div class="header--icons">
         <div class="header--icons--logos">

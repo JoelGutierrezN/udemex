@@ -13,7 +13,7 @@
 
     @include('layout.header')
 
-    <div class="main-container">
+    <div class="main-container mt-2 mb-2">
         @yield('content')
     </div>
 
