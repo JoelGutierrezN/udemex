@@ -33,10 +33,35 @@ label{
     font-size: 1.4rem;
     margin-top: 10px;
 }
+input[type="file"]{
+    width: 80%;
+    height: 34px;
+    margin: 10px auto 10px 0;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 
-input[type="text"],
+input[type="text"],.select2-multiple,
 select{
     width: 80%;
+    height: 80%;
+    margin: 10px auto 10px 0;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    padding: 5px;
+    vertical-align: middle;
+    font-size: 1.5rem;
+}
+
+input[type="time"]{
+    width: 30%;
     height: 80%;
     margin: 10px auto 10px 0;
     border: 1px solid var(--gray);
@@ -55,6 +80,9 @@ select option{
 
 input[type="text"]:focus,
 select:focus{
+    outline: 2px solid var(--gray);
+}
+input[type="time"]:focus{
     outline: 2px solid var(--gray);
 }
 
@@ -105,6 +133,43 @@ select:focus{
     align-items: start;
     justify-content: center;
     flex-direction: column;
+}
+.contenedor-2col {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .contenedor-2col > div {
+    width: 50%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+    
+  }
+
+  UL.col2
+{
+PADDING-RIGHT: 0px;
+PADDING-LEFT: 0px;
+FLOAT: left;
+PADDING-BOTTOM: 0px;
+MARGIN: 15px 0px;
+WIDTH: 100%;
+PADDING-TOP: 0px;
+LIST-STYLE-TYPE: none
+}
+
+UL.col2 LI
+{
+PADDING-RIGHT: 2px;
+DISPLAY: inline;
+PADDING-LEFT: 2px;
+FLOAT: left;
+PADDING-BOTTOM: 2px;
+WIDTH: 50%;
+PADDING-TOP: 2px
 }
 
 .form-screen-title{
