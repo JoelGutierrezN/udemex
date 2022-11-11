@@ -95,60 +95,113 @@
         #info_table tbody tr td{
             border-bottom: 1px solid;
         }
+        #page-footer{
+            position: absolute;
+            width: 100%;
+            height: 30px;
+            background-color: #3CA037;
+            text-align: center;
+            color: whitesmoke;
+            font-size: 10px;
+            padding-top: 10px;
+            bottom: -10px;
+        }
+        #marca-agua{
+            z-index: -1;
+            position: absolute;
+            top: 50%;
+            right: 30%;
+        }
+        #marca-agua #logo{
+            opacity: 0.3;
+            width: 300px;
+            height: 300px;
+        }
+        #page-container{
+            z-index: 1;
+        }
+        section{
+            display: inline-block;
+        }
+        #page-num{
+            position: relative;
+            right: -200px;
+        }
     </style>
 </head>
 <body>
-        <div class="header">
-            <div class="logo-container">
-                <img src="data:image/jpg;base64, {{ $image }}" alt="Logo UDEMEX">
+    @php
+        $count = 1;
+    @endphp
+     @foreach($info->pages as $page)
+        <div id="page-container">
+            <div class="header">
+                <div class="logo-container">
+                    <img src="data:image/jpg;base64, {{ $image }}" alt="Logo UDEMEX">
+                </div>
+                <div class="title-container">
+                    <h1><a href="">UNIVERSIDAD DIGITAL</a></h1><br>
+                    <h2><a href="">DEL ESTADO DE MÉXICO</a></h2>
+                </div>
             </div>
-            <div class="title-container">
-                <h1><a href="">UNIVERSIDAD DIGITAL</a></h1><br>
-                <h2><a href="">DEL ESTADO DE MÉXICO</a></h2>
-            </div>
-        </div>
-        <hr>
-        
-        <div class="page-body">
-            <div class="table-container">
-                <h2>Resultados de evaluacion {{ $info[6] }}</h2>
-                <table class="docente-table">
-                    <tr>
-                        <th id="docente_head">Docente: </th>
-                        <td id="docente_col">
-                            {{ $info[0] }}
-                        </td>
-                        <th id="fecha_head">Fecha: </th>
-                        <td id="fecha_col">{{ $info[1] }}</td>
-                    </tr>
-                    <tr>
-                        <th id="asignatura_head">Asignatura: </th>
-                        <td id="asignatura_col">{{ $info[2] }}</td>
-                        <th id="grupo_col" colspan=2>{{ $info[3] }}</th>
-                    </tr>
-                    <tr>
-                        <th id="programa_head">Programa educativo: </th>
-                        <td id="programa_col" colspan=3>{{ $info[4] }}</td>
-                    </tr>
-                </table>
-                <hr>
-                <table id="info_table">
-                    <thead>
+            <hr>
+                
+            <div class="page-body">
+                <div class="table-container">
+                    <h2>Resultados de evaluacion {{ $info->tipo_evaluacion }}</h2>
+                    <table class="docente-table">
                         <tr>
-                            <th id="alumno_head">Alumno</th>
-                            <th id="calificaciones_head">Calificaciones</th>
+                            <th id="docente_head">Docente: </th>
+                            <td id="docente_col">
+                                {{ $info->docente }}
+                            </td>
+                            <th id="fecha_head">Fecha: </th>
+                            <td id="fecha_col">{{ $info->fecha }}</td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($info[5] as $alumno)
+                        <tr>
+                            <th id="asignatura_head">Asignatura: </th>
+                            <td id="asignatura_col">{{ $info->asignatura }}</td>
+                            <th id="grupo_col" colspan=2>{{ $info->grupo }}</th>
+                        </tr>
+                        <tr>
+                            <th id="programa_head">Programa educativo: </th>
+                            <td id="programa_col" colspan=3>{{ $info->programa }}</td>
+                        </tr>
+                    </table>
+                    <hr>
+                    <table id="info_table">
+                        <thead>
                             <tr>
-                                <td>{{ $alumno }}</td>
+                                <th id="alumno_head">Alumno</th>
+                                <th id="calificaciones_head">Calificaciones</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach($page as $alumno)
+                                <tr>
+                                    <td>{{ $alumno }}</td>
+                                </tr>
+                                @endforeach
+                         </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <div id="page-footer">
+            <section>
+                UNIVERSIDAD DIGITAL DEL ESTADO DE MÉXICO
+            </section>
+            <section id="page-num">
+                {{ $count }}
+            </section>
+        </div>
+        <div id="marca-agua">
+            <img src="data:image/jpg;base64, {{ $logo }}" id="logo" alt="">
+        </div>
+        @php
+            $count ++;
+        @endphp
+    @endforeach
 </body>
 
 </html>
