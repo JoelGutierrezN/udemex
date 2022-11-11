@@ -91,21 +91,36 @@
         {{--Fin Datos personales --}}
 
         {{--Datos del Historial Académico --}}
-
         <div class="mt-2" data-tab-id="2">
             <h3 class="tab--title">Datos del Historial Académico</h3>
             <div class="input-columns-2">
                 <div>
-                    <label for="text-input-2">Nombre del campo 2</label>
-                    <input type="text" placeholder="Este es un placeholder" id="text-input-2">
+                    <label>Materias que ha impartido en nivel preparatoria</label>
+                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
+                        <option value="#">Mate prepa1</option>
+                        <option value="#">Mate prepa2</option>
+                      </select>
                 </div>
                 <div>
-                    <label for="select-input-2">Nombre del campo 2</label>
-                    <select id="select-input-2">
-                        <option value="">opcion 1</option>
-                        <option value="">opcion 2</option>
-                        <option value="">opcion 3</option>
-                    </select>
+                    <label>Materias que ha impartido en nivel licenciatura</label>
+                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
+                        <option value="#">Ingles lic 1</option>
+                        <option value="#">Ingles lic 2</option>
+                      </select>
+                </div>
+                <div>
+                    <label>Materias que ha impartido en nivel maestria</label>
+                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
+                        <option value="#">español mae 1</option>
+                        <option value="#">español mae 2</option>
+                      </select>
+                </div>
+                <div>
+                    <label>Materias que ha impartido en nivel doctorado</label>
+                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
+                        <option value="#">Doc doc 1</option>
+                        <option value="#">Doc doc 2</option>
+                      </select>
                 </div>
             </div>
         </div>
@@ -136,7 +151,6 @@
                 <div>
                     <label for="select-input-2">Disponibilidad para ser asesor en la UDEMEX</label>
                     <ul class="col2">
-                        
                         <li><input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
                             <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
                             <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
@@ -145,29 +159,29 @@
                         <li>
                         </ul>
                 </div>
-                
+
                 <div style="margin-top:10px">
                     <label for="select-input-2">¿Cuál es el horario laboral en su otro trabajo?</label>
                     <ul class="col2">
                         <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00"></li> </ul>
                 </div>
-                
+
             </div>
             <div class="contenedor-2col">
                 <div>
                     <label for="select-input-2">¿Trabaja en otro lugar actualmente?</label>
                     <ul class="col2">
-                        
+
                         <li><input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
                             <label for=""> Si</label>&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
                             <label for=""> No</label></li>
                         <li>
                         </ul>
                 </div>
-                
+
                 <div>
                     <label for="select-input-2">¿Cuáles son los dias laborales en su otro trabajo? </label>
-                    
+
                         <ul class="col2"><input type="checkbox" id="l-otrolugar" name="labora-actualmente" value="Bike">
                         <label > Lun.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
                         <label > Mar.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
@@ -176,27 +190,26 @@
                         <label > Vier.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
                         <label > Sáb.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
                         <label > Dom.</label></ul>
-                    
                 </div>
             </div>
             <div class="contenedor-2col">
                 <div>
                     <label for="select-input-2">En este otro lugar donde trabaja, ¿está de...?</label>
                     <ul class="col2">
-                        
+
                         <li><input type="radio" id="" name="" value="">
                             <label for=""> Tiempo Parcial</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
                             <label for=""> Tiempo Completo</label></li>
                         <li>
                             <li>
-                                
+
                             </li>
                         </ul>
                 </div>
-                
+
                 <div>
-                    
-                    
+
+
                 </div>
             </div>
         </div>
@@ -216,7 +229,7 @@
                     <small>El nombre del archivo debe de ser su nombre completo empezando
                         por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
                     <input type="file" placeholder="Coloque su fotografia" id="text-input">
-                    
+
                 </div>
             </div>
         </div>
