@@ -14,23 +14,23 @@ use App\Http\Controllers\Auth\TemporalAuthController;
 |
 */
 
-Route::view('/welcome', 'welcome');
-Route::redirect('/', 'auth/login/temporal');
+Route::view('/', 'welcome');
+// Route::redirect('/', 'auth/login/temporal');
 
-/* Auth 365 */
-Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers\Auth'], function(){
-    Route::get('login', 'AuthController@login')->name('login');
-    Route::get('connect', 'AuthController@connect')->name('connect');
-});
+// /* Auth 365 */
+// Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers\Auth'], function(){
+//     Route::get('login', 'AuthController@login')->name('login');
+//     Route::get('connect', 'AuthController@connect')->name('connect');
+// });
 
-Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
-    Route::get('/', 'PagesController@app')->name('app');
-    Route::get('logout', 'Auth\AuthController@logout')->name('logout');
-});
+// Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
+//     Route::get('/', 'PagesController@app')->name('app');
+//     Route::get('logout', 'Auth\AuthController@logout')->name('logout');
+// });
 
-/* Auth Normal Temporal*/
-Route::prefix('auth')->group(function (){
-    Route::get('login/temporal', [TemporalAuthController::class, 'login'])->name('login.temporal');
-    Route::post('authenticate/temporal', [TemporalAuthController::class, 'authenticate'])->name('authenticate.temporal');
-    Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
-});
+// /* Auth Normal Temporal*/
+// Route::prefix('auth')->group(function (){
+//     Route::get('login/temporal', [TemporalAuthController::class, 'login'])->name('login.temporal');
+//     Route::post('authenticate/temporal', [TemporalAuthController::class, 'authenticate'])->name('authenticate.temporal');
+//     Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
+// });

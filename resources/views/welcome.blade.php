@@ -19,7 +19,7 @@
 
         {{-- Datos personales --}}
         <div class="mt-2" data-tab-id="1">
-            <h3 class="tab--title">Datos Personales</h3>
+            <h3 class="tab--title">Datos personales</h3>
             <div class="input-columns-2">
                 <div>
                     <label for="text-input">Nombres</label>
@@ -27,12 +27,12 @@
                 </div>
 
                 <div>
-                    <label for="text-input">Apellido Paterno</label>
+                    <label for="text-input">Apellido paterno</label>
                     <input type="text" placeholder="Coloque su apellido paterno" id="text-input">
                 </div>
 
                 <div>
-                    <label for="text-input">Apellido Materno</label>
+                    <label for="text-input">Apellido materno</label>
                     <input type="text" placeholder="Coloque su apellido materno" id="text-input">
                 </div>
 
@@ -42,23 +42,23 @@
                 </div>
 
                 <div>
-                    <label for="text-input">Telefono de casa</label>
-                    <input type="text" placeholder="Coloque su telefono de casa" id="text-input">
+                    <label for="text-input">Teléfono de casa</label>
+                    <input type="text" placeholder="Coloque su teléfono de casa" id="text-input">
                 </div>
 
                 <div>
-                    <label for="text-input">Telefono Celular</label>
-                    <input type="text" placeholder="Coloque su telefono celular" id="text-input">
+                    <label for="text-input">Teléfono celular</label>
+                    <input type="text" placeholder="Coloque su teléfono celular" id="text-input">
                 </div>
 
                 <div>
-                    <label for="text-input">Email de EDEMEX</label>
-                    <input type="text" placeholder="Coloque su email de EDEMEX" id="text-input">
+                    <label for="text-input">Correo electrónico de UDEMEX</label>
+                    <input type="text" placeholder="Coloque su correo electrónico de UDEMEX" id="text-input">
                 </div>
 
                 <div>
-                    <label for="text-input">Email Personal</label>
-                    <input type="text" placeholder="Coloque su email personal" id="text-input">
+                    <label for="text-input">Correo electrónico personal</label>
+                    <input type="text" placeholder="Coloque su Correo electrónico personal" id="text-input">
                 </div>
 
                 <div>
@@ -70,19 +70,21 @@
                 </div>
 
                 <div>
-                    <label for="text-input">Confirmación de Email Personal</label>
-                    <input type="text" placeholder="Coloque su email personal" id="text-input">
+                    <label for="text-input">Confirmación de Correo electrónico personal</label>
+                    <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
                 </div>
 
                 <div>
                     <label for="select-input">Sexo</label>
-                    <label><input type="radio" name="#" value="#">Femenino</label>
-                    <label><input type="radio" name="#" value="#" required>Masculino</label>
+                    <ul class="col2">
+                        <label><input type="radio" name="#" value="#">Femenino</label>&#160;&#160;&#160;&#160;&#160;
+                        <label><input type="radio" name="#" value="#" required>Masculino</label>
+                    </ul>
                 </div>
 
                 <div>
-                    <label for="text-input">Fotografia</label>
-                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
+                    <label for="text-input">Fotografía</label>
+                    <input type="file" placeholder="Coloque su fotografía" id="text-input">
                 </div>
 
 
