@@ -50,4 +50,4 @@ Route::get('/anex', function(){
 
 Route::post('getInformacionAcademicas', [EjemploAnex::class, 'getInformacionAcademicas'])->name('getInformacionAcademicas');
 Route::get('getData', [EjemploAnex::class, 'getData'])->name('getData');
-Route::get('reporteEjemplo/{filtro}/{value}', [EjemploAnex::class, 'reporteEjemplo'])->name('reporteEjemplo');
+Route::get('reporteEjemplo/{id}/{experiencia_presencial}/{expreriencia_linea}', [EjemploAnex::class, 'reporteEjemplo'])->name('reporteEjemplo');
