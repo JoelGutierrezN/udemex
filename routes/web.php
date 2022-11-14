@@ -4,20 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\PDFController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::view('/welcome', 'welcome');
-Route::redirect('/', 'auth/login/temporal');
-
+Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 /* Auth 365 */
 Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers\Auth'], function(){
     Route::get('login', 'AuthController@login')->name('login');
@@ -36,8 +23,24 @@ Route::prefix('auth')->group(function (){
     Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
 });
 
-// * Rutas para generar los PDF
-Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
-Route::get('/test_pdf', function(){
-    return view('pdf/index');
+/* Rutas Administrativas */
+Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
+    Route::view('/', 'admin-modules.index')->name('index');
+});
+
+/* Rutas de Profesores */
+Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
+    Route::view('/', 'teacher-modules.index')->name('index');
+    Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher']);
+
+    // * Rutas para generar los PDF
+    Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
+    Route::get('/test_pdf', function(){
+        return view('pdf/index');
+    });
+});
+
+/* Rutas Rutas de Soporte */
+Route::middleware(['auth', 'support'])->prefix('soporte')->name('support.')->group( function(){
+    Route::view('/', 'support-modules.index')->name('index');
 });
