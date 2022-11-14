@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\EjemploAnex;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,12 @@ Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
 Route::get('/test_pdf', function(){
     return view('pdf/index');
 });
+
+// * Rutas para zinggrid
+Route::get('/anex', function(){
+    return view('EjemploGrid/zinggrid');
+});
+
+Route::post('getInformacionAcademicas', [EjemploAnex::class, 'getInformacionAcademicas'])->name('getInformacionAcademicas');
+Route::get('getData', [EjemploAnex::class, 'getData'])->name('getData');
+Route::get('reporteEjemplo/{filtro}/{value}', [EjemploAnex::class, 'reporteEjemplo'])->name('reporteEjemplo');
