@@ -55,7 +55,7 @@ class EjemploAnex extends Controller
                 ->select('id_informacion_academica', 'experiencia_presencial', 'experiencia_linea', 'nivel_mayor_experiencia', 'modalidad')
                 ->where('id_informacion_academica', 'like', '%'.$id_informacion_academica.'%')
                 ->where('experiencia_presencial', 'like', '%'.$experiencia_presencial.'%')
-                ->where('experiencia_linea', 'like', '%'.$experiencia_linea.'%')
+                ->where('experiencia_linea', '=', '%'.$experiencia_linea.'%')
                 ->where('nivel_mayor_experiencia', 'like', '%'.$nivel_mayor_experiencia.'%')
                 ->where('modalidad', 'like', '%'.$modalidad.'%')
                 ->skip($anexGrid->pagina)
@@ -79,10 +79,13 @@ class EjemploAnex extends Controller
         return $info;
     }
 
-    public function reporteEjemplo($filtro, $value){
+    public function reporteEjemplo($id, $experiencia_presencial, $experiencia_linea){
+        
         $info = \DB::table('informacion_academicas')
                 ->select('id_informacion_academica', 'experiencia_presencial', 'experiencia_linea', 'nivel_mayor_experiencia', 'modalidad')
-                ->where($filtro, 'like', '%'.$value.'%')
+                ->where('id_informacion_academica', 'like', ($id == 'null')? '%'.''.'%' : '%'.$id.'%')
+                ->where('experiencia_presencial', 'like', ($experiencia_presencial == 'null')? '%'.''.'%' : '%'.$experiencia_presencial.'%')
+                ->where('experiencia_linea', '=', ($experiencia_linea == 'null')? '%'.''.'%' : '%'.$experiencia_linea.'%')
                 ->get();
         
         return $info;

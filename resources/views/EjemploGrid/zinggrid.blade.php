@@ -1,15 +1,16 @@
 @extends('layout.app')
 
-@section('title', 'Ejemplo con Zingrid')
+@section('title', 'Ejemplo con AnexGrid')
 @section('content')
 
+<!-- Scripts -->
 <script src="{{ asset('assets/js/jquery-3.6.1.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.anexgrid.js') }}"></script>
 
 <div class="row">
     <div class="col-12">
-        <h1>Zinggrid</h1>
-        <a id="export" href="{{ route('reporteEjemplo', ['temp1', 'temp2']) }}">Exportar</a>
+        <h1>Anexgrid</h1>
+        <a id="export" href="{{ route('reporteEjemplo', ['temp1', 'temp2', 'temp3']) }}">Exportar</a>
     </div>
     <div class="col-12" id="datatable"></div>
 </div>
@@ -23,8 +24,8 @@
                 {leyenda: 'id', ordenable: true, columna: 'id_informacion_academica', filtro: true},
                 {leyenda: 'Experiencia presencial', ordenable: true, columna: 'experiencia_presencial', filtro: true},
                 {leyenda: 'Experiencia en linea', ordenable: true, columna: 'experiencia_linea', filtro: true},  
-                {leyenda: 'Mayor nivel de experiencia', ordenable: true, columna: 'nivel_mayor_experiencia', filtro: true},
-                {leyenda: 'Modalidad', ordenable: true, columna: 'modalidad', filtro: true},              
+                {leyenda: 'Mayor nivel de experiencia', ordenable: true, columna: 'nivel_mayor_experiencia', filtro: false},
+                {leyenda: 'Modalidad', ordenable: true, columna: 'modalidad', filtro: false},              
             ],
             modelo: [
                 {propiedad: 'id_informacion_academica'},
@@ -50,30 +51,58 @@
 
     function setFiltros(){
         let arreglo = {
-            filtro: 'null',
-            value: 'null'
+            id: 'null',
+            experiencia_presencial: 'null',
+            experiencia_linea: 'null',
         }
 
         setUrl(arreglo);
         let filtroId = $("input[data-columna = 'id_informacion_academica']");
+        let filtroExperienciaPresencial = $("input[data-columna = 'experiencia_presencial']");
+        let filtroExperienciaLinea = $("input[data-columna = 'experiencia_linea']");
         filtroId.keyup(function(e){
             if(e.key === 'Enter'){
                 arreglo = {
-                    filtro: 'id_informacion_academica',
-                    value: filtroId.val()
+                    id: filtroId.val() == '' ? 'null' : filtroId.val(),
+                    experiencia_presencial: filtroExperienciaPresencial.val() == '' ? 'null' : filtroExperienciaPresencial.val(),
+                    experiencia_linea: filtroExperienciaLinea.val() == '' ? 'null' : filtroExperienciaLinea.val()
                 };
 
                 setUrl(arreglo);
             }
         });
 
+        filtroExperienciaPresencial.keyup(function(e){
+            if(e.key === 'Enter'){
+                arreglo = {
+                    id: filtroId.val() == '' ? 'null' : filtroId.val(),
+                    experiencia_presencial: filtroExperienciaPresencial.val() == '' ? 'null' : filtroExperienciaPresencial.val(),
+                    experiencia_linea: filtroExperienciaLinea.val() == '' ? 'null' : filtroExperienciaLinea.val()
+                };
+
+                setUrl(arreglo);
+            }
+        });
+
+        filtroExperienciaLinea.keyup(function(e){
+            if(e.key === 'Enter'){
+                arreglo = {
+                    id: filtroId.val() == '' ? 'null' : filtroId.val(),
+                    experiencia_presencial: filtroExperienciaPresencial.val() == '' ? 'null' : filtroExperienciaPresencial.val(),
+                    experiencia_linea: filtroExperienciaLinea.val() == '' ? 'null' : filtroExperienciaLinea.val()
+                };
+
+                setUrl(arreglo);
+            }
+        });
     }
 
     function setUrl(arreglo){
-        url_temp = "{{ route('reporteEjemplo', ['temp1', 'temp2']) }}";
+        url_temp = "{{ route('reporteEjemplo', ['temp1', 'temp2', 'temp3']) }}";
         url = url_temp
-            .replace('temp1', arreglo.filtro)
-            .replace('temp2', arreglo.value);
+            .replace('temp1', arreglo.id)
+            .replace('temp2', arreglo.experiencia_presencial)
+            .replace('temp3', arreglo.experiencia_linea);
 
         $('#export').attr('href', url);
     }
