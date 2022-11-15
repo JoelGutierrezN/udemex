@@ -22,7 +22,7 @@
             <h3 class="tab--title">Datos personales</h3>
             <div class="input-columns-2">
                 <div>
-                    <label for="text-input">Nombres</label>
+                    <label for="text-input">Nombre</label>
                     <input type="text" placeholder="Coloque su nombre" id="text-input">
                 </div>
 
@@ -37,8 +37,21 @@
                 </div>
 
                 <div>
-                    <label for="text-input">Número de empleado EDEMEX</label>
+                    <label for="select-input">Género</label>
+                    <ul class="col2">
+                        <label><input type="radio" name="#" value="0">Femenino</label>&#160;&#160;&#160;&#160;&#160;
+                        <label><input type="radio" name="#" value="1" required>Masculino</label>
+                    </ul>
+                </div>
+
+                <div>
+                    <label for="text-input">Número de empleado UDEMEX</label>
                     <input type="text" placeholder="Número de empleado EDEMEX" id="text-input">
+                </div>
+
+                <div>
+                    <label for="text-input">Fotografía</label>
+                    <input type="file" placeholder="Coloque su fotografía" id="text-input">
                 </div>
 
                 <div>
@@ -57,37 +70,38 @@
                 </div>
 
                 <div>
+                    <label for="text-input">Confirmación de correo electrónico UDEMEX</label>
+                    <input type="text" placeholder="Coloque su correo electrónico UDEMEX" id="text-input">
+                </div>
+
+                <div>
                     <label for="text-input">Correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su Correo electrónico personal" id="text-input">
-                </div>
-
-                <div>
-                    <label for="select-input">Rol</label>
-                    <select id="select-input">
-                        <option value="">Docente</option>
-                        <option value="">Asistente</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="text-input">Confirmación de Correo electrónico personal</label>
                     <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
                 </div>
 
                 <div>
-                    <label for="select-input">Sexo</label>
-                    <ul class="col2">
-                        <label><input type="radio" name="#" value="#">Femenino</label>&#160;&#160;&#160;&#160;&#160;
-                        <label><input type="radio" name="#" value="#" required>Masculino</label>
-                    </ul>
+                    <label for="text-input">Confirmación de correo electrónico personal</label>
+                    <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
                 </div>
 
-                <div>
-                    <label for="text-input">Fotografía</label>
-                    <input type="file" placeholder="Coloque su fotografía" id="text-input">
-                </div>
-
-
+                <!-- <div>
+                    <label for="select-input">Rol</label>
+                    <select id="select-input">
+                        <option value="Tutor">Tutor</option>
+                        <option value="Control académico">Control académico</option>
+                        <option value="Asesor">Asesor</option>
+                    </select>
+                </div> -->
+                
+                <!-- <div>
+                    <label for="select-input">Tipo usuario</label>
+                    <select id="select-input">
+                        <option value="Docte">Docente</option>
+                        <option value="Encargado de Control Docente">Encargado de Control Docente</option>
+                        <option value="Revisor">Revisor</option>
+                    </select>
+                </div> -->
+                
             </div>
         </div>
         {{--Fin Datos personales --}}
