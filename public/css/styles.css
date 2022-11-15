@@ -101,6 +101,31 @@ input[type="time"]:focus{
     -webkit-transform:scale(1.1);transform:scale(1.1);
 }
 
+/* materias */
+#table-materias {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #table-materias td, #table-materias th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #table-materias tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #table-materias tr:hover {background-color: #ddd;}
+  
+  #table-materias th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+
+/* capacitaciones */
 #table-capacitaciones {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -221,6 +246,29 @@ PADDING-LEFT: 2px;
 FLOAT: left;
 PADDING-BOTTOM: 2px;
 WIDTH: 50%;
+PADDING-TOP: 2px
+}
+
+UL.col6
+{
+PADDING-RIGHT: 0px;
+PADDING-LEFT: 0px;
+FLOAT: left;
+PADDING-BOTTOM: 0px;
+MARGIN: 15px 0px;
+WIDTH: 100%;
+PADDING-TOP: 0px;
+LIST-STYLE-TYPE: none
+}
+
+UL.col6 LI
+{
+PADDING-RIGHT: 2px;
+DISPLAY: inline;
+PADDING-LEFT: 2px;
+FLOAT: left;
+PADDING-BOTTOM: 2px;
+WIDTH: 16.6%;
 PADDING-TOP: 2px
 }
 
