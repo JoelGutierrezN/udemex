@@ -14,7 +14,7 @@
             <button type="button" data-tab-target="5">Historial académico &blacktriangledown;</button>
         </div>
 
-        {{-- Datos personales --}}
+    {{-- Datos personales --}}
        <form action="{{ route('teacher.usuarios.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
@@ -160,7 +160,7 @@
             <br>&nbsp;
         </div>
         </form>
-        {{--Fin Datos personales --}}
+    {{--Fin Datos personales --}}
 
         {{--Datos de materias impartidas --}}
         <div class="mt-2" data-tab-id="2">
