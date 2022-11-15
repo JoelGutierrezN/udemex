@@ -10,7 +10,7 @@
             <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
             <button type="button" data-tab-target="2">Materias impartidas &blacktriangledown;</button>
             <button type="button" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
-            <button type="button" id="archivos-menu" data-tab-target="4">Subida de Documentos &blacktriangledown;</button>
+            <button type="button" id="archivos-menu" data-tab-target="4">Cursos &blacktriangledown;</button>
             <button type="button" data-tab-target="5">Historial académico &blacktriangledown;</button>
         </div>
 
@@ -293,7 +293,10 @@
                 </div>
 
                 <div>
-
+                    <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
+                    <small>El nombre del archivo debe de ser su nombre completo empezando
+                        por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
+                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
 
                 </div>
             </div>
@@ -302,7 +305,7 @@
 
         {{-- Subida de Documentos --}}
         <div class="mt-2" data-tab-id="4">
-            <h3 class="tab--title">Subida de Documentos</h3>
+            <h3 class="tab--title">Capacitaciones</h3>
             <div class="">
                 <div>
                     <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
@@ -353,13 +356,7 @@
                     </script>
 
                 </div><br>
-                <div>
-                    <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
-                    <small>El nombre del archivo debe de ser su nombre completo empezando
-                        por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
-                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
-
-                </div>
+                
 
             </div>
         </div>
