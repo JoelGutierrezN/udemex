@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\AuthRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,14 +14,14 @@ class TemporalAuthController extends Controller
         return view('temporal-auth.login');
     }
 
-    public function authenticate(Request $request){
+    public function authenticate(AuthRequest $request){
 
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/welcome');
+            return redirect()->intended('profesores/welcome');
         }else{
             return redirect()->route('login.temporal')->with('message', 'Credenciales de Acceso Incorrectas');
         }

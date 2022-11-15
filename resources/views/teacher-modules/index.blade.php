@@ -101,28 +101,28 @@
                     <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
                         <option value="#">Mate prepa1</option>
                         <option value="#">Mate prepa2</option>
-                      </select>
+                    </select>
                 </div>
                 <div>
                     <label>Materias que ha impartido en nivel licenciatura</label>
                     <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
                         <option value="#">Ingles lic 1</option>
                         <option value="#">Ingles lic 2</option>
-                      </select>
+                    </select>
                 </div>
                 <div>
                     <label>Materias que ha impartido en nivel maestria</label>
                     <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
                         <option value="#">español mae 1</option>
                         <option value="#">español mae 2</option>
-                      </select>
+                    </select>
                 </div>
                 <div>
                     <label>Materias que ha impartido en nivel doctorado</label>
                     <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
                         <option value="#">Doc doc 1</option>
                         <option value="#">Doc doc 2</option>
-                      </select>
+                    </select>
                 </div>
             </div>
         </div>
@@ -138,7 +138,7 @@
                     <select style="margin-top:10px" class="select2-multiple" name="areas[]" multiple="multiple">
                         <option value="Industrial">Industrial</option>
                         <option value="Salud">Salud</option>
-                      </select>
+                    </select>
                 </div>
                 <div>
                     <label >Seleccione las herramientas tecnológicas que sabe utilizar
@@ -146,7 +146,7 @@
                     <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
                         <option value="Office">Office</option>
                         <option value="Adobe">Adobe</option>
-                      </select>
+                    </select>
                 </div>
             </div>
             <div class="contenedor-2col">
@@ -159,7 +159,7 @@
                             <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
                             <label for=""> %25</label></li>
                         <li>
-                        </ul>
+                    </ul>
                 </div>
 
                 <div style="margin-top:10px">
@@ -178,13 +178,13 @@
                             <label for=""> Si</label>&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
                             <label for=""> No</label></li>
                         <li>
-                        </ul>
+                    </ul>
                 </div>
 
                 <div>
                     <label for="select-input-2">¿Cuáles son los dias laborales en su otro trabajo? </label>
 
-                        <ul class="col2"><input type="checkbox" id="l-otrolugar" name="labora-actualmente" value="Bike">
+                    <ul class="col2"><input type="checkbox" id="l-otrolugar" name="labora-actualmente" value="Bike">
                         <label > Lun.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
                         <label > Mar.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
                         <label > Mierc.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
@@ -203,10 +203,10 @@
                             <label for=""> Tiempo Parcial</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
                             <label for=""> Tiempo Completo</label></li>
                         <li>
-                            <li>
+                        <li>
 
-                            </li>
-                        </ul>
+                        </li>
+                    </ul>
                 </div>
 
                 <div>
