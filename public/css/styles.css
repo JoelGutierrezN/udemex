@@ -47,7 +47,7 @@ input[type="file"]{
     border-radius: 4px;
 }
 
-input[type="text"],.select2-multiple,
+input[type="text"],.select2-multiple,input[type="date"],
 select{
     width: 80%;
     height: 80%;
@@ -59,6 +59,7 @@ select{
     vertical-align: middle;
     font-size: 1.5rem;
 }
+
 
 input[type="time"]{
     width: 30%;
@@ -78,12 +79,23 @@ select option{
     font-size: 1.5rem;
 }
 
-input[type="text"]:focus,
+input[type="text"]:focus,input[type="date"]:focus,
 select:focus{
     outline: 2px solid var(--gray);
 }
 input[type="time"]:focus{
     outline: 2px solid var(--gray);
+}
+.formlabel{
+    font-size: 15px;
+    margin-bottom:-10px
+}
+.btnplus{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border:0;
+    cursor: pointer
 }
 
 /* Utilities */
@@ -169,6 +181,29 @@ PADDING-LEFT: 2px;
 FLOAT: left;
 PADDING-BOTTOM: 2px;
 WIDTH: 50%;
+PADDING-TOP: 2px
+}
+
+UL.col8
+{
+PADDING-RIGHT: 0px;
+PADDING-LEFT: 0px;
+FLOAT: left;
+PADDING-BOTTOM: 0px;
+MARGIN: 15px 0px;
+WIDTH: 100%;
+PADDING-TOP: 0px;
+LIST-STYLE-TYPE: none
+}
+
+UL.col8 LI
+{
+PADDING-RIGHT: 2px;
+DISPLAY: inline;
+PADDING-LEFT: 2px;
+FLOAT: left;
+PADDING-BOTTOM: 2px;
+WIDTH: 12.5%;
 PADDING-TOP: 2px
 }
 

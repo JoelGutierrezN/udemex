@@ -221,10 +221,33 @@
 
         <div class="mt-2" data-tab-id="4">
             <h3 class="tab--title">Subida de Documentos</h3>
-            <div class="input-columns-2">
+            <div class="">
                 <div>
                     <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
-                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
+                    <ul class="col8">
+                        <form action="#" method="post" enctype="multipart/form" id="capacitacion-form">
+                        <li class="formlabel">Nombre</li>
+                        <li class="formlabel">Institucion</li>
+                        <li class="formlabel">Inicio</li>
+                        <li class="formlabel">Fin</li>
+                        <li class="formlabel">Horas</li>
+                        <li class="formlabel">Tipo</li>
+                        <li class="formlabel">Evidencia</li>
+                        <li style="color:white">Agregar</li>
+                        <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
+                        <li><input name="instituto" type="text" placeholder="Institucion donde se tomo la capacitacion" id="text-input"></li>
+                        <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                        <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                        <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
+                        <li><select  style="margin-top:10px" class="" name="tipo" >
+                            <option value="#">Diplomado</option>
+                            <option value="#">Certificado</option>
+                          </select></li>
+                        <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                        <li><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                            </form>
+                    </ul>
+                    
                 </div>
                 <div>
                     <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
@@ -233,6 +256,7 @@
                     <input type="file" placeholder="Coloque su fotografia" id="text-input">
 
                 </div>
+                
             </div>
         </div>
         {{--Fin Subida de Documentos --}}
@@ -244,6 +268,7 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/utilities/menu.js') }}"></script>
+    <script></script>
     <script>
         $(document).ready(function() {
             $('.select2-multiple').select2();
