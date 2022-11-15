@@ -107,37 +107,62 @@
         </div>
         {{--Fin Datos personales --}}
 
-        {{--Datos del Historial Académico --}}
+        {{--Datos de materias impartidas --}}
         <div class="mt-2" data-tab-id="2">
             <h3 class="tab--title">Materias impartidas</h3>
             <div class="">
                 <div>
-                    <label for="text-input">Coloque las materias impartidas</label>
-                    <ul class="col4">
-                        <form action="#" method="post" enctype="multipart/form" id="materias-form">
+                    <label for="text-input"> Coloque las materias impartidas</label>
+                    <ul class="col6">
+                        <form id="archivos-form" action="" method="post" enctype="multipart/form-data">
+                        @csrf
                         <li class="formlabel">Nombre</li>
-                        <li class="formlabel">Institucion</li>
+                        <li class="formlabel">Institución</li>
                         <li class="formlabel">Inicio</li>
                         <li class="formlabel">Fin</li>
                         <li class="formlabel">Nivel</li>
                         <li style="color:white">Agregar</li>
-                        <li><input name="nombre" type="text" placeholder="Nombre de la materia" id="text-input"></li>
-                        <li><input name="institucion" type="text" placeholder="Nombre de la institución" id="text-input"></li>
+                        <li><input name="nombre" autocomplete="off" type="text" placeholder="Nombre de la materia" id="text-input"></li>
+                        <li><input name="institucion" autocomplete="off" type="text" placeholder="Nombre de la institución" id="text-input"></li>
                         <li><input name="inicio" type="date" placeholder="Inicio de la materia impartida" id="text-input"></li>
                         <li><input name="fin" type="date" placeholder="Fin de la materia impartida" id="text-input"></li>
                         <li><select  style="margin-top:10px" class="" name="tipo" >
                             <option value="#">Preparatoria</option>
                             <option value="#">Licenciatura</option>
-                            <option value="#">Maestria</option>
+                            <option value="#">Maestría</option>
                             <option value="#">Doctorado</option>
                           </select></li>
                           <li><a href="#"  onclick="document.getElementById('materias-form').submit()" id="agregar-materias" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                         </form>
                     </ul>
+                    <table id="table-materias">
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Instituto</th>
+                          <th>Inicio</th>
+                          <th>Fin</th>
+                          <th>Nivel</th>
+                          <th>Operaciones</th>
+                        </tr>
+                        <tr>
+                          <td>Ingenieria en sistemas</td>
+                          <td>Tecnologico de Toluca</td>
+                          <td>1 Sep 1999</td>
+                          <td>30 Agosto 2005</td>
+                          <td>Doctorado</td>
+                          <td align="center"><a href="#"  onclick="document.getElementById('materia-form').submit()" id="agregar-materia" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></td>
+                        </tr>
+                      </table>
+                      <script>
+                        document.querySelector('#agregar-materia').addEventListener('click', (e)=>{
+                            e.preventDefault();
+                            document.querySelector('#archivos-materia').submit();
+                        });
+                    </script>
                 </div>
             </div>
         </div>
-        {{--Fin Datos del Historial Académico --}}
+        {{--Fin Datos de materias impartidas --}}
 
         {{-- Experiencia Laboral --}}
 
