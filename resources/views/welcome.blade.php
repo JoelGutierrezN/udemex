@@ -12,9 +12,10 @@
 
         <div class="tabs">
             <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
-            <button type="button" data-tab-target="2">Datos del Historial Académico &blacktriangledown;</button>
+            <button type="button" data-tab-target="2">Materias impartidas &blacktriangledown;</button>
             <button type="button" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
             <button type="button" data-tab-target="4">Subida de Documentos &blacktriangledown;</button>
+            <button type="button" data-tab-target="5">Historial académico &blacktriangledown;</button>
         </div>
 
         {{-- Datos personales --}}
@@ -94,35 +95,31 @@
 
         {{--Datos del Historial Académico --}}
         <div class="mt-2" data-tab-id="2">
-            <h3 class="tab--title">Datos del Historial Académico</h3>
-            <div class="input-columns-2">
+            <h3 class="tab--title">Materias impartidas</h3>
+            <div class="">
                 <div>
-                    <label>Materias que ha impartido en nivel preparatoria</label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="#">Mate prepa1</option>
-                        <option value="#">Mate prepa2</option>
-                      </select>
-                </div>
-                <div>
-                    <label>Materias que ha impartido en nivel licenciatura</label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="#">Ingles lic 1</option>
-                        <option value="#">Ingles lic 2</option>
-                      </select>
-                </div>
-                <div>
-                    <label>Materias que ha impartido en nivel maestria</label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="#">español mae 1</option>
-                        <option value="#">español mae 2</option>
-                      </select>
-                </div>
-                <div>
-                    <label>Materias que ha impartido en nivel doctorado</label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="#">Doc doc 1</option>
-                        <option value="#">Doc doc 2</option>
-                      </select>
+                    <label for="text-input">Coloque las materias impartidas</label>
+                    <ul class="col4">
+                        <form action="#" method="post" enctype="multipart/form" id="materias-form">
+                        <li class="formlabel">Nombre</li>
+                        <li class="formlabel">Institucion</li>
+                        <li class="formlabel">Inicio</li>
+                        <li class="formlabel">Fin</li>
+                        <li class="formlabel">Nivel</li>
+                        <li style="color:white">Agregar</li>
+                        <li><input name="nombre" type="text" placeholder="Nombre de la materia" id="text-input"></li>
+                        <li><input name="institucion" type="text" placeholder="Nombre de la institución" id="text-input"></li>
+                        <li><input name="inicio" type="date" placeholder="Inicio de la materia impartida" id="text-input"></li>
+                        <li><input name="fin" type="date" placeholder="Fin de la materia impartida" id="text-input"></li>
+                        <li><select  style="margin-top:10px" class="" name="tipo" >
+                            <option value="#">Preparatoria</option>
+                            <option value="#">Licenciatura</option>
+                            <option value="#">Maestria</option>
+                            <option value="#">Doctorado</option>
+                          </select></li>
+                          <li><a href="#"  onclick="document.getElementById('materias-form').submit()" id="agregar-materias" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                        </form>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -239,7 +236,7 @@
                         <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                         <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                         <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
-                        <li><select  style="margin-top:10px" class="" name="tipo" >
+                        <li><select style="margin-top:10px" class="" name="tipo" >
                             <option value="#">Diplomado</option>
                             <option value="#">Certificado</option>
                           </select></li>
@@ -247,7 +244,7 @@
                         <li><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                             </form>
                     </ul>
-                    
+
                 </div>
                 <div>
                     <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
@@ -256,11 +253,47 @@
                     <input type="file" placeholder="Coloque su fotografia" id="text-input">
 
                 </div>
-                
+
             </div>
         </div>
         {{--Fin Subida de Documentos --}}
 
+        {{-- Inicio historial academico --}}
+        <div class="mt-2" data-tab-id="5">
+            <h3 class="tab--title">Historial Académico</h3>
+            <div class="">
+                <div>
+                    <label for="text-input">Coloque su historial académico</label>
+                    <ul class="col8">
+                        <form action="#" method="post" enctype="multipart/form" id="historialAcademico-form">
+                            <li class="formlabel">Nombre</li>
+                            <li class="formlabel">Inicio</li>
+                            <li class="formlabel">Fin</li>
+                            <li class="formlabel">Nivel</li>
+                            <li class="formlabel">Cédula PDF</li>
+                            <li class="formlabel">Título PDF</li>
+                            <li class="formlabel">Certificado PDF</li>
+                            <li style="color:white">Agregar</li>
+                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
+                            <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                            <li><input name="fin" type="date" placeholder="Fin de capacitacion" id="text-input"></li>
+                            <li>
+                                <select style="margin-top:10px" class="" name="tipo" >
+                                    <option value="#">Preparatoria</option>
+                                    <option value="#">Licenciatura</option>
+                                    <option value="#">Maestría</option>
+                                    <option value="#">Doctorado</option>
+                                </select>
+                            </li>
+                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><a href="#"  onclick="document.getElementById('historialAcademico-form').submit()" id="agregar-hisotiralAcademico" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
     </form>
 
