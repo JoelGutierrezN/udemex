@@ -4,10 +4,6 @@
 
 @section('content')
 
-    <form action="#" method="POST">
-        @csrf
-        @method('POST')
-
         <h3 class="form-screen-title">Registro de Información Personal</h3>
 
         <div class="tabs">
@@ -19,71 +15,117 @@
         </div>
 
         {{-- Datos personales --}}
+       <form action="{{ route('teacher.usuarios.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('POST')
         <div class="mt-2" data-tab-id="1">
             <h3 class="tab--title">Datos personales</h3>
             <div class="input-columns-1">
                 <div>
                     <label for="text-input">Nombre</label>
-                    <input type="text" placeholder="Coloque su nombre" id="text-input">
+                    <input type="text" placeholder="Coloque su nombre" 
+                    autocomplete="off" id="text-input">
                 </div>
+                    @if($errors->first('nombre'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('nombre') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Apellido paterno</label>
-                    <input type="text" placeholder="Coloque su apellido paterno" id="text-input">
+                    <input type="text" placeholder="Coloque su apellido paterno" 
+                     autocomplete="off" id="text-input">
                 </div>
+                    @if($errors->first('apellido_paterno'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('apellido_paterno') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Apellido materno</label>
-                    <input type="text" placeholder="Coloque su apellido materno" id="text-input">
+                    <input type="text" placeholder="Coloque su apellido materno" 
+                    autocomplete="off" id="text-input">
                 </div>
+                    @if($errors->first('apellido_materno'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('apellido_materno') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="select-input">Género</label>
                     <ul class="col2">
                         <label><input type="radio" name="#" value="0">Femenino</label>&#160;&#160;&#160;&#160;&#160;
-                        <label><input type="radio" name="#" value="1" required>Masculino</label>
+                        <label><input type="radio" name="#" value="1">Masculino</label>
                     </ul>
                 </div>
 
                 <div>
                     <label for="text-input">Número de empleado UDEMEX</label>
-                    <input type="text" placeholder="Número de empleado EDEMEX" id="text-input">
+                    <input type="text" placeholder="Número de empleado EDEMEX" 
+                    autocomplete="off" id="text-input">
                 </div>
+                     @if($errors->first('clave_empleado'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('clave_empleado') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Fotografía</label>
                     <input type="file" placeholder="Coloque su fotografía" id="text-input">
                 </div>
+                     @if($errors->first('foto'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('foto') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Teléfono de casa</label>
-                    <input type="text" placeholder="Coloque su teléfono de casa" id="text-input">
+                    <input type="text" placeholder="Coloque su teléfono de casa" 
+                    autocomplete="off" id="text-input">
                 </div>
+                    @if($errors->first('telefono_casa'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('telefono_casa') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Teléfono celular</label>
-                    <input type="text" placeholder="Coloque su teléfono celular" id="text-input">
+                    <input type="text" placeholder="Coloque su teléfono celular" 
+                    autocomplete="off" id="text-input">
                 </div>
+                     @if($errors->first('celular'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('celular') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Correo electrónico de UDEMEX</label>
-                    <input type="text" placeholder="Coloque su correo electrónico de UDEMEX" id="text-input">
+                    <input type="text" placeholder="Coloque su correo electrónico de UDEMEX" 
+                    autocomplete="off" id="text-input">
                 </div>
-
-                <div>
-                    <label for="text-input">Confirmación de correo electrónico UDEMEX</label>
-                    <input type="text" placeholder="Coloque su correo electrónico UDEMEX" id="text-input">
-                </div>
+                    @if($errors->first('email_udemex'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('email_udemex') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
+                    <input type="text" placeholder="Coloque su correo electrónico personal" 
+                    autocomplete="off" id="text-input">
                 </div>
-
-                <div>
-                    <label for="text-input">Confirmación de correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
-                </div>
+                    @if($errors->first('email_personal'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('email_personal') }}</i>
+                    </div>
+                    @endif
 
                 <!-- <div>
                     <label for="select-input">Rol</label>
@@ -103,8 +145,14 @@
                     </select>
                 </div> -->
 
+            <div>
+                <button type="submit">Guardar Cambios</button>
             </div>
+
+            </div>
+            <br>&nbsp;
         </div>
+        </form>
         {{--Fin Datos personales --}}
 
         {{--Datos de materias impartidas --}}
@@ -165,7 +213,6 @@
         {{--Fin Datos de materias impartidas --}}
 
         {{-- Experiencia Laboral --}}
-
         <div class="mt-2" data-tab-id="3">
             <h3 class="tab--title">Datos de Experiencia Laboral</h3>
             <div class="input-columns-2">
@@ -251,17 +298,14 @@
                 </div>
             </div>
         </div>
-</form>
         {{--Fin Experiencia Laboral --}}
 
         {{-- Subida de Documentos --}}
-
         <div class="mt-2" data-tab-id="4">
             <h3 class="tab--title">Subida de Documentos</h3>
             <div class="">
                 <div>
                     <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
-
                     <ul class="col8">
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -357,9 +401,6 @@
                 </div>
             </div>
         </div>
-
-    </form>
-
 @endsection
 
 @section('scripts')
