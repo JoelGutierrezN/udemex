@@ -32,7 +32,7 @@ class ArchivosController extends Controller
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
-                    'id_usuario' => 1,
+                    'id_usuario' => \Auth::user()->id,
                     'activo' => 1,
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
@@ -40,18 +40,27 @@ class ArchivosController extends Controller
             
 
             $file = $request->file('evidencia');
-            \Storage::disk('local')->put($storage_path, \File::get($file));
+            //\Storage::disk('local')->put($storage_path, \File::get($file));
             $data = array([
                 'state' => 'registro realizado'
             ]);
 
-            return response()->json($data, 200);
+            return view('welcome')
+                    ->with('alert', 'Evidencia de la capacitación guardada')
+                    ->with('from', 'Subida de documentos');
         }else{
             $data = array([
                 'state' => 'sin archivo'
             ]);
             return response()->json($data, 200);
         }
+    }
 
+    public function getCapacitaciones($id){
+        $info = \DB::table('capacitaciones')
+            ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
+            ->where('id_usuario', '=', $id)
+            ->get();
+        return $info;
     }
 }

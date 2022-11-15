@@ -14,7 +14,7 @@
             <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
             <button type="button" data-tab-target="2">Materias impartidas &blacktriangledown;</button>
             <button type="button" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
-            <button type="button" data-tab-target="4">Subida de Documentos &blacktriangledown;</button>
+            <button type="button" id="archivos-menu" data-tab-target="4">Subida de Documentos &blacktriangledown;</button>
             <button type="button" data-tab-target="5">Historial académico &blacktriangledown;</button>
         </div>
 
@@ -238,7 +238,7 @@
                     <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
 
                     <ul class="col8">
-                        <form id="archivos-form" action="{{ route('updateFiles') }}" method="post" enctype="multipart/form-data">
+                        <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <li class="formlabel">Nombre</li>
                             <li class="formlabel">Institucion</li>
@@ -254,13 +254,14 @@
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                             <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
                             <li><select style="margin-top:10px" class="" name="tipo" >
-                                <option value="#">Diplomado</option>
-                                <option value="#">Certificado</option>
+                                <option value="diplomado">Diplomado</option>
+                                <option value="certificado">Certificado</option>
                             </select></li>
                             <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
                             <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                         </form>
                     </ul>
+                    
                     <table id="table-capacitaciones">
                         <tr>
                           <th>Nombre</th>
@@ -272,17 +273,8 @@
                           <th>Archivo</th>
                           <th>Operaciones</th>
                         </tr>
-                        <tr>
-                          <td>Ingenieria en sistemas</td>
-                          <td>Tecnologico de Toluca</td>
-                          <td>1 Sep 1999</td>
-                          <td>30 Agosto 2005</td>
-                          <td>34</td>
-                          <td>Diplomado</td>
-                          <td align="center"><a href="#" id="agregar-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a></td>
-                          <td align="center"><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></td>
-                        </tr>
                       </table>
+                        
 
                     <script>
                         document.querySelector('#agregar-capacitacion').addEventListener('click', (e)=>{
@@ -353,4 +345,64 @@
             $('.select2-multiple').select2();
         });
     </script>
+
+    <script>
+        var archivosMenu = document.querySelector('#archivos-menu');
+        archivosMenu.addEventListener('click', ()=>{
+            fetch('getCapacitaciones/{{ Auth::user()->id }}')
+                .then(response => response.json())
+                .then((response)=>{
+                    let table = document.querySelector('#table-capacitaciones');
+                    response.forEach((element)=>{
+                        console.log(element.nombre_curso);
+                        let tr = document.createElement('tr');
+
+                        // * Columnas
+                        let nombre_curso = document.createElement('td');
+                        let nombre_institucion = document.createElement('td');
+                        let fecha_inicio = document.createElement('td');
+                        let fecha_fin = document.createElement('td');
+                        let horas = document.createElement('td');
+                        let tipo_curso = document.createElement('td');
+                        let constancia_pdf = document.createElement('td');
+                        let opciones = document.createElement('td');
+
+                        // * Asignaciones
+                        nombre_curso.innerHTML = `${element.nombre_curso}`;
+                        nombre_institucion.innerHTML = `${ element.nombre_institucion }`;
+                        fecha_inicio.innerHTML = `${ element.fecha_inicio }`;
+                        fecha_fin.innerHTML = `${ element.fecha_fin }`;
+                        horas.innerHTML = `${ element.horas }`;
+                        tipo_curso.innerHTML = `${ element.tipo_curso }`;
+                        constancia_pdf.innerHTML = `<a href="#" id="agregar-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
+                        opciones.innerHTML = `<a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a>`;
+                        
+                        // * Attr
+                        constancia_pdf.setAttribute('align', 'center');
+                        opciones.setAttribute('aling', 'center');
+                        
+                        // * Appends
+                        tr.appendChild(nombre_curso);
+                        tr.appendChild(nombre_institucion);
+                        tr.appendChild(fecha_inicio);
+                        tr.appendChild(fecha_fin);
+                        tr.appendChild(horas);
+                        tr.appendChild(tipo_curso);
+                        tr.appendChild(constancia_pdf);
+                        tr.appendChild(opciones);
+                        table.appendChild(tr);
+                    });
+                });
+        });
+    </script>
+
+    @if(isset($from))
+        <script>
+            Swal.fire(
+                '{{ $alert }}',
+                'Lo puedes consultar en la seccion {{ $from }}',
+                'success'
+            );
+        </script>
+    @endif
 @endsection

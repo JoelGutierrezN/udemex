@@ -32,7 +32,11 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
 /* Rutas de Profesores */
 Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
     Route::view('/', 'teacher-modules.index')->name('index');
-    Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher']);
+    Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher'])->name('welcome');
+
+    // * Rutas para las capacitaciones
+    Route::post('/updateFiles', [ArchivosController::class, 'update'])->name('updateFiles');
+    Route::get('/getCapacitaciones/{id}', [ArchivosController::class, 'getCapacitaciones'])->name('getCapacitaciones');
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
@@ -46,4 +50,3 @@ Route::middleware(['auth', 'support'])->prefix('soporte')->name('support.')->gro
     Route::view('/', 'support-modules.index')->name('index');
 });
 
-Route::post('/updateFiles', [ArchivosController::class, 'update'])->name('updateFiles');
