@@ -55,7 +55,7 @@ class EjemploAnex extends Controller
                 ->select('id_informacion_academica', 'experiencia_presencial', 'experiencia_linea', 'nivel_mayor_experiencia', 'modalidad')
                 ->where('id_informacion_academica', 'like', '%'.$id_informacion_academica.'%')
                 ->where('experiencia_presencial', 'like', '%'.$experiencia_presencial.'%')
-                ->where('experiencia_linea', '=', '%'.$experiencia_linea.'%')
+                ->where('experiencia_linea', 'like', '%'.$experiencia_linea.'%')
                 ->where('nivel_mayor_experiencia', 'like', '%'.$nivel_mayor_experiencia.'%')
                 ->where('modalidad', 'like', '%'.$modalidad.'%')
                 ->skip($anexGrid->pagina)
