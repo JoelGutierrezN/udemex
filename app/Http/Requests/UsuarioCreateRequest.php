@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UsuarioCreateRequest extends FormRequest
 {
@@ -24,16 +25,16 @@ class UsuarioCreateRequest extends FormRequest
     public function rules()
     {
         return [
-           'nombre'             => 'required',
-           'apellido_paterno'   => 'required',
-           'apellido_materno'   => 'required',
+           'nombre'             => ['required','regex:/^[A-Z][A-Z,a-z, ,é,É,í,Í,ó,Ó,ú,Ú,á,Á,ü,Ü,ñ,Ñ]+$/'],
+           'apellido_paterno'   => ['required','regex:/^[A-Z][A-Z,a-z, ,é,É,í,Í,ó,Ó,ú,Ú,á,Á,ü,Ü,ñ,Ñ]+$/'],
+           'apellido_materno'   => ['required','regex:/^[A-Z][A-Z,a-z, ,é,É,í,Í,ó,Ó,ú,Ú,á,Á,ü,Ü,ñ,Ñ]+$/'],
            'sexo'               => 'required',
            'clave_empleado'     => 'required',
            'foto'               => 'required',
-           'telefono_casa'      => 'required',
-           'celular'            => 'required',
-           'email_udemex'       => 'required',
-           'email_personal'     => 'required',
+           'telefono_casa'      => ['required', 'max:10', 'regex:/^[0-9]+$/'],
+           'celular'            => ['required', 'max:10', 'regex:/^[0-9]+$/'],
+           'email_udemex'       => ['required', 'email', 'unique:usuarios,email_udemex', 'max:60'],
+           'email_personal'     => ['required', 'email', 'unique:usuarios,email_personal', 'max:60'],
         ];
     }
 }

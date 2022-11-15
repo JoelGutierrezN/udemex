@@ -21,10 +21,23 @@
         <div class="mt-2" data-tab-id="1">
             <h3 class="tab--title">Datos personales</h3>
             <div class="input-columns-1">
+
+                <div>
+                    <label for="text-input">Número de empleado UDEMEX</label>
+                    <input type="text" placeholder="Número de empleado EDEMEX" 
+                    autocomplete="off" id="clave_empleado" name="clave_empleado"
+                    value="{{ old('clave_empleado') }}">
+                </div>
+                     @if($errors->first('clave_empleado'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('clave_empleado') }}</i>
+                    </div>
+                    @endif
+
                 <div>
                     <label for="text-input">Nombre</label>
-                    <input type="text" placeholder="Coloque su nombre" 
-                    autocomplete="off" id="text-input">
+                    <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
+                    autocomplete="off" id="nombre" name="nombre"  value="{{ old('nombre') }}">
                 </div>
                     @if($errors->first('nombre'))
                     <div class="invalid-feedback">
@@ -34,8 +47,9 @@
 
                 <div>
                     <label for="text-input">Apellido paterno</label>
-                    <input type="text" placeholder="Coloque su apellido paterno" 
-                     autocomplete="off" id="text-input">
+                    <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo 'González'" 
+                     autocomplete="off" id="apellido_paterno" name="apellido_paterno"
+                      value="{{ old('apellido_paterno') }}">
                 </div>
                     @if($errors->first('apellido_paterno'))
                     <div class="invalid-feedback">
@@ -45,8 +59,9 @@
 
                 <div>
                     <label for="text-input">Apellido materno</label>
-                    <input type="text" placeholder="Coloque su apellido materno" 
-                    autocomplete="off" id="text-input">
+                    <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo 'González'" 
+                    autocomplete="off" id="apellido_materno" name="apellido_materno"
+                     value="{{ old('apellido_materno') }}">
                 </div>
                     @if($errors->first('apellido_materno'))
                     <div class="invalid-feedback">
@@ -57,25 +72,15 @@
                 <div>
                     <label for="select-input">Género</label>
                     <ul class="col2">
-                        <label><input type="radio" name="#" value="0">Femenino</label>&#160;&#160;&#160;&#160;&#160;
-                        <label><input type="radio" name="#" value="1">Masculino</label>
+                        <label><input type="radio" name="sexo" value="1" checked>Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <label><input type="radio" name="sexo" value="0">Femenino</label>
                     </ul>
                 </div>
 
-                <div>
-                    <label for="text-input">Número de empleado UDEMEX</label>
-                    <input type="text" placeholder="Número de empleado EDEMEX" 
-                    autocomplete="off" id="text-input">
-                </div>
-                     @if($errors->first('clave_empleado'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('clave_empleado') }}</i>
-                    </div>
-                    @endif
 
                 <div>
                     <label for="text-input">Fotografía</label>
-                    <input type="file" placeholder="Coloque su fotografía" id="text-input">
+                    <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto">
                 </div>
                      @if($errors->first('foto'))
                     <div class="invalid-feedback">
@@ -86,7 +91,9 @@
                 <div>
                     <label for="text-input">Teléfono de casa</label>
                     <input type="text" placeholder="Coloque su teléfono de casa" 
-                    autocomplete="off" id="text-input">
+                    autocomplete="off" id="telefono_casa" name="telefono_casa"
+                     value="{{ old('telefono_casa') }}" maxlength="10"
+                     onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                 </div>
                     @if($errors->first('telefono_casa'))
                     <div class="invalid-feedback">
@@ -97,7 +104,9 @@
                 <div>
                     <label for="text-input">Teléfono celular</label>
                     <input type="text" placeholder="Coloque su teléfono celular" 
-                    autocomplete="off" id="text-input">
+                    autocomplete="off" id="celular" name="celular"  value="{{ old('celular') }}"
+                    maxlength="10"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                 </div>
                      @if($errors->first('celular'))
                     <div class="invalid-feedback">
@@ -107,8 +116,8 @@
 
                 <div>
                     <label for="text-input">Correo electrónico de UDEMEX</label>
-                    <input type="text" placeholder="Coloque su correo electrónico de UDEMEX" 
-                    autocomplete="off" id="text-input">
+                    <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico de UDEMEX" 
+                    autocomplete="off" id="email_udemex" name="email_udemex"  value="{{ old('email_udemex') }}">
                 </div>
                     @if($errors->first('email_udemex'))
                     <div class="invalid-feedback">
@@ -119,7 +128,7 @@
                 <div>
                     <label for="text-input">Correo electrónico personal</label>
                     <input type="text" placeholder="Coloque su correo electrónico personal" 
-                    autocomplete="off" id="text-input">
+                    autocomplete="off" id="email_personal" name="email_personal"  value="{{ old('email_personal') }}">
                 </div>
                     @if($errors->first('email_personal'))
                     <div class="invalid-feedback">
@@ -144,11 +153,9 @@
                         <option value="Revisor">Revisor</option>
                     </select>
                 </div> -->
-
-            <div>
-                <button type="submit">Guardar Cambios</button>
             </div>
-
+            <div>
+                <center><button type="submit" class="btn-primario">Guardar Cambios</button></center>
             </div>
             <br>&nbsp;
         </div>

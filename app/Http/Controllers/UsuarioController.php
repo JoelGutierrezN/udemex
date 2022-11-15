@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioCreateRequest;
+use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
@@ -35,7 +36,7 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioCreateRequest $request)
     {
-        // Usuario::create($request->all());
+        Usuario::create($request->all());
 
          return view("welcome");
     }
