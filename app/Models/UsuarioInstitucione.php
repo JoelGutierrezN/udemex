@@ -9,11 +9,19 @@ class UsuarioInstitucione extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id_usuario_institucion";
+
     protected $table = "usuario_instituciones";
+
+    public $timestamp = false;
+
     protected $fillable = [
-        "id_usuario_institucion",
         "id_usuario",
         "id_institucion",
-        "activo",
+        "activo"
+    ];
+    
+    protected $attributes = [
+    'activo' => 1
     ];
 }

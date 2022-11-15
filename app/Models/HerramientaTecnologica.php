@@ -9,10 +9,18 @@ class HerramientaTecnologica extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id_herramienta";
+
     protected $table = "herramienta_tecnologicas";
+
+    public $timestamp = false;
+
     protected $fillable = [
-        "id_herramienta",
         "nombre",
         "activo"
+    ];
+
+    protected $attributes = [
+    'activo' => 1
     ];
 }

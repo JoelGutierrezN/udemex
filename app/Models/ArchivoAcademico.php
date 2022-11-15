@@ -9,9 +9,13 @@ class ArchivoAcademico extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id_archivo_academico";
+
     protected $table = "archivo_academicos";
+
+    public $timestamp = false;
+
     protected $fillable = [
-        "id_archivo_academico",
         "numero_archivo_titulo",
         "titulo_pdf",
         "validar_archivo_titulo",
@@ -21,7 +25,11 @@ class ArchivoAcademico extends Model
         "numero_archivo_cedula",
         "cedula_pdf",
         "validar_archivo_cedula",
-        "activo",
-        "id_usuario"
+        "id_usuario",
+        "activo"
+    ];
+
+     protected $attributes = [
+    'activo' => 1
     ];
 }

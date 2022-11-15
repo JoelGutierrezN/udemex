@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Informacion_academica extends Model
+class InformacionAcademica extends Model
 {
     use HasFactory;
 

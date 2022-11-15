@@ -9,7 +9,7 @@ class Capacitacione extends Model
 {
     use HasFactory;
 
-     protected $primaryKey = "id_capacitacion";
+    protected $primaryKey = "id_capacitacion";
 
     protected $table = "capacitaciones";
 
