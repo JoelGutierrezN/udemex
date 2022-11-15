@@ -158,6 +158,20 @@ input[type="time"]:focus{
     cursor: pointer;
 }
 
+.input-columns-1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-columns-1 div{
+    width: 60%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+}
 .input-columns-2{
     display: flex;
     justify-content: space-around;
@@ -166,7 +180,7 @@ input[type="time"]:focus{
 }
 
 .input-columns-2 div{
-    width: 51%;
+    width: 50%;
     display: flex;
     align-items: start;
     justify-content: center;

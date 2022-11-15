@@ -20,7 +20,7 @@
         {{-- Datos personales --}}
         <div class="mt-2" data-tab-id="1">
             <h3 class="tab--title">Datos personales</h3>
-            <div class="input-columns-2">
+            <div class="input-columns-1">
                 <div>
                     <label for="text-input">Nombre</label>
                     <input type="text" placeholder="Coloque su nombre" id="text-input">
