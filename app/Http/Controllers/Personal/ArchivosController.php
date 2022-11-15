@@ -47,7 +47,7 @@ class ArchivosController extends Controller
 
             return view('welcome')
                     ->with('alert', 'Evidencia de la capacitación guardada')
-                    ->with('from', 'Subida de documentos');
+                    ->with('from', 'Cursos');
         }else{
             $data = array([
                 'state' => 'sin archivo'
