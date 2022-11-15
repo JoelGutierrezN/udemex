@@ -5,19 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class HerramientaTecnologica extends Model
+class TipoUsuario extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = "id_herramienta";
+    protected $primaryKey = "id_tipo_usuario";
 
-    protected $table = "herramienta_tecnologicas";
+    protected $table = "tipo_usuarios";
 
     public $timestamp = false;
 
     protected $fillable = [
-        "nombre",
-        "activo"
+        'nombre',
+        'activo'
+
     ];
 
     protected $attributes = [

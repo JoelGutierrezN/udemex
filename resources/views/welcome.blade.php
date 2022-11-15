@@ -21,9 +21,9 @@
         {{-- Datos personales --}}
         <div class="mt-2" data-tab-id="1">
             <h3 class="tab--title">Datos personales</h3>
-            <div class="input-columns-2">
+            <div class="input-columns-1">
                 <div>
-                    <label for="text-input">Nombres</label>
+                    <label for="text-input">Nombre</label>
                     <input type="text" placeholder="Coloque su nombre" id="text-input">
                 </div>
 
@@ -38,8 +38,21 @@
                 </div>
 
                 <div>
-                    <label for="text-input">Número de empleado EDEMEX</label>
+                    <label for="select-input">Género</label>
+                    <ul class="col2">
+                        <label><input type="radio" name="#" value="0">Femenino</label>&#160;&#160;&#160;&#160;&#160;
+                        <label><input type="radio" name="#" value="1" required>Masculino</label>
+                    </ul>
+                </div>
+
+                <div>
+                    <label for="text-input">Número de empleado UDEMEX</label>
                     <input type="text" placeholder="Número de empleado EDEMEX" id="text-input">
+                </div>
+
+                <div>
+                    <label for="text-input">Fotografía</label>
+                    <input type="file" placeholder="Coloque su fotografía" id="text-input">
                 </div>
 
                 <div>
@@ -58,36 +71,37 @@
                 </div>
 
                 <div>
+                    <label for="text-input">Confirmación de correo electrónico UDEMEX</label>
+                    <input type="text" placeholder="Coloque su correo electrónico UDEMEX" id="text-input">
+                </div>
+
+                <div>
                     <label for="text-input">Correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su Correo electrónico personal" id="text-input">
-                </div>
-
-                <div>
-                    <label for="select-input">Rol</label>
-                    <select id="select-input">
-                        <option value="">Docente</option>
-                        <option value="">Asistente</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="text-input">Confirmación de Correo electrónico personal</label>
                     <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
                 </div>
 
                 <div>
-                    <label for="select-input">Sexo</label>
-                    <ul class="col2">
-                        <label><input type="radio" name="#" value="#">Femenino</label>&#160;&#160;&#160;&#160;&#160;
-                        <label><input type="radio" name="#" value="#" required>Masculino</label>
-                    </ul>
+                    <label for="text-input">Confirmación de correo electrónico personal</label>
+                    <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
                 </div>
 
-                <div>
-                    <label for="text-input">Fotografía</label>
-                    <input type="file" placeholder="Coloque su fotografía" id="text-input">
-                </div>
+                <!-- <div>
+                    <label for="select-input">Rol</label>
+                    <select id="select-input">
+                        <option value="Tutor">Tutor</option>
+                        <option value="Control académico">Control académico</option>
+                        <option value="Asesor">Asesor</option>
+                    </select>
+                </div> -->
 
+                <!-- <div>
+                    <label for="select-input">Tipo usuario</label>
+                    <select id="select-input">
+                        <option value="Docte">Docente</option>
+                        <option value="Encargado de Control Docente">Encargado de Control Docente</option>
+                        <option value="Revisor">Revisor</option>
+                    </select>
+                </div> -->
 
             </div>
         </div>
@@ -212,6 +226,7 @@
                 </div>
             </div>
         </div>
+</form>
         {{--Fin Experiencia Laboral --}}
 
         {{-- Subida de Documentos --}}
@@ -221,31 +236,62 @@
             <div class="">
                 <div>
                     <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
-                    <ul class="col8">
-                        <form action="#" method="post" enctype="multipart/form" id="capacitacion-form">
-                        <li class="formlabel">Nombre</li>
-                        <li class="formlabel">Institucion</li>
-                        <li class="formlabel">Inicio</li>
-                        <li class="formlabel">Fin</li>
-                        <li class="formlabel">Horas</li>
-                        <li class="formlabel">Tipo</li>
-                        <li class="formlabel">Evidencia</li>
-                        <li style="color:white">Agregar</li>
-                        <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
-                        <li><input name="instituto" type="text" placeholder="Institucion donde se tomo la capacitacion" id="text-input"></li>
-                        <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                        <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                        <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
-                        <li><select style="margin-top:10px" class="" name="tipo" >
-                            <option value="#">Diplomado</option>
-                            <option value="#">Certificado</option>
-                          </select></li>
-                        <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                        <li><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
-                            </form>
-                    </ul>
 
-                </div>
+                    <ul class="col8">
+                        <form id="archivos-form" action="{{ route('updateFiles') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <li class="formlabel">Nombre</li>
+                            <li class="formlabel">Institucion</li>
+                            <li class="formlabel">Inicio</li>
+                            <li class="formlabel">Fin</li>
+                            <li class="formlabel">Horas</li>
+                            <li class="formlabel">Tipo</li>
+                            <li class="formlabel">Evidencia</li>
+                            <li style="color:white">Agregar</li>
+                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
+                            <li><input name="instituto" type="text" placeholder="Institucion donde se tomo la capacitacion" id="text-input"></li>
+                            <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                            <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                            <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
+                            <li><select style="margin-top:10px" class="" name="tipo" >
+                                <option value="#">Diplomado</option>
+                                <option value="#">Certificado</option>
+                            </select></li>
+                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                        </form>
+                    </ul>
+                    <table id="table-capacitaciones">
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Instituto</th>
+                          <th>Inicio</th>
+                          <th>Fin</th>
+                          <th>Horas</th>
+                          <th>Tipo</th>
+                          <th>Archivo</th>
+                          <th>Operaciones</th>
+                        </tr>
+                        <tr>
+                          <td>Ingenieria en sistemas</td>
+                          <td>Tecnologico de Toluca</td>
+                          <td>1 Sep 1999</td>
+                          <td>30 Agosto 2005</td>
+                          <td>34</td>
+                          <td>Diplomado</td>
+                          <td align="center"><a href="#" id="agregar-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a></td>
+                          <td align="center"><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></td>
+                        </tr>
+                      </table>
+
+                    <script>
+                        document.querySelector('#agregar-capacitacion').addEventListener('click', (e)=>{
+                            e.preventDefault();
+                            document.querySelector('#archivos-form').submit();
+                        });
+                    </script>
+
+                </div><br>
                 <div>
                     <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
                     <small>El nombre del archivo debe de ser su nombre completo empezando

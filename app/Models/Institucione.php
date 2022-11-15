@@ -9,9 +9,13 @@ class Institucione extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id_institucion";
+
     protected $table = "instituciones";
+
+    public $timestamp = false;
+
     protected $fillable = [
-        "id_institucion",
         "nombre",
         "id_estado",
         "id_municipio",

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
+use App\Http\Controllers\Personal\ArchivosController;
 use App\Http\Controllers\PDFController;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
@@ -44,3 +45,5 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
 Route::middleware(['auth', 'support'])->prefix('soporte')->name('support.')->group( function(){
     Route::view('/', 'support-modules.index')->name('index');
 });
+
+Route::post('/updateFiles', [ArchivosController::class, 'update'])->name('updateFiles');
