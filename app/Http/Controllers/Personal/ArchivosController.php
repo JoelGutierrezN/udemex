@@ -8,28 +8,29 @@ use Illuminate\Http\Request;
 class ArchivosController extends Controller
 {
     public function update(Request $request){
+        //return $request;
         $this->validate($request, [
             'nombre' => 'required',
-            'institucion' => 'required',
+            'instituto' => 'required',
             'inicio' => 'required',
             'fin' => 'required',
             'horas' => 'required',
             'tipo' => 'required'
         ]);
 
-        if($request->file('archivo') != ''){
+        if($request->file('evidencia') != ""){
 
-            $storage_path = $request->nombre_curso.'_'.$request->tipo_curso.'.pdf';
+            $storage_path = $request->nombre.'_'.$request->tipo.'.pdf';
 
             \DB::table('capacitaciones')
                 ->insert([
                     'nombre_curso' => $request->nombre,
-                    'nombre_institucion' => $request->institucion,
+                    'nombre_institucion' => $request->instituto,
                     'fecha_inicio' => $request->inicio,
                     'fecha_fin' => $request->fin,
                     'horas' => $request->horas,
                     'tipo_curso' => $request->tipo,
-                    'numero_archivo_constancia' => $request->numero_archivo,
+                    'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
                     'id_usuario' => 1,
                     'activo' => 1,
@@ -38,12 +39,12 @@ class ArchivosController extends Controller
 
             
 
-            $file = $request->file('archivo');
+            $file = $request->file('evidencia');
             \Storage::disk('local')->put($storage_path, \File::get($file));
             $data = array([
                 'state' => 'registro realizado'
             ]);
-            
+
             return response()->json($data, 200);
         }else{
             $data = array([

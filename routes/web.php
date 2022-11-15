@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
+use App\Http\Controllers\Personal\ArchivosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +35,5 @@ Route::view('/', 'welcome');
 //     Route::post('authenticate/temporal', [TemporalAuthController::class, 'authenticate'])->name('authenticate.temporal');
 //     Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
 // });
+
+Route::post('/updateFiles', [ArchivosController::class, 'update'])->name('updateFiles');

@@ -215,6 +215,7 @@
                 </div>
             </div>
         </div>
+</form>
         {{--Fin Experiencia Laboral --}}
 
         {{-- Subida de Documentos --}}
@@ -225,28 +226,36 @@
                 <div>
                     <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
                     <ul class="col8">
-                        <form action="#" method="post" enctype="multipart/form" id="capacitacion-form">
-                        <li class="formlabel">Nombre</li>
-                        <li class="formlabel">Institucion</li>
-                        <li class="formlabel">Inicio</li>
-                        <li class="formlabel">Fin</li>
-                        <li class="formlabel">Horas</li>
-                        <li class="formlabel">Tipo</li>
-                        <li class="formlabel">Evidencia</li>
-                        <li style="color:white">Agregar</li>
-                        <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
-                        <li><input name="instituto" type="text" placeholder="Institucion donde se tomo la capacitacion" id="text-input"></li>
-                        <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                        <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                        <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
-                        <li><select  style="margin-top:10px" class="" name="tipo" >
-                            <option value="#">Diplomado</option>
-                            <option value="#">Certificado</option>
-                          </select></li>
-                        <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                        <li><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
-                            </form>
+                        <form id="archivos-form" action="{{ route('updateFiles') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <li class="formlabel">Nombre</li>
+                            <li class="formlabel">Institucion</li>
+                            <li class="formlabel">Inicio</li>
+                            <li class="formlabel">Fin</li>
+                            <li class="formlabel">Horas</li>
+                            <li class="formlabel">Tipo</li>
+                            <li class="formlabel">Evidencia</li>
+                            <li style="color:white">Agregar</li>
+                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
+                            <li><input name="instituto" type="text" placeholder="Institucion donde se tomo la capacitacion" id="text-input"></li>
+                            <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                            <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                            <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
+                            <li><select  style="margin-top:10px" class="" name="tipo" >
+                                <option value="#">Diplomado</option>
+                                <option value="#">Certificado</option>
+                            </select></li>
+                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                        </form>
                     </ul>
+
+                    <script>
+                        document.querySelector('#agregar-capacitacion').addEventListener('click', (e)=>{
+                            e.preventDefault();
+                            document.querySelector('#archivos-form').submit();
+                        });
+                    </script>
                     
                 </div>
                 <div>
