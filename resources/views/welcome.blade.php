@@ -244,11 +244,33 @@
                             <option value="#">Certificado</option>
                           </select></li>
                         <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                        <li><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                        <li><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                             </form>
                     </ul>
+                    <table id="table-capacitaciones">
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Instituto</th>
+                          <th>Inicio</th>
+                          <th>Fin</th>
+                          <th>Horas</th>
+                          <th>Tipo</th>
+                          <th>Archivo</th>
+                          <th>Operaciones</th>
+                        </tr>
+                        <tr>
+                          <td>Ingenieria en sistemas</td>
+                          <td>Tecnologico de Toluca</td>
+                          <td>1 Sep 1999</td>
+                          <td>30 Agosto 2005</td>
+                          <td>34</td>
+                          <td>Diplomado</td>
+                          <td align="center"><a href="#" id="agregar-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a></td>
+                          <td align="center"><a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></td>
+                        </tr>
+                      </table>
                     
-                </div>
+                </div><br>
                 <div>
                     <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
                     <small>El nombre del archivo debe de ser su nombre completo empezando
