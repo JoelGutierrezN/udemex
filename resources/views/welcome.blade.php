@@ -259,94 +259,159 @@
         {{--Fin Datos de materias impartidas --}}
 
         {{-- Experiencia Laboral --}}
+        <form action="{{ route('teacher.infoacademica.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('POST')
         <div class="mt-2" data-tab-id="3">
             <h3 class="tab--title">Datos de Experiencia Laboral</h3>
-            <div class="input-columns-2">
-                <div>
-                    <label>Areas de Experiencia Laboral</label>
-                    <select style="margin-top:10px" class="select2-multiple" name="areas[]" multiple="multiple">
-                        <option value="Industrial">Industrial</option>
-                        <option value="Salud">Salud</option>
-                      </select>
-                </div>
-                <div>
-                    <label >Seleccione las herramientas tecnológicas que sabe utilizar
-                    </label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="Office">Office</option>
-                        <option value="Adobe">Adobe</option>
-                      </select>
-                </div>
-            </div>
-            <div class="contenedor-2col">
+                <div class="input-columns-1">
+
+                    <div>
+                        <label for="text-input">Años de experiencia en modo presencial</label>
+                        <input type="text" placeholder="Coloque sus años de experiencia en modo en línea" id="datos_experiencia_presencial" name="experiencia_presencial">
+                    </div>
+                    @if($errors->first('experiencia_presencial'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('experiencia_presencial') }}</i>
+                    </div>
+                    @endif
+
+                    <div>
+                        <label for="text-input">Años de experiencia en modo en línea</label>
+                        <input type="text" placeholder="Coloque sus años de experiencia en modo presencial" id="datos_experiencia_linea" name="experiencia_linea">
+                    </div>
+                    @if($errors->first('experiencia_linea'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('experiencia_linea') }}</i>
+                    </div>
+                    @endif
+
+                    <div>
+                        <label >Seleccione el nivel más alto de experiencia</label>
+                        <select  style="margin-top:10px" name="nivel_mayor_experiencia">
+                            <option value="preparatoria">Preparatoria</option>
+                            <option value="licenciatura">Licenciatura</option>
+                            <option value="maestria">Maestría</option>
+                            <option value="doctorado">Doctorado</option>
+                          </select>
+                    </div>
+
+                    <div>
+                        <label>Áreas de experiencia Laboral</label>
+                        <select style="margin-top:10px" class="select2-multiple" name="area_experiencia[]" multiple="multiple">
+                            <option value="Industrial">Industrial</option>
+                            <option value="Salud">Salud</option>
+                          </select>
+                    </div>
+                    @if($errors->first('area_experiencia'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('area_experiencia') }}</i>
+                    </div>
+                    @endif
+
+                    <div>
+                        <label >Seleccione las herramientas tecnológicas que sabe utilizar
+                        </label>
+                        <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
+                            <option value="Office">Office</option>
+                            <option value="Adobe">Adobe</option>
+                          </select>
+                    </div>
+                    @if($errors->first('herramientas'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('herramientas') }}</i>
+                    </div>
+                    @endif
+
                 <div>
                     <label for="select-input-2">Disponibilidad para ser asesor en la UDEMEX</label>
                     <ul class="col2">
-                        <li><input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
-                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
-                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
-                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
+                        <li><input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="100%">
+                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="75%">
+                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="50%">
+                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="25%">
                             <label for=""> %25</label></li>
                         <li>
-                        </ul>
+                    </ul>
+                </div>
+                @if($errors->first('disponibilidad_asesor'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('disponibilidad_asesor') }}</i>
+                    </div>
+                    @endif
+
+                <div>
+                    <label for="select-input-2">¿Trabaja en otro lugar actualmente?</label>
+                    <ul class="col2">
+                        <li>
+                            <input type="radio" id="l-otrolugar" name="labora_actualmente" value="si" checked>
+                            <label for=""> Si</label>&#160;&#160;&#160;&#160;
+                            <input type="radio" id="l-otrolugar" name="labora_actualmente" value="no">
+                            <label for=""> No</label></li>
+                        <li>
+                    </ul>
+                </div>
+
+                <div>
+                    <label for="text-input">Lugar donde labora</label>
+                    <input type="text" placeholder="Coloque el nombre del lugar en donde labora" id="datos_lugar_labora" name="lugar_labora">
+                </div>
+
+                <div>
+                    <label >Seleccione la modalidad en la que labora</label>
+                    <select  style="margin-top:10px" name="modalidad">
+                        <option value="presencial">Presencial</option>
+                        <option value="linea">Línea</option>
+                      </select>
                 </div>
 
                 <div style="margin-top:10px">
                     <label for="select-input-2">¿Cuál es el horario laboral en su otro trabajo?</label>
                     <ul class="col2">
-                        <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00"></li> </ul>
+                    <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li> </ul>
                 </div>
-
-            </div>
-            <div class="contenedor-2col">
-                <div>
-                    <label for="select-input-2">¿Trabaja en otro lugar actualmente?</label>
-                    <ul class="col2">
-
-                        <li><input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
-                            <label for=""> Si</label>&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
-                            <label for=""> No</label></li>
-                        <li>
-                        </ul>
-                </div>
+                @if($errors->first('horario_laboral'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('horario_laboral') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="select-input-2">¿Cuáles son los dias laborales en su otro trabajo? </label>
-
-                        <ul class="col2"><input type="checkbox" id="l-otrolugar" name="labora-actualmente" value="Bike">
-                        <label > Lun.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Mar.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Mierc.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Juev.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Vier.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Sáb.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Dom.</label></ul>
+                    <ul class="col2"><input type="checkbox" id="l-otrolugar" name="dias_laboral" value="lunes">
+                        <label > Lun.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="martes">
+                        <label > Mar.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="miercoles">
+                        <label > Mierc.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="jueves">
+                        <label > Juev.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="viernes">
+                        <label > Vier.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="sabado">
+                        <label > Sáb.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="domingo">
+                        <label > Dom.</label>
+                    </ul>
                 </div>
-            </div>
-            <div class="contenedor-2col">
-                <div>
-                    <label for="select-input-2">En este otro lugar donde trabaja, ¿está de...?</label>
-                    <ul class="col2">
-
-                        <li><input type="radio" id="" name="" value="">
-                            <label for=""> Tiempo Parcial</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
-                            <label for=""> Tiempo Completo</label></li>
-                        <li>
-                            <li>
-
-                            </li>
-                        </ul>
-                </div>
+                @if($errors->first('dias_laboral'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('dias_laboral') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
                     <small>El nombre del archivo debe de ser su nombre completo empezando
                         por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
-                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
+                    <input type="file" placeholder="Coloque su fotografia" id="curriculum_pdf" name="curriculum_pdf">
+                </div>
+                @if($errors->first('curriculum_pdf'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('curriculum_pdf') }}</i>
+                    </div>
+                    @endif
 
+                <div>
+                    <center><button type="submit" class="btn-primario">Guardar Cambios</button></center>
                 </div>
             </div>
         </div>
+        </form>
         {{--Fin Experiencia Laboral --}}
 
         {{-- Subida de Documentos --}}

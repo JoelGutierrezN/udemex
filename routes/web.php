@@ -7,6 +7,7 @@ use App\Http\Controllers\Personal\MateriasController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProfesoresInicioController;
+use App\Http\Controllers\InformacionAcademicaController;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 /* Auth 365 */
@@ -37,6 +38,7 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     Route::view('/', 'teacher-modules.index')->name('index');
     Route::get('/welcome', ProfesoresInicioController::class)->name('welcome');
     Route::resource('usuarios', UsuarioController::class);
+    Route::resource('infoacademica', InformacionAcademicaController::class);
     Route::get('/getTeacherInfo/{id}', [UsuarioController::class, 'getTeacherInfo'])->name('getTeacherInfo');
 
 
