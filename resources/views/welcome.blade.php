@@ -360,6 +360,7 @@
                             e.preventDefault();
                             document.querySelector('#archivos-form').submit();
                         });
+                        
                     </script>
 
                 </div><br>
@@ -372,6 +373,7 @@
         {{-- Inicio historial academico --}}
         <div class="mt-2" data-tab-id="5">
             <h3 class="tab--title">Historial Académico</h3>
+            
             <div class="">
                 <div>
                     <label for="text-input">Coloque su historial académico</label>
@@ -475,8 +477,8 @@
                         fecha_fin.innerHTML = `${ element.fecha_fin }`;
                         horas.innerHTML = `${ element.horas }`;
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
-                        constancia_pdf.innerHTML = `<a href="#" id="agregar-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
-                        opciones.innerHTML = `<a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a>`;
+                        constancia_pdf.innerHTML = `<a href="#" id="show-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
+                        opciones.innerHTML = `<a href="delete-capacitacion/${ element.id_capacitacion }" id="#deletearchivo-form" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a>`;
                         
                         // * Attr
                         constancia_pdf.setAttribute('align', 'center');
@@ -492,7 +494,8 @@
                         tr.appendChild(constancia_pdf);
                         tr.appendChild(opciones);
                         table.appendChild(tr);
-                    });
+                        
+    });
                 });
         });
     </script>
