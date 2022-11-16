@@ -24,8 +24,8 @@
 
                 <div>
                     <label for="text-input">Número de empleado UDEMEX</label>
-                    <input type="text" placeholder="Número de empleado EDEMEX" 
-                    autocomplete="off" id="dato_clave_empleado" name="clave_empleado"
+                    <input type="text" placeholder="Número de empleado EDEMEX"
+                    autocomplete="off" id="xclave_empleado" name="clave_empleado"
                     value="{{ old('clave_empleado') }}">
                 </div>
                      @if($errors->first('clave_empleado'))
@@ -47,7 +47,7 @@
 
                 <div>
                     <label for="text-input">Apellido paterno</label>
-                    <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo 'González'" 
+                    <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo 'González'"
                      autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
                       value="{{ old('apellido_paterno') }}">
                 </div>
@@ -59,7 +59,7 @@
 
                 <div>
                     <label for="text-input">Apellido materno</label>
-                    <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo 'González'" 
+                    <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo 'González'"
                     autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
                      value="{{ old('apellido_materno') }}">
                 </div>
@@ -77,20 +77,9 @@
                     </ul>
                 </div>
 
-
-                <div>
-                    <label for="text-input">Fotografía</label>
-                    <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto">
-                </div>
-                     @if($errors->first('foto'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('foto') }}</i>
-                    </div>
-                    @endif
-
                 <div>
                     <label for="text-input">Teléfono de casa</label>
-                    <input type="text" placeholder="Coloque su teléfono de casa" 
+                    <input type="text" placeholder="Coloque su teléfono de casa"
                     autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
                      value="{{ old('telefono_casa') }}" maxlength="10"
                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
@@ -103,7 +92,7 @@
 
                 <div>
                     <label for="text-input">Teléfono celular</label>
-                    <input type="text" placeholder="Coloque su teléfono celular" 
+                    <input type="text" placeholder="Coloque su teléfono celular"
                     autocomplete="off" id="dato_celular" name="celular"  value="{{ old('celular') }}"
                     maxlength="10"
                     onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
@@ -116,7 +105,7 @@
 
                 <div>
                     <label for="text-input">Correo electrónico de UDEMEX</label>
-                    <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico de UDEMEX" 
+                    <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico de UDEMEX"
                     autocomplete="off" id="dato_email_udemex" name="email_udemex"  value="{{ old('email_udemex') }}">
                 </div>
                     @if($errors->first('email_udemex'))
@@ -127,7 +116,7 @@
 
                 <div>
                     <label for="text-input">Correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su correo electrónico personal" 
+                    <input type="text" placeholder="Coloque su correo electrónico personal"
                     autocomplete="off" id="dato_email_personal" name="email_personal"  value="{{ old('email_personal') }}">
                 </div>
                     @if($errors->first('email_personal'))
@@ -136,29 +125,28 @@
                     </div>
                     @endif
 
+                    <div>
+                        <style>
+                            .fotoperfil{
+                                width: 150px;
+                                height: auto;
+                            }
+                        </style>
+                        <label for="text-input">Fotografía</label>
+                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto">
+                        <div id="imagePreview"></div>
+                    </div>
+                         @if($errors->first('foto'))
+                        <div class="invalid-feedback">
+                        <i>{{ $errors->first('foto') }}</i>
+                        </div>
+                        @endif
+
                 <div>
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
                 </div>
-
-                <!-- <div>
-                    <label for="select-input">Rol</label>
-                    <select id="select-input">
-                        <option value="Tutor">Tutor</option>
-                        <option value="Control académico">Control académico</option>
-                        <option value="Asesor">Asesor</option>
-                    </select>
-                </div> -->
-
-                <!-- <div>
-                    <label for="select-input">Tipo usuario</label>
-                    <select id="select-input">
-                        <option value="Docte">Docente</option>
-                        <option value="Encargado de Control Docente">Encargado de Control Docente</option>
-                        <option value="Revisor">Revisor</option>
-                    </select>
-                </div> -->
             </div>
-            
+
             <div>
                 <center><button type="submit" class="btn-primario">Guardar Cambios</button></center>
             </div>
@@ -345,7 +333,7 @@
                             <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                         </form>
                     </ul>
-                    
+
                     <table id="table-capacitaciones">
                         <thead>
                             <tr>
@@ -361,18 +349,18 @@
                         </thead>
                         <tbody id="capacitaciones-table-body"></tbody>
                       </table>
-                        
+
 
                     <script>
                         document.querySelector('#agregar-capacitacion').addEventListener('click', (e)=>{
                             e.preventDefault();
                             document.querySelector('#archivos-form').submit();
                         });
-                        
+
                     </script>
 
                 </div><br>
-                
+
 
             </div>
         </div>
@@ -381,7 +369,7 @@
         {{-- Inicio historial academico --}}
         <div class="mt-2" data-tab-id="5">
             <h3 class="tab--title">Historial Académico</h3>
-            
+
             <div class="">
                 <div>
                     <label for="text-input">Coloque su historial académico</label>
@@ -413,7 +401,7 @@
                             <li class="formlabel">Certificado</li>
                             <li class="formlabel">Cédula</li>
                             <li>&#160;</li>
-                            
+
                             <li></li>
                             <li><input type="file" name="titulo" placeholder="titulo" class="formlabel"></li>
                             <li><input type="file" name="certificado" placeholder="certificado" class="formlabel"></li>
@@ -496,7 +484,7 @@
                 dato_email_personal.setAttribute("readonly", "true");
 
         })/*.catch((error)=>{})*/
-    
+
     });
     </script>
     <script>
@@ -531,12 +519,12 @@
                         constancia_pdf.innerHTML = `<a href="#" id="show-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
                         deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
                         //opciones.innerHTML = `<a href="delete-capacitacion/${ element.id_capacitacion }" id="delete-archivo-${element.id_capacitacion}" type="submit" class="btnplus"></a>`;
-                        
+
                         // * Attr
                         constancia_pdf.setAttribute('align', 'center');
                         opciones.setAttribute('aling', 'center');
                         deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_capacitacion }`);
-                        
+
                         // * Appends
                         tr.appendChild(nombre_curso);
                         tr.appendChild(nombre_institucion);
@@ -561,7 +549,7 @@
                                     table.removeChild(tr);
                                 });
                         });
-                        
+
     });
                 });
         });
@@ -577,7 +565,23 @@
                 'success'
             );
         </script>
-
-        
     @endif
+
+    <script>
+        (function(){
+            function filePreview(input){
+                if(input.files && input.files[0]){
+                    var reader = new FileReader();
+                    reader.onload = function(e){
+                        $('#imagePreview').html("<img class='fotoperfil' src='"+e.target.result+"'/>");
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $('#foto').change(function(){
+                filePreview(this);
+            });
+        })();
+    </script>
 @endsection

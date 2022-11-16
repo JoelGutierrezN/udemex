@@ -38,7 +38,28 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioCreateRequest $request)
     {
-        Usuario::create($request->all());
+        $newUsuario = Usuario::create($request->all());
+
+        // dd($request->hasFile('foto'));
+        if($request->hasFile('foto')){
+            $foto = $request->file('foto');
+            $destino = 'imagenes/perfil/';
+            $fotoname = time() . '-' . $foto->getClientOriginalName();
+            $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
+            $newUsuario->foto = $fotoname;
+        }
+
+        $newUsuario->nombre = $request->nombre;
+        $newUsuario->apellido_paterno = $request->apellido_paterno;
+        $newUsuario->apellido_materno = $request->apellido_materno;
+        $newUsuario->clave_empleado = $request->clave_empleado;
+        $newUsuario->sexo = $request->sexo;
+        $newUsuario->telefono_casa = $request->telefono_casa;
+        $newUsuario->celular = $request->celular;
+        $newUsuario->email_udemex = $request->email_udemex;
+        $newUsuario->email_personal = $request-> email_personal;
+
+        $newUsuario->save();
 
          return view("welcome");
     }
