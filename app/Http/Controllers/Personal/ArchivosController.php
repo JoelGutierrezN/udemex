@@ -79,7 +79,7 @@ class ArchivosController extends Controller
         $data = array([
             'alert' => 'Registro eliminado'
         ]);
-        return response()->json();
+        return response()->json($data, 200);
         
 
         
