@@ -37,6 +37,7 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     // * Rutas para las capacitaciones
     Route::post('/updateFiles', [ArchivosController::class, 'update'])->name('updateFiles');
     Route::get('/getCapacitaciones/{id}', [ArchivosController::class, 'getCapacitaciones'])->name('getCapacitaciones');
+    Route::get('/delete-capacitacion/{id}', [ArchivosController::class, 'deleteCapacitacion'])->name('deleteCapacitacion');
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
