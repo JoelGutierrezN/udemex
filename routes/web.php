@@ -50,6 +50,7 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     // * Rutas para las materias
     Route::post('/storeMaterias', [MateriasController::class, 'store'])->name('storeMaterias');
     Route::get('/getMaterias/{id}', [MateriasController::class, 'getMaterias'])->name('getMaterias');
+    Route::get('/delete-materia/{id}', [MateriasController::class, 'deleteMateria'])->name('deleteMateria');
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');

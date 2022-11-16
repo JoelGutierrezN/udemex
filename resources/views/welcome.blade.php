@@ -203,7 +203,7 @@
                             <option value="#">Maestría</option>
                             <option value="#">Doctorado</option>
                           </select></li>
-                          <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                          <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                         </form>
                     </ul>
 
@@ -579,7 +579,9 @@
                         Inicio.innerHTML = `${ element.fecha_inicio }`;
                         fin.innerHTML = `${ element.fecha_fin }`;
                         nivel.innerHTML = `${ element.nivel_escolar }`;
-                        deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
+                        deleteButton.innerHTML = `<div class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></div>`;
+
+                        deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_asignatura }`);
 
                         tr.appendChild(nombre);
                         tr.appendChild(institucion);
@@ -591,9 +593,15 @@
 
                         table.appendChild(tr);
                                         
+                        // * Eventlisteners
                         deleteButton.addEventListener('click', (e)=>{
                             e.preventDefault();
-                            table.removeChild(tr);
+                            fetch(`delete-materia/${ element.id_asignatura }`)
+                                .then((response) => response.json())
+                                .then((response) => {
+                                    Swal.fire(response[0].alert, '', 'success');
+                                    table.removeChild(tr);
+                                });
                         });
                     });
                 });
@@ -683,8 +691,8 @@
                         horas.innerHTML = `${ element.horas }`;
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
                         constancia_pdf.innerHTML = `<a href="#" id="show-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
-                        deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
-                        //opciones.innerHTML = `<a href="delete-capacitacion/${ element.id_capacitacion }" id="delete-archivo-${element.id_capacitacion}" type="submit" class="btnplus"></a>`;
+                        deleteButton.innerHTML = `<div class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"><div>`;
+                        
 
                         // * Attr
                         constancia_pdf.setAttribute('align', 'center');

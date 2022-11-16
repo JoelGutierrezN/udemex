@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Personal;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\AcademicoAsignatura;
+use Illuminate\Support\Facades\Auth;
 
 class MateriasController extends Controller
 {
@@ -47,5 +49,16 @@ class MateriasController extends Controller
             ->where('id_usuario', '=', $id)
             ->get();
         return $info;
+    }
+
+    public function deleteMateria($id){
+        
+        $materia = AcademicoAsignatura::findOrFail($id);
+        $materia->delete();
+        $data = array([
+            'alert' => 'Registro eliminado'
+        ]);
+        return response()->json($data, 200);
+        
     }
 }
