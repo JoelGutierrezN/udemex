@@ -7,6 +7,7 @@ use App\Http\Requests\UsuarioCreateRequest;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UsuarioController extends Controller
 {
@@ -39,6 +40,8 @@ class UsuarioController extends Controller
     public function store(UsuarioCreateRequest $request)
     {
         Usuario::create($request->all());
+        // Alert::toast('Sus Datos Personales han sido regristados correctamente.','success');
+        Alert::alert()->success('Sus Datos Personales',' han sido regristados correctamente.');
 
          return view("welcome");
     }
