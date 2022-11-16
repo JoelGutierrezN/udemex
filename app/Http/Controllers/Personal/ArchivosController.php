@@ -49,9 +49,7 @@ class ArchivosController extends Controller
                 //\Storage::putFileAs('/Capacitaciones/',$file,$storage_path);
                 \Storage::disk('local')->put('/Capacitaciones/'.$storage_path, \File::get($file));
             }
-            $data = array([
-                'state' => 'registro realizado'
-            ]);
+            
 
             return view('welcome')
                     ->with('alert', 'Evidencia de la capacitación guardada')

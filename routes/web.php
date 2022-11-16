@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\Personal\ArchivosController;
 use App\Http\Controllers\Personal\MateriasController;
+use App\Http\Controllers\Personal\HistorialController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UsuarioController;
 
@@ -47,6 +48,10 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     // * Rutas para las materias
     Route::post('/storeMaterias', [MateriasController::class, 'store'])->name('storeMaterias');
     Route::get('/getMaterias/{id}', [MateriasController::class, 'getMaterias'])->name('getMaterias');
+
+    // * Rutas para el historial
+    Route::post('/storeHistorial', [HistorialController::class, 'store'])->name('storeHistorial');
+    Route::get('/getHistorial/{id}', [HistorialController::class, 'getHistorial'])->name('getHistorial');
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');

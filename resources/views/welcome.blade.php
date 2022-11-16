@@ -7,11 +7,11 @@
         <h3 class="form-screen-title">Registro de Información Personal</h3>
 
         <div class="tabs">
-            <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
+            <button type="button" id="personal-menu" data-tab-target="1">Datos Personales &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Materias impartidas &blacktriangledown;</button>
-            <button type="button" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
+            <button type="button" id="experiencia-menu" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
             <button type="button" id="archivos-menu" data-tab-target="4">Cursos &blacktriangledown;</button>
-            <button type="button" data-tab-target="5">Historial académico &blacktriangledown;</button>
+            <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
         </div>
 
     {{-- Datos personales --}}
@@ -25,7 +25,7 @@
                 <div>
                     <label for="text-input">Número de empleado UDEMEX</label>
                     <input type="text" placeholder="Número de empleado EDEMEX"
-                    autocomplete="off" id="xclave_empleado" name="clave_empleado"
+                    autocomplete="off" id="dato_clave_empleado" name="clave_empleado"
                     value="{{ old('clave_empleado') }}">
                 </div>
                      @if($errors->first('clave_empleado'))
@@ -396,64 +396,107 @@
             <div class="">
                 <div>
                     <label for="text-input">Coloque su historial académico</label>
-                    <form action="#" method="post" enctype="multipart/form" id="historialAcademico-form">
+                        <form action="{{ route('teacher.storeHistorial') }}" method="post" enctype="multipart/form-data" id="historialAcademico-form">
+                            @csrf
                             <ul class="col5">
-                            <li class="formlabel">Nombre</li>
-                            <li class="formlabel">Institución</li>
-                            <li class="formlabel">Inicio</li>
-                            <li class="formlabel">Fin</li>
-                            <li class="formlabel">Nivel Escolar</li>
+                                <li class="formlabel">Nombre</li>
+                                <li class="formlabel">Institución</li>
+                                <li class="formlabel">Inicio</li>
+                                <li class="formlabel">Fin</li>
+                                <li class="formlabel">Nivel Escolar</li>
 
-                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
-                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
-                            <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
-                            <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
-                            <li>
-                                <select style="margin-top:10px" class="" name="tipo" >
-                                    <option value="#">Preparatoria</option>
-                                    <option value="#">Licenciatura</option>
-                                    <option value="#">Maestría</option>
-                                    <option value="#">Doctorado</option>
-                                </select>
-                            </li>
-                           </ul>
-
-                            <ul class="col5">
-                            <li class="formlabel">Tipo de documento</li>
-                            <li class="formlabel">Título</li>
-                            <li class="formlabel">Certificado</li>
-                            <li class="formlabel">Cédula</li>
-                            <li>&#160;</li>
-
-                            <li></li>
-                            <li><input type="file" name="titulo" placeholder="titulo" class="formlabel"></li>
-                            <li><input type="file" name="certificado" placeholder="certificado" class="formlabel"></li>
-                            <li><input type="file" name="cedula" placeholder="cedula" class="formlabel"></li>
-                            <li><a type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                                <li><input name="nombre" id="historial-nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
+                                <li><input name="institucion" id="historial-institucion" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
+                                <li><input name="inicio" id="historial-inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
+                                <li><input name="fin" id="historial-fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
+                                <li>
+                                    <select id="historial-nivel" style="margin-top:10px" class="" name="nivel" >
+                                        <option value="#">Preparatoria</option>
+                                        <option value="#">Licenciatura</option>
+                                        <option value="#">Maestría</option>
+                                        <option value="#">Doctorado</option>
+                                    </select>
+                                </li>
                             </ul>
 
-                           <table id="table-historial-academico">
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Institutoción</th>
-                          <th>Inicio</th>
-                          <th>Fin</th>
-                          <th>Nivel Escolar</th>
-                          <th>Archivos</th>
-                          <th>Operaciones</th>
-                        </tr>
-                        <tr>
-                          <td>Ingeniería en sistemas</td>
-                          <td>Tecnologico de Toluca</td>
-                          <td>1 Sep 1999</td>
-                          <td>30 Agosto 2005</td>
-                          <td>Doctorado</td>
-                          <td></td>
-                          <td align="center"><a href="#" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></td>
-                        </tr>
-                      </table>
+                            <ul class="col5">
+                                <li class="formlabel">Tipo de documento</li>
+                                <li class="formlabel">Título</li>
+                                <li class="formlabel">Certificado</li>
+                                <li class="formlabel">Cédula</li>
+                                <li>&#160;</li>
 
+                                <li></li>
+                                <li><input id="historial-titulo" type="file" name="titulo" placeholder="titulo" class="formlabel"></li>
+                                <li><input id="historial-certificado" type="file" name="certificado" placeholder="certificado" class="formlabel"></li>
+                                <li><input id="historial-cedula" type="file" name="cedula" placeholder="cedula" class="formlabel"></li>
+                                <li><button type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></button></li>
+                            </ul>
                         </form>
+                        <table id="table-historial-academico">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Institutoción</th>
+                                    <th>Inicio</th>
+                                    <th>Fin</th>
+                                    <th>Nivel Escolar</th>
+                                    <th>Archivos</th>
+                                    <th>Operaciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historial-table">
+
+                            </tbody>
+                        </table>
+
+                    <script>
+                        var historialMenu = document.querySelector('#historial-menu');
+                        historialMenu.addEventListener('click', (e)=>{
+                            fetch("getHistorial/{{ Auth::user()->id }}")
+                                .then((response) => response.json())
+                                .then((response) => {
+                                    
+                                    let table = document.querySelector('#historial-table');
+                                    table.innerHTML = '';
+                                    response.forEach((element) => {
+                                        let tr = document.createElement('tr');
+                                        let nombre = document.createElement('td');
+                                        let institucion = document.createElement('td');
+                                        let inicio = document.createElement('td');
+                                        let fin = document.createElement('td');
+                                        let nivel = document.createElement('td');
+                                        let archivos = document.createElement('td');
+                                        let opciones = document.createElement('td');
+                                        let deleteButton = document.createElement('a');
+
+                                        nombre.innerHTML = element.nombre_asignatura;
+                                        institucion.innerHTML = element.nombre_institucion;
+                                        inicio.innerHTML = element.fecha_inicio;
+                                        fin.innerHTML = element.fecha_fin;
+                                        nivel.innerHTML = element.nivel_escolar;
+                                        archivos.innerHTML = '';
+                                        deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
+
+                                        tr.appendChild(nombre);
+                                        tr.appendChild(institucion);
+                                        tr.appendChild(inicio);
+                                        tr.appendChild(fin);
+                                        tr.appendChild(nivel);
+                                        tr.appendChild(archivos);
+                                        opciones.appendChild(deleteButton)
+                                        tr.appendChild(opciones);
+                                        table.appendChild(tr);
+
+                                        deleteButton.addEventListener('click', (e)=>{
+                                            e.preventDefault();
+                                            table.removeChild(tr);
+                                            Swal.fire('Registro eliminado', '', 'success');
+                                        });
+                                    });
+                                });
+                        });    
+                    </script>
                 </div>
             </div>
         </div>
@@ -476,8 +519,11 @@
                 .then(response => response.json())
                 .then(response => {
                     let table = document.querySelector('#materias-table');
+
+                    table.innerHTML = '';
+
                     response.forEach((element)=>{
-                                        let tr = document.createElement('tr');
+                        let tr = document.createElement('tr');
                         let nombre = document.createElement('td');
                         let institucion = document.createElement('td');
                         let Inicio = document.createElement('td');
