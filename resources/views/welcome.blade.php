@@ -42,7 +42,7 @@
                     <label for="text-input">Número de empleado UDEMEX</label>
                     <input type="text" placeholder="Número de empleado EDEMEX"
                     autocomplete="off" id="xclave_empleado" name="clave_empleado"
-                    value="{{ old('clave_empleado', $usuario->clave_empleado ?? '') }}">
+                    value="{{ old('clave_empleado', $usuario->clave_empleado ?? '') }}" pattern="[0-9]+">
                 </div>
                      @if($errors->first('clave_empleado'))
                     <div class="invalid-feedback">
@@ -116,7 +116,7 @@
                     autocomplete="off" id="dato_celular" name="celular" 
                     value="{{ old('celular', $usuario->celular ?? '') }}"
                     maxlength="10"
-                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" pattern="[0-9]{10}">
                 </div>
                      @if($errors->first('celular'))
                     <div class="invalid-feedback">
@@ -171,7 +171,7 @@
             </div>
 
             <div>
-                <center><button type="submit" class="btn-primario">Guardar Cambios</button></center>
+                <button  type="submit" class="btn-primario">Guardar Cambios</button>
             </div>
             <br>&nbsp;
         </div>
@@ -407,8 +407,8 @@
                     @endif
 
                 <div>
-                    <center><button type="submit" class="btn-primario">Guardar Cambios</button></center>
-                </div>
+                    <button type="submit" class="btn-primario">Guardar Cambios</button>
+                </div><br><div>&#160;</div>
             </div>
         </div>
         </form>
@@ -498,10 +498,10 @@
                             <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
                             <li>
                                 <select style="margin-top:10px" class="" name="tipo" >
-                                    <option value="#">Preparatoria</option>
-                                    <option value="#">Licenciatura</option>
-                                    <option value="#">Maestría</option>
-                                    <option value="#">Doctorado</option>
+                                    <option value="Preparatoria">Preparatoria</option>
+                                    <option value="Licenciatura">Licenciatura</option>
+                                    <option value="Maestría">Maestría</option>
+                                    <option value="Doctorado">Doctorado</option>
                                 </select>
                             </li>
                            </ul>
