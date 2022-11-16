@@ -7,6 +7,7 @@ use App\Http\Requests\UsuarioCreateRequest;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UsuarioController extends Controller
 {
@@ -38,6 +39,7 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioCreateRequest $request)
     {
+        
         $newUsuario = Usuario::create($request->all());
 
         // dd($request->hasFile('foto'));
@@ -60,6 +62,7 @@ class UsuarioController extends Controller
         $newUsuario->email_personal = $request-> email_personal;
 
         $newUsuario->save();
+        Alert::alert()->success('Sus Datos Personales',' han sido regristados correctamente.');
 
          return view("welcome");
     }
