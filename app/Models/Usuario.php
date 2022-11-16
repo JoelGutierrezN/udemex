@@ -28,6 +28,7 @@ class Usuario extends Model
         'email_personal',
         'rol',
         'id_tipo_usuario',
+        'id_user',
         'activo'
 
     ];

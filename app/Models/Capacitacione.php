@@ -25,7 +25,7 @@ class Capacitacione extends Model
         'numero_archivo_constancia',
         'constancia_pdf',
         'validar_archivo_constancia',
-        'id_usuario',
+        'id_user',
         'activo'
 
     ];
