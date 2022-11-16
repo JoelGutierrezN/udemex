@@ -66,12 +66,18 @@ class UsuarioController extends Controller
 
     public function getTeacherInfo($id)
     {
-        $usuarios = Usuario::find($id);
+       $usuarios = \DB::table('usuarios')
+            ->select('id_usuario', 'nombre', 'apellido_paterno', 'apellido_materno', 'sexo', 'clave_empleado', 
+            'foto', 'telefono_casa', 'celular', 'email_udemex', 'email_personal', 'id_user')
+            ->where('id_user', '=', $id)
+            ->get();
+
+        // $usuarios = Usuario::find($id);
 
         // if ( isset($usuarios)){
         //     return array([]);
         // }
-        return $usuarios;
+        return $usuarios [0];
 
 
     }
