@@ -25,7 +25,7 @@
                 <div>
                     <label for="text-input">Número de empleado UDEMEX</label>
                     <input type="text" placeholder="Número de empleado EDEMEX" 
-                    autocomplete="off" id="clave_empleado" name="clave_empleado"
+                    autocomplete="off" id="dato_clave_empleado" name="clave_empleado"
                     value="{{ old('clave_empleado') }}">
                 </div>
                      @if($errors->first('clave_empleado'))
@@ -37,7 +37,7 @@
                 <div>
                     <label for="text-input">Nombre</label>
                     <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
-                    autocomplete="off" id="nombre" name="nombre"  value="{{ old('nombre') }}">
+                    autocomplete="off" id="dato_nombre" name="nombre"  value="{{ old('nombre') }}">
                 </div>
                     @if($errors->first('nombre'))
                     <div class="invalid-feedback">
@@ -48,7 +48,7 @@
                 <div>
                     <label for="text-input">Apellido paterno</label>
                     <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo 'González'" 
-                     autocomplete="off" id="apellido_paterno" name="apellido_paterno"
+                     autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
                       value="{{ old('apellido_paterno') }}">
                 </div>
                     @if($errors->first('apellido_paterno'))
@@ -60,7 +60,7 @@
                 <div>
                     <label for="text-input">Apellido materno</label>
                     <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo 'González'" 
-                    autocomplete="off" id="apellido_materno" name="apellido_materno"
+                    autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
                      value="{{ old('apellido_materno') }}">
                 </div>
                     @if($errors->first('apellido_materno'))
@@ -91,7 +91,7 @@
                 <div>
                     <label for="text-input">Teléfono de casa</label>
                     <input type="text" placeholder="Coloque su teléfono de casa" 
-                    autocomplete="off" id="telefono_casa" name="telefono_casa"
+                    autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
                      value="{{ old('telefono_casa') }}" maxlength="10"
                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                 </div>
@@ -104,7 +104,7 @@
                 <div>
                     <label for="text-input">Teléfono celular</label>
                     <input type="text" placeholder="Coloque su teléfono celular" 
-                    autocomplete="off" id="celular" name="celular"  value="{{ old('celular') }}"
+                    autocomplete="off" id="dato_celular" name="celular"  value="{{ old('celular') }}"
                     maxlength="10"
                     onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                 </div>
@@ -117,7 +117,7 @@
                 <div>
                     <label for="text-input">Correo electrónico de UDEMEX</label>
                     <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico de UDEMEX" 
-                    autocomplete="off" id="email_udemex" name="email_udemex"  value="{{ old('email_udemex') }}">
+                    autocomplete="off" id="dato_email_udemex" name="email_udemex"  value="{{ old('email_udemex') }}">
                 </div>
                     @if($errors->first('email_udemex'))
                     <div class="invalid-feedback">
@@ -128,7 +128,7 @@
                 <div>
                     <label for="text-input">Correo electrónico personal</label>
                     <input type="text" placeholder="Coloque su correo electrónico personal" 
-                    autocomplete="off" id="email_personal" name="email_personal"  value="{{ old('email_personal') }}">
+                    autocomplete="off" id="dato_email_personal" name="email_personal"  value="{{ old('email_personal') }}">
                 </div>
                     @if($errors->first('email_personal'))
                     <div class="invalid-feedback">
@@ -453,6 +453,48 @@
     </script>
 
     <script>
+     document.addEventListener('DOMContentLoaded',()=>{
+        fetch("getTeacherInfo/{{ Auth::user()->id }}")
+        .then(response => response.json())
+        .then((response)=>{
+                console.log(response)
+                var dato_clave_empleado =  document.querySelector('#dato_clave_empleado')
+                dato_clave_empleado.value=response.clave_empleado;
+                dato_clave_empleado.setAttribute("readonly", "true");
+
+                var dato_nombre =  document.querySelector('#dato_nombre')
+                dato_nombre.value=response.nombre;
+                dato_nombre.setAttribute("readonly", "true");
+
+                var dato_apellido_paterno =  document.querySelector('#dato_apellido_paterno')
+                dato_apellido_paterno.value=response.apellido_paterno;
+                dato_apellido_paterno.setAttribute("readonly", "true");
+
+                var dato_apellido_materno =  document.querySelector('#dato_apellido_materno')
+                dato_apellido_materno.value=response.apellido_materno;
+                dato_apellido_materno.setAttribute("readonly", "true");
+
+                var dato_telefono_casa =  document.querySelector('#dato_telefono_casa')
+                dato_telefono_casa.value=response.telefono_casa;
+                dato_telefono_casa.setAttribute("readonly", "true");
+
+                var dato_celular =  document.querySelector('#dato_celular')
+                dato_celular.value=response.celular;
+                dato_celular.setAttribute("readonly", "true");
+
+                var dato_email_udemex =  document.querySelector('#dato_email_udemex')
+                dato_email_udemex.value=response.email_udemex;
+                dato_email_udemex.setAttribute("readonly", "true");
+
+                var dato_email_personal =  document.querySelector('#dato_email_personal')
+                dato_email_personal.value=response.email_personal;
+                dato_email_personal.setAttribute("readonly", "true");
+
+        })/*.catch((error)=>{})*/
+    
+    });
+    </script>
+    <script>
         var archivosMenu = document.querySelector('#archivos-menu');
         archivosMenu.addEventListener('click', ()=>{
             fetch('getCapacitaciones/{{ Auth::user()->id }}')
@@ -520,7 +562,9 @@
         });
     </script>
 
+
     @if(isset($from))
+
         <script>
             Swal.fire(
                 '{{ $alert }}',
@@ -528,5 +572,7 @@
                 'success'
             );
         </script>
+
+        
     @endif
 @endsection

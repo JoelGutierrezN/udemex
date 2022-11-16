@@ -35,6 +35,7 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     Route::view('/', 'teacher-modules.index')->name('index');
     Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher'])->name('welcome');
     Route::resource('usuarios', UsuarioController::class);
+    Route::get('/getTeacherInfo/{id}', [UsuarioController::class, 'getTeacherInfo'])->name('getTeacherInfo');
 
 
     // * Rutas para las capacitaciones

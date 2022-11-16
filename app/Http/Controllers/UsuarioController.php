@@ -41,6 +41,18 @@ class UsuarioController extends Controller
          return view("welcome");
     }
 
+    public function getTeacherInfo($id)
+    {
+        $usuarios = Usuario::find($id);
+
+        // if ( isset($usuarios)){
+        //     return array([]);
+        // }
+        return $usuarios;
+
+
+    }
+
     /**
      * Display the specified resource.
      *
