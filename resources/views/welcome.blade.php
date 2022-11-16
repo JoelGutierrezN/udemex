@@ -4,86 +4,137 @@
 
 @section('content')
 
-    <form action="#" method="POST">
-        @csrf
-        @method('POST')
-
         <h3 class="form-screen-title">Registro de Información Personal</h3>
 
         <div class="tabs">
             <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
             <button type="button" data-tab-target="2">Materias impartidas &blacktriangledown;</button>
             <button type="button" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
-            <button type="button" id="archivos-menu" data-tab-target="4">Subida de Documentos &blacktriangledown;</button>
+            <button type="button" id="archivos-menu" data-tab-target="4">Cursos &blacktriangledown;</button>
             <button type="button" data-tab-target="5">Historial académico &blacktriangledown;</button>
         </div>
 
-        {{-- Datos personales --}}
+    {{-- Datos personales --}}
+       <form action="{{ route('teacher.usuarios.store') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        @method('POST')
         <div class="mt-2" data-tab-id="1">
             <h3 class="tab--title">Datos personales</h3>
             <div class="input-columns-1">
+
+                <div>
+                    <label for="text-input">Número de empleado UDEMEX</label>
+                    <input type="text" placeholder="Número de empleado EDEMEX" 
+                    autocomplete="off" id="clave_empleado" name="clave_empleado"
+                    value="{{ old('clave_empleado') }}">
+                </div>
+                     @if($errors->first('clave_empleado'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('clave_empleado') }}</i>
+                    </div>
+                    @endif
+
                 <div>
                     <label for="text-input">Nombre</label>
-                    <input type="text" placeholder="Coloque su nombre" id="text-input">
+                    <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
+                    autocomplete="off" id="nombre" name="nombre"  value="{{ old('nombre') }}">
                 </div>
+                    @if($errors->first('nombre'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('nombre') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Apellido paterno</label>
-                    <input type="text" placeholder="Coloque su apellido paterno" id="text-input">
+                    <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo 'González'" 
+                     autocomplete="off" id="apellido_paterno" name="apellido_paterno"
+                      value="{{ old('apellido_paterno') }}">
                 </div>
+                    @if($errors->first('apellido_paterno'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('apellido_paterno') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Apellido materno</label>
-                    <input type="text" placeholder="Coloque su apellido materno" id="text-input">
+                    <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo 'González'" 
+                    autocomplete="off" id="apellido_materno" name="apellido_materno"
+                     value="{{ old('apellido_materno') }}">
                 </div>
+                    @if($errors->first('apellido_materno'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('apellido_materno') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="select-input">Género</label>
                     <ul class="col2">
-                        <label><input type="radio" name="#" value="0">Femenino</label>&#160;&#160;&#160;&#160;&#160;
-                        <label><input type="radio" name="#" value="1" required>Masculino</label>
+                        <label><input type="radio" name="sexo" value="1" checked>Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <label><input type="radio" name="sexo" value="0">Femenino</label>
                     </ul>
                 </div>
 
-                <div>
-                    <label for="text-input">Número de empleado UDEMEX</label>
-                    <input type="text" placeholder="Número de empleado EDEMEX" id="text-input">
-                </div>
 
                 <div>
                     <label for="text-input">Fotografía</label>
-                    <input type="file" placeholder="Coloque su fotografía" id="text-input">
+                    <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto">
                 </div>
+                     @if($errors->first('foto'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('foto') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Teléfono de casa</label>
-                    <input type="text" placeholder="Coloque su teléfono de casa" id="text-input">
+                    <input type="text" placeholder="Coloque su teléfono de casa" 
+                    autocomplete="off" id="telefono_casa" name="telefono_casa"
+                     value="{{ old('telefono_casa') }}" maxlength="10"
+                     onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                 </div>
+                    @if($errors->first('telefono_casa'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('telefono_casa') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Teléfono celular</label>
-                    <input type="text" placeholder="Coloque su teléfono celular" id="text-input">
+                    <input type="text" placeholder="Coloque su teléfono celular" 
+                    autocomplete="off" id="celular" name="celular"  value="{{ old('celular') }}"
+                    maxlength="10"
+                    onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                 </div>
+                     @if($errors->first('celular'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('celular') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Correo electrónico de UDEMEX</label>
-                    <input type="text" placeholder="Coloque su correo electrónico de UDEMEX" id="text-input">
+                    <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico de UDEMEX" 
+                    autocomplete="off" id="email_udemex" name="email_udemex"  value="{{ old('email_udemex') }}">
                 </div>
-
-                <div>
-                    <label for="text-input">Confirmación de correo electrónico UDEMEX</label>
-                    <input type="text" placeholder="Coloque su correo electrónico UDEMEX" id="text-input">
-                </div>
+                    @if($errors->first('email_udemex'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('email_udemex') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input">Correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
+                    <input type="text" placeholder="Coloque su correo electrónico personal" 
+                    autocomplete="off" id="email_personal" name="email_personal"  value="{{ old('email_personal') }}">
                 </div>
-
-                <div>
-                    <label for="text-input">Confirmación de correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
-                </div>
+                    @if($errors->first('email_personal'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('email_personal') }}</i>
+                    </div>
+                    @endif
 
                 <!-- <div>
                     <label for="select-input">Rol</label>
@@ -102,10 +153,14 @@
                         <option value="Revisor">Revisor</option>
                     </select>
                 </div> -->
-
             </div>
+            <div>
+                <center><button type="submit" class="btn-primario">Guardar Cambios</button></center>
+            </div>
+            <br>&nbsp;
         </div>
-        {{--Fin Datos personales --}}
+        </form>
+    {{--Fin Datos personales --}}
 
         {{--Datos de materias impartidas --}}
         <div class="mt-2" data-tab-id="2">
@@ -114,7 +169,7 @@
                 <div>
                     <label for="text-input"> Coloque las materias impartidas</label>
                     <ul class="col6">
-                        <form id="archivos-form" action="" method="post" enctype="multipart/form-data">
+                        <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                         @csrf
                         <li class="formlabel">Nombre</li>
                         <li class="formlabel">Institución</li>
@@ -165,7 +220,6 @@
         {{--Fin Datos de materias impartidas --}}
 
         {{-- Experiencia Laboral --}}
-
         <div class="mt-2" data-tab-id="3">
             <h3 class="tab--title">Datos de Experiencia Laboral</h3>
             <div class="input-columns-2">
@@ -246,22 +300,22 @@
                 </div>
 
                 <div>
-
+                    <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
+                    <small>El nombre del archivo debe de ser su nombre completo empezando
+                        por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
+                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
 
                 </div>
             </div>
         </div>
-</form>
         {{--Fin Experiencia Laboral --}}
 
         {{-- Subida de Documentos --}}
-
         <div class="mt-2" data-tab-id="4">
-            <h3 class="tab--title">Subida de Documentos</h3>
+            <h3 class="tab--title">Capacitaciones</h3>
             <div class="">
                 <div>
                     <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
-
                     <ul class="col8">
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -288,16 +342,19 @@
                     </ul>
                     
                     <table id="table-capacitaciones">
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Instituto</th>
-                          <th>Inicio</th>
-                          <th>Fin</th>
-                          <th>Horas</th>
-                          <th>Tipo</th>
-                          <th>Archivo</th>
-                          <th>Operaciones</th>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Instituto</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
+                                <th>Horas</th>
+                                <th>Tipo</th>
+                                <th>Archivo</th>
+                                <th>Operaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="capacitaciones-table-body"></tbody>
                       </table>
                         
 
@@ -306,16 +363,11 @@
                             e.preventDefault();
                             document.querySelector('#archivos-form').submit();
                         });
+                        
                     </script>
 
                 </div><br>
-                <div>
-                    <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
-                    <small>El nombre del archivo debe de ser su nombre completo empezando
-                        por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
-                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
-
-                </div>
+                
 
             </div>
         </div>
@@ -324,22 +376,22 @@
         {{-- Inicio historial academico --}}
         <div class="mt-2" data-tab-id="5">
             <h3 class="tab--title">Historial Académico</h3>
+            
             <div class="">
                 <div>
                     <label for="text-input">Coloque su historial académico</label>
-                    <ul class="col8">
-                        <form action="#" method="post" enctype="multipart/form" id="historialAcademico-form">
+                    <form action="#" method="post" enctype="multipart/form" id="historialAcademico-form">
+                            <ul class="col5">
                             <li class="formlabel">Nombre</li>
+                            <li class="formlabel">Institución</li>
                             <li class="formlabel">Inicio</li>
                             <li class="formlabel">Fin</li>
-                            <li class="formlabel">Nivel</li>
-                            <li class="formlabel">Cédula PDF</li>
-                            <li class="formlabel">Título PDF</li>
-                            <li class="formlabel">Certificado PDF</li>
-                            <li style="color:white">Agregar</li>
-                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
-                            <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                            <li><input name="fin" type="date" placeholder="Fin de capacitacion" id="text-input"></li>
+                            <li class="formlabel">Nivel Escolar</li>
+
+                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
+                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
+                            <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
+                            <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
                             <li>
                                 <select style="margin-top:10px" class="" name="tipo" >
                                     <option value="#">Preparatoria</option>
@@ -348,18 +400,47 @@
                                     <option value="#">Doctorado</option>
                                 </select>
                             </li>
-                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><a href="#"  onclick="document.getElementById('historialAcademico-form').submit()" id="agregar-hisotiralAcademico" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                           </ul>
+
+                            <ul class="col5">
+                            <li class="formlabel">Tipo de documento</li>
+                            <li class="formlabel">Título</li>
+                            <li class="formlabel">Certificado</li>
+                            <li class="formlabel">Cédula</li>
+                            <li>&#160;</li>
+                            
+                            <li></li>
+                            <li><input type="file" name="titulo" placeholder="titulo" class="formlabel"></li>
+                            <li><input type="file" name="certificado" placeholder="certificado" class="formlabel"></li>
+                            <li><input type="file" name="cedula" placeholder="cedula" class="formlabel"></li>
+                            <li><a type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                            </ul>
+
+                           <table id="table-historial-academico">
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Institutoción</th>
+                          <th>Inicio</th>
+                          <th>Fin</th>
+                          <th>Nivel Escolar</th>
+                          <th>Archivos</th>
+                          <th>Operaciones</th>
+                        </tr>
+                        <tr>
+                          <td>Ingeniería en sistemas</td>
+                          <td>Tecnologico de Toluca</td>
+                          <td>1 Sep 1999</td>
+                          <td>30 Agosto 2005</td>
+                          <td>Doctorado</td>
+                          <td></td>
+                          <td align="center"><a href="#" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></td>
+                        </tr>
+                      </table>
+
                         </form>
-                    </ul>
                 </div>
             </div>
         </div>
-
-    </form>
-
 @endsection
 
 @section('scripts')
@@ -377,9 +458,9 @@
             fetch('getCapacitaciones/{{ Auth::user()->id }}')
                 .then(response => response.json())
                 .then((response)=>{
-                    let table = document.querySelector('#table-capacitaciones');
+                    let table = document.querySelector('#capacitaciones-table-body');
+                    table.innerHTML = '';
                     response.forEach((element)=>{
-                        console.log(element.nombre_curso);
                         let tr = document.createElement('tr');
 
                         // * Columnas
@@ -391,6 +472,7 @@
                         let tipo_curso = document.createElement('td');
                         let constancia_pdf = document.createElement('td');
                         let opciones = document.createElement('td');
+                        let deleteButton = document.createElement('a');
 
                         // * Asignaciones
                         nombre_curso.innerHTML = `${element.nombre_curso}`;
@@ -399,15 +481,14 @@
                         fecha_fin.innerHTML = `${ element.fecha_fin }`;
                         horas.innerHTML = `${ element.horas }`;
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
-                        constancia_pdf.innerHTML = `<a href="#" id="ver-archivo-${element.id_capacitacion}" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
-                        opciones.innerHTML = `<a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a>`;
+                        constancia_pdf.innerHTML = `<a href="#" id="show-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
+                        deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
+                        //opciones.innerHTML = `<a href="delete-capacitacion/${ element.id_capacitacion }" id="delete-archivo-${element.id_capacitacion}" type="submit" class="btnplus"></a>`;
                         
                         // * Attr
                         constancia_pdf.setAttribute('align', 'center');
                         opciones.setAttribute('aling', 'center');
-
-                        // * Eventlisteners
-                        
+                        deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_capacitacion }`);
                         
                         // * Appends
                         tr.appendChild(nombre_curso);
@@ -417,9 +498,24 @@
                         tr.appendChild(horas);
                         tr.appendChild(tipo_curso);
                         tr.appendChild(constancia_pdf);
+                        opciones.appendChild(deleteButton);
                         tr.appendChild(opciones);
                         table.appendChild(tr);
-                    });
+
+                        // * Eventlisteners
+                        deleteButton.addEventListener('click', (e)=>{
+                            e.preventDefault();
+                            console.log('delete');
+                            fetch(`delete-capacitacion/${ element.id_capacitacion }`)
+                                .then((response) => response.json())
+                                .then((response) => {
+                                    console.log(response);
+                                    Swal.fire(response.alert, '', 'success');
+                                    table.removeChild(tr);
+                                });
+                        });
+                        
+    });
                 });
         });
     </script>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Personal;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Capacitacione;
+use Illuminate\Support\Facades\Auth;
 
 class ArchivosController extends Controller
 {
@@ -19,8 +21,9 @@ class ArchivosController extends Controller
         ]);
 
         if($request->file('evidencia') != ""){
-
-            $storage_path = $request->nombre.'_'.$request->tipo.'.pdf';
+            $nombre = Auth::user()->name;
+            $nombreConvert = strtr($nombre, " ", "_");
+            $storage_path = $nombreConvert.'_'.$request->nombre.'_'.$request->tipo.'.pdf';
 
             \DB::table('capacitaciones')
                 ->insert([
@@ -32,28 +35,54 @@ class ArchivosController extends Controller
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
-                    'id_usuario' => \Auth::user()->id,
+                    'id_usuario' => Auth::user()->id,
                     'activo' => 1,
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
 
             
-
-            $file = $request->file('evidencia');
+             if(file_exists('/storage/app/Capacitaciones/'.$storage_path)){
+            
             //\Storage::disk('local')->put($storage_path, \File::get($file));
+            }else{
+                $file = $request->file('evidencia');
+                //\Storage::putFileAs('/Capacitaciones/',$file,$storage_path);
+                \Storage::disk('local')->put('/Capacitaciones/'.$storage_path, \File::get($file));
+            }
             $data = array([
                 'state' => 'registro realizado'
             ]);
 
             return view('welcome')
                     ->with('alert', 'Evidencia de la capacitación guardada')
-                    ->with('from', 'Subida de documentos');
+                    ->with('from', 'Cursos');
         }else{
             $data = array([
                 'state' => 'sin archivo'
             ]);
             return response()->json($data, 200);
         }
+    }
+    public function deleteCapacitacion($id){
+        
+        $capacitacion = Capacitacione::findOrFail($id);
+        $capacitacion->delete();
+        $nombre = Auth::user()->name;
+            $nombreConvert = strtr($nombre, " ", "_");
+            $storage_path = $capacitacion->constancia_pdf;
+        if(file_exists('/storage/app/Capacitaciones/'.$storage_path)){
+            \File::delete('/storage/app/Capacitaciones/'.$storage_path);
+            //\Storage::disk('local')->put($storage_path, \File::get($file));
+            }else{
+                
+            }
+        $data = array([
+            'alert' => 'Registro eliminado'
+        ]);
+        return response()->json();
+        
+
+        
     }
 
     public function getCapacitaciones($id){
