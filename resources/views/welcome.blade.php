@@ -136,6 +136,10 @@
                     </div>
                     @endif
 
+                <div>
+                    <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
+                </div>
+
                 <!-- <div>
                     <label for="select-input">Rol</label>
                     <select id="select-input">
@@ -154,6 +158,7 @@
                     </select>
                 </div> -->
             </div>
+            
             <div>
                 <center><button type="submit" class="btn-primario">Guardar Cambios</button></center>
             </div>

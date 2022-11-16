@@ -35,7 +35,7 @@ class ArchivosController extends Controller
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
-                    'id_usuario' => Auth::user()->id,
+                    'id_user' => Auth::user()->id,
                     'activo' => 1,
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
@@ -88,7 +88,7 @@ class ArchivosController extends Controller
     public function getCapacitaciones($id){
         $info = \DB::table('capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
-            ->where('id_usuario', '=', $id)
+            ->where('id_user', '=', $id)
             ->get();
         return $info;
     }
