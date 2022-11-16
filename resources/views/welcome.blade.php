@@ -72,8 +72,8 @@
                 <div>
                     <label for="select-input">Género</label>
                     <ul class="col2">
-                        <label><input type="radio" name="sexo" value="1" checked>Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                        <label><input type="radio" name="sexo" value="0">Femenino</label>
+                        <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1">Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <label><input type="radio" id="dato_sexo_femenino" name="sexo" value="0">Femenino</label>
                     </ul>
                 </div>
 
@@ -158,7 +158,7 @@
                     </select>
                 </div> -->
             </div>
-            
+
             <div>
                 <center><button type="submit" class="btn-primario">Guardar Cambios</button></center>
             </div>
@@ -478,6 +478,15 @@
                 var dato_apellido_materno =  document.querySelector('#dato_apellido_materno')
                 dato_apellido_materno.value=response.apellido_materno;
                 dato_apellido_materno.setAttribute("readonly", "true");
+
+                var dato_sexo_masculino =  document.querySelector('#dato_sexo_masculino')
+                var dato_sexo_femenino =  document.querySelector('#dato_sexo_femenino')
+                if (response.sexo == 1){
+                    dato_sexo_masculino.setAttribute("checked", "true");
+                }else {
+                    dato_sexo_femenino.setAttribute("checked", "true");
+                }
+
 
                 var dato_telefono_casa =  document.querySelector('#dato_telefono_casa')
                 dato_telefono_casa.value=response.telefono_casa;
