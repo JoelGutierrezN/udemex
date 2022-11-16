@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\Personal\ArchivosController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\UsuarioController;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 /* Auth 365 */
@@ -13,7 +14,7 @@ Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Control
 });
 
 Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
-    Route::get('/', 'PagesController@app')->name('app');
+    // Route::get('/', 'PagesController@app')->name('app');
     Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 });
 
@@ -33,6 +34,8 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
 Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
     Route::view('/', 'teacher-modules.index')->name('index');
     Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher'])->name('welcome');
+    Route::resource('usuarios', UsuarioController::class);
+
 
     // * Rutas para las capacitaciones
     Route::post('/updateFiles', [ArchivosController::class, 'update'])->name('updateFiles');
