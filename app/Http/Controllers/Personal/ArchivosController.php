@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Capacitacione;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ArchivosController extends Controller
 {
@@ -53,9 +54,12 @@ class ArchivosController extends Controller
                 'state' => 'registro realizado'
             ]);
 
-            return view('welcome')
-                    ->with('alert', 'Evidencia de la capacitación guardada')
-                    ->with('from', 'Cursos');
+            // return view('welcome')
+
+            Alert::alert()->success('Evidencia de la capacitacion guardada',' puede consultarlo en la pestaña de cursos.');
+            return redirect()->route('teacher.welcome');
+                    // ->with('alert', 'Evidencia de la capacitación guardada')
+                    // ->with('from', 'Cursos');
         }else{
             $data = array([
                 'state' => 'sin archivo'

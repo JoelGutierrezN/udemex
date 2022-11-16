@@ -620,5 +620,29 @@ footer h5, footer h6{
     background-color: var(--secondary);
 }
 
+.alert {
+    display:block;
+    height: auto;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+
+}
+
+.alert-info{
+    background-color: #5499506e;
+    color:#126408;
+    
+}
+
+.alert-info h6{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.alert-info p{
+    font-size: 1.2rem;
+}
 
 

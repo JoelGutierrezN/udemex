@@ -6,6 +6,7 @@ use App\Http\Controllers\Personal\ArchivosController;
 use App\Http\Controllers\Personal\MateriasController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProfesoresInicioController;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 /* Auth 365 */
@@ -34,7 +35,7 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
 /* Rutas de Profesores */
 Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
     Route::view('/', 'teacher-modules.index')->name('index');
-    Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher'])->name('welcome');
+    Route::get('/welcome', ProfesoresInicioController::class)->name('welcome');
     Route::resource('usuarios', UsuarioController::class);
     Route::get('/getTeacherInfo/{id}', [UsuarioController::class, 'getTeacherInfo'])->name('getTeacherInfo');
 

@@ -15,18 +15,34 @@
         </div>
 
     {{-- Datos personales --}}
-       <form action="{{ route('teacher.usuarios.store') }}" method="POST" enctype="multipart/form-data">
+       @if($is_registered)
+         <form action="{{ route('teacher.usuarios.update', $usuario) }}" method="POST" enctype="multipart/form-data">
+             @csrf
+             @method('PUT')
+           @else 
+
+        <form action="{{ route('teacher.usuarios.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
+        @endif
         <div class="mt-2" data-tab-id="1">
             <h3 class="tab--title">Datos personales</h3>
-            <div class="input-columns-1">
+            @if($is_registered)
+             <div class="alert alert-info">
+                
+                   <h6>!Ya tenemos tus datos¡</h6>
+                   <p>Ya cuentas con tus datos registrados, a partir de ahora solo puedes actualizarlos.
+                     </p>
+           </div>
+            @endif
 
+
+            <div class="input-columns-1">
                 <div>
                     <label for="text-input">Número de empleado UDEMEX</label>
                     <input type="text" placeholder="Número de empleado EDEMEX"
                     autocomplete="off" id="xclave_empleado" name="clave_empleado"
-                    value="{{ old('clave_empleado') }}">
+                    value="{{ old('clave_empleado', $usuario->clave_empleado ?? '') }}">
                 </div>
                      @if($errors->first('clave_empleado'))
                     <div class="invalid-feedback">
@@ -37,7 +53,8 @@
                 <div>
                     <label for="text-input">Nombre</label>
                     <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
-                    autocomplete="off" id="dato_nombre" name="nombre"  value="{{ old('nombre') }}">
+                    autocomplete="off" id="dato_nombre" name="nombre"  
+                     value="{{ old('nombre', $usuario->nombre ?? '') }}">
                 </div>
                     @if($errors->first('nombre'))
                     <div class="invalid-feedback">
@@ -49,7 +66,7 @@
                     <label for="text-input">Apellido paterno</label>
                     <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo 'González'"
                      autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
-                      value="{{ old('apellido_paterno') }}">
+                       value="{{ old('apellido_paterno', $usuario->apellido_paterno ?? '') }}">
                 </div>
                     @if($errors->first('apellido_paterno'))
                     <div class="invalid-feedback">
@@ -61,7 +78,7 @@
                     <label for="text-input">Apellido materno</label>
                     <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo 'González'"
                     autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
-                     value="{{ old('apellido_materno') }}">
+                     value="{{ old('apellido_materno', $usuario->apellido_materno ?? '') }}">
                 </div>
                     @if($errors->first('apellido_materno'))
                     <div class="invalid-feedback">
@@ -72,8 +89,10 @@
                 <div>
                     <label for="select-input">Género</label>
                     <ul class="col2">
-                        <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1">Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
-                        <label><input type="radio" id="dato_sexo_femenino" name="sexo" value="0">Femenino</label>
+                        <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" @isset ($usuario->sexo) @if($usuario->sexo == 1)   checked @endif @endisset>
+                        Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <label><input type="radio" id="dato_sexo_femenino" name="sexo" value="0" @isset ($usuario->sexo) @if($usuario->sexo == 0)  checked @endif @endisset>
+                        Femenino</label>
                     </ul>
                 </div>
 
@@ -81,7 +100,8 @@
                     <label for="text-input">Teléfono de casa</label>
                     <input type="text" placeholder="Coloque su teléfono de casa"
                     autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
-                     value="{{ old('telefono_casa') }}" maxlength="10"
+                     value="{{ old('telefono_casa', $usuario->telefono_casa ?? '') }}"
+                     maxlength="10"
                      onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                 </div>
                     @if($errors->first('telefono_casa'))
@@ -93,7 +113,8 @@
                 <div>
                     <label for="text-input">Teléfono celular</label>
                     <input type="text" placeholder="Coloque su teléfono celular"
-                    autocomplete="off" id="dato_celular" name="celular"  value="{{ old('celular') }}"
+                    autocomplete="off" id="dato_celular" name="celular" 
+                    value="{{ old('celular', $usuario->celular ?? '') }}"
                     maxlength="10"
                     onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;">
                 </div>
@@ -106,7 +127,8 @@
                 <div>
                     <label for="text-input">Correo electrónico de UDEMEX</label>
                     <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico de UDEMEX"
-                    autocomplete="off" id="dato_email_udemex" name="email_udemex"  value="{{ old('email_udemex') }}">
+                    autocomplete="off" id="dato_email_udemex" name="email_udemex"  
+                       value="{{ old('email_udemex', $usuario->email_udemex ?? '') }}">
                 </div>
                     @if($errors->first('email_udemex'))
                     <div class="invalid-feedback">
@@ -117,7 +139,8 @@
                 <div>
                     <label for="text-input">Correo electrónico personal</label>
                     <input type="text" placeholder="Coloque su correo electrónico personal"
-                    autocomplete="off" id="dato_email_personal" name="email_personal"  value="{{ old('email_personal') }}">
+                    autocomplete="off" id="dato_email_personal" name="email_personal"  
+                     value="{{ old('email_personal', $usuario->email_personal ?? '') }}">
                 </div>
                     @if($errors->first('email_personal'))
                     <div class="invalid-feedback">
