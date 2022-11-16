@@ -8,7 +8,7 @@
 
         <div class="tabs">
             <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
-            <button type="button" data-tab-target="2">Materias impartidas &blacktriangledown;</button>
+            <button type="button" id="materias-menu" data-tab-target="2">Materias impartidas &blacktriangledown;</button>
             <button type="button" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
             <button type="button" id="archivos-menu" data-tab-target="4">Cursos &blacktriangledown;</button>
             <button type="button" data-tab-target="5">Historial académico &blacktriangledown;</button>
@@ -177,43 +177,66 @@
                         <li class="formlabel">Fin</li>
                         <li class="formlabel">Nivel</li>
                         <li style="color:white">Agregar</li>
-                        <li><input name="nombre" autocomplete="off" type="text" placeholder="Nombre de la materia" id="text-input"></li>
-                        <li><input name="institucion" autocomplete="off" type="text" placeholder="Nombre de la institución" id="text-input"></li>
-                        <li><input name="inicio" type="date" placeholder="Inicio de la materia impartida" id="text-input"></li>
-                        <li><input name="fin" type="date" placeholder="Fin de la materia impartida" id="text-input"></li>
-                        <li><select  style="margin-top:10px" class="" name="tipo" >
+                        <li><input id="materia-nombre" name="nombre" autocomplete="off" type="text" placeholder="Nombre de la materia"></li>
+                        <li><input id="materia-institucion" name="institucion" autocomplete="off" type="text" placeholder="Nombre de la institución"></li>
+                        <li><input id="materia-inicio" name="inicio" type="date" placeholder="Inicio de la materia impartida"></li>
+                        <li><input id="materia-fin" name="fin" type="date" placeholder="Fin de la materia impartida"></li>
+                        <li><select id="materia-nivel" style="margin-top:10px" class="" name="tipo" >
                             <option value="#">Preparatoria</option>
                             <option value="#">Licenciatura</option>
                             <option value="#">Maestría</option>
                             <option value="#">Doctorado</option>
                           </select></li>
-                          <li><a href="#"  onclick="document.getElementById('materias-form').submit()" id="agregar-materias" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                          <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                         </form>
                     </ul>
-                    <table id="table-materias">
-                        <tr>
-                          <th>Nombre</th>
-                          <th>Instituto</th>
-                          <th>Inicio</th>
-                          <th>Fin</th>
-                          <th>Nivel</th>
-                          <th>Operaciones</th>
-                        </tr>
-                        <tr>
-                          <td>Ingenieria en sistemas</td>
-                          <td>Tecnologico de Toluca</td>
-                          <td>1 Sep 1999</td>
-                          <td>30 Agosto 2005</td>
-                          <td>Doctorado</td>
-                          <td align="center"><a href="#"  onclick="document.getElementById('materia-form').submit()" id="agregar-materia" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></td>
-                        </tr>
-                      </table>
-                      <script>
-                        document.querySelector('#agregar-materia').addEventListener('click', (e)=>{
+
+                    <script>
+                        
+
+                        document.querySelector('#agregar-materias').addEventListener('click', (e)=>{
                             e.preventDefault();
-                            document.querySelector('#archivos-materia').submit();
-                        });
+
+                            let data = new FormData();
+                            data.append('nombre', document.querySelector('#materia-nombre').value);
+                            data.append('institucion', document.querySelector('#materia-institucion').value);
+                            data.append('inicio', document.querySelector('#materia-inicio').value);
+                            data.append('fin', document.querySelector('#materia-fin').value);
+                            data.append('nivel', document.querySelector('#materia-nivel').value);
+                            data.append('_token', '{{ csrf_token() }}');
+
+                            fetch('/profesores/storeMaterias', {
+                                method: 'POST',
+                                headers: new Headers({
+                                    'X-CSRF-Token': '{{ csrf_token() }}'
+                                }),
+                                body: data
+                            }).then((response) => response.json())
+                            .then((response)=>{
+                                //console.log(response);
+                                Swal.fire(response[0].state, '', 'success');
+                            });
+                        })
                     </script>
+
+                    <table id="table-materias">
+                        <thead>
+                            <tr>
+                            <th>Nombre</th>
+                            <th>Instituto</th>
+                            <th>Inicio</th>
+                            <th>Fin</th>
+                            <th>Nivel</th>
+                            <th>Operaciones</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="materias-table">
+
+                        </tbody>
+                        
+                    </table>
+                    
                 </div>
             </div>
         </div>
@@ -452,6 +475,52 @@
         });
     </script>
 
+    <!-- Tabla de materias -->
+    <script>
+        var materiasMenu = document.querySelector('#materias-menu');
+        materiasMenu.addEventListener('click', ()=>{
+            fetch('getMaterias/{{ Auth::user()->id }}')
+                .then(response => response.json())
+                .then(response => {
+                    let table = document.querySelector('#materias-table');
+                    response.forEach((element)=>{
+                                        let tr = document.createElement('tr');
+                        let nombre = document.createElement('td');
+                        let institucion = document.createElement('td');
+                        let Inicio = document.createElement('td');
+                        let fin = document.createElement('td');
+                        let nivel = document.createElement('td');
+                        let operaciones = document.createElement('td');
+                        let deleteButton = document.createElement('a');
+
+                        nombre.innerHTML = `${ element.nombre_asignatura }`;
+                        institucion.innerHTML = `${ element.nombre_institucion }`;
+                        Inicio.innerHTML = `${ element.fecha_inicio }`;
+                        fin.innerHTML = `${ element.fecha_fin }`;
+                        nivel.innerHTML = `${ element.nivel_escolar }`;
+                        deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
+
+                        tr.appendChild(nombre);
+                        tr.appendChild(institucion);
+                        tr.appendChild(Inicio);
+                        tr.appendChild(fin);
+                        tr.appendChild(nivel);
+                        operaciones.appendChild(deleteButton);
+                        tr.appendChild(operaciones);
+
+                        table.appendChild(tr);
+                                        
+                        deleteButton.addEventListener('click', (e)=>{
+                            e.preventDefault();
+                            table.removeChild(tr);
+                        });
+                    });
+                });
+        });
+
+    </script>
+
+    <!-- Tabla de cursos -->
     <script>
         var archivosMenu = document.querySelector('#archivos-menu');
         archivosMenu.addEventListener('click', ()=>{
@@ -505,19 +574,17 @@
                         // * Eventlisteners
                         deleteButton.addEventListener('click', (e)=>{
                             e.preventDefault();
-                            console.log('delete');
                             fetch(`delete-capacitacion/${ element.id_capacitacion }`)
                                 .then((response) => response.json())
                                 .then((response) => {
-                                    console.log(response);
-                                    Swal.fire(response.alert, '', 'success');
+                                    Swal.fire(response[0].alert, '', 'success');
                                     table.removeChild(tr);
                                 });
                         });
                         
-    });
+                    });
                 });
-        });
+            });
     </script>
 
     @if(isset($from))
