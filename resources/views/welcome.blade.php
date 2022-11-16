@@ -375,19 +375,18 @@
             <div class="">
                 <div>
                     <label for="text-input">Coloque su historial académico</label>
-                    <ul class="col8">
-                        <form action="#" method="post" enctype="multipart/form" id="historialAcademico-form">
+                    <form action="#" method="post" enctype="multipart/form" id="historialAcademico-form">
+                            <ul class="col5">
                             <li class="formlabel">Nombre</li>
+                            <li class="formlabel">Institución</li>
                             <li class="formlabel">Inicio</li>
                             <li class="formlabel">Fin</li>
-                            <li class="formlabel">Nivel</li>
-                            <li class="formlabel">Cédula PDF</li>
-                            <li class="formlabel">Título PDF</li>
-                            <li class="formlabel">Certificado PDF</li>
-                            <li style="color:white">Agregar</li>
-                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
-                            <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                            <li><input name="fin" type="date" placeholder="Fin de capacitacion" id="text-input"></li>
+                            <li class="formlabel">Nivel Escolar</li>
+
+                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
+                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
+                            <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
+                            <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
                             <li>
                                 <select style="margin-top:10px" class="" name="tipo" >
                                     <option value="#">Preparatoria</option>
@@ -396,12 +395,44 @@
                                     <option value="#">Doctorado</option>
                                 </select>
                             </li>
-                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><a href="#"  onclick="document.getElementById('historialAcademico-form').submit()" id="agregar-hisotiralAcademico" type="submit" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                           </ul>
+
+                            <ul class="col5">
+                            <li class="formlabel">Tipo de documento</li>
+                            <li class="formlabel">Título</li>
+                            <li class="formlabel">Certificado</li>
+                            <li class="formlabel">Cédula</li>
+                            <li>&#160;</li>
+                            
+                            <li></li>
+                            <li><input type="file" name="titulo" placeholder="titulo" class="formlabel"></li>
+                            <li><input type="file" name="certificado" placeholder="certificado" class="formlabel"></li>
+                            <li><input type="file" name="cedula" placeholder="cedula" class="formlabel"></li>
+                            <li><a type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                            </ul>
+
+                           <table id="table-historial-academico">
+                        <tr>
+                          <th>Nombre</th>
+                          <th>Institutoción</th>
+                          <th>Inicio</th>
+                          <th>Fin</th>
+                          <th>Nivel Escolar</th>
+                          <th>Archivos</th>
+                          <th>Operaciones</th>
+                        </tr>
+                        <tr>
+                          <td>Ingeniería en sistemas</td>
+                          <td>Tecnologico de Toluca</td>
+                          <td>1 Sep 1999</td>
+                          <td>30 Agosto 2005</td>
+                          <td>Doctorado</td>
+                          <td></td>
+                          <td align="center"><a href="#" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></td>
+                        </tr>
+                      </table>
+
                         </form>
-                    </ul>
                 </div>
             </div>
         </div>

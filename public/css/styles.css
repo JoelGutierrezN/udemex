@@ -125,6 +125,30 @@ input[type="time"]:focus{
     color: white;
   }
 
+  /* historial-academico */
+#table-historial-academico {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #table-historial-academico td, #table-historial-academico th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #table-historial-academico tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #table-historial-academico tr:hover {background-color: #ddd;}
+  
+  #table-historial-academico th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+
 /* capacitaciones */
 #table-capacitaciones {
     font-family: Arial, Helvetica, sans-serif;
@@ -246,8 +270,56 @@ PADDING-LEFT: 2px;
 FLOAT: left;
 PADDING-BOTTOM: 2px;
 WIDTH: 50%;
-PADDING-TOP: 2px
+PADDING-TOP: 2px;
 }
+
+UL.col4
+{
+PADDING-RIGHT: 0px;
+PADDING-LEFT: 0px;
+FLOAT: left;
+PADDING-BOTTOM: 0px;
+MARGIN: 15px 0px;
+WIDTH: 80%;
+PADDING-TOP: 0px;
+LIST-STYLE-TYPE: none
+}
+
+UL.col4 LI
+{
+PADDING-RIGHT: 2px;
+DISPLAY: inline;
+PADDING-LEFT: 2px;
+FLOAT: left;
+PADDING-BOTTOM: 2px;
+WIDTH: 25%;
+PADDING-TOP: 0px;
+}
+
+
+UL.col5
+{
+PADDING-RIGHT: 0px;
+PADDING-LEFT: 0px;
+FLOAT: left;
+PADDING-BOTTOM: 0px;
+MARGIN: 15px 0px;
+WIDTH: 100%;
+PADDING-TOP: 0px;
+LIST-STYLE-TYPE: none
+}
+
+UL.col5 LI
+{
+PADDING-RIGHT: 2px;
+DISPLAY: inline;
+PADDING-LEFT: 2px;
+FLOAT: left;
+PADDING-BOTTOM: 2px;
+WIDTH: 20%;
+PADDING-TOP: 2px;
+}
+
 
 UL.col6
 {
@@ -269,7 +341,7 @@ PADDING-LEFT: 2px;
 FLOAT: left;
 PADDING-BOTTOM: 2px;
 WIDTH: 16.6%;
-PADDING-TOP: 2px
+PADDING-TOP: 2px;
 }
 
 UL.col8
@@ -292,7 +364,7 @@ PADDING-LEFT: 2px;
 FLOAT: left;
 PADDING-BOTTOM: 2px;
 WIDTH: 12.5%;
-PADDING-TOP: 2px
+PADDING-TOP: 2px;
 }
 
 .form-screen-title{
@@ -528,6 +600,7 @@ footer h5, footer h6{
 
 .invalid-feedback {
     color: red;
+    font-size: 14px;
 }
 
 .btn-primario {
