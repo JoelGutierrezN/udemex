@@ -399,12 +399,15 @@
                         fecha_fin.innerHTML = `${ element.fecha_fin }`;
                         horas.innerHTML = `${ element.horas }`;
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
-                        constancia_pdf.innerHTML = `<a href="#" id="agregar-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
+                        constancia_pdf.innerHTML = `<a href="#" id="ver-archivo-${element.id_capacitacion}" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
                         opciones.innerHTML = `<a href="#"  onclick="document.getElementById('capacitacion-form').submit()" id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a>`;
                         
                         // * Attr
                         constancia_pdf.setAttribute('align', 'center');
                         opciones.setAttribute('aling', 'center');
+
+                        // * Eventlisteners
+                        
                         
                         // * Appends
                         tr.appendChild(nombre_curso);
