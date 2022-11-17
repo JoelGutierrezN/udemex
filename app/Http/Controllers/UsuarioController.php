@@ -84,7 +84,7 @@ class UsuarioController extends Controller
         // if ( isset($usuarios)){
         //     return array([]);
         // }
-        return $usuarios [0];
+        return $usuarios[0];
 
 
     }

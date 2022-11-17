@@ -41,13 +41,8 @@
                 <div>
                     <label for="text-input">Número de empleado UDEMEX</label>
                     <input type="text" placeholder="Número de empleado EDEMEX"
-<<<<<<< HEAD
-                    autocomplete="off" id="dato_clave_empleado" name="clave_empleado"
-                    value="{{ old('clave_empleado') }}">
-=======
                     autocomplete="off" id="xclave_empleado" name="clave_empleado"
                     value="{{ old('clave_empleado', $usuario->clave_empleado ?? '') }}" pattern="[0-9]+">
->>>>>>> 80652c4e76dea3ad007aa745249586e0cb5f574f
                 </div>
                      @if($errors->first('clave_empleado'))
                     <div class="invalid-feedback">
@@ -212,35 +207,7 @@
                         </form>
                     </ul>
 
-                    <script>
-                        
-
-                        document.querySelector('#agregar-materias').addEventListener('click', (e)=>{
-                            e.preventDefault();
-
-                            let data = new FormData();
-                            data.append('nombre', document.querySelector('#materia-nombre').value);
-                            data.append('institucion', document.querySelector('#materia-institucion').value);
-                            data.append('inicio', document.querySelector('#materia-inicio').value);
-                            data.append('fin', document.querySelector('#materia-fin').value);
-                            data.append('nivel', document.querySelector('#materia-nivel').value);
-                            data.append('_token', '{{ csrf_token() }}');
-
-                            fetch('/profesores/storeMaterias', {
-                                method: 'POST',
-                                headers: new Headers({
-                                    'X-CSRF-Token': '{{ csrf_token() }}'
-                                }),
-                                body: data
-                            }).then((response) => response.json())
-                            .then((response)=>{
-                                //console.log(response);
-                                Swal.fire(response[0].state, '', 'success');
-                            });
-                        })
-                    </script>
-
-                    <table id="table-materias">
+                    <table id="table-materias" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
                             <th>Nombre</th>
@@ -450,7 +417,7 @@
                         </form>
                     </ul>
 
-                    <table id="table-capacitaciones">
+                    <table id="table-capacitaciones" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -492,27 +459,6 @@
                         <form action="{{ route('teacher.storeHistorial') }}" method="post" enctype="multipart/form-data" id="historialAcademico-form">
                             @csrf
                             <ul class="col5">
-<<<<<<< HEAD
-                                <li class="formlabel">Nombre</li>
-                                <li class="formlabel">Institución</li>
-                                <li class="formlabel">Inicio</li>
-                                <li class="formlabel">Fin</li>
-                                <li class="formlabel">Nivel Escolar</li>
-
-                                <li><input name="nombre" id="historial-nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
-                                <li><input name="institucion" id="historial-institucion" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
-                                <li><input name="inicio" id="historial-inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
-                                <li><input name="fin" id="historial-fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
-                                <li>
-                                    <select id="historial-nivel" style="margin-top:10px" class="" name="nivel" >
-                                        <option value="#">Preparatoria</option>
-                                        <option value="#">Licenciatura</option>
-                                        <option value="#">Maestría</option>
-                                        <option value="#">Doctorado</option>
-                                    </select>
-                                </li>
-                            </ul>
-=======
                             <li class="formlabel">Nombre</li>
                             <li class="formlabel">Institución</li>
                             <li class="formlabel">Inicio</li>
@@ -520,19 +466,17 @@
                             <li class="formlabel">Nivel Escolar</li>
 
                             <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
-                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
+                            <li><input name="institucion" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
                             <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
                             <li>
-                                <select style="margin-top:10px" class="" name="tipo" >
-                                    <option value="Preparatoria">Preparatoria</option>
+                                <select style="margin-top:10px" class="" name="nivel$" >
                                     <option value="Licenciatura">Licenciatura</option>
                                     <option value="Maestría">Maestría</option>
                                     <option value="Doctorado">Doctorado</option>
                                 </select>
                             </li>
                            </ul>
->>>>>>> 80652c4e76dea3ad007aa745249586e0cb5f574f
 
                             <ul class="col5">
                                 <li class="formlabel">Tipo de documento</li>
@@ -548,7 +492,7 @@
                                 <li><button type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></button></li>
                             </ul>
                         </form>
-                        <table id="table-historial-academico">
+                        <table id="table-historial-academico" style="font-size: 1.3rem;">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -565,6 +509,56 @@
                             </tbody>
                         </table>
 
+                    <style>
+                        .modal {
+                            display: none; /* Hidden by default */
+                            position: fixed; /* Stay in place */
+                            z-index: 1; /* Sit on top */
+                            left: 0;
+                            top: 0;
+                            width: 100%; /* Full width */
+                            height: 100%; /* Full height */
+                            overflow: auto; /* Enable scroll if needed */
+                            background: rgb(0,0,0); /* Fallback color */
+                            background: rgba(0,0,0,0.4); /* Black w/ opacity */
+                        }
+
+                            /* Modal Content/Box */
+                        .modal-content {
+                            background: #fefefe;
+                            margin: 15% auto; /* 15% from the top and centered */
+                            padding: 20px;
+                            border: 1px solid #888;
+                            width: 80%; /* Could be more or less, depending on screen size */
+                        }
+
+                            /* The Close Button */
+                        .close {
+                            color: #aaa;
+                            float: right;
+                            font-size: 28px;
+                            font-weight: bold;
+                        }
+
+                        .close:hover,
+                        .close:focus {
+                            color: black;
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                    </style>
+
+                    <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>Some text in the Modal..</p>
+                            <iframe id="archivo-view" src="" frameborder="0"></iframe>
+                        </div>
+
+                    </div>
+
                     <script>
                         var historialMenu = document.querySelector('#historial-menu');
                         historialMenu.addEventListener('click', (e)=>{
@@ -572,6 +566,13 @@
                                 .then((response) => response.json())
                                 .then((response) => {
                                     
+                                    // Get the modal
+                                    var modal = document.getElementById("myModal");
+                                    // Get the <span> element that closes the modal
+                                    var span = document.getElementsByClassName("close")[0];
+
+                                    let iframe = document.querySelector('#archivo-view');
+
                                     let table = document.querySelector('#historial-table');
                                     table.innerHTML = '';
                                     response.forEach((element) => {
@@ -585,12 +586,25 @@
                                         let opciones = document.createElement('td');
                                         let deleteButton = document.createElement('a');
 
+                                        let documentosTable = document.createElement('table');
+                                        let titulo = document.createElement('tr');
+                                        let certificado = document.createElement('tr');
+                                        let cedula = document.createElement('tr');
+
+                                        opciones.setAttribute('style', 'text-align: center;');
+                                        titulo.setAttribute('style', 'cursor: pointer;');
+                                        certificado.setAttribute('style', 'cursor: pointer;');
+                                        cedula.setAttribute('style', 'cursor: pointer;');
+
                                         nombre.innerHTML = element.nombre_asignatura;
                                         institucion.innerHTML = element.nombre_institucion;
                                         inicio.innerHTML = element.fecha_inicio;
                                         fin.innerHTML = element.fecha_fin;
                                         nivel.innerHTML = element.nivel_escolar;
-                                        archivos.innerHTML = '';
+                                        titulo.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver titulo</span>`;
+                                        certificado.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cerfiticado</span>`;
+                                        cedula.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cedula</span>`;
+                
                                         deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
                                         tr.appendChild(nombre);
@@ -598,15 +612,58 @@
                                         tr.appendChild(inicio);
                                         tr.appendChild(fin);
                                         tr.appendChild(nivel);
+                                        archivos.appendChild(titulo);
+                                        archivos.appendChild(certificado);
+                                        archivos.appendChild(cedula);
                                         tr.appendChild(archivos);
                                         opciones.appendChild(deleteButton)
                                         tr.appendChild(opciones);
                                         table.appendChild(tr);
 
+                                        // When the user clicks on <span> (x), close the modal
+                                        span.onclick = function() {
+                                            modal.style.display = "none";
+                                        }
+
+                                        // When the user clicks anywhere outside of the modal, close it
+                                        window.onclick = function(event) {
+                                            if (event.target == modal) {
+                                                modal.style.display = "none";
+                                            }
+                                        } 
+
+                                        titulo.addEventListener('click',(e)=>{
+                                            let archivo = `storage/app/Historial/${element.titulo}`;
+                                            iframe.setAttribute('src', '{{ asset("") }}'+archivo);
+                                            modal.style.display = "block";
+                                        });
+                                        certificado.addEventListener('click',(e)=>{
+                                            console.log('a')
+                                            modal.style.display = "block";
+                                        });
+                                        cedula.addEventListener('click',(e)=>{
+                                            console.log('a')
+                                            modal.style.display = "block";
+                                        });
+
                                         deleteButton.addEventListener('click', (e)=>{
-                                            e.preventDefault();
-                                            table.removeChild(tr);
-                                            Swal.fire('Registro eliminado', '', 'success');
+                                            Swal.fire({
+                                                title: '¿Deseas eliminar el archivo?',
+                                                confirmButton: 'Si',
+                                                showCancelButton: true,
+                                                cancelButtonText: 'Cancelar'
+                                            }).then((response)=>{
+                                                if(response.isConfirmed){
+                                                    fetch(`delete-historial/${ element.id_asignatura }`)
+                                                        .then((response) => response.json())
+                                                        .then((response) => {
+                                                            Swal.fire(response[0].alert, '', 'success');
+                                                            table.removeChild(tr);
+                                                        }).catch((error)=>{
+                                                            Swal.fire('Lo sentimos, ocurrio un error', 'Intenta de nuevo mas tarde', 'error');
+                                                        });
+                                                }
+                                            });
                                         });
                                     });
                                 });
@@ -629,7 +686,8 @@
     <!-- Tabla de materias -->
     <script>
         var materiasMenu = document.querySelector('#materias-menu');
-        materiasMenu.addEventListener('click', ()=>{
+
+        function createTable(){
             fetch('getMaterias/{{ Auth::user()->id }}')
                 .then(response => response.json())
                 .then(response => {
@@ -647,12 +705,14 @@
                         let operaciones = document.createElement('td');
                         let deleteButton = document.createElement('a');
 
+                        operaciones.setAttribute('style', 'text-align: center;');
+
                         nombre.innerHTML = `${ element.nombre_asignatura }`;
                         institucion.innerHTML = `${ element.nombre_institucion }`;
                         Inicio.innerHTML = `${ element.fecha_inicio }`;
                         fin.innerHTML = `${ element.fecha_fin }`;
                         nivel.innerHTML = `${ element.nivel_escolar }`;
-                        deleteButton.innerHTML = `<div class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></div>`;
+                        deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></div>`;
 
                         deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_asignatura }`);
 
@@ -669,16 +729,54 @@
                         // * Eventlisteners
                         deleteButton.addEventListener('click', (e)=>{
                             e.preventDefault();
-                            fetch(`delete-materia/${ element.id_asignatura }`)
-                                .then((response) => response.json())
-                                .then((response) => {
-                                    Swal.fire(response[0].alert, '', 'success');
-                                    table.removeChild(tr);
-                                });
+                            Swal.fire({
+                                title: '¿Deseas eliminar el archivo?',
+                                confirmButton: 'Si',
+                                showCancelButton: true,
+                                cancelButtonText: 'Cancelar'
+                            }).then((response)=>{
+                                if(response.isConfirmed){
+                                    fetch(`delete-materia/{{ Auth::user()->id }}`)
+                                        .then((response) => response.json())
+                                        .then((response) => {
+                                            Swal.fire(response[0].alert, '', 'success');
+                                            table.removeChild(tr);
+                                        }).catch((error)=>{
+                                            Swal.fire('Lo sentimos, ocurrio un error', 'Intenta de nuevo mas tarde', 'error');
+                                        });
+                                }
+                            });
                         });
                     });
                 });
+        }
+        materiasMenu.addEventListener('click', ()=>{
+            createTable();
         });
+
+        document.querySelector('#agregar-materias').addEventListener('click', (e)=>{
+                            e.preventDefault();
+
+                            let data = new FormData();
+                            data.append('nombre', document.querySelector('#materia-nombre').value);
+                            data.append('institucion', document.querySelector('#materia-institucion').value);
+                            data.append('inicio', document.querySelector('#materia-inicio').value);
+                            data.append('fin', document.querySelector('#materia-fin').value);
+                            data.append('nivel', document.querySelector('#materia-nivel').value);
+                            data.append('_token', '{{ csrf_token() }}');
+
+                            fetch('/profesores/storeMaterias', {
+                                method: 'POST',
+                                headers: new Headers({
+                                    'X-CSRF-Token': '{{ csrf_token() }}'
+                                }),
+                                body: data
+                            }).then((response) => response.json())
+                            .then((response)=>{
+                                createTable();
+                                Swal.fire(response[0].state, '', 'success');
+                            });
+                        })
 
     </script>
 
@@ -756,6 +854,8 @@
                         let opciones = document.createElement('td');
                         let deleteButton = document.createElement('a');
 
+                        opciones.setAttribute('style', 'text-align: center;');
+
                         // * Asignaciones
                         nombre_curso.innerHTML = `${element.nombre_curso}`;
                         nombre_institucion.innerHTML = `${ element.nombre_institucion }`;
@@ -764,12 +864,11 @@
                         horas.innerHTML = `${ element.horas }`;
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
                         constancia_pdf.innerHTML = `<a href="#" id="show-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
-                        deleteButton.innerHTML = `<div class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"><div>`;
+                        deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"><div>`;
                         
 
                         // * Attr
                         constancia_pdf.setAttribute('align', 'center');
-                        opciones.setAttribute('aling', 'center');
                         deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_capacitacion }`);
 
                         // * Appends
@@ -787,12 +886,23 @@
                         // * Eventlisteners
                         deleteButton.addEventListener('click', (e)=>{
                             e.preventDefault();
-                            fetch(`delete-capacitacion/${ element.id_capacitacion }`)
-                                .then((response) => response.json())
-                                .then((response) => {
-                                    Swal.fire(response[0].alert, '', 'success');
-                                    table.removeChild(tr);
-                                });
+                            Swal.fire({
+                                title: '¿Deseas eliminar el archivo?',
+                                confirmButton: 'Si',
+                                showCancelButton: true,
+                                cancelButtonText: 'Cancelar'
+                            }).then((result)=>{
+                                if(result.isConfirmed){
+                                    fetch(`delete-capacitacion/${ element.id_capacitacion }`)
+                                        .then((response) => response.json())
+                                        .then((response) => {
+                                            Swal.fire(response[0].alert, '', 'success');
+                                            table.removeChild(tr);
+                                        }).catch((error)=>{
+                                            Swal.fire('Lo sentimos, ocurrio un error', 'Intenta de nuevo mas tarde', 'error');
+                                        });
+                                }
+                            });
                         });
                         
                     });

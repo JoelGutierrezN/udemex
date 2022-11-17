@@ -28,7 +28,7 @@ class MateriasController extends Controller
                 'fecha_inicio' => $request->inicio,
                 'fecha_fin' => $request->fin,
                 'nivel_escolar' => $request->nivel,
-                'id_usuario' => \Auth::user()->id,
+                'id_user' => \Auth::user()->id,
                 'activo' => 1,
                 'created_at' => date('Y-m-d h:i:s')
             ]);
@@ -46,7 +46,7 @@ class MateriasController extends Controller
 
     public function getMaterias($id){
         $info = \DB::table('academico_asignaturas')
-            ->where('id_usuario', '=', $id)
+            ->where('id_user', '=', $id)
             ->get();
         return $info;
     }

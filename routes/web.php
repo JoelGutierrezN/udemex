@@ -56,6 +56,7 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     // * Rutas para el historial
     Route::post('/storeHistorial', [HistorialController::class, 'store'])->name('storeHistorial');
     Route::get('/getHistorial/{id}', [HistorialController::class, 'getHistorial'])->name('getHistorial');
+    Route::get('/delete-historial/{id}', [HistorialController::class, 'deleteHistorial'])->name('deleteHistorial');
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
