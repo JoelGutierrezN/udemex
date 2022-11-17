@@ -48,13 +48,13 @@ class UsuarioController extends Controller
         // dd($request->hasFile('foto'));
         $newUsuario = Usuario::create($request->all());
 
-        // if($request->hasFile('foto')){
-        //     $foto = $request->file('foto');
-        //     $destino = 'imagenes/perfil/';
-        //     $fotoname = time() . '-' . $foto->getClientOriginalName();
-        //     $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
-        //     $newUsuario->foto = $fotoname;
-        // }
+        if($request->hasFile('foto')){
+            $foto = $request->file('foto');
+            $destino = 'imagenes/perfil/';
+            $fotoname = time() . '-' . $foto->getClientOriginalName();
+            $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
+            $newUsuario->foto = $fotoname;
+        }
 
         $newUsuario->nombre = $request->nombre;
         $newUsuario->apellido_paterno = $request->apellido_paterno;

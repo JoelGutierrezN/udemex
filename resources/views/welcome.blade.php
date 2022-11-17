@@ -41,13 +41,8 @@
                 <div>
                     <label for="text-input">Número de empleado UDEMEX</label>
                     <input type="text" placeholder="Número de empleado EDEMEX"
-<<<<<<< HEAD
-                    autocomplete="off" id="dato_clave_empleado" name="clave_empleado"
-                    value="{{ old('clave_empleado') }}">
-=======
                     autocomplete="off" id="xclave_empleado" name="clave_empleado"
                     value="{{ old('clave_empleado', $usuario->clave_empleado ?? '') }}" pattern="[0-9]+">
->>>>>>> 80652c4e76dea3ad007aa745249586e0cb5f574f
                 </div>
                      @if($errors->first('clave_empleado'))
                     <div class="invalid-feedback">
@@ -56,7 +51,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input">Nombre</label>
+                    <label for="text-input">Nombre(s)</label>
                     <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
                     autocomplete="off" id="dato_nombre" name="nombre"  
                      value="{{ old('nombre', $usuario->nombre ?? '') }}">
