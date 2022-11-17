@@ -30,9 +30,10 @@
             @if($is_registered)
              <div class="alert alert-info">
                 
-                   <h6>!Ya tenemos tus datos¡</h6>
-                   <p>Ya cuentas con tus datos registrados, a partir de ahora solo puedes actualizarlos.
-                     </p>
+                <h6>¡Ya tenemos tus datos!</h6>
+                <p>
+                    Ya cuentas con tus datos registrados, a partir de ahora solo puedes actualizarlos.
+                </p>
            </div>
             @endif
 
@@ -89,7 +90,7 @@
                 <div>
                     <label for="select-input">Género</label>
                     <ul class="col2">
-                        <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" @isset ($usuario->sexo) @if($usuario->sexo == 1)   checked @endif @endisset>
+                    <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" checked @isset ($usuario->sexo) @if($usuario->sexo == 1) checked @endif @endisset>
                         Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
                         <label><input type="radio" id="dato_sexo_femenino" name="sexo" value="0" @isset ($usuario->sexo) @if($usuario->sexo == 0)  checked @endif @endisset>
                         Femenino</label>
@@ -98,7 +99,7 @@
 
                 <div>
                     <label for="text-input">Teléfono de casa</label>
-                    <input type="text" placeholder="Coloque su teléfono de casa"
+                    <input type="text" placeholder="Coloque su teléfono de casa. (10 dígitos)"
                     autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
                      value="{{ old('telefono_casa', $usuario->telefono_casa ?? '') }}"
                      maxlength="10"
@@ -112,7 +113,7 @@
 
                 <div>
                     <label for="text-input">Teléfono celular</label>
-                    <input type="text" placeholder="Coloque su teléfono celular"
+                    <input type="text" placeholder="Coloque su teléfono celular (10 dígitos)"
                     autocomplete="off" id="dato_celular" name="celular" 
                     value="{{ old('celular', $usuario->celular ?? '') }}"
                     maxlength="10"
@@ -149,14 +150,14 @@
                     @endif
 
                     <div>
-                        <style>
-                            .fotoperfil{
-                                width: 150px;
-                                height: auto;
-                            }
-                        </style>
+                        
                         <label for="text-input">Fotografía</label>
-                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto">
+                        <medium class="">La fotografía no debe exceder los 2 Megabyte y solo acepta imágenes  
+                        con extensiones 'jpeg, png, jfif'</medium>
+
+                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto" 
+                        accept="image/png,image/jpeg,jfif">
+                        
                         <div id="imagePreview"></div>
                     </div>
                          @if($errors->first('foto'))
