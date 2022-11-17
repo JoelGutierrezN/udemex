@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioCreateRequest;
+use App\Http\Requests\UsuarioUpdateRequest;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -90,9 +91,12 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuario $usuario)
+    public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
-        dd($request, $usuario);
+        // dd($request, $usuario);
+        $usuario->update($request->all());
+         Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
+         return redirect()->route("teacher.welcome");
     }
 
     /**
