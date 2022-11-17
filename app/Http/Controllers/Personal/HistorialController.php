@@ -32,7 +32,7 @@ class HistorialController extends Controller
             // * Aqui se asigna el nombre de la cedula
         }
 
-        \DB::table('academico_asignaturas')
+        \DB::table('historial_academicos')
             ->insert([
                 'nombre_asignatura' => $request->nombre,
                 'nombre_institucion' => $request->institucion,
@@ -49,7 +49,7 @@ class HistorialController extends Controller
     }
 
     public function getHistorial($id){
-        $info = \DB::table('academico_asignaturas')
+        $info = \DB::table('historial_academicos')
             ->where('id_usuario', '=', $id)
             ->get();
         
