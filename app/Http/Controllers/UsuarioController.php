@@ -46,7 +46,6 @@ class UsuarioController extends Controller
            return redirect()->route("teacher.welcome");
         }
         
-        // dd($request->hasFile('foto'));
         $newUsuario = Usuario::create($request->all());
 
         if($request->hasFile('foto')){
@@ -58,22 +57,10 @@ class UsuarioController extends Controller
         }
 
         $newUsuario->save();
-        Alert::alert()->success('Sus Datos Personales',' han sido regristados correctamente.');
+        Alert::alert()->success('Guardado!',' Sus datos personales han sido regristados correctamente.');
          return redirect()->route("teacher.welcome");
     }
 
-    public function getTeacherInfo($id)
-    {
-       $usuarios = \DB::table('usuarios')
-            ->select('id_usuario', 'nombre', 'apellido_paterno', 'apellido_materno', 'sexo', 'clave_empleado', 
-            'foto', 'telefono_casa', 'celular', 'email_udemex', 'email_personal', 'id_user')
-            ->where('id_user', '=', $id)
-            ->get();
-
-        return $usuarios[0];
-
-
-    }
 
     /**
      * Display the specified resource.

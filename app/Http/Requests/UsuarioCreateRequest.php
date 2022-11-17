@@ -34,11 +34,7 @@ class UsuarioCreateRequest extends FormRequest
            'celular'            => ['required', 'max:10', 'regex:/^[0-9]+$/'],
            'email_udemex'       => ['required', 'email', 'unique:usuarios,email_udemex', 'max:60'],
            'email_personal'     => ['required', 'email', 'unique:usuarios,email_personal', 'max:60'],
-<<<<<<< HEAD
            'foto'               => ['required', 'image', 'max:2048'],
-=======
-           'foto'               => ['required', 'image'],
->>>>>>> 34f76741c61458379d35c5f30d28dfb4d58e5155
         ];
     }
 }

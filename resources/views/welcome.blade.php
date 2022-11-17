@@ -52,7 +52,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input">Nombre</label>
+                    <label for="text-input">Nombre(s)</label>
                     <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
                     autocomplete="off" id="dato_nombre" name="nombre"  
                      value="{{ old('nombre', $usuario->nombre ?? '') }}">
@@ -175,16 +175,16 @@
                 <button  type="submit" class="btn-primario">Guardar Cambios</button>
             </div>
             <br>&nbsp;
+            @if($is_registered)
+                    <div class="conte">
+                        <div class="left">
+                        </div>
+                        <div class="alert-info2">
+                            <p>Información actualizada a la fecha: {{ $usuario->updated_at }}</p>
+                        </div>
+                    </div><br>&nbsp;
+                @endif
         </div>
-        @if($is_registered)
-                <div class="conte">
-                    <div class="left">
-                    </div>
-                    <div class="alert-info2">
-                        <p>Información actualizada a la fecha: {{ $usuario->updated_at }}</p>
-                    </div>
-                </div><br>&nbsp;
-            @endif
         </form>
     {{--Fin Datos personales --}}
 
