@@ -49,23 +49,13 @@ class UsuarioController extends Controller
         // dd($request->hasFile('foto'));
         $newUsuario = Usuario::create($request->all());
 
-        // if($request->hasFile('foto')){
-        //     $foto = $request->file('foto');
-        //     $destino = 'imagenes/perfil/';
-        //     $fotoname = time() . '-' . $foto->getClientOriginalName();
-        //     $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
-        //     $newUsuario->foto = $fotoname;
-        // }
-
-        $newUsuario->nombre = $request->nombre;
-        $newUsuario->apellido_paterno = $request->apellido_paterno;
-        $newUsuario->apellido_materno = $request->apellido_materno;
-        $newUsuario->clave_empleado = $request->clave_empleado;
-        $newUsuario->sexo = $request->sexo;
-        $newUsuario->telefono_casa = $request->telefono_casa;
-        $newUsuario->celular = $request->celular;
-        $newUsuario->email_udemex = $request->email_udemex;
-        $newUsuario->email_personal = $request-> email_personal;
+        if($request->hasFile('foto')){
+            $foto = $request->file('foto');
+            $destino = 'imagenes/perfil/';
+            $fotoname = time() . '-' . $foto->getClientOriginalName();
+            $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
+            $newUsuario->foto = $fotoname;
+        }
 
         $newUsuario->save();
         Alert::alert()->success('Sus Datos Personales',' han sido regristados correctamente.');
@@ -80,11 +70,6 @@ class UsuarioController extends Controller
             ->where('id_user', '=', $id)
             ->get();
 
-        // $usuarios = Usuario::find($id);
-
-        // if ( isset($usuarios)){
-        //     return array([]);
-        // }
         return $usuarios[0];
 
 
