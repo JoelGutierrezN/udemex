@@ -30,7 +30,7 @@
             @if($is_registered)
              <div class="alert alert-info">
                 
-                   <h6>¡Ya tenemos tus datos!</h6>
+                   <h6>!Ya tenemos tus datos¡</h6>
                    <p>Ya cuentas con tus datos registrados, a partir de ahora solo puedes actualizarlos.
                      </p>
            </div>
@@ -51,7 +51,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input">Nombre(s)</label>
+                    <label for="text-input">Nombre</label>
                     <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
                     autocomplete="off" id="dato_nombre" name="nombre"  
                      value="{{ old('nombre', $usuario->nombre ?? '') }}">
@@ -89,7 +89,7 @@
                 <div>
                     <label for="select-input">Género</label>
                     <ul class="col2">
-                        <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" checked @isset ($usuario->sexo) @if($usuario->sexo == 1)   checked @endif @endisset>
+                        <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" @isset ($usuario->sexo) @if($usuario->sexo == 1)   checked @endif @endisset>
                         Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
                         <label><input type="radio" id="dato_sexo_femenino" name="sexo" value="0" @isset ($usuario->sexo) @if($usuario->sexo == 0)  checked @endif @endisset>
                         Femenino</label>
@@ -98,7 +98,7 @@
 
                 <div>
                     <label for="text-input">Teléfono de casa</label>
-                    <input type="text" placeholder="Coloque su teléfono de casa. (10 dígitos)"
+                    <input type="text" placeholder="Coloque su teléfono de casa"
                     autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
                      value="{{ old('telefono_casa', $usuario->telefono_casa ?? '') }}"
                      maxlength="10"
@@ -112,7 +112,7 @@
 
                 <div>
                     <label for="text-input">Teléfono celular</label>
-                    <input type="text" placeholder="Coloque su teléfono celular (10 dígitos)"
+                    <input type="text" placeholder="Coloque su teléfono celular"
                     autocomplete="off" id="dato_celular" name="celular" 
                     value="{{ old('celular', $usuario->celular ?? '') }}"
                     maxlength="10"
@@ -149,12 +149,14 @@
                     @endif
 
                     <div>
+                        <style>
+                            .fotoperfil{
+                                width: 150px;
+                                height: auto;
+                            }
+                        </style>
                         <label for="text-input">Fotografía</label>
-                        <medium class="">La fotografía no debe exceder los 2 Megabyte y solo acepta imágenes  
-                        con extensiones 'jpeg, png, jfif'</medium>
-                        
-                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto" 
-                        accept="image/png,image/jpeg,jfif">
+                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto">
                         <div id="imagePreview"></div>
                     </div>
                          @if($errors->first('foto'))
@@ -166,13 +168,12 @@
                 <div>
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
                 </div>
-
             </div>
+
             <div>
                 <button  type="submit" class="btn-primario">Guardar Cambios</button>
             </div>
-
-
+            <br>&nbsp;
         </div>
         @if($is_registered)
                 <div class="conte">
@@ -215,35 +216,7 @@
                         </form>
                     </ul>
 
-                    <script>
-                        
-
-                        document.querySelector('#agregar-materias').addEventListener('click', (e)=>{
-                            e.preventDefault();
-
-                            let data = new FormData();
-                            data.append('nombre', document.querySelector('#materia-nombre').value);
-                            data.append('institucion', document.querySelector('#materia-institucion').value);
-                            data.append('inicio', document.querySelector('#materia-inicio').value);
-                            data.append('fin', document.querySelector('#materia-fin').value);
-                            data.append('nivel', document.querySelector('#materia-nivel').value);
-                            data.append('_token', '{{ csrf_token() }}');
-
-                            fetch('/profesores/storeMaterias', {
-                                method: 'POST',
-                                headers: new Headers({
-                                    'X-CSRF-Token': '{{ csrf_token() }}'
-                                }),
-                                body: data
-                            }).then((response) => response.json())
-                            .then((response)=>{
-                                //console.log(response);
-                                Swal.fire(response[0].state, '', 'success');
-                            });
-                        })
-                    </script>
-
-                    <table id="table-materias">
+                    <table id="table-materias" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
                             <th>Nombre</th>
@@ -453,7 +426,7 @@
                         </form>
                     </ul>
 
-                    <table id="table-capacitaciones">
+                    <table id="table-capacitaciones" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -495,25 +468,24 @@
                         <form action="{{ route('teacher.storeHistorial') }}" method="post" enctype="multipart/form-data" id="historialAcademico-form">
                             @csrf
                             <ul class="col5">
-                                <li class="formlabel">Nombre</li>
-                                <li class="formlabel">Institución</li>
-                                <li class="formlabel">Inicio</li>
-                                <li class="formlabel">Fin</li>
-                                <li class="formlabel">Nivel Escolar</li>
+                            <li class="formlabel">Nombre</li>
+                            <li class="formlabel">Institución</li>
+                            <li class="formlabel">Inicio</li>
+                            <li class="formlabel">Fin</li>
+                            <li class="formlabel">Nivel Escolar</li>
 
-                                <li><input name="nombre" id="historial-nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
-                                <li><input name="institucion" id="historial-institucion" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
-                                <li><input name="inicio" id="historial-inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
-                                <li><input name="fin" id="historial-fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
-                                <li>
-                                    <select id="historial-nivel" style="margin-top:10px" class="" name="nivel" >
-                                        <option value="#">Preparatoria</option>
-                                        <option value="#">Licenciatura</option>
-                                        <option value="#">Maestría</option>
-                                        <option value="#">Doctorado</option>
-                                    </select>
-                                </li>
-                            </ul>
+                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
+                            <li><input name="institucion" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
+                            <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
+                            <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
+                            <li>
+                                <select style="margin-top:10px" class="" name="nivel$" >
+                                    <option value="Licenciatura">Licenciatura</option>
+                                    <option value="Maestría">Maestría</option>
+                                    <option value="Doctorado">Doctorado</option>
+                                </select>
+                            </li>
+                           </ul>
 
                             <ul class="col5">
                                 <li class="formlabel">Tipo de documento</li>
@@ -529,7 +501,7 @@
                                 <li><button type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></button></li>
                             </ul>
                         </form>
-                        <table id="table-historial-academico">
+                        <table id="table-historial-academico" style="font-size: 1.3rem;">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -546,6 +518,56 @@
                             </tbody>
                         </table>
 
+                    <style>
+                        .modal {
+                            display: none; /* Hidden by default */
+                            position: fixed; /* Stay in place */
+                            z-index: 1; /* Sit on top */
+                            left: 0;
+                            top: 0;
+                            width: 100%; /* Full width */
+                            height: 100%; /* Full height */
+                            overflow: auto; /* Enable scroll if needed */
+                            background: rgb(0,0,0); /* Fallback color */
+                            background: rgba(0,0,0,0.4); /* Black w/ opacity */
+                        }
+
+                            /* Modal Content/Box */
+                        .modal-content {
+                            background: #fefefe;
+                            margin: 15% auto; /* 15% from the top and centered */
+                            padding: 20px;
+                            border: 1px solid #888;
+                            width: 80%; /* Could be more or less, depending on screen size */
+                        }
+
+                            /* The Close Button */
+                        .close {
+                            color: #aaa;
+                            float: right;
+                            font-size: 28px;
+                            font-weight: bold;
+                        }
+
+                        .close:hover,
+                        .close:focus {
+                            color: black;
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                    </style>
+
+                    <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p>Some text in the Modal..</p>
+                            <iframe id="archivo-view" src="" frameborder="0"></iframe>
+                        </div>
+
+                    </div>
+
                     <script>
                         var historialMenu = document.querySelector('#historial-menu');
                         historialMenu.addEventListener('click', (e)=>{
@@ -553,6 +575,13 @@
                                 .then((response) => response.json())
                                 .then((response) => {
                                     
+                                    // Get the modal
+                                    var modal = document.getElementById("myModal");
+                                    // Get the <span> element that closes the modal
+                                    var span = document.getElementsByClassName("close")[0];
+
+                                    let iframe = document.querySelector('#archivo-view');
+
                                     let table = document.querySelector('#historial-table');
                                     table.innerHTML = '';
                                     response.forEach((element) => {
@@ -566,12 +595,25 @@
                                         let opciones = document.createElement('td');
                                         let deleteButton = document.createElement('a');
 
+                                        let documentosTable = document.createElement('table');
+                                        let titulo = document.createElement('tr');
+                                        let certificado = document.createElement('tr');
+                                        let cedula = document.createElement('tr');
+
+                                        opciones.setAttribute('style', 'text-align: center;');
+                                        titulo.setAttribute('style', 'cursor: pointer;');
+                                        certificado.setAttribute('style', 'cursor: pointer;');
+                                        cedula.setAttribute('style', 'cursor: pointer;');
+
                                         nombre.innerHTML = element.nombre_asignatura;
                                         institucion.innerHTML = element.nombre_institucion;
                                         inicio.innerHTML = element.fecha_inicio;
                                         fin.innerHTML = element.fecha_fin;
                                         nivel.innerHTML = element.nivel_escolar;
-                                        archivos.innerHTML = '';
+                                        titulo.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver titulo</span>`;
+                                        certificado.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cerfiticado</span>`;
+                                        cedula.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cedula</span>`;
+                
                                         deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
                                         tr.appendChild(nombre);
@@ -579,15 +621,58 @@
                                         tr.appendChild(inicio);
                                         tr.appendChild(fin);
                                         tr.appendChild(nivel);
+                                        archivos.appendChild(titulo);
+                                        archivos.appendChild(certificado);
+                                        archivos.appendChild(cedula);
                                         tr.appendChild(archivos);
                                         opciones.appendChild(deleteButton)
                                         tr.appendChild(opciones);
                                         table.appendChild(tr);
 
+                                        // When the user clicks on <span> (x), close the modal
+                                        span.onclick = function() {
+                                            modal.style.display = "none";
+                                        }
+
+                                        // When the user clicks anywhere outside of the modal, close it
+                                        window.onclick = function(event) {
+                                            if (event.target == modal) {
+                                                modal.style.display = "none";
+                                            }
+                                        } 
+
+                                        titulo.addEventListener('click',(e)=>{
+                                            let archivo = `storage/app/Historial/${element.titulo}`;
+                                            iframe.setAttribute('src', '{{ asset("") }}'+archivo);
+                                            modal.style.display = "block";
+                                        });
+                                        certificado.addEventListener('click',(e)=>{
+                                            console.log('a')
+                                            modal.style.display = "block";
+                                        });
+                                        cedula.addEventListener('click',(e)=>{
+                                            console.log('a')
+                                            modal.style.display = "block";
+                                        });
+
                                         deleteButton.addEventListener('click', (e)=>{
-                                            e.preventDefault();
-                                            table.removeChild(tr);
-                                            Swal.fire('Registro eliminado', '', 'success');
+                                            Swal.fire({
+                                                title: '¿Deseas eliminar el archivo?',
+                                                confirmButton: 'Si',
+                                                showCancelButton: true,
+                                                cancelButtonText: 'Cancelar'
+                                            }).then((response)=>{
+                                                if(response.isConfirmed){
+                                                    fetch(`delete-historial/${ element.id_asignatura }`)
+                                                        .then((response) => response.json())
+                                                        .then((response) => {
+                                                            Swal.fire(response[0].alert, '', 'success');
+                                                            table.removeChild(tr);
+                                                        }).catch((error)=>{
+                                                            Swal.fire('Lo sentimos, ocurrio un error', 'Intenta de nuevo mas tarde', 'error');
+                                                        });
+                                                }
+                                            });
                                         });
                                     });
                                 });
@@ -610,7 +695,8 @@
     <!-- Tabla de materias -->
     <script>
         var materiasMenu = document.querySelector('#materias-menu');
-        materiasMenu.addEventListener('click', ()=>{
+
+        function createTable(){
             fetch('getMaterias/{{ Auth::user()->id }}')
                 .then(response => response.json())
                 .then(response => {
@@ -628,12 +714,14 @@
                         let operaciones = document.createElement('td');
                         let deleteButton = document.createElement('a');
 
+                        operaciones.setAttribute('style', 'text-align: center;');
+
                         nombre.innerHTML = `${ element.nombre_asignatura }`;
                         institucion.innerHTML = `${ element.nombre_institucion }`;
                         Inicio.innerHTML = `${ element.fecha_inicio }`;
                         fin.innerHTML = `${ element.fecha_fin }`;
                         nivel.innerHTML = `${ element.nivel_escolar }`;
-                        deleteButton.innerHTML = `<div class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></div>`;
+                        deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></div>`;
 
                         deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_asignatura }`);
 
@@ -650,21 +738,109 @@
                         // * Eventlisteners
                         deleteButton.addEventListener('click', (e)=>{
                             e.preventDefault();
-                            fetch(`delete-materia/${ element.id_asignatura }`)
-                                .then((response) => response.json())
-                                .then((response) => {
-                                    Swal.fire(response[0].alert, '', 'success');
-                                    table.removeChild(tr);
-                                });
+                            Swal.fire({
+                                title: '¿Deseas eliminar el archivo?',
+                                confirmButton: 'Si',
+                                showCancelButton: true,
+                                cancelButtonText: 'Cancelar'
+                            }).then((response)=>{
+                                if(response.isConfirmed){
+                                    fetch(`delete-materia/{{ Auth::user()->id }}`)
+                                        .then((response) => response.json())
+                                        .then((response) => {
+                                            Swal.fire(response[0].alert, '', 'success');
+                                            table.removeChild(tr);
+                                        }).catch((error)=>{
+                                            Swal.fire('Lo sentimos, ocurrio un error', 'Intenta de nuevo mas tarde', 'error');
+                                        });
+                                }
+                            });
                         });
                     });
                 });
+        }
+        materiasMenu.addEventListener('click', ()=>{
+            createTable();
         });
+
+        document.querySelector('#agregar-materias').addEventListener('click', (e)=>{
+                            e.preventDefault();
+
+                            let data = new FormData();
+                            data.append('nombre', document.querySelector('#materia-nombre').value);
+                            data.append('institucion', document.querySelector('#materia-institucion').value);
+                            data.append('inicio', document.querySelector('#materia-inicio').value);
+                            data.append('fin', document.querySelector('#materia-fin').value);
+                            data.append('nivel', document.querySelector('#materia-nivel').value);
+                            data.append('_token', '{{ csrf_token() }}');
+
+                            fetch('/profesores/storeMaterias', {
+                                method: 'POST',
+                                headers: new Headers({
+                                    'X-CSRF-Token': '{{ csrf_token() }}'
+                                }),
+                                body: data
+                            }).then((response) => response.json())
+                            .then((response)=>{
+                                createTable();
+                                Swal.fire(response[0].state, '', 'success');
+                            });
+                        })
 
     </script>
 
     <!-- Tabla de cursos -->
-   
+    <script>
+     document.addEventListener('DOMContentLoaded',()=>{
+        fetch("getTeacherInfo/{{ Auth::user()->id }}")
+        .then(response => response.json())
+        .then((response)=>{
+                console.log(response)
+                var dato_clave_empleado =  document.querySelector('#dato_clave_empleado')
+                dato_clave_empleado.value=response.clave_empleado;
+                dato_clave_empleado.setAttribute("readonly", "true");
+
+                var dato_nombre =  document.querySelector('#dato_nombre')
+                dato_nombre.value=response.nombre;
+                dato_nombre.setAttribute("readonly", "true");
+
+                var dato_apellido_paterno =  document.querySelector('#dato_apellido_paterno')
+                dato_apellido_paterno.value=response.apellido_paterno;
+                dato_apellido_paterno.setAttribute("readonly", "true");
+
+                var dato_apellido_materno =  document.querySelector('#dato_apellido_materno')
+                dato_apellido_materno.value=response.apellido_materno;
+                dato_apellido_materno.setAttribute("readonly", "true");
+
+                var dato_sexo_masculino =  document.querySelector('#dato_sexo_masculino')
+                var dato_sexo_femenino =  document.querySelector('#dato_sexo_femenino')
+                if (response.sexo == 1){
+                    dato_sexo_masculino.setAttribute("checked", "true");
+                }else {
+                    dato_sexo_femenino.setAttribute("checked", "true");
+                }
+
+
+                var dato_telefono_casa =  document.querySelector('#dato_telefono_casa')
+                dato_telefono_casa.value=response.telefono_casa;
+                dato_telefono_casa.setAttribute("readonly", "true");
+
+                var dato_celular =  document.querySelector('#dato_celular')
+                dato_celular.value=response.celular;
+                dato_celular.setAttribute("readonly", "true");
+
+                var dato_email_udemex =  document.querySelector('#dato_email_udemex')
+                dato_email_udemex.value=response.email_udemex;
+                dato_email_udemex.setAttribute("readonly", "true");
+
+                var dato_email_personal =  document.querySelector('#dato_email_personal')
+                dato_email_personal.value=response.email_personal;
+                dato_email_personal.setAttribute("readonly", "true");
+
+        })/*.catch((error)=>{})*/
+
+    });
+    </script>
     <script>
         var archivosMenu = document.querySelector('#archivos-menu');
         archivosMenu.addEventListener('click', ()=>{
@@ -687,6 +863,8 @@
                         let opciones = document.createElement('td');
                         let deleteButton = document.createElement('a');
 
+                        opciones.setAttribute('style', 'text-align: center;');
+
                         // * Asignaciones
                         nombre_curso.innerHTML = `${element.nombre_curso}`;
                         nombre_institucion.innerHTML = `${ element.nombre_institucion }`;
@@ -695,12 +873,11 @@
                         horas.innerHTML = `${ element.horas }`;
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
                         constancia_pdf.innerHTML = `<a href="#" id="show-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
-                        deleteButton.innerHTML = `<div class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"><div>`;
+                        deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"><div>`;
                         
 
                         // * Attr
                         constancia_pdf.setAttribute('align', 'center');
-                        opciones.setAttribute('aling', 'center');
                         deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_capacitacion }`);
 
                         // * Appends
@@ -718,12 +895,23 @@
                         // * Eventlisteners
                         deleteButton.addEventListener('click', (e)=>{
                             e.preventDefault();
-                            fetch(`delete-capacitacion/${ element.id_capacitacion }`)
-                                .then((response) => response.json())
-                                .then((response) => {
-                                    Swal.fire(response[0].alert, '', 'success');
-                                    table.removeChild(tr);
-                                });
+                            Swal.fire({
+                                title: '¿Deseas eliminar el archivo?',
+                                confirmButton: 'Si',
+                                showCancelButton: true,
+                                cancelButtonText: 'Cancelar'
+                            }).then((result)=>{
+                                if(result.isConfirmed){
+                                    fetch(`delete-capacitacion/${ element.id_capacitacion }`)
+                                        .then((response) => response.json())
+                                        .then((response) => {
+                                            Swal.fire(response[0].alert, '', 'success');
+                                            table.removeChild(tr);
+                                        }).catch((error)=>{
+                                            Swal.fire('Lo sentimos, ocurrio un error', 'Intenta de nuevo mas tarde', 'error');
+                                        });
+                                }
+                            });
                         });
                         
                     });
@@ -760,6 +948,4 @@
             });
         })();
     </script>
-
-
 @endsection
