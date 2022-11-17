@@ -41,7 +41,7 @@
             <div class="input-columns-1">
                 <div>
                     <label for="text-input">Número de empleado UDEMEX</label>
-                    <input type="text" placeholder="Número de empleado EDEMEX"
+                    <input type="text" placeholder="Número de empleado UDEMEX"
                     autocomplete="off" id="xclave_empleado" name="clave_empleado"
                     value="{{ old('clave_empleado', $usuario->clave_empleado ?? '') }}" pattern="[0-9]+">
                 </div>
@@ -53,7 +53,7 @@
 
                 <div>
                     <label for="text-input">Nombre(s)</label>
-                    <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
+                    <input type="text" placeholder="Coloque su nombre(s) iniciando por letra mayúscula. Ejemplo: 'Luis'"
                     autocomplete="off" id="dato_nombre" name="nombre"  
                      value="{{ old('nombre', $usuario->nombre ?? '') }}">
                 </div>
@@ -65,7 +65,7 @@
 
                 <div>
                     <label for="text-input">Apellido paterno</label>
-                    <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo 'González'"
+                    <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo: 'González'"
                      autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
                        value="{{ old('apellido_paterno', $usuario->apellido_paterno ?? '') }}">
                 </div>
@@ -77,7 +77,7 @@
 
                 <div>
                     <label for="text-input">Apellido materno</label>
-                    <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo 'González'"
+                    <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo: 'González'"
                     autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
                      value="{{ old('apellido_materno', $usuario->apellido_materno ?? '') }}">
                 </div>
@@ -113,7 +113,7 @@
 
                 <div>
                     <label for="text-input">Teléfono celular</label>
-                    <input type="text" placeholder="Coloque su teléfono celular (10 dígitos)"
+                    <input type="text" placeholder="Coloque su teléfono celular. (10 dígitos)"
                     autocomplete="off" id="dato_celular" name="celular" 
                     value="{{ old('celular', $usuario->celular ?? '') }}"
                     maxlength="10"
@@ -201,7 +201,7 @@
                         <li class="formlabel">Institución</li>
                         <li class="formlabel">Inicio</li>
                         <li class="formlabel">Fin</li>
-                        <li class="formlabel">Nivel</li>
+                        <li class="formlabel">Nivel Escolar</li>
                         <li style="color:white">Agregar</li>
                         <li><input id="materia-nombre" name="nombre" autocomplete="off" type="text" placeholder="Nombre de la materia"></li>
                         <li><input id="materia-institucion" name="institucion" autocomplete="off" type="text" placeholder="Nombre de la institución"></li>
@@ -221,10 +221,10 @@
                         <thead>
                             <tr>
                             <th>Nombre</th>
-                            <th>Instituto</th>
+                            <th>Institución</th>
                             <th>Inicio</th>
                             <th>Fin</th>
-                            <th>Nivel</th>
+                            <th>Nivel Escolar</th>
                             <th>Operaciones</th>
                             </tr>
                         </thead>
@@ -406,7 +406,7 @@
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <li class="formlabel">Nombre</li>
-                            <li class="formlabel">Institucion</li>
+                            <li class="formlabel">Institución</li>
                             <li class="formlabel">Inicio</li>
                             <li class="formlabel">Fin</li>
                             <li class="formlabel">Horas</li>
@@ -414,7 +414,7 @@
                             <li class="formlabel">Evidencia</li>
                             <li style="color:white">Agregar</li>
                             <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
-                            <li><input name="instituto" type="text" placeholder="Institucion donde se tomo la capacitacion" id="text-input"></li>
+                            <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                             <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
@@ -431,7 +431,7 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Instituto</th>
+                                <th>Institución</th>
                                 <th>Inicio</th>
                                 <th>Fin</th>
                                 <th>Horas</th>
