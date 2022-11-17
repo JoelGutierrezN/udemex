@@ -34,7 +34,7 @@ label{
     margin-top: 10px;
 }
 input[type="file"]{
-    width: 80%;
+    width: 100%;
     height: 34px;
     margin: 10px auto 10px 0;
     padding: 6px 12px;
@@ -49,14 +49,14 @@ input[type="file"]{
 
 input[type="text"],.select2-multiple,input[type="date"],
 select{
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     margin: 10px auto 10px 0;
+    vertical-align: middle;
     border: 1px solid var(--gray);
     border-radius: 5px;
     background-color: var(--light-gray);
     padding: 5px;
-    vertical-align: middle;
     font-size: 1.5rem;
 }
 
@@ -609,16 +609,41 @@ footer h5, footer h6{
     color: white;
     padding: 15px 32px;
     text-align: center;
-    align-content: center;
+    margin: 10px auto 10px 40%;
+    vertical-align: middle;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    border-radius: 4%;
+    border-radius: 5px;
 }
 
 .btn-primario:hover {
     background-color: var(--secondary);
 }
 
+.alert {
+    display:block;
+    height: auto;
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-align: center;
+
+}
+
+.alert-info{
+    background-color: #5499506e;
+    color:#126408;
+    
+}
+
+.alert-info h6{
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.alert-info p{
+    font-size: 1.2rem;
+}
 
 

@@ -7,6 +7,7 @@ use App\Http\Requests\UsuarioCreateRequest;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UsuarioController extends Controller
 {
@@ -38,16 +39,22 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioCreateRequest $request)
     {
+        $is_registered = Usuario::where('id_user', Auth::id())->count();
+        if ($is_registered){
+            Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en datos personales ');
+           return redirect()->route("teacher.welcome");
+        }
+        
+        // dd($request->hasFile('foto'));
         $newUsuario = Usuario::create($request->all());
 
-        // dd($request->hasFile('foto'));
-        if($request->hasFile('foto')){
-            $foto = $request->file('foto');
-            $destino = 'imagenes/perfil/';
-            $fotoname = time() . '-' . $foto->getClientOriginalName();
-            $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
-            $newUsuario->foto = $fotoname;
-        }
+        // if($request->hasFile('foto')){
+        //     $foto = $request->file('foto');
+        //     $destino = 'imagenes/perfil/';
+        //     $fotoname = time() . '-' . $foto->getClientOriginalName();
+        //     $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
+        //     $newUsuario->foto = $fotoname;
+        // }
 
         $newUsuario->nombre = $request->nombre;
         $newUsuario->apellido_paterno = $request->apellido_paterno;
@@ -60,8 +67,8 @@ class UsuarioController extends Controller
         $newUsuario->email_personal = $request-> email_personal;
 
         $newUsuario->save();
-
-         return view("welcome");
+        Alert::alert()->success('Sus Datos Personales',' han sido regristados correctamente.');
+         return redirect()->route("teacher.welcome");
     }
 
     public function getTeacherInfo($id)
@@ -111,9 +118,9 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Usuario $usuario)
     {
-        //
+        dd($request, $usuario);
     }
 
     /**

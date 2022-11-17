@@ -7,6 +7,8 @@ use App\Http\Controllers\Personal\MateriasController;
 use App\Http\Controllers\Personal\HistorialController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProfesoresInicioController;
+use App\Http\Controllers\InformacionAcademicaController;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 /* Auth 365 */
@@ -35,8 +37,9 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
 /* Rutas de Profesores */
 Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
     Route::view('/', 'teacher-modules.index')->name('index');
-    Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher'])->name('welcome');
+    Route::get('/welcome', ProfesoresInicioController::class)->name('welcome');
     Route::resource('usuarios', UsuarioController::class);
+    Route::resource('infoacademica', InformacionAcademicaController::class);
     Route::get('/getTeacherInfo/{id}', [UsuarioController::class, 'getTeacherInfo'])->name('getTeacherInfo');
 
 
@@ -48,6 +51,7 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     // * Rutas para las materias
     Route::post('/storeMaterias', [MateriasController::class, 'store'])->name('storeMaterias');
     Route::get('/getMaterias/{id}', [MateriasController::class, 'getMaterias'])->name('getMaterias');
+    Route::get('/delete-materia/{id}', [MateriasController::class, 'deleteMateria'])->name('deleteMateria');
 
     // * Rutas para el historial
     Route::post('/storeHistorial', [HistorialController::class, 'store'])->name('storeHistorial');
