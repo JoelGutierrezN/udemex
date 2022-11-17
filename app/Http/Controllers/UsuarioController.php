@@ -45,32 +45,21 @@ class UsuarioController extends Controller
            return redirect()->route("teacher.welcome");
         }
         
-        // dd($request->hasFile('foto'));
         $newUsuario = Usuario::create($request->all());
 
-        // if($request->hasFile('foto')){
-        //     $foto = $request->file('foto');
-        //     $destino = 'imagenes/perfil/';
-        //     $fotoname = time() . '-' . $foto->getClientOriginalName();
-        //     $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
-        //     $newUsuario->foto = $fotoname;
-        // }
-
-        $newUsuario->nombre = $request->nombre;
-        $newUsuario->apellido_paterno = $request->apellido_paterno;
-        $newUsuario->apellido_materno = $request->apellido_materno;
-        $newUsuario->clave_empleado = $request->clave_empleado;
-        $newUsuario->sexo = $request->sexo;
-        $newUsuario->telefono_casa = $request->telefono_casa;
-        $newUsuario->celular = $request->celular;
-        $newUsuario->email_udemex = $request->email_udemex;
-        $newUsuario->email_personal = $request-> email_personal;
-
+        if($request->hasFile('foto')){
+            $foto = $request->file('foto');
+            $destino = 'imagenes/perfil/';
+            $fotoname = time() . '-' . $foto->getClientOriginalName();
+            $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
+            $newUsuario->foto = $fotoname;
+        }
         $newUsuario->save();
-        Alert::alert()->success('Sus Datos Personales',' han sido regristados correctamente.');
+        Alert::alert()->success('Guardado!',' Sus datos personales han sido regristados correctamente.');
          return redirect()->route("teacher.welcome");
     }
 
+<<<<<<< HEAD
     public function getTeacherInfo($id)
     {
        $usuarios = \DB::table('usuarios')
@@ -88,6 +77,9 @@ class UsuarioController extends Controller
 
 
     }
+=======
+   
+>>>>>>> 1647a8fb6c76649c630aa83df20698d2daa294a9
 
     /**
      * Display the specified resource.

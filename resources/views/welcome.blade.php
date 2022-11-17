@@ -30,7 +30,7 @@
             @if($is_registered)
              <div class="alert alert-info">
                 
-                   <h6>!Ya tenemos tus datos¡</h6>
+                   <h6>¡Ya tenemos tus datos!</h6>
                    <p>Ya cuentas con tus datos registrados, a partir de ahora solo puedes actualizarlos.
                      </p>
            </div>
@@ -51,7 +51,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input">Nombre</label>
+                    <label for="text-input">Nombre(s)</label>
                     <input type="text" placeholder="Coloque su nombre iniciando por letra mayúscula. Ejemplo: (Luis)"
                     autocomplete="off" id="dato_nombre" name="nombre"  
                      value="{{ old('nombre', $usuario->nombre ?? '') }}">
@@ -89,7 +89,7 @@
                 <div>
                     <label for="select-input">Género</label>
                     <ul class="col2">
-                        <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" @isset ($usuario->sexo) @if($usuario->sexo == 1)   checked @endif @endisset>
+                        <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" checked @isset ($usuario->sexo) @if($usuario->sexo == 1)   checked @endif @endisset>
                         Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
                         <label><input type="radio" id="dato_sexo_femenino" name="sexo" value="0" @isset ($usuario->sexo) @if($usuario->sexo == 0)  checked @endif @endisset>
                         Femenino</label>
@@ -98,7 +98,7 @@
 
                 <div>
                     <label for="text-input">Teléfono de casa</label>
-                    <input type="text" placeholder="Coloque su teléfono de casa"
+                    <input type="text" placeholder="Coloque su teléfono de casa. (10 dígitos)"
                     autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
                      value="{{ old('telefono_casa', $usuario->telefono_casa ?? '') }}"
                      maxlength="10"
@@ -112,7 +112,7 @@
 
                 <div>
                     <label for="text-input">Teléfono celular</label>
-                    <input type="text" placeholder="Coloque su teléfono celular"
+                    <input type="text" placeholder="Coloque su teléfono celular (10 dígitos)"
                     autocomplete="off" id="dato_celular" name="celular" 
                     value="{{ old('celular', $usuario->celular ?? '') }}"
                     maxlength="10"
@@ -149,14 +149,12 @@
                     @endif
 
                     <div>
-                        <style>
-                            .fotoperfil{
-                                width: 150px;
-                                height: auto;
-                            }
-                        </style>
                         <label for="text-input">Fotografía</label>
-                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto">
+                        <medium class="">La fotografía no debe exceder los 2 Megabyte y solo acepta imágenes  
+                        con extensiones 'jpeg, png, jfif'</medium>
+                        
+                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto" 
+                        accept="image/png,image/jpeg,jfif">
                         <div id="imagePreview"></div>
                     </div>
                          @if($errors->first('foto'))
@@ -168,13 +166,23 @@
                 <div>
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
                 </div>
-            </div>
 
+            </div>
             <div>
                 <button  type="submit" class="btn-primario">Guardar Cambios</button>
             </div>
-            <br>&nbsp;
+
+
         </div>
+        @if($is_registered)
+                <div class="conte">
+                    <div class="left">
+                    </div>
+                    <div class="alert-info2">
+                        <p>Información actualizada a la fecha: {{ $usuario->updated_at }}</p>
+                    </div>
+                </div><br>&nbsp;
+            @endif
         </form>
     {{--Fin Datos personales --}}
 
@@ -459,6 +467,7 @@
                         <form action="{{ route('teacher.storeHistorial') }}" method="post" enctype="multipart/form-data" id="historialAcademico-form">
                             @csrf
                             <ul class="col5">
+<<<<<<< HEAD
                             <li class="formlabel">Nombre</li>
                             <li class="formlabel">Institución</li>
                             <li class="formlabel">Inicio</li>
@@ -477,6 +486,27 @@
                                 </select>
                             </li>
                            </ul>
+=======
+                                <li class="formlabel">Nombre</li>
+                                <li class="formlabel">Institución</li>
+                                <li class="formlabel">Inicio</li>
+                                <li class="formlabel">Fin</li>
+                                <li class="formlabel">Nivel Escolar</li>
+
+                                <li><input name="nombre" id="historial-nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
+                                <li><input name="institucion" id="historial-institucion" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
+                                <li><input name="inicio" id="historial-inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
+                                <li><input name="fin" id="historial-fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
+                                <li>
+                                    <select id="historial-nivel" style="margin-top:10px" class="" name="nivel" >
+                                        <option value="#">Preparatoria</option>
+                                        <option value="#">Licenciatura</option>
+                                        <option value="#">Maestría</option>
+                                        <option value="#">Doctorado</option>
+                                    </select>
+                                </li>
+                            </ul>
+>>>>>>> 1647a8fb6c76649c630aa83df20698d2daa294a9
 
                             <ul class="col5">
                                 <li class="formlabel">Tipo de documento</li>
@@ -781,57 +811,7 @@
     </script>
 
     <!-- Tabla de cursos -->
-    <script>
-     document.addEventListener('DOMContentLoaded',()=>{
-        fetch("getTeacherInfo/{{ Auth::user()->id }}")
-        .then(response => response.json())
-        .then((response)=>{
-                console.log(response)
-                var dato_clave_empleado =  document.querySelector('#dato_clave_empleado')
-                dato_clave_empleado.value=response.clave_empleado;
-                dato_clave_empleado.setAttribute("readonly", "true");
-
-                var dato_nombre =  document.querySelector('#dato_nombre')
-                dato_nombre.value=response.nombre;
-                dato_nombre.setAttribute("readonly", "true");
-
-                var dato_apellido_paterno =  document.querySelector('#dato_apellido_paterno')
-                dato_apellido_paterno.value=response.apellido_paterno;
-                dato_apellido_paterno.setAttribute("readonly", "true");
-
-                var dato_apellido_materno =  document.querySelector('#dato_apellido_materno')
-                dato_apellido_materno.value=response.apellido_materno;
-                dato_apellido_materno.setAttribute("readonly", "true");
-
-                var dato_sexo_masculino =  document.querySelector('#dato_sexo_masculino')
-                var dato_sexo_femenino =  document.querySelector('#dato_sexo_femenino')
-                if (response.sexo == 1){
-                    dato_sexo_masculino.setAttribute("checked", "true");
-                }else {
-                    dato_sexo_femenino.setAttribute("checked", "true");
-                }
-
-
-                var dato_telefono_casa =  document.querySelector('#dato_telefono_casa')
-                dato_telefono_casa.value=response.telefono_casa;
-                dato_telefono_casa.setAttribute("readonly", "true");
-
-                var dato_celular =  document.querySelector('#dato_celular')
-                dato_celular.value=response.celular;
-                dato_celular.setAttribute("readonly", "true");
-
-                var dato_email_udemex =  document.querySelector('#dato_email_udemex')
-                dato_email_udemex.value=response.email_udemex;
-                dato_email_udemex.setAttribute("readonly", "true");
-
-                var dato_email_personal =  document.querySelector('#dato_email_personal')
-                dato_email_personal.value=response.email_personal;
-                dato_email_personal.setAttribute("readonly", "true");
-
-        })/*.catch((error)=>{})*/
-
-    });
-    </script>
+   
     <script>
         var archivosMenu = document.querySelector('#archivos-menu');
         archivosMenu.addEventListener('click', ()=>{
@@ -939,4 +919,6 @@
             });
         })();
     </script>
+
+
 @endsection

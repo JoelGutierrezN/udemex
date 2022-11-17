@@ -40,7 +40,6 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     Route::get('/welcome', ProfesoresInicioController::class)->name('welcome');
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('infoacademica', InformacionAcademicaController::class);
-    Route::get('/getTeacherInfo/{id}', [UsuarioController::class, 'getTeacherInfo'])->name('getTeacherInfo');
 
 
     // * Rutas para las capacitaciones
