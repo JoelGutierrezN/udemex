@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\InformacionAcademicaController;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
+
 /* Auth 365 */
 Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers\Auth'], function(){
     Route::get('login', 'AuthController@login')->name('login');
@@ -36,8 +37,7 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
 
 /* Rutas de Profesores */
 Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
-    Route::view('/', 'teacher-modules.index')->name('index');
-    Route::get('/welcome', ProfesoresInicioController::class)->name('welcome');
+    Route::get('/welcome', ProfesoresInicioController::class)->name('index');
     Route::resource('usuarios', UsuarioController::class);
     Route::resource('infoacademica', InformacionAcademicaController::class);
 
@@ -58,7 +58,6 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     Route::get('/delete-historial/{id}', [HistorialController::class, 'deleteHistorial'])->name('deleteHistorial');
     Route::view('/bienvenido', 'teacher-modules.welcome')->name('welcome');
     Route::view('/perfil', 'teacher-modules.profile')->name('profile');
-    Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher']);
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
