@@ -35,10 +35,10 @@
                 <button type="submit">Ingresar</button>
             </div>
 
-            <div class="form-group-images">
-                <img src="{{ asset('assets/img/logos/edomex-2022.png') }}" alt="edomex" width="70px">
-                <img src="{{ asset('assets/img/logos/udemex.png') }}" alt="udemex" width="80px">
-            </div>
+{{--            <div class="form-group-images">--}}
+{{--                <img src="{{ asset('assets/img/logos/edomex-2022.png') }}" alt="edomex" width="70px">--}}
+{{--                <img src="{{ asset('assets/img/logos/udemex.png') }}" alt="udemex" width="80px">--}}
+{{--            </div>--}}
 
         </form>
     </main>
