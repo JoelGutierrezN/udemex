@@ -9,6 +9,7 @@ use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\File;
 
 class UsuarioController extends Controller
 {
@@ -93,8 +94,21 @@ class UsuarioController extends Controller
      */
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
-        // dd($request, $usuario);
-        $usuario->update($request->all());
+      $usuario->update($request->all());
+
+      if($request->hasFile('foto')){
+           $destino = 'imagenes/perfil/';
+            if(File::exists($destino))
+            {
+                File::delete($destino);
+            }
+            $foto = $request->file('foto');
+            $fotoname = time() . '-' . $foto->getClientOriginalName();
+            $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
+            $usuario->foto = $fotoname;
+        }
+        $usuario->save();
+
          Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
          return redirect()->route("teacher.welcome");
     }

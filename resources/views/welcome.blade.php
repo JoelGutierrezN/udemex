@@ -152,12 +152,15 @@
                     <div>
                         
                         <label for="text-input">Fotografía</label>
-                        <medium class="">La fotografía no debe exceder los 2 Megabyte y solo acepta imágenes  
-                        con extensiones 'jpeg, png, jfif'</medium>
+                        <medium>La fotografía no debe exceder los 2 Megabyte y solo acepta imágenes  
+                        con extensiones 'jpeg, png, jfif'</medium><br>&nbsp;
 
+                          @if($is_registered)
+                          <!-- <img class='fotoperfil' src="{{ asset('imagenes/perfil/' . $usuario->foto) }}" alt="" width="200px"> -->
+                         @endif
                         <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto" 
                         accept="image/png,image/jpeg,jfif">
-                        
+                    
                         <div id="imagePreview"></div>
                     </div>
                          @if($errors->first('foto'))
@@ -165,6 +168,7 @@
                         <i>{{ $errors->first('foto') }}</i>
                         </div>
                         @endif
+                        
 
                 <div>
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
@@ -172,7 +176,11 @@
             </div>
 
             <div>
+                 @if($is_registered)
+                <button  type="submit" class="btn-primario">Actualizar</button>
+                @else
                 <button  type="submit" class="btn-primario">Guardar Cambios</button>
+                @endif
             </div>
             <br>&nbsp;
             @if($is_registered)
