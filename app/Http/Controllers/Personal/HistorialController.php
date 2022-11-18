@@ -105,6 +105,7 @@ class HistorialController extends Controller
                 archivo_academicos.certificado_pdf as certificado,
                 archivo_academicos.cedula_pdf as cedula
                 '))
+            ->orderBy('historial_academicos.fecha_inicio', 'desc')
             ->get();
         
         return $info;
