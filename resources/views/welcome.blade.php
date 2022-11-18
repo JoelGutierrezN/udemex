@@ -757,7 +757,7 @@
                                 cancelButtonText: 'Cancelar'
                             }).then((response)=>{
                                 if(response.isConfirmed){
-                                    fetch(`delete-materia/{{ Auth::user()->id }}`)
+                                    fetch(`delete-materia/${element.id_asignatura}`)
                                         .then((response) => response.json())
                                         .then((response) => {
                                             Swal.fire(response[0].alert, '', 'success');
