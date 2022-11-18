@@ -8,10 +8,10 @@
 
         <div class="tabs">
             <button type="button" id="personal-menu" data-tab-target="1">Datos Personales &blacktriangledown;</button>
-            <button type="button" id="materias-menu" data-tab-target="2">Materias impartidas &blacktriangledown;</button>
+            <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
+            <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
             <button type="button" id="experiencia-menu" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
             <button type="button" id="archivos-menu" data-tab-target="4">Cursos &blacktriangledown;</button>
-            <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
         </div>
 
     {{-- Datos personales --}}
@@ -198,24 +198,25 @@
 
         {{--Datos de materias impartidas --}}
         <div class="mt-2" data-tab-id="2">
-            <h3 class="tab--title">Materias impartidas</h3>
+            <h3 class="tab--title">Asignaturas impartidas</h3>
             <div class="">
                 <div>
                     <label for="text-input"> Coloque las materias impartidas</label>
                     <ul class="col6">
                         <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                         @csrf
-                        <li class="formlabel">Nombre</li>
-                        <li class="formlabel">Institución</li>
-                        <li class="formlabel">Inicio</li>
-                        <li class="formlabel">Fin</li>
+                        <li class="formlabel">Nombre de la asignatura</li>
+                        <li class="formlabel">Institución donde se impartio</li>
+                        <li class="formlabel">Inicio impartición</li>
+                        <li class="formlabel">Fin impartición</li>
                         <li class="formlabel">Nivel Escolar</li>
                         <li style="color:white">Agregar</li>
-                        <li><input id="materia-nombre" name="nombre" autocomplete="off" type="text" placeholder="Nombre de la materia"></li>
-                        <li><input id="materia-institucion" name="institucion" autocomplete="off" type="text" placeholder="Nombre de la institución"></li>
-                        <li><input id="materia-inicio" name="inicio" type="date" placeholder="Inicio de la materia impartida"></li>
-                        <li><input id="materia-fin" name="fin" type="date" placeholder="Fin de la materia impartida"></li>
+                        <li><input id="materia-nombre" name="nombre" autocomplete="off" type="text" placeholder="Nombre completo de la asignatura"></li>
+                        <li><input id="materia-institucion" name="institucion" autocomplete="off" type="text" placeholder="Nombre completo de la institucion donde se ímpartió"></li>
+                        <li><input id="materia-inicio" name="inicio" type="date" placeholder="Inicio de la asignatura impartida"></li>
+                        <li><input id="materia-fin" name="fin" type="date" placeholder="Fin de la asignatura impartida"></li>
                         <li><select id="materia-nivel" style="margin-top:10px" class="" name="tipo" >
+                            <option value="Bachillerato">Bachillerato</option>
                             <option value="Licenciatura">Licenciatura</option>
                             <option value="Maestría">Maestría</option>
                             <option value="Doctorado">Doctorado</option>
@@ -227,10 +228,10 @@
                     <table id="table-materias" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
-                            <th>Nombre</th>
-                            <th>Institución</th>
-                            <th>Inicio</th>
-                            <th>Fin</th>
+                            <th>Nombre de la asignatura</th>
+                            <th>Institución donde se impartió</th>
+                            <th>Inicio impartición</th>
+                            <th>Fin impartición</th>
                             <th>Nivel Escolar</th>
                             <th>Operaciones</th>
                             </tr>
@@ -476,18 +477,18 @@
 
             <div class="">
                 <div>
-                    <label for="text-input">Coloque su historial académico</label>
+                    <label for="text-input">Estudios concluidos</label>
                         <form action="{{ route('teacher.storeHistorial') }}" method="post" enctype="multipart/form-data" id="historialAcademico-form">
                             @csrf
                             <ul class="col5">
-                            <li class="formlabel">Nombre</li>
-                            <li class="formlabel">Institución</li>
+                            <li class="formlabel">Nombre del titulo</li>
+                            <li class="formlabel">Nombre de la institución</li>
                             <li class="formlabel">Inicio</li>
                             <li class="formlabel">Fin</li>
                             <li class="formlabel">Nivel Escolar</li>
 
-                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre de capacitación" id="text-input"></li>
-                            <li><input name="institucion" type="text" autocomplete="off" placeholder="Institución de capacitación" id="text-input"></li>
+                            <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre completo del titulo" id="text-input"></li>
+                            <li><input name="institucion" type="text" autocomplete="off" placeholder="Nombre completo de la institucion donde se estudio" id="text-input"></li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
                             <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
                             <li>
@@ -495,6 +496,7 @@
                                     <option value="Licenciatura">Licenciatura</option>
                                     <option value="Maestría">Maestría</option>
                                     <option value="Doctorado">Doctorado</option>
+                                    <option value="Especialidad">Especialidad</option>
                                 </select>
                             </li>
                            </ul>
@@ -619,12 +621,12 @@
 
                                         nombre.innerHTML = element.nombre_asignatura;
                                         institucion.innerHTML = element.nombre_institucion;
-                                        inicio.innerHTML = element.fecha_inicio;
-                                        fin.innerHTML = element.fecha_fin;
+                                        inicio.innerHTML = new Date(element.fecha_inicio).toLocaleDateString('es-MX');
+                                        fin.innerHTML = new Date(element.fecha_fin).toLocaleDateString('es-MX');
                                         nivel.innerHTML = element.nivel_escolar;
-                                        titulo.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver titulo</span>`;
+                                        titulo.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver título</span>`;
                                         certificado.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cerfiticado</span>`;
-                                        cedula.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cedula</span>`;
+                                        cedula.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cédula</span>`;
                 
                                         deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
@@ -730,8 +732,8 @@
 
                         nombre.innerHTML = `${ element.nombre_asignatura }`;
                         institucion.innerHTML = `${ element.nombre_institucion }`;
-                        Inicio.innerHTML = `${ element.fecha_inicio }`;
-                        fin.innerHTML = `${ element.fecha_fin }`;
+                        Inicio.innerHTML = new Date(element.fecha_inicio).toLocaleDateString('es-MX');
+                        fin.innerHTML = new Date(element.fecha_fin).toLocaleDateString('es-MX');
                         nivel.innerHTML = `${ element.nivel_escolar }`;
                         deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></div>`;
 
@@ -880,8 +882,8 @@
                         // * Asignaciones
                         nombre_curso.innerHTML = `${element.nombre_curso}`;
                         nombre_institucion.innerHTML = `${ element.nombre_institucion }`;
-                        fecha_inicio.innerHTML = `${ element.fecha_inicio }`;
-                        fecha_fin.innerHTML = `${ element.fecha_fin }`;
+                        fecha_inicio.innerHTML = new Date(element.fecha_inicio).toLocaleDateString('es-MX');
+                        fecha_fin.innerHTML = new Date(element.fecha_fin).toLocaleDateString('es-MX');
                         horas.innerHTML = `${ element.horas }`;
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
                         constancia_pdf.innerHTML = `<a href="#" id="show-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
