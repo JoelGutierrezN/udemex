@@ -480,7 +480,7 @@
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
                             <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
                             <li>
-                                <select style="margin-top:10px" class="" name="nivel$" >
+                                <select style="margin-top:10px" class="" name="nivel" >
                                     <option value="Licenciatura">Licenciatura</option>
                                     <option value="Maestría">Maestría</option>
                                     <option value="Doctorado">Doctorado</option>
@@ -643,7 +643,7 @@
                                         } 
 
                                         titulo.addEventListener('click',(e)=>{
-                                            let archivo = `storage/app/Historial/${element.titulo}`;
+                                            let archivo = `storage/Historial/${element.titulo}`;
                                             iframe.setAttribute('src', '{{ asset("") }}'+archivo);
                                             modal.style.display = "block";
                                         });

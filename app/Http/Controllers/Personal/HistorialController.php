@@ -10,7 +10,7 @@ class HistorialController extends Controller
 {
     public function store(Request $request){
 
-        //return $request;
+        //  return $request;
         $this->validate($request, [
             'nombre' => 'required',
             'institucion' => 'required',
@@ -22,11 +22,13 @@ class HistorialController extends Controller
         if( $request->file('titulo') != '' && $request->file('certificado') != '' && $request->file('cedula') != '' ){
 
             $nombre = \Auth::user()->name;
-            $nombreConvert = strtr($nombre, " ", "_");
+            $nombreConvert = str_replace(" ", "", $nombre);
+            $nombreConvert = str_replace('ñ', 'n', $nombreConvert);
+            
 
-            $titulo = 'titulo_'.$nombreConvert.'_'.$request->nombre.'_'.$request->nivel.'.pdf';
-            $certificado = 'certificado_'.$nombreConvert.'_'.$request->nombre.'_'.$request->nivel.'.pdf';;
-            $cedula = 'cedula_'.$nombreConvert.'_'.$request->nombre.'_'.$request->nivel.'.pdf';;
+            $titulo = 'Titulo'.$request->nivel.'_'.$nombreConvert.'_'.$request->nombre.'.pdf';
+            $certificado = 'Certificado'.$request->nivel.'_'.$nombreConvert.'_'.$request->nombre.'.pdf';
+            $cedula = 'Cedula'.$request->nivel.'_'.$nombreConvert.'_'.$request->nombre.'.pdf';
 
             \DB::table('historial_academicos')
                 ->insert([
@@ -38,6 +40,8 @@ class HistorialController extends Controller
                     'id_user' => \Auth::user()->id,
                     'activo' => 1
                 ]);
+
+            //return 'Aqui';
             $idHistorial = \DB::table('historial_academicos')
                 ->select('id_asignatura')
                 ->where('nombre_asignatura', '=', $request->nombre)
@@ -65,16 +69,16 @@ class HistorialController extends Controller
                 ]);
             
             if(!file_exists('/storage/app/Historial/'.$titulo)){
-                $file = $request->file('titulo');
-                \Storage::disk('local')->put('/Historial/'.$titulo, \File::get($file));
+                $file = $request->file('titulo')->storeAs('Historial', $titulo);
+                //\Storage::disk('local')->put('/Historial/'.$titulo, \File::get($file));
             }
             if(!file_exists('/storage/app/Historial/'.$cedula)){
-                $file = $request->file('cedula');
-                \Storage::disk('local')->put('/Historial/'.$cedula, \File::get($file));
+                $file = $request->file('cedula')->storeAs('Historial', $titulo);
+                //\Storage::disk('local')->put('/Historial/'.$cedula, \File::get($file));
             }
             if(!file_exists('/storage/app/Historial/'.$certificado)){
-                $file = $request->file('certificado');
-                \Storage::disk('local')->put('/Historial/'.$certificado, \File::get($file));
+                $file = $request->file('certificado')->storeAs('Historial', $titulo);
+                //\Storage::disk('local')->put('/Historial/'.$certificado, \File::get($file));
             }
 
             Alert::alert()->success('Evidencia del historial guardada',' Puede consultarlo en la pestaña de historial academico.');
