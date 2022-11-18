@@ -509,7 +509,7 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Institutoción</th>
+                                    <th>Institución</th>
                                     <th>Inicio</th>
                                     <th>Fin</th>
                                     <th>Nivel Escolar</th>
