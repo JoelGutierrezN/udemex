@@ -56,6 +56,9 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     Route::post('/storeHistorial', [HistorialController::class, 'store'])->name('storeHistorial');
     Route::get('/getHistorial/{id}', [HistorialController::class, 'getHistorial'])->name('getHistorial');
     Route::get('/delete-historial/{id}', [HistorialController::class, 'deleteHistorial'])->name('deleteHistorial');
+    Route::view('/bienvenido', 'teacher-modules.welcome')->name('welcome');
+    Route::view('/perfil', 'teacher-modules.profile')->name('profile');
+    Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher']);
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
@@ -68,4 +71,3 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
 Route::middleware(['auth', 'support'])->prefix('soporte')->name('support.')->group( function(){
     Route::view('/', 'support-modules.index')->name('index');
 });
-
