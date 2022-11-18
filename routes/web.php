@@ -31,6 +31,7 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
 /* Rutas de Profesores */
 Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
     Route::view('/', 'teacher-modules.index')->name('index');
+    Route::view('/bienvenido', 'teacher-modules.welcome')->name('welcome');
     Route::view('/welcome', 'welcome')->middleware(['auth', 'teacher']);
 
     // * Rutas para generar los PDF
