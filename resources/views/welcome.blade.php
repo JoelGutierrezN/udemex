@@ -126,8 +126,8 @@
                     @endif
 
                 <div>
-                    <label for="text-input">Correo electrónico de UDEMEX</label>
-                    <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico de UDEMEX"
+                    <label for="text-input">Correo electrónico Institucional</label>
+                    <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico Institucional"
                     autocomplete="off" id="dato_email_udemex" name="email_udemex"  
                        value="{{ old('email_udemex', $usuario->email_udemex ?? '') }}">
                 </div>
@@ -152,16 +152,20 @@
                     <div>
                         
                         <label for="text-input">Fotografía</label>
-                        <medium>La fotografía no debe exceder los 2 Megabyte y solo acepta imágenes  
-                        con extensiones 'jpeg, png, jfif'</medium><br>&nbsp;
-
-                          @if($is_registered)
-                          <!-- <img class='fotoperfil' src="{{ asset('imagenes/perfil/' . $usuario->foto) }}" alt="" width="200px"> -->
-                         @endif
+                        <p class= "text-foto">La fotografía no debe exceder los 2 Mb y solo acepta imágenes  
+                            con extensiones 'jpeg, png, jfif'</p><br>&nbsp;
+                            
+                            @if($is_registered)
+                            <div id="imagePreview">
+                            <img class='fotoperfil' src="{{ asset('imagenes/perfil/' . $usuario->foto) }}" alt="" width="200px">
+                            </div>
+                            @else   
+                            <div id="imagePreview"></div>
+                            @endif
+                           
                         <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto" 
                         accept="image/png,image/jpeg,jfif">
                     
-                        <div id="imagePreview"></div>
                     </div>
                          @if($errors->first('foto'))
                         <div class="invalid-feedback">

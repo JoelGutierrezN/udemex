@@ -94,8 +94,8 @@ class UsuarioController extends Controller
      */
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
+        dd($usuario->foto);
       $usuario->update($request->all());
-
       if($request->hasFile('foto')){
            $destino = 'imagenes/perfil/';
             if(File::exists($destino))
