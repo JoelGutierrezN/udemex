@@ -2,7 +2,7 @@
 
     <div class="header--icons">
         <div class="header--icons--logos">
-            <img src="{{ asset('assets/img/logos/edomex.png') }}" alt="edomex">
+{{--            <img src="{{ asset('assets/img/logos/edomex.png') }}" alt="edomex">--}}
             <img src="{{ asset('assets/img/logos/udemex.jpg') }}" alt="udemex">
         </div>
 
