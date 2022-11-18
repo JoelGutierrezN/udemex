@@ -152,12 +152,15 @@
                     <div>
                         
                         <label for="text-input">Fotografía</label>
-                        <medium class="">La fotografía no debe exceder los 2 Megabyte y solo acepta imágenes  
-                        con extensiones 'jpeg, png, jfif'</medium>
+                        <medium>La fotografía no debe exceder los 2 Megabyte y solo acepta imágenes  
+                        con extensiones 'jpeg, png, jfif'</medium><br>&nbsp;
 
+                          @if($is_registered)
+                          <!-- <img class='fotoperfil' src="{{ asset('imagenes/perfil/' . $usuario->foto) }}" alt="" width="200px"> -->
+                         @endif
                         <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto" 
                         accept="image/png,image/jpeg,jfif">
-                        
+                    
                         <div id="imagePreview"></div>
                     </div>
                          @if($errors->first('foto'))
@@ -165,6 +168,7 @@
                         <i>{{ $errors->first('foto') }}</i>
                         </div>
                         @endif
+                        
 
                 <div>
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
@@ -172,7 +176,11 @@
             </div>
 
             <div>
+                 @if($is_registered)
+                <button  type="submit" class="btn-primario">Actualizar</button>
+                @else
                 <button  type="submit" class="btn-primario">Guardar Cambios</button>
+                @endif
             </div>
             <br>&nbsp;
             @if($is_registered)
@@ -208,10 +216,9 @@
                         <li><input id="materia-inicio" name="inicio" type="date" placeholder="Inicio de la materia impartida"></li>
                         <li><input id="materia-fin" name="fin" type="date" placeholder="Fin de la materia impartida"></li>
                         <li><select id="materia-nivel" style="margin-top:10px" class="" name="tipo" >
-                            <option value="#">Preparatoria</option>
-                            <option value="#">Licenciatura</option>
-                            <option value="#">Maestría</option>
-                            <option value="#">Doctorado</option>
+                            <option value="Licenciatura">Licenciatura</option>
+                            <option value="Maestría">Maestría</option>
+                            <option value="Doctorado">Doctorado</option>
                           </select></li>
                           <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                         </form>
@@ -249,8 +256,8 @@
                 <div class="input-columns-1">
 
                     <div>
-                        <label for="text-input">Años de experiencia en modo presencial</label>
-                        <input type="text" placeholder="Coloque sus años de experiencia en modo en línea" id="datos_experiencia_presencial" name="experiencia_presencial">
+                        <label for="text-input">Años de experiencia en modalidad presencial.</label>
+                        <input type="text" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad presencial" id="datos_experiencia_presencial" name="experiencia_presencial">
                     </div>
                     @if($errors->first('experiencia_presencial'))
                     <div class="invalid-feedback">
@@ -259,8 +266,8 @@
                     @endif
 
                     <div>
-                        <label for="text-input">Años de experiencia en modo en línea</label>
-                        <input type="text" placeholder="Coloque sus años de experiencia en modo presencial" id="datos_experiencia_linea" name="experiencia_linea">
+                        <label for="text-input">Años de experiencia en modalidad línea</label>
+                        <input type="text" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad línea" id="datos_experiencia_linea" name="experiencia_linea">
                     </div>
                     @if($errors->first('experiencia_linea'))
                     <div class="invalid-feedback">
@@ -308,10 +315,10 @@
                 <div>
                     <label for="select-input-2">Disponibilidad para ser asesor en la UDEMEX</label>
                     <ul class="col2">
-                        <li><input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="100%">
-                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="75%">
-                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="50%">
-                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="25%">
+                        <li><input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="100%" checked>
+                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="75%">
+                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="50%">
+                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="25%">
                             <label for=""> %25</label></li>
                         <li>
                     </ul>
@@ -336,7 +343,7 @@
 
                 <div>
                     <label for="text-input">Lugar donde labora</label>
-                    <input type="text" placeholder="Coloque el nombre del lugar en donde labora" id="datos_lugar_labora" name="lugar_labora">
+                    <input type="text" autocomplete="off" placeholder="Coloque el nombre del lugar en donde labora" id="datos_lugar_labora" name="lugar_labora">
                 </div>
 
                 <div>
@@ -350,7 +357,8 @@
                 <div style="margin-top:10px">
                     <label for="select-input-2">¿Cuál es el horario laboral en su otro trabajo?</label>
                     <ul class="col2">
-                    <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li> </ul>
+                    <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li>
+                    <li><label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li> </ul>
                 </div>
                 @if($errors->first('horario_laboral'))
                     <div class="invalid-feedback">
@@ -359,15 +367,18 @@
                     @endif
 
                 <div>
-                    <label for="select-input-2">¿Cuáles son los dias laborales en su otro trabajo? </label>
-                    <ul class="col2"><input type="checkbox" id="l-otrolugar" name="dias_laboral" value="lunes">
-                        <label > Lun.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="martes">
-                        <label > Mar.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="miercoles">
-                        <label > Mierc.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="jueves">
-                        <label > Juev.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="viernes">
-                        <label > Vier.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="sabado">
-                        <label > Sáb.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="domingo">
-                        <label > Dom.</label>
+                    <label for="select-input-2">¿Cuáles son los días laborales en su otro trabajo? </label>
+                    <ul class="col8">
+                        <li><input type="checkbox" id="l-otrolugar" name="dias_laboral" value="lunes"><label > Lun.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="martes"><label > Mar.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="miercoles"><label > Mierc.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="jueves"><label > Juev.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="viernes"><label > Vier.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="sabado"><label > Sáb.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="domingo"><label > Dom.</label></li>
+                        
+                        
+                        
                     </ul>
                 </div>
                 @if($errors->first('dias_laboral'))
@@ -380,7 +391,7 @@
                     <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
                     <small>El nombre del archivo debe de ser su nombre completo empezando
                         por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
-                    <input type="file" placeholder="Coloque su fotografia" id="curriculum_pdf" name="curriculum_pdf">
+                    <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="curriculum_pdf" name="curriculum_pdf">
                 </div>
                 @if($errors->first('curriculum_pdf'))
                     <div class="invalid-feedback">
@@ -389,7 +400,7 @@
                     @endif
 
                 <div>
-                    <button type="submit" class="btn-primario">Guardar Cambios</button>
+                    <button type="submit" class="btn-primario">Guardar</button>
                 </div><br><div>&#160;</div>
             </div>
         </div>
@@ -506,7 +517,7 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Institutoción</th>
+                                    <th>Institución</th>
                                     <th>Inicio</th>
                                     <th>Fin</th>
                                     <th>Nivel Escolar</th>
