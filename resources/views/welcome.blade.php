@@ -256,8 +256,8 @@
                 <div class="input-columns-1">
 
                     <div>
-                        <label for="text-input">Años de experiencia en modo presencial</label>
-                        <input type="text" placeholder="Coloque sus años de experiencia en modo en línea" id="datos_experiencia_presencial" name="experiencia_presencial">
+                        <label for="text-input">Años de experiencia en modalidad presencial.</label>
+                        <input type="text" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad presencial" id="datos_experiencia_presencial" name="experiencia_presencial">
                     </div>
                     @if($errors->first('experiencia_presencial'))
                     <div class="invalid-feedback">
@@ -266,8 +266,8 @@
                     @endif
 
                     <div>
-                        <label for="text-input">Años de experiencia en modo en línea</label>
-                        <input type="text" placeholder="Coloque sus años de experiencia en modo presencial" id="datos_experiencia_linea" name="experiencia_linea">
+                        <label for="text-input">Años de experiencia en modalidad línea</label>
+                        <input type="text" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad línea" id="datos_experiencia_linea" name="experiencia_linea">
                     </div>
                     @if($errors->first('experiencia_linea'))
                     <div class="invalid-feedback">
@@ -315,7 +315,7 @@
                 <div>
                     <label for="select-input-2">Disponibilidad para ser asesor en la UDEMEX</label>
                     <ul class="col2">
-                        <li><input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="100%">
+                        <li><input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="100%" checked>
                             <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="75%">
                             <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="50%">
                             <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="25%">
@@ -343,7 +343,7 @@
 
                 <div>
                     <label for="text-input">Lugar donde labora</label>
-                    <input type="text" placeholder="Coloque el nombre del lugar en donde labora" id="datos_lugar_labora" name="lugar_labora">
+                    <input type="text" autocomplete="off" placeholder="Coloque el nombre del lugar en donde labora" id="datos_lugar_labora" name="lugar_labora">
                 </div>
 
                 <div>
@@ -367,7 +367,7 @@
                     @endif
 
                 <div>
-                    <label for="select-input-2">¿Cuáles son los dias laborales en su otro trabajo? </label>
+                    <label for="select-input-2">¿Cuáles son los días laborales en su otro trabajo? </label>
                     <ul class="col8">
                         <li><input type="checkbox" id="l-otrolugar" name="dias_laboral" value="lunes"><label > Lun.</label></li>
                         <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="martes"><label > Mar.</label></li>
@@ -391,7 +391,7 @@
                     <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
                     <small>El nombre del archivo debe de ser su nombre completo empezando
                         por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
-                    <input type="file" placeholder="Coloque su fotografia" id="curriculum_pdf" name="curriculum_pdf">
+                    <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="curriculum_pdf" name="curriculum_pdf">
                 </div>
                 @if($errors->first('curriculum_pdf'))
                     <div class="invalid-feedback">
@@ -400,7 +400,7 @@
                     @endif
 
                 <div>
-                    <button type="submit" class="btn-primario">Guardar Cambios</button>
+                    <button type="submit" class="btn-primario">Guardar</button>
                 </div><br><div>&#160;</div>
             </div>
         </div>
