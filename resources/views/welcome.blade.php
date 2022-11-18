@@ -216,10 +216,9 @@
                         <li><input id="materia-inicio" name="inicio" type="date" placeholder="Inicio de la materia impartida"></li>
                         <li><input id="materia-fin" name="fin" type="date" placeholder="Fin de la materia impartida"></li>
                         <li><select id="materia-nivel" style="margin-top:10px" class="" name="tipo" >
-                            <option value="#">Preparatoria</option>
-                            <option value="#">Licenciatura</option>
-                            <option value="#">Maestría</option>
-                            <option value="#">Doctorado</option>
+                            <option value="Licenciatura">Licenciatura</option>
+                            <option value="Maestría">Maestría</option>
+                            <option value="Doctorado">Doctorado</option>
                           </select></li>
                           <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
                         </form>
@@ -317,9 +316,9 @@
                     <label for="select-input-2">Disponibilidad para ser asesor en la UDEMEX</label>
                     <ul class="col2">
                         <li><input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="100%">
-                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="75%">
-                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="50%">
-                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="25%">
+                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="75%">
+                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="50%">
+                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="25%">
                             <label for=""> %25</label></li>
                         <li>
                     </ul>
@@ -358,7 +357,8 @@
                 <div style="margin-top:10px">
                     <label for="select-input-2">¿Cuál es el horario laboral en su otro trabajo?</label>
                     <ul class="col2">
-                    <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral">&#160;&#160;&#160;&#160;&#160;&#160;&#160;<label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li> </ul>
+                    <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li>
+                    <li><label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li> </ul>
                 </div>
                 @if($errors->first('horario_laboral'))
                     <div class="invalid-feedback">
@@ -368,14 +368,17 @@
 
                 <div>
                     <label for="select-input-2">¿Cuáles son los dias laborales en su otro trabajo? </label>
-                    <ul class="col2"><input type="checkbox" id="l-otrolugar" name="dias_laboral" value="lunes">
-                        <label > Lun.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="martes">
-                        <label > Mar.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="miercoles">
-                        <label > Mierc.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="jueves">
-                        <label > Juev.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="viernes">
-                        <label > Vier.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="sabado">
-                        <label > Sáb.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="dias_laboral" name="dias_laboral" value="domingo">
-                        <label > Dom.</label>
+                    <ul class="col8">
+                        <li><input type="checkbox" id="l-otrolugar" name="dias_laboral" value="lunes"><label > Lun.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="martes"><label > Mar.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="miercoles"><label > Mierc.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="jueves"><label > Juev.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="viernes"><label > Vier.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="sabado"><label > Sáb.</label></li>
+                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="domingo"><label > Dom.</label></li>
+                        
+                        
+                        
                     </ul>
                 </div>
                 @if($errors->first('dias_laboral'))
@@ -514,7 +517,7 @@
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Institutoción</th>
+                                    <th>Institución</th>
                                     <th>Inicio</th>
                                     <th>Fin</th>
                                     <th>Nivel Escolar</th>
