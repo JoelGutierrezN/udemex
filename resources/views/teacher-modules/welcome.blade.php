@@ -9,7 +9,7 @@
 
         <div class="welcome--divisor-line"></div>
 
-        <h1>Bienvenido al Sistema de Gestión UDEMEX</h1>
+        <h1>Bienvenido al E-Portafolio Docente</h1>
 
         <div class="welcome--module-container">
             <a href="{{ route('teacher.index') }}">
