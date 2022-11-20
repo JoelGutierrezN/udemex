@@ -1,14 +1,16 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminIndexController;
+use App\Http\Controllers\Admin\TeacherController;
 use App\Http\Controllers\Auth\TemporalAuthController;
-use App\Http\Controllers\Personal\ArchivosController;
-use App\Http\Controllers\Personal\MateriasController;
-use App\Http\Controllers\Personal\HistorialController;
-use App\Http\Controllers\PDFController;
-use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\InformacionAcademicaController;
+use App\Http\Controllers\PDFController;
+use App\Http\Controllers\Personal\ArchivosController;
+use App\Http\Controllers\Personal\HistorialController;
+use App\Http\Controllers\Personal\MateriasController;
+use App\Http\Controllers\ProfesoresInicioController;
+use App\Http\Controllers\UsuarioController;
+use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 
@@ -32,7 +34,8 @@ Route::prefix('auth')->group(function (){
 
 /* Rutas Administrativas */
 Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
-    Route::view('/', 'admin-modules.index')->name('index');
+    Route::get('bienvenida', AdminIndexController::class)->name('welcome');
+    Route::get('profesores', [TeacherController::class, 'index'])->name('teachers.index');
 });
 
 /* Rutas de Profesores */

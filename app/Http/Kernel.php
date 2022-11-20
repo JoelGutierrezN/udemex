@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'admin' => AdminMiddleware::class,
         'teacher' => TeacherMiddleware::class,
         'support' => SupportMiddleware::class
+
     ];
 }

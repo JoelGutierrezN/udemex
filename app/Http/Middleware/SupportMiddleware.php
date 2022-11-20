@@ -15,7 +15,7 @@ class SupportMiddleware
         if(Auth::user()->role == 3)
             return $next($request);
         elseif (Auth::user()->role == 1)
-            return redirect()->route('admin.index');
+            return redirect()->route('admin.welcome');
         elseif (Auth::user()->role == 2)
             return redirect()->route('teacher.index');
 

@@ -31,7 +31,7 @@ class InformacionAcademica extends Model
         'curriculum_pdf',
         'validar_archivo_curriculum',
         'grado_maximo_estudios',
-        'id_usuario',
+        'id_user',
         'activo'
 
     ];
@@ -39,4 +39,8 @@ class InformacionAcademica extends Model
     protected $attributes = [
     'activo' => 1
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
 }
