@@ -11,7 +11,7 @@
             <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
             <button type="button" id="experiencia-menu" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
-            <button type="button" id="archivos-menu" data-tab-target="4">Cursos &blacktriangledown;</button>
+            <button type="button" id="archivos-menu" data-tab-target="4">Capacitación &blacktriangledown;</button>
         </div>
 
     {{-- Datos personales --}}
@@ -205,7 +205,7 @@
             <h3 class="tab--title">Asignaturas impartidas</h3>
             <div class="">
                 <div>
-                    <label for="text-input"> Coloque las materias impartidas</label>
+                    <label for="text-input"> Coloque las asignaturas impartidas</label>
                     <ul class="col6">
                         <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                         @csrf
@@ -437,6 +437,14 @@
                             <li><select style="margin-top:10px" class="" name="tipo" >
                                 <option value="diplomado">Diplomado</option>
                                 <option value="certificado">Certificado</option>
+                                <option value="curso">Curso</option>
+                                <option value="certificacion">Certificación</option>
+                                <option value="diplomado">Diplomado</option>
+                                <option value="taller">Taller</option>
+                                <option value="congreso">Congreso</option>
+                                <option value="Expo">Expo</option>
+                                <option value="Concurso">Concurso</option>
+                                <option value="acreditacion">Acreditación</option>
                             </select></li>
                             <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
                             <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
@@ -536,56 +544,6 @@
                             </tbody>
                         </table>
 
-                    <style>
-                        .modal {
-                            display: none; /* Hidden by default */
-                            position: fixed; /* Stay in place */
-                            z-index: 1; /* Sit on top */
-                            left: 0;
-                            top: 0;
-                            width: 100%; /* Full width */
-                            height: 100%; /* Full height */
-                            overflow: auto; /* Enable scroll if needed */
-                            background: rgb(0,0,0); /* Fallback color */
-                            background: rgba(0,0,0,0.4); /* Black w/ opacity */
-                        }
-
-                            /* Modal Content/Box */
-                        .modal-content {
-                            background: #fefefe;
-                            margin: 15% auto; /* 15% from the top and centered */
-                            padding: 20px;
-                            border: 1px solid #888;
-                            width: 80%; /* Could be more or less, depending on screen size */
-                        }
-
-                            /* The Close Button */
-                        .close {
-                            color: #aaa;
-                            float: right;
-                            font-size: 28px;
-                            font-weight: bold;
-                        }
-
-                        .close:hover,
-                        .close:focus {
-                            color: black;
-                            text-decoration: none;
-                            cursor: pointer;
-                        }
-                    </style>
-
-                    <div id="myModal" class="modal">
-
-                    <!-- Modal content -->
-                        <div class="modal-content">
-                            <span class="close">&times;</span>
-                            <p>Some text in the Modal..</p>
-                            <iframe id="archivo-view" src="" frameborder="0"></iframe>
-                        </div>
-
-                    </div>
-
                     <script>
                         var historialMenu = document.querySelector('#historial-menu');
                         historialMenu.addEventListener('click', (e)=>{
@@ -660,16 +618,18 @@
                                         } 
 
                                         titulo.addEventListener('click',(e)=>{
-                                            let archivo = `storage/Historial/${element.titulo}`;
-                                            iframe.setAttribute('src', '{{ asset("") }}'+archivo);
+                                            let archivo = `documentos/Historial/${element.titulo}`;
+                                            iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                                             modal.style.display = "block";
                                         });
                                         certificado.addEventListener('click',(e)=>{
-                                            console.log('a')
+                                            let archivo = `documentos/Historial/${element.titulo}`;
+                                            iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                                             modal.style.display = "block";
                                         });
                                         cedula.addEventListener('click',(e)=>{
-                                            console.log('a')
+                                            let archivo = `documentos/Historial/${element.titulo}`;
+                                            iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                                             modal.style.display = "block";
                                         });
 
@@ -699,6 +659,56 @@
                 </div>
             </div>
         </div>
+        <style>
+                        .modal {
+                            display: none; /* Hidden by default */
+                            position: fixed; /* Stay in place */
+                            z-index: 1; /* Sit on top */
+                            left: 0;
+                            top: 0;
+                            width: 100%; /* Full width */
+                            height: 100%; /* Full height */
+                            overflow: auto; /* Enable scroll if needed */
+                            background: rgb(0,0,0); /* Fallback color */
+                            background: rgba(0,0,0,0.4); /* Black w/ opacity */
+                        }
+
+                            /* Modal Content/Box */
+                        .modal-content {
+                            background: #fefefe;
+                            margin: auto; /* 15% from the top and centered */
+                            padding: 20px;
+                            border: 1px solid #888;
+                            width: 80%;
+                            height: 90vh; /* Could be more or less, depending on screen size */
+                        }
+
+                            /* The Close Button */
+                        .close {
+                            color: #aaa;
+                            float: right;
+                            font-size: 28px;
+                            font-weight: bold;
+                        }
+
+                        .close:hover,
+                        .close:focus {
+                            color: black;
+                            text-decoration: none;
+                            cursor: pointer;
+                        }
+                    </style>
+
+                    <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <p></p>
+                            <object id="archivo-view" src="" type="application/PDF" width="100%" height="95%" frameborder="0"></object>
+                        </div>
+
+                    </div>
 @endsection
 
 @section('scripts')
@@ -713,6 +723,12 @@
     <!-- Tabla de materias -->
     <script>
         var materiasMenu = document.querySelector('#materias-menu');
+
+        var inputNombre = document.querySelector('#materias-nombre');
+        var inputInstitucion = document.querySelector('#materias-institucion');
+        var inputInicio = document.querySelector('#materias-inicio');
+        var inputFin = document.querySelector('#materias-fin');
+        var inputNivel  = document.querySelector('#materias-nivel');
 
         function createTable(){
             fetch('getMaterias/{{ Auth::user()->id }}')
@@ -768,6 +784,11 @@
                                         .then((response) => {
                                             Swal.fire(response[0].alert, '', 'success');
                                             table.removeChild(tr);
+                                            inputNombre.value = '';
+                                            inputInstitucion.value = '';
+                                            inputInicio.value = '';
+                                            inputFin.value = '';
+                                            inputNivel.value = '';
                                         }).catch((error)=>{
                                             Swal.fire('Lo sentimos, ocurrio un error', 'Intenta de nuevo mas tarde', 'error');
                                         });
@@ -870,6 +891,13 @@
                     response.forEach((element)=>{
                         let tr = document.createElement('tr');
 
+                        // Get the modal
+                        var modal = document.getElementById("myModal");
+                        // Get the <span> element that closes the modal
+                        var span = document.getElementsByClassName("close")[0];
+
+                        let iframe = document.querySelector('#archivo-view');
+
                         // * Columnas
                         let nombre_curso = document.createElement('td');
                         let nombre_institucion = document.createElement('td');
@@ -880,6 +908,7 @@
                         let constancia_pdf = document.createElement('td');
                         let opciones = document.createElement('td');
                         let deleteButton = document.createElement('a');
+                        let pdfPreview = document.createElement('a')
 
                         opciones.setAttribute('style', 'text-align: center;');
 
@@ -890,7 +919,7 @@
                         fecha_fin.innerHTML = new Date(element.fecha_fin).toLocaleDateString('es-MX');
                         horas.innerHTML = `${ element.horas }`;
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
-                        constancia_pdf.innerHTML = `<a href="#" id="show-capacitacion" class="btnplus"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40"></a>`;
+                        pdfPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40">`;
                         deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"><div>`;
                         
 
@@ -905,12 +934,32 @@
                         tr.appendChild(fecha_fin);
                         tr.appendChild(horas);
                         tr.appendChild(tipo_curso);
+                        constancia_pdf.appendChild(pdfPreview);
                         tr.appendChild(constancia_pdf);
                         opciones.appendChild(deleteButton);
                         tr.appendChild(opciones);
                         table.appendChild(tr);
 
+                        // When the user clicks on <span> (x), close the modal
+                        span.onclick = function() {
+                            modal.style.display = "none";
+                        }
+
+                        // When the user clicks anywhere outside of the modal, close it
+                        window.onclick = function(event) {
+                            if (event.target == modal) {
+                                modal.style.display = "none";
+                            }
+                        } 
+
                         // * Eventlisteners
+                        pdfPreview.addEventListener('click', (e)=>{
+                            e.preventDefault();
+                            let archivo = `documentos/Capacitaciones/${element.constancia_pdf}`;
+                            iframe.setAttribute('data', '{{ asset("") }}'+archivo);
+                            modal.style.display = "block";
+                        });
+
                         deleteButton.addEventListener('click', (e)=>{
                             e.preventDefault();
                             Swal.fire({

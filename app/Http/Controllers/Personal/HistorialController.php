@@ -68,17 +68,17 @@ class HistorialController extends Controller
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
             
-            if(!file_exists('/storage/app/Historial/'.$titulo)){
-                $file = $request->file('titulo')->storeAs('Historial', $titulo);
-                //\Storage::disk('local')->put('/Historial/'.$titulo, \File::get($file));
+            if(!file_exists('/documentos/Historial/'.$titulo)){
+                $destino = 'documentos/Historial';
+                $request->file('titulo')->move($destino, $titulo);
             }
-            if(!file_exists('/storage/app/Historial/'.$cedula)){
-                $file = $request->file('cedula')->storeAs('Historial', $titulo);
-                //\Storage::disk('local')->put('/Historial/'.$cedula, \File::get($file));
+            if(!file_exists('/documentos/Historial/'.$cedula)){
+                $destino = 'documentos/Historial';
+                $request->file('cedula')->move($destino, $cedula);
             }
-            if(!file_exists('/storage/app/Historial/'.$certificado)){
-                $file = $request->file('certificado')->storeAs('Historial', $titulo);
-                //\Storage::disk('local')->put('/Historial/'.$certificado, \File::get($file));
+            if(!file_exists('/documentos/Historial/'.$certificado)){
+                $destino = 'documentos/Historial';
+                $request->file('certificado')->move($destino, $certificado);
             }
 
             Alert::alert()->success('Evidencia del historial guardada',' Puede consultarlo en la pestaña de historial academico.');

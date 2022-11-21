@@ -23,7 +23,8 @@ class ArchivosController extends Controller
 
         if($request->file('evidencia') != ""){
             $nombre = Auth::user()->name;
-            $nombreConvert = strtr($nombre, " ", "_");
+            $nombreConvert = str_replace(" ", "", $nombre);
+            $nombreConvert = str_replace('ñ', 'n', $nombreConvert);
             $storage_path = $nombreConvert.'_'.$request->nombre.'_'.$request->tipo.'.pdf';
 
             \DB::table('capacitaciones')
@@ -42,13 +43,10 @@ class ArchivosController extends Controller
                 ]);
 
             
-             if(file_exists('/storage/app/Capacitaciones/'.$storage_path)){
-            
-            //\Storage::disk('local')->put($storage_path, \File::get($file));
-            }else{
+             if(!file_exists('/documentos/Capacitaciones/'.$storage_path)){
                 $file = $request->file('evidencia');
-                //\Storage::putFileAs('/Capacitaciones/',$file,$storage_path);
-                \Storage::disk('local')->put('/Capacitaciones/'.$storage_path, \File::get($file));
+                $destino = 'documentos/Capacitaciones';
+                $request->file('evidencia')->move($destino, $storage_path);
             }
             
 
@@ -70,14 +68,16 @@ class ArchivosController extends Controller
         $capacitacion = Capacitacione::findOrFail($id);
         $capacitacion->delete();
         $nombre = Auth::user()->name;
-            $nombreConvert = strtr($nombre, " ", "_");
-            $storage_path = $capacitacion->constancia_pdf;
+        $nombreConvert = strtr($nombre, " ", "_");
+
+        $storage_path = $capacitacion->constancia_pdf;
+
         if(file_exists('/storage/app/Capacitaciones/'.$storage_path)){
             \File::delete('/storage/app/Capacitaciones/'.$storage_path);
             //\Storage::disk('local')->put($storage_path, \File::get($file));
-            }else{
+        }else{
                 
-            }
+        }
         $data = array([
             'alert' => 'Registro eliminado'
         ]);
