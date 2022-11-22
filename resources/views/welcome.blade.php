@@ -209,8 +209,8 @@
                     <ul class="col6">
                         <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                         @csrf
-                        <li class="formlabel">Nombre de la asignatura</li>
-                        <li class="formlabel">Institución donde se impartio</li>
+                        <li class="formlabel">Nombre completo de la asignatura</li>
+                        <li class="formlabel">Nombre completo de la institución donde se impartio</li>
                         <li class="formlabel">Inicio impartición</li>
                         <li class="formlabel">Fin impartición</li>
                         <li class="formlabel">Nivel Escolar</li>
