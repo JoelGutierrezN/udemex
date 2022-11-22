@@ -708,11 +708,9 @@ footer h5, footer h6{
     height: 120px;
 }
 
-<<<<<<< HEAD
 #div-container > div{
     width: 100%;
 }
-=======
 .is-required:before {
     content: '*';
     margin-left: 0px;
@@ -720,4 +718,3 @@ footer h5, footer h6{
     font-weight: bold;
     font-size: 1.8rem;
 }
->>>>>>> e18b7f584f81106b96557cd8ec2c28bfb6208d39
