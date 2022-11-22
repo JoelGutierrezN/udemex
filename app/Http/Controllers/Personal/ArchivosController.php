@@ -73,8 +73,8 @@ class ArchivosController extends Controller
 
         $storage_path = $capacitacion->constancia_pdf;
 
-        if(file_exists('/storage/app/Capacitaciones/'.$storage_path)){
-            \File::delete('/storage/app/Capacitaciones/'.$storage_path);
+        if(file_exists('/documentos/Capacitaciones/'.$storage_path)){
+            \File::delete('/documentos/Capacitaciones/'.$storage_path);
             //\Storage::disk('local')->put($storage_path, \File::get($file));
         }else{
                 
