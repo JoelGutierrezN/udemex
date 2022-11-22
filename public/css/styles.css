@@ -707,3 +707,11 @@ footer h5, footer h6{
     width: 120px;
     height: 120px;
 }
+
+.is-required:before {
+    content: '*';
+    margin-left: 0px;
+    color: red;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
