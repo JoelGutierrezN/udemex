@@ -41,6 +41,7 @@
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </form>
                     </ul> <br><br>
+                    <p>Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
                     <h3 class="form-screen-title">CAPACITACIÓN SOLICITADA EN UDEMEX</h3>
 
 

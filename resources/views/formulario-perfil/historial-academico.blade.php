@@ -48,6 +48,8 @@
                     <li><button id="historial-button" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                 </ul>
             </form>
+            <p>Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
+            <br>
             <table id="table-historial-academico" style="font-size: 1.3rem;">
                 <thead>
                     <tr>
