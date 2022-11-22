@@ -225,7 +225,7 @@
                             <option value="Maestría">Maestría</option>
                             <option value="Doctorado">Doctorado</option>
                           </select></li>
-                          <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                          <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
                         </form>
                     </ul>
 
@@ -447,7 +447,7 @@
                                 <option value="acreditacion">Acreditación</option>
                             </select></li>
                             <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                            <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
                         </form>
                     </ul>
 
@@ -524,7 +524,7 @@
                                 <li><input id="historial-titulo" type="file" name="titulo" placeholder="titulo" class="formlabel"></li>
                                 <li><input id="historial-certificado" type="file" name="certificado" placeholder="certificado" class="formlabel"></li>
                                 <li><input id="historial-cedula" type="file" name="cedula" placeholder="cedula" class="formlabel"></li>
-                                <li><button type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></button></li>
+                                <li><button type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                             </ul>
                         </form>
                         <table id="table-historial-academico" style="font-size: 1.3rem;">
