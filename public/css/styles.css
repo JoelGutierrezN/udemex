@@ -47,7 +47,7 @@ input[type="file"]{
     border-radius: 4px;
 }
 
-input[type="text"],.select2-multiple,input[type="date"],
+input[type="text"],.select2-multiple,input[type="date"], .largo,
 select{
     width: 100%;
     height: 100%;
@@ -61,7 +61,7 @@ select{
 }
 
 
-input[type="time"]{
+input[type="time"],.acortado{
     width: 30%;
     height: 80%;
     margin: 10px auto 10px 0;

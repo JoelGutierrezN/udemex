@@ -7,8 +7,8 @@
             <ul class="col6">
                 <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                     @csrf
-                    <li class="formlabel">Nombre de la asignatura</li>
-                    <li class="formlabel">Institución donde se impartio</li>
+                    <li class="formlabel" style="font-size:13px;">Nombre completo de la asignatura</li>
+                    <li class="formlabel" style="font-size:13px; margin-top:-1%">Nombre completo de la institución donde se impartio</li>
                     <li class="formlabel">Inicio impartición</li>
                     <li class="formlabel">Fin impartición</li>
                     <li class="formlabel">Nivel Escolar</li>
@@ -60,7 +60,7 @@
     var inputFin = document.querySelector('#materia-fin');
     var inputNivel  = document.querySelector('#materia-nivel');
 
-    function createTable(){
+    function createMateriasTable(){
         fetch('getMaterias/{{ Auth::user()->id }}')
             .then(response => response.json())
             .then(response => {
@@ -124,7 +124,7 @@
             });
     }
     materiasMenu.addEventListener('click', ()=>{
-        createTable();
+        createMateriasTable();
     });
 
     document.querySelector('#agregar-materias')
@@ -148,7 +148,7 @@
                 body: data
             }).then((response) => response.json())
                 .then((response)=>{
-                    createTable();
+                    createMateriasTable();
                     inputNombre.value = '';
                     inputInstitucion.value = '';
                     inputInicio.value = '';

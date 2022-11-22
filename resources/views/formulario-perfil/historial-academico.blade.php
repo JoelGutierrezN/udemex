@@ -76,7 +76,7 @@
         Swal.fire('Cargando', 'Espera un momento', 'info');
     });
 
-    function createTable(){
+    function createHistorialTable(){
         fetch("getHistorial/{{ Auth::user()->id }}")
             .then((response) => response.json())
             .then((response) => {
@@ -187,6 +187,6 @@
     }
 
     historialMenu.addEventListener('click', (e)=>{
-        createTable();
+        createHistorialTable();
     });    
 </script>

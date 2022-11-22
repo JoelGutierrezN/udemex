@@ -1,18 +1,100 @@
+{{-- Subida de Documentos --}}
+        <div class="mt-2" data-tab-id="4">
+            <h3 class="tab--title"> 
+                    <label for="text-input"> Anexar constancias con registro de datos:</label>
+            </h3>
+            <div class="">
+                <div>
+                    <ul class="col8">
+                        <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+                            <li class="formlabel">Nombre completo</li>
+                            <li class="formlabel" style="font-size:13px; margin-top:-1%">Nombre completo de la institución donde se tomo</li>
+                            <li class="formlabel">Inicio</li>
+                            <li class="formlabel">Fin</li>
+                            <li class="formlabel">Número de horas</li>
+                            <li class="formlabel">Tipo</li>
+                            <li class="formlabel">Evidencia</li>
+                            <li style="color:white">Agregar</li>
+                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
+                            <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
+                            <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                            <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
+                            <li><input class="largo" name="horas" type="number" placeholder="Total de horas" id="text-input"
+                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                             autocomplete="off"></li>
+                            <li><select style="margin-top:10px" class="" name="tipo" >
+                                <option value="conferencia">Conferencia</option>
+                                <option value="curso">Curso</option>
+                                <option value="taller">Taller</option>
+                                <option value="diplomado">Diplomado</option>
+                                <option value="seminario">Seminario</option>
+                                <option value="acreditacion">Acreditación</option>
+                                <option value="certificacion">Certificación</option>
+                            </select></li>
+                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
+                        </form>
+                    </ul> <br><br>
+                    <h3 class="form-screen-title">CAPACITACIÓN SOLICITADA EN UDEMEX</h3>
+
+
+                    <table id="table-capacitaciones" style="font-size: 1.3rem;">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Institución</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
+                                <th>Horas</th>
+                                <th>Tipo</th>
+                                <th>Archivo</th>
+                                <th>Operaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="capacitaciones-table-dentro"></tbody>
+                      </table>
+
+                      <h5 class="form-screen-title">CAPACITACIÓN TOMADA AFUERA DE UDEMEX</h5>
+
+                      <table id="table-capacitaciones" style="font-size: 1.3rem;">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Institución</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
+                                <th>Horas</th>
+                                <th>Tipo</th>
+                                <th>Archivo</th>
+                                <th>Operaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="capacitaciones-table-fuera"></tbody>
+                      </table>
+
+                </div><br>
+
+
+            </div>
+        </div>
+        {{--Fin Subida de Documentos --}}
 <script>
     var archivosMenu = document.querySelector('#archivos-menu');
     archivosMenu.addEventListener('click', ()=>{
         fetch('getCapacitaciones/{{ Auth::user()->id }}')
             .then(response => response.json())
             .then((response)=>{
-                createTable(response[0], 'dentro');
-                createTable(response[0], 'fuera');
+                createCapacitacionTable(response[0], 'dentro');
+                createCapacitacionTable(response[1], 'fuera');
             });
         });
 
-    function createTable(data, tabla){
+    function createCapacitacionTable(data, tabla){
         let table = document.querySelector(`#capacitaciones-table-${tabla}`);
         table.innerHTML = '';
-        response.forEach((element)=>{
+        //console.log('a');
+        data.forEach((element)=>{
                     let tr = document.createElement('tr');
 
                     // Get the modal
@@ -20,7 +102,7 @@
                     // Get the <span> element that closes the modal
                     var span = document.getElementsByClassName("close")[0];
 
-                        let iframe = document.querySelector('#archivo-view');
+                    let iframe = document.querySelector('#archivo-view');
 
                     // * Columnas
                     let nombre_curso = document.createElement('td');
