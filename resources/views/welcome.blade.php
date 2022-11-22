@@ -209,8 +209,8 @@
                     <ul class="col6">
                         <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                         @csrf
-                        <li class="formlabel">Nombre completo de la asignatura</li>
-                        <li class="formlabel">Nombre completo de la institución donde se impartio</li>
+                        <li class="formlabel" style="font-size:13px;">Nombre completo de la asignatura</li>
+                        <li class="formlabel" style="font-size:13px; margin-top:-1%">Nombre completo de la institución donde se impartio</li>
                         <li class="formlabel">Inicio impartición</li>
                         <li class="formlabel">Fin impartición</li>
                         <li class="formlabel">Nivel Escolar</li>
@@ -262,7 +262,7 @@
 
                     <div>
                         <label for="text-input">Años de experiencia en modalidad presencial.</label>
-                        <input type="text" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad presencial" id="datos_experiencia_presencial" name="experiencia_presencial">
+                        <input class="acortado" type="number" autocomplete="off" value=0 id="datos_experiencia_presencial" name="experiencia_presencial">
                     </div>
                     @if($errors->first('experiencia_presencial'))
                     <div class="invalid-feedback">
@@ -272,7 +272,7 @@
 
                     <div>
                         <label for="text-input">Años de experiencia en modalidad línea</label>
-                        <input type="text" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad línea" id="datos_experiencia_linea" name="experiencia_linea">
+                        <input class="acortado" type="number" autocomplete="off" value=0 id="datos_experiencia_linea" name="experiencia_linea">
                     </div>
                     @if($errors->first('experiencia_linea'))
                     <div class="invalid-feedback">
@@ -281,7 +281,7 @@
                     @endif
 
                     <div>
-                        <label >Seleccione el nivel más alto de experiencia</label>
+                        <label >Seleccione el nivel más alto de experiencia docente</label>
                         <select  style="margin-top:10px" name="nivel_mayor_experiencia">
                             <option value="preparatoria">Preparatoria</option>
                             <option value="licenciatura">Licenciatura</option>
@@ -394,8 +394,6 @@
 
                 <div>
                     <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
-                    <small>El nombre del archivo debe de ser su nombre completo empezando
-                        por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
                     <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="curriculum_pdf" name="curriculum_pdf">
                 </div>
                 @if($errors->first('curriculum_pdf'))
@@ -423,7 +421,7 @@
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <li class="formlabel">Nombre completo</li>
-                            <li class="formlabel">Institución</li>
+                            <li class="formlabel" style="font-size:13px; margin-top:-1%">Nombre completo de la institución donde se tomo</li>
                             <li class="formlabel">Inicio</li>
                             <li class="formlabel">Fin</li>
                             <li class="formlabel">Número de horas</li>
@@ -434,7 +432,7 @@
                             <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                            <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"
+                            <li><input class="largo" name="horas" type="number" placeholder="Total de horas" id="text-input"
                              onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                              autocomplete="off"></li>
                             <li><select style="margin-top:10px" class="" name="tipo" >
@@ -449,9 +447,29 @@
                             <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
                             <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
                         </form>
-                    </ul>
+                    </ul> <br><br>
+                    <h3 class="form-screen-title">CAPACITACIÓN SOLICITADA EN UDEMEX</h3>
+
 
                     <table id="table-capacitaciones" style="font-size: 1.3rem;">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Institución</th>
+                                <th>Inicio</th>
+                                <th>Fin</th>
+                                <th>Horas</th>
+                                <th>Tipo</th>
+                                <th>Archivo</th>
+                                <th>Operaciones</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                      </table>
+
+                      <h5 class="form-screen-title">CAPACITACIÓN TOMADA AFUERA DE UDEMEX</h5>
+
+                      <table id="table-capacitaciones" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
                                 <th>Nombre</th>
