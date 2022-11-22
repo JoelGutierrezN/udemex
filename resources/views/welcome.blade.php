@@ -19,7 +19,7 @@
          <form action="{{ route('teacher.usuarios.update', $usuario) }}" method="POST" enctype="multipart/form-data">
              @csrf
              @method('PUT')
-           @else 
+           @else
 
         <form action="{{ route('teacher.usuarios.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -29,7 +29,7 @@
             <h3 class="tab--title">Datos personales</h3>
             @if($is_registered)
              <div class="alert alert-info">
-                
+
                 <h6>¡Ya tenemos tus datos!</h6>
                 <p>
                     Ya cuentas con tus datos registrados, a partir de ahora solo puedes actualizarlos.
@@ -54,7 +54,7 @@
                 <div>
                     <label for="text-input">Nombre(s)</label>
                     <input type="text" placeholder="Coloque su nombre(s) iniciando por letra mayúscula. Ejemplo: 'Luis'"
-                    autocomplete="off" id="dato_nombre" name="nombre"  
+                    autocomplete="off" id="dato_nombre" name="nombre"
                      value="{{ old('nombre', $usuario->nombre ?? '') }}">
                 </div>
                     @if($errors->first('nombre'))
@@ -114,7 +114,7 @@
                 <div>
                     <label for="text-input">Teléfono celular</label>
                     <input type="text" placeholder="Coloque su teléfono celular. (10 dígitos)"
-                    autocomplete="off" id="dato_celular" name="celular" 
+                    autocomplete="off" id="dato_celular" name="celular"
                     value="{{ old('celular', $usuario->celular ?? '') }}"
                     maxlength="10"
                     onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" pattern="[0-9]{10}">
@@ -128,7 +128,7 @@
                 <div>
                     <label for="text-input">Correo electrónico Institucional</label>
                     <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico Institucional"
-                    autocomplete="off" id="dato_email_udemex" name="email_udemex"  
+                    autocomplete="off" id="dato_email_udemex" name="email_udemex"
                        value="{{ old('email_udemex', $usuario->email_udemex ?? '') }}">
                 </div>
                     @if($errors->first('email_udemex'))
@@ -140,7 +140,7 @@
                 <div>
                     <label for="text-input">Correo electrónico personal</label>
                     <input type="text" placeholder="Coloque su correo electrónico personal"
-                    autocomplete="off" id="dato_email_personal" name="email_personal"  
+                    autocomplete="off" id="dato_email_personal" name="email_personal"
                      value="{{ old('email_personal', $usuario->email_personal ?? '') }}">
                 </div>
                     @if($errors->first('email_personal'))
@@ -150,29 +150,29 @@
                     @endif
 
                     <div>
-                        
+
                         <label for="text-input">Fotografía</label>
-                        <p class= "text-foto">La fotografía no debe exceder los 2 Mb y solo acepta imágenes  
+                        <p class= "text-foto">La fotografía no debe exceder los 2 Mb y solo acepta imágenes
                             con extensiones 'jpeg, png, jfif'</p><br>&nbsp;
-                            
+
                             @if($is_registered)
                             <div id="imagePreview">
                             <img class='fotoperfil' src="{{ asset('imagenes/perfil/' . $usuario->foto) }}" alt="" width="200px">
                             </div>
-                            @else   
+                            @else
                             <div id="imagePreview"></div>
                             @endif
-                           
-                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto" 
+
+                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto"
                         accept="image/png,image/jpeg,jfif">
-                    
+
                     </div>
                          @if($errors->first('foto'))
                         <div class="invalid-feedback">
                         <i>{{ $errors->first('foto') }}</i>
                         </div>
                         @endif
-                        
+
 
                 <div>
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
@@ -244,25 +244,44 @@
                         <tbody id="materias-table">
 
                         </tbody>
-                        
+
                     </table>
-                    
+
                 </div>
             </div>
         </div>
         {{--Fin Datos de materias impartidas --}}
 
         {{-- Experiencia Laboral --}}
+
+        @if($is_registered)
+         <form action="{{ route('teacher.infoacademica.update', $infoAcademica) }}" method="POST" enctype="multipart/form-data">
+             @csrf
+             @method('PUT')
+           @else
+
         <form action="{{ route('teacher.infoacademica.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
+        @endif
         <div class="mt-2" data-tab-id="3">
             <h3 class="tab--title">Datos de Experiencia Laboral</h3>
+            @if($is_registered)
+             <div class="alert alert-info">
+
+                <h6>¡Ya tenemos tus datos!</h6>
+                <p>
+                    Ya cuentas con tus datos registrados, a partir de ahora solo puedes actualizarlos.
+                </p>
+           </div>
+            @endif
                 <div class="input-columns-1">
 
                     <div>
-                        <label for="text-input">Años de experiencia en modalidad presencial.</label>
-                        <input type="text" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad presencial" id="datos_experiencia_presencial" name="experiencia_presencial">
+                        <label for="text-input" class="is-required">Años de experiencia en modalidad presencial.</label>
+                        <input type="number" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad presencial"
+                        id="datos_experiencia_presencial" name="experiencia_presencial"
+                        value="{{ old('experiencia_presencial', $infoAcademica->experiencia_presencial ?? '') }}">
                     </div>
                     @if($errors->first('experiencia_presencial'))
                     <div class="invalid-feedback">
@@ -271,8 +290,10 @@
                     @endif
 
                     <div>
-                        <label for="text-input">Años de experiencia en modalidad línea</label>
-                        <input type="text" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad línea" id="datos_experiencia_linea" name="experiencia_linea">
+                        <label for="text-input" class="is-required">Años de experiencia en modalidad línea</label>
+                        <input type="number" autocomplete="off" placeholder="Coloque sus años de experiencia en modalidad línea"
+                        id="datos_experiencia_linea" name="experiencia_linea"
+                        value="{{ old('experiencia_linea', $infoAcademica->experiencia_linea ?? '') }}">
                     </div>
                     @if($errors->first('experiencia_linea'))
                     <div class="invalid-feedback">
@@ -281,7 +302,7 @@
                     @endif
 
                     <div>
-                        <label >Seleccione el nivel más alto de experiencia</label>
+                        <label class="is-required">Seleccione el nivel más alto de experiencia docente</label>
                         <select  style="margin-top:10px" name="nivel_mayor_experiencia">
                             <option value="preparatoria">Preparatoria</option>
                             <option value="licenciatura">Licenciatura</option>
@@ -291,123 +312,109 @@
                     </div>
 
                     <div>
-                        <label>Áreas de experiencia Laboral</label>
-                        <select style="margin-top:10px" class="select2-multiple" name="area_experiencia[]" multiple="multiple">
+                        <label class="is-required">Áreas de experiencia Laboral</label>
+                        <select style="margin-top:10px" name="id_area_experiencia">
                             <option value="Industrial">Industrial</option>
                             <option value="Salud">Salud</option>
                           </select>
                     </div>
-                    @if($errors->first('area_experiencia'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('area_experiencia') }}</i>
-                    </div>
-                    @endif
 
                     <div>
-                        <label >Seleccione las herramientas tecnológicas que sabe utilizar
-                        </label>
-                        <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                            <option value="Office">Office</option>
-                            <option value="Adobe">Adobe</option>
+                        <label class="is-required">Seleccione las herramientas tecnológicas que más sabe utilizar</label>
+                        <select  style="margin-top:10px" name="id_herramienta">
+                            <option value="preparatoria">Adobe</option>
+                            <option value="licenciatura">Office</option>
+                            <option value="maestria">zoom</option>
+                            <option value="doctorado">Teams</option>
                           </select>
                     </div>
-                    @if($errors->first('herramientas'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('herramientas') }}</i>
-                    </div>
-                    @endif
 
                 <div>
-                    <label for="select-input-2">Disponibilidad para ser asesor en la UDEMEX</label>
+                    <label for="select-input-2" class="is-required">Disponibilidad para ser asesor en la UDEMEX</label>
                     <ul class="col2">
-                        <li><input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="100%" checked>
-                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="75%">
-                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="50%">
-                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="disponibilidad_asesor" value="25%">
+                        <li><input type="radio" id="datos_disponibilidad_asesor" name="disponibilidad_asesor" value="100%" checked>
+                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="datos_disónibilidad_asesor" name="disponibilidad_asesor" value="75%">
+                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="datos_disónibilidad_asesor" name="disponibilidad_asesor" value="50%">
+                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="datos_disónibilidad_asesor" name="disponibilidad_asesor" value="25%">
                             <label for=""> %25</label></li>
                         <li>
                     </ul>
                 </div>
-                @if($errors->first('disponibilidad_asesor'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('disponibilidad_asesor') }}</i>
-                    </div>
-                    @endif
 
                 <div>
-                    <label for="select-input-2">¿Trabaja en otro lugar actualmente?</label>
+                    <label for="select-input-2" class="is-required">¿Trabaja en otro lugar actualmente?</label>
                     <ul class="col2">
                         <li>
-                            <input type="radio" id="l-otrolugar" name="labora_actualmente" value="si" checked>
-                            <label for=""> Si</label>&#160;&#160;&#160;&#160;
-                            <input type="radio" id="l-otrolugar" name="labora_actualmente" value="no">
-                            <label for=""> No</label></li>
+                            <input type="radio" id="datos_labora_actualmente" name="labora_actualmente" value="Si">
+                            <label for=""> Sí</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                            <input type="radio" id="datos_labora_actualmente_no" name="labora_actualmente" value="No" checked>
+                            <label for=""> No</label>
                         <li>
                     </ul>
                 </div>
 
-                <div>
-                    <label for="text-input">Lugar donde labora</label>
-                    <input type="text" autocomplete="off" placeholder="Coloque el nombre del lugar en donde labora" id="datos_lugar_labora" name="lugar_labora">
-                </div>
-
-                <div>
-                    <label >Seleccione la modalidad en la que labora</label>
-                    <select  style="margin-top:10px" name="modalidad">
-                        <option value="presencial">Presencial</option>
-                        <option value="linea">Línea</option>
-                      </select>
-                </div>
-
-                <div style="margin-top:10px">
-                    <label for="select-input-2">¿Cuál es el horario laboral en su otro trabajo?</label>
-                    <ul class="col2">
-                    <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li>
-                    <li><label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral"></li> </ul>
-                </div>
-                @if($errors->first('horario_laboral'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('horario_laboral') }}</i>
+                <div id="datos_si_labora">
+                    <div>
+                        <label for="datos_lugar_labora" class="is-required">Nombre completo del lugar donde labora</label>
+                        <input type="text" autocomplete="off" placeholder="Coloque el nombre del lugar en donde labora" id="datos_lugar_labora" name="lugar_labora">
                     </div>
-                    @endif
 
-                <div>
-                    <label for="select-input-2">¿Cuáles son los días laborales en su otro trabajo? </label>
-                    <ul class="col8">
-                        <li><input type="checkbox" id="l-otrolugar" name="dias_laboral" value="lunes"><label > Lun.</label></li>
-                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="martes"><label > Mar.</label></li>
-                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="miercoles"><label > Mierc.</label></li>
-                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="jueves"><label > Juev.</label></li>
-                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="viernes"><label > Vier.</label></li>
-                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="sabado"><label > Sáb.</label></li>
-                        <li><input type="checkbox" id="dias_laboral" name="dias_laboral" value="domingo"><label > Dom.</label></li>
-                        
-                        
-                        
-                    </ul>
-                </div>
-                @if($errors->first('dias_laboral'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('dias_laboral') }}</i>
+                    <div>
+                        <label class="is-required">Seleccione la modalidad en la que labora</label>
+                        <select  style="margin-top:10px" name="modalidad">
+                            <option value="presencial">Presencial</option>
+                            <option value="linea">Línea</option>
+                          </select>
                     </div>
-                    @endif
+
+                    <div style="margin-top:10px">
+                        <label for="select-input-2" class="is-required">¿Cuál es el horario laboral en su otro trabajo?</label>
+                        <ul class="col2">
+                        <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral_inicio"></li>
+                        <li><label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral_fin"></li> </ul>
+                    </div>
+
+                    <div>
+                        <label for="select-input-2" class="is-required">¿Cuáles son los días laborales en su otro trabajo? </label>
+                        <ul class="col8">
+                            <li><input type="checkbox" id="l-otrolugar" name="lunes" value="si"><label > Lun.</label></li>
+                            <li><input type="checkbox" id="dias_laboral" name="martes" value="si"><label > Mar.</label></li>
+                            <li><input type="checkbox" id="dias_laboral" name="miercoles" value="si"><label > Mierc.</label></li>
+                            <li><input type="checkbox" id="dias_laboral" name="jueves" value="si"><label > Juev.</label></li>
+                            <li><input type="checkbox" id="dias_laboral" name="viernes" value="si"><label > Vier.</label></li>
+                            <li><input type="checkbox" id="dias_laboral" name="sabado" value="si"><label > Sáb.</label></li>
+                            <li><input type="checkbox" id="dias_laboral" name="domingo" value="si"><label > Dom.</label></li>
+                        </ul>
+                    </div>
+                </div>
 
                 <div>
-                    <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
-                    <small>El nombre del archivo debe de ser su nombre completo empezando
-                        por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
+                    <label for="text-input" class="is-required">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
                     <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="curriculum_pdf" name="curriculum_pdf">
                 </div>
-                @if($errors->first('curriculum_pdf'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('curriculum_pdf') }}</i>
-                    </div>
-                    @endif
 
                 <div>
-                    <button type="submit" class="btn-primario">Guardar</button>
-                </div><br><div>&#160;</div>
-            </div>
+                    <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
+                </div>
+        </div>
+
+        <div>
+             @if($is_registered)
+            <button  type="submit" class="btn-primario">Actualizar</button>
+            @else
+            <button  type="submit" class="btn-primario">Guardar Cambios</button>
+            @endif
+        </div>
+        <br>&nbsp;
+        @if($is_registered)
+                <div class="conte">
+                    <div class="left">
+                    </div>
+                    <div class="alert-info2">
+                        <p>Información actualizada a la fecha: {{ $newInfoAcademica->updated_at }}</p>
+                    </div>
+                </div><br>&nbsp;
+            @endif
         </div>
         </form>
         {{--Fin Experiencia Laboral --}}
@@ -550,7 +557,7 @@
                             fetch("getHistorial/{{ Auth::user()->id }}")
                                 .then((response) => response.json())
                                 .then((response) => {
-                                    
+
                                     // Get the modal
                                     var modal = document.getElementById("myModal");
                                     // Get the <span> element that closes the modal
@@ -589,7 +596,7 @@
                                         titulo.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver título</span>`;
                                         certificado.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cerfiticado</span>`;
                                         cedula.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cédula</span>`;
-                
+
                                         deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
                                         tr.appendChild(nombre);
@@ -615,7 +622,7 @@
                                             if (event.target == modal) {
                                                 modal.style.display = "none";
                                             }
-                                        } 
+                                        }
 
                                         titulo.addEventListener('click',(e)=>{
                                             let archivo = `documentos/Historial/${element.titulo}`;
@@ -654,7 +661,7 @@
                                         });
                                     });
                                 });
-                        });    
+                        });
                     </script>
                 </div>
             </div>
@@ -768,7 +775,7 @@
                         tr.appendChild(operaciones);
 
                         table.appendChild(tr);
-                                        
+
                         // * Eventlisteners
                         deleteButton.addEventListener('click', (e)=>{
                             e.preventDefault();
@@ -921,7 +928,7 @@
                         tipo_curso.innerHTML = `${ element.tipo_curso }`;
                         pdfPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40">`;
                         deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"><div>`;
-                        
+
 
                         // * Attr
                         constancia_pdf.setAttribute('align', 'center');
@@ -950,7 +957,7 @@
                             if (event.target == modal) {
                                 modal.style.display = "none";
                             }
-                        } 
+                        }
 
                         // * Eventlisteners
                         pdfPreview.addEventListener('click', (e)=>{
@@ -980,7 +987,7 @@
                                 }
                             });
                         });
-                        
+
                     });
                 });
             });
@@ -1015,4 +1022,35 @@
             });
         })();
     </script>
+
+    <script>
+        window.addEventListener('load', function (){
+            const datos_si_labora = document.querySelector('#datos_si_labora');
+            const si_labora = document.querySelector('#datos_labora_actualmente');
+            const no_labora = document.querySelector('#datos_labora_actualmente_no');
+
+            datos_si_labora.classList.add('d-none');
+
+            si_labora.addEventListener('change', function (){
+                if(si_labora.checked){
+                    datos_si_labora.classList.remove('d-none');
+                }else{
+                    if(!datos_si_labora.classList.contains('d-none')){
+                        datos_si_labora.classList.add('d-none');
+                }
+                }
+            });
+
+            no_labora.addEventListener('change', function (){
+                if(no_labora.checked){
+                    datos_si_labora.classList.add('d-none');
+                }else{
+                    if(!datos_si_labora.classList.contains('d-none')){
+                        datos_si_labora.classList.remove('d-none');
+                    }
+                }
+            });
+        });
+    </script>
+
 @endsection
