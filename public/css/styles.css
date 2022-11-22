@@ -509,11 +509,11 @@ header{
     background-color: var(--primary);
 }
 
-.header--navbar li{
+.header--navbar > li{
     height: 100%;
 }
 
-.header--navbar li a{
+.header--navbar > li > a{
     width: 100%;
     height: 100%;
     display: inline-block;
@@ -525,16 +525,16 @@ header{
     transition: all 400ms;
 }
 
-.header--navbar li a:hover{
+.header--navbar > li > a:hover{
     background-color: var(--primary);
 }
 
-.header--navbar li:first-child a{
+.header--navbar > li:first-child > a{
     padding: 0 5px;
     background-color: var(--primary);
 }
 
-.header--navbar li:first-child a:hover{
+.header--navbar > li:first-child > a:hover{
     background-color: var(--secondary);
 }
 
@@ -557,6 +557,56 @@ header div:last-child{
 #header--navbar--button:hover{
     cursor: pointer;
     background-color: var(--secondary);
+}
+
+.header--navbar #teachers-dropdown{
+    position: relative;
+    border: none;
+    background-color: var(--secondary);
+    height: 100%;
+    color: white;
+    transition: all 300ms;
+    padding: 0 10px;
+}
+
+.header--navbar #teachers-dropdown:hover{
+    background-color: var(--primary);
+}
+
+.header--navbar #teachers-dropdown:hover > ul{
+    display: block;
+}
+
+.header--navbar #teachers-dropdown > ul{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    display: none;
+}
+
+.header--navbar #teachers-dropdown > ul > li{
+    display: block;
+    width: 100%;
+}
+
+.header--navbar #teachers-dropdown > ul > li > a{
+    display: block;
+    padding: 10px 5px;
+    width: 100%;
+    font-size: 1.2rem;
+    text-decoration: none;
+    background-color: var(--secondary);
+    color: white;
+    transition: all 300ms;
+}
+
+.header--navbar #teachers-dropdown > ul > li > a:hover{
+    background-color: var(--primary);
+}
+
+.header--navbar #teachers-dropdown:hover{
+    background-color: var(--primary);
 }
 
 /* */
@@ -599,6 +649,11 @@ footer h5, footer h6{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+#welcome-admin{
+    min-height: 100%;
+    height: 70vh;
 }
 
 .welcome--image-container{
