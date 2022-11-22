@@ -45,7 +45,7 @@
                     <li>
                         <input id="historial-cedula" type="file" name="cedula" placeholder="cedula" class="formlabel" accept="application/pdf">
                     </li>
-                    <li><button type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></button></li>
+                    <li><button id="historial-button" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                 </ul>
             </form>
             <table id="table-historial-academico" style="font-size: 1.3rem;">
@@ -68,7 +68,15 @@
 </div>
 <script>
     var historialMenu = document.querySelector('#historial-menu');
-    historialMenu.addEventListener('click', (e)=>{
+
+    var historialForm = document.querySelector('#historialAcademico-form');
+    var historialButton = document.querySelector('#historial-button');
+
+    historialButton.addEventListener('click', (e)=>{
+        Swal.fire('Cargando', 'Espera un momento', 'info');
+    });
+
+    function createTable(){
         fetch("getHistorial/{{ Auth::user()->id }}")
             .then((response) => response.json())
             .then((response) => {
@@ -176,5 +184,9 @@
                     });
                 });
             });
+    }
+
+    historialMenu.addEventListener('click', (e)=>{
+        createTable();
     });    
 </script>

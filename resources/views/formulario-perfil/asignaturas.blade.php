@@ -23,7 +23,7 @@
                         <option value="Maestría">Maestría</option>
                         <option value="Doctorado">Doctorado</option>
                         </select></li>
-                    <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                    <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
                 </form>
             </ul>
 
@@ -87,7 +87,7 @@
                     nivel.innerHTML = `${ element.nivel_escolar }`;
                     deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"></a></div>`;
 
-                        deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_asignatura }`);
+                    deleteButton.setAttribute('id', `delete-capacitacion-${ element.id_asignatura }`);
 
                     tr.appendChild(nombre);
                     tr.appendChild(institucion);

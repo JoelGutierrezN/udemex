@@ -364,18 +364,19 @@
 
         {{-- Subida de Documentos --}}
         <div class="mt-2" data-tab-id="4">
-            <h3 class="tab--title">Capacitaciones</h3>
+            <h3 class="tab--title"> 
+                    <label for="text-input"> Anexar constancias con registro de datos:</label>
+            </h3>
             <div class="">
                 <div>
-                    <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
                     <ul class="col8">
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <li class="formlabel">Nombre</li>
+                            <li class="formlabel">Nombre completo</li>
                             <li class="formlabel">Institución</li>
                             <li class="formlabel">Inicio</li>
                             <li class="formlabel">Fin</li>
-                            <li class="formlabel">Horas</li>
+                            <li class="formlabel">Número de horas</li>
                             <li class="formlabel">Tipo</li>
                             <li class="formlabel">Evidencia</li>
                             <li style="color:white">Agregar</li>
@@ -383,21 +384,20 @@
                             <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                            <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"></li>
+                            <li><input name="horas" type="text" placeholder="Total de horas" id="text-input"
+                             onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+                             autocomplete="off"></li>
                             <li><select style="margin-top:10px" class="" name="tipo" >
-                                <option value="diplomado">Diplomado</option>
-                                <option value="certificado">Certificado</option>
+                                <option value="conferencia">Conferencia</option>
                                 <option value="curso">Curso</option>
-                                <option value="certificacion">Certificación</option>
-                                <option value="diplomado">Diplomado</option>
                                 <option value="taller">Taller</option>
-                                <option value="congreso">Congreso</option>
-                                <option value="Expo">Expo</option>
-                                <option value="Concurso">Concurso</option>
+                                <option value="diplomado">Diplomado</option>
+                                <option value="seminario">Seminario</option>
                                 <option value="acreditacion">Acreditación</option>
+                                <option value="certificacion">Certificación</option>
                             </select></li>
-                            <li><input type="file" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="https://cdn-icons-png.flaticon.com/512/189/189689.png" height ="40" width="40" /></a></li>
+                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
                         </form>
                     </ul>
 
@@ -496,7 +496,6 @@
         });
     </script>
 
-    <!-- Tabla de cursos -->
     <script>
      document.addEventListener('DOMContentLoaded',()=>{
         fetch("getTeacherInfo/{{ Auth::user()->id }}")
