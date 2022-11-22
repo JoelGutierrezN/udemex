@@ -34,6 +34,7 @@ class ArchivosController extends Controller
                     'fecha_inicio' => $request->inicio,
                     'fecha_fin' => $request->fin,
                     'horas' => $request->horas,
+                    'solicitud' => $request->solicitud,
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
@@ -72,8 +73,8 @@ class ArchivosController extends Controller
 
         $storage_path = $capacitacion->constancia_pdf;
 
-        if(file_exists('/storage/app/Capacitaciones/'.$storage_path)){
-            \File::delete('/storage/app/Capacitaciones/'.$storage_path);
+        if(file_exists('/documentos/Capacitaciones/'.$storage_path)){
+            \File::delete('/documentos/Capacitaciones/'.$storage_path);
             //\Storage::disk('local')->put($storage_path, \File::get($file));
         }else{
                 
@@ -82,16 +83,22 @@ class ArchivosController extends Controller
             'alert' => 'Registro eliminado'
         ]);
         return response()->json($data, 200);
-        
-
-        
     }
 
     public function getCapacitaciones($id){
-        $info = \DB::table('capacitaciones')
+        $dentro = \DB::table('capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
             ->where('id_user', '=', $id)
+            ->where('solicitud', '=', 'dentro')
+            ->orderBy('fecha_inicio', 'desc')
             ->get();
+        $fuera = \DB::table('capacitaciones')
+            ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
+            ->where('id_user', '=', $id)
+            ->where('solicitud', '=', 'fuera')
+            ->orderBy('fecha_inicio', 'desc')
+            ->get();
+        $info = [$dentro, $fuera];
         return $info;
     }
 }

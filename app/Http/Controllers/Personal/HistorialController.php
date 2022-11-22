@@ -115,14 +115,14 @@ class HistorialController extends Controller
         $historial = \DB::table('historial_academicos')->select('id_asignatura')->where('id_asignatura', '=', $id)->get();
         $archivo = \DB::table('archivo_academicos')->select('titulo_pdf', 'cedula_pdf', 'certificado_pdf')->where('id_historial', '=', $historial[0]->id_asignatura)->get();
 
-        if(file_exists('/storage/app/Historial/'.$archivo[0]->titulo_pdf)){
-            \File::delete('/storage/app/Historial/'.$archivo[0]->titulo_pdf);
+        if(file_exists('/documentos/Historial/'.$archivo[0]->titulo_pdf)){
+            \File::delete('/documentos/Historial/'.$archivo[0]->titulo_pdf);
         }
-        if(file_exists('/storage/app/Historial/'.$archivo[0]->cedula_pdf)){
-            \File::delete('/storage/app/Historial/'.$archivo[0]->cedula_pdf);
+        if(file_exists('/documentos/Historial/'.$archivo[0]->cedula_pdf)){
+            \File::delete('/documentos/Historial/'.$archivo[0]->cedula_pdf);
         }
-        if(file_exists('/storage/app/Historial/'.$archivo[0]->certificado_pdf)){
-            \File::delete('/storage/app/Historial/'.$archivo[0]->certificado_pdf);
+        if(file_exists('/documentos/Historial/'.$archivo[0]->certificado_pdf)){
+            \File::delete('/documentos/Historial/'.$archivo[0]->certificado_pdf);
         }
 
         \DB::table('archivo_academicos')->where('id_historial', '=', $historial[0]->id_asignatura)->delete();
