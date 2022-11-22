@@ -14,12 +14,12 @@
                     <li class="formlabel">Fin</li>
                     <li class="formlabel">Nivel Escolar</li>
 
-                    <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre completo del titulo" id="text-input"></li>
-                    <li><input name="institucion" type="text" autocomplete="off" placeholder="Nombre completo de la institucion donde se estudio" id="text-input"></li>
-                    <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="text-input"></li>
-                    <li><input name="fin" type="date" placeholder="Fin de capacitación" id="text-input"></li>
+                    <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre completo del titulo" id="historial-nombre"></li>
+                    <li><input name="institucion" type="text" autocomplete="off" placeholder="Nombre completo de la institucion donde se estudio" id="historial-institucion"></li>
+                    <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="historial-inicio"></li>
+                    <li><input name="fin" type="date" placeholder="Fin de capacitación" id="historial-fin"></li>
                     <li>
-                        <select style="margin-top:10px" class="" name="nivel" >
+                        <select style="margin-top:10px" class="" name="nivel" id="historial-nivel">
                             <option value="Licenciatura">Licenciatura</option>
                             <option value="Maestría">Maestría</option>
                             <option value="Doctorado">Doctorado</option>
@@ -72,7 +72,31 @@
     var historialForm = document.querySelector('#historialAcademico-form');
     var historialButton = document.querySelector('#historial-button');
 
+
     historialButton.addEventListener('click', (e)=>{
+        e.preventDefault();
+        let data = new FormData(historialForm);
+        
+        fetch("/profesores/storeHistorial", {
+                method: 'POST',
+                headers: new Headers({
+                    'X-CSRF-Token': '{{ csrf_token() }}'
+                }),
+                body: data
+            }).then((response) => response.json())
+            .then((response)=>{
+                createHistorialTable();
+                document.querySelector('#historial-nombre').value= '';
+                document.querySelector('#historial-institucion').value= '';
+                document.querySelector('#historial-inicio').value= '';
+                document.querySelector('#historial-fin').value= '';
+                document.querySelector('#historial-nivel').value= '';
+                document.querySelector('#historial-titulo').value= '';
+                document.querySelector('#historial-cedula').value= '';
+                document.querySelector('#historial-certificado').value= '';
+                Swal.fire('Registro realizado correctamente', '', 'success');
+            }).catch((error)=>console.log);
+
         Swal.fire('Cargando', 'Espera un momento', 'info');
     });
 

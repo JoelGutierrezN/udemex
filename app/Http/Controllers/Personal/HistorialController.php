@@ -81,8 +81,12 @@ class HistorialController extends Controller
                 $request->file('certificado')->move($destino, $certificado);
             }
 
-            Alert::alert()->success('Evidencia del historial guardada',' Puede consultarlo en la pestaña de historial academico.');
-            return redirect()->route('teacher.welcome');
+            $data = array([
+                'state' => 'Registro realizado',
+                'from' => 'historial'
+            ]);
+
+            return response()->json($data, 200);
 
         }
 
