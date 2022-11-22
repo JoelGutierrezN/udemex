@@ -52,7 +52,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input" class="is-required">Nombre(s)</label>
+                    <label for="text-input" class="is-required"> Nombre(s)</label>
                     <input type="text" placeholder="Coloque su nombre(s) iniciando por letra mayúscula. Ejemplo: 'Luis'"
                     autocomplete="off" id="dato_nombre" name="nombre"  
                      value="{{ old('nombre', $usuario->nombre ?? '') }}">
@@ -64,7 +64,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input" class="is-required">Apellido paterno</label>
+                    <label for="text-input" class="is-required"> Apellido paterno</label>
                     <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo: 'González'"
                      autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
                        value="{{ old('apellido_paterno', $usuario->apellido_paterno ?? '') }}">
@@ -76,7 +76,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input" class="is-required">Apellido materno</label>
+                    <label for="text-input" class="is-required"> Apellido materno</label>
                     <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo: 'González'"
                     autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
                      value="{{ old('apellido_materno', $usuario->apellido_materno ?? '') }}">
@@ -88,7 +88,7 @@
                     @endif
 
                 <div>
-                    <label for="select-input" class="is-required">Género</label>
+                    <label for="select-input" class="is-required"> Género</label>
                     <ul class="col2">
                     <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" checked @isset ($usuario->sexo) @if($usuario->sexo == 1) checked @endif @endisset>
                         Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
@@ -98,7 +98,7 @@
                 </div>
 
                 <div>
-                    <label for="text-input" class="is-required">Teléfono de casa</label>
+                    <label for="text-input" class="is-required"> Teléfono de casa</label>
                     <input type="text" placeholder="Coloque su teléfono de casa. (10 dígitos)"
                     autocomplete="off" id="dato_telefono_casa" name="telefono_casa" 
                      value="{{ old('telefono_casa', $usuario->telefono_casa ?? '') }}"
@@ -112,7 +112,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input" class="is-required">Teléfono celular</label>
+                    <label for="text-input" class="is-required"> Teléfono celular</label>
                     <input type="text" placeholder="Coloque su teléfono celular. (10 dígitos)"
                     autocomplete="off" id="dato_celular" name="celular" 
                     value="{{ old('celular', $usuario->celular ?? '') }}"
@@ -126,7 +126,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input" class="is-required">Correo electrónico Institucional</label>
+                    <label for="text-input" class="is-required"> Correo electrónico Institucional</label>
                     <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico Institucional"
                     autocomplete="off" id="dato_email_udemex" name="email_udemex"  
                        value="{{ old('email_udemex', $usuario->email_udemex ?? '') }}">
@@ -138,7 +138,7 @@
                     @endif
 
                 <div>
-                    <label for="text-input" class="is-required">Correo electrónico personal</label>
+                    <label for="text-input" class="is-required"> Correo electrónico personal</label>
                     <input type="text" placeholder="Coloque su correo electrónico personal"
                     autocomplete="off" id="dato_email_personal" name="email_personal"  
                      value="{{ old('email_personal', $usuario->email_personal ?? '') }}">
@@ -150,8 +150,12 @@
                     @endif
 
                     <div>
-                        
-                        <label for="text-input" class="is-required">Fotografía</label>
+                         @if($is_registered)
+                        <label for="text-input"> Fotografía</label>
+                        @else
+                         <label for="text-input" class="is-required"> Fotografía</label>
+                        @endif
+                    
                         <p class= "text-foto">La fotografía no debe exceder los 2 Mb y solo acepta imágenes  
                             con extensiones 'jpeg, png, jfif'</p><br>&nbsp;
                             
