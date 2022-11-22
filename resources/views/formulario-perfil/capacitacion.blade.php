@@ -4,12 +4,13 @@
                     <label for="text-input"> Anexar constancias con registro de datos:</label>
             </h3>
             <div class="">
-                <div>
-                    <ul class="col8">
+                <div><br><br>
+                    <ul class="col9">
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <li class="formlabel">Nombre completo</li>
-                            <li class="formlabel" style="font-size:13px; margin-top:-1%">Nombre completo de la institución donde se tomo</li>
+                            <li class="formlabel" style="font-size:13px; margin-top:-2%">Nombre completo de la institución donde se tomo</li>
+                            <li class="formlabel">Solicitud</li>
                             <li class="formlabel">Inicio</li>
                             <li class="formlabel">Fin</li>
                             <li class="formlabel">Número de horas</li>
@@ -17,7 +18,11 @@
                             <li class="formlabel">Evidencia</li>
                             <li style="color:white">Agregar</li>
                             <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
-                            <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
+                            <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
+                            <li><select style="margin-top:10px" class="" name="tipo" >
+                                <option value="conferencia">Dentro de UDEMEX</option>
+                                <option value="curso">Fuera de UDEMEX</option>
+                            </select></li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                             <li><input class="largo" name="horas" type="number" placeholder="Total de horas" id="text-input"
