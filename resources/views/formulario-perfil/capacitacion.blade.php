@@ -37,7 +37,7 @@
                                 <option value="acreditacion">Acreditación</option>
                                 <option value="certificacion">Certificación</option>
                             </select></li>
-                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="text-input" required></li>
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </form>
                     </ul> <br><br>
@@ -89,9 +89,25 @@
 
     var enviarCapacitacion = document.querySelector('#agregar-capacitacion');
 
+    let archivosForm = document.querySelector('#archivos-form');
+
     enviarCapacitacion.addEventListener('click', (e)=>{
+        e.preventDefault();
+        let data = new FormData(archivosForm);
+        data.append('_token', '{{ csrf_token() }}');
+
+        fetch("/profesores/updateFiles", {
+            method: 'POST',
+            headers: new Headers({
+                'X-CSRF-Token': '{{ csrf_token() }}'
+            }),
+            body: data
+        }).then((response) => response.json())
+            .then((response)=>{
+                console.log('a');
+            });
+
         Swal.fire('Cargando', 'Espera un momento', 'info');
-        e.submit();
     });
 
     archivosMenu.addEventListener('click', ()=>{

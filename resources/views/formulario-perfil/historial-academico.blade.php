@@ -153,12 +153,12 @@
                         modal.style.display = "block";
                     });
                     certificado.addEventListener('click',(e)=>{
-                        let archivo = `documentos/Historial/${element.titulo}`;
+                        let archivo = `documentos/Historial/${element.certificado}`;
                         iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                         modal.style.display = "block";
                     });
                     cedula.addEventListener('click',(e)=>{
-                        let archivo = `documentos/Historial/${element.titulo}`;
+                        let archivo = `documentos/Historial/${element.cedula}`;
                         iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                         modal.style.display = "block";
                     });
