@@ -37,13 +37,13 @@
 
                     <li></li>
                     <li>
-                        <input id="historial-titulo" type="file" name="titulo" placeholder="titulo" class="formlabel" accept="application/pdf">
+                        <input id="historial-titulo" type="file" name="titulo" placeholder="titulo" class="formlabel" accept="application/pdf" required>
                     </li>
                     <li>
-                        <input id="historial-certificado" type="file" name="certificado" placeholder="certificado" class="formlabel" accept="application/pdf">
+                        <input id="historial-certificado" type="file" name="certificado" placeholder="certificado" class="formlabel" accept="application/pdf" required>
                     </li>
                     <li>
-                        <input id="historial-cedula" type="file" name="cedula" placeholder="cedula" class="formlabel" accept="application/pdf">
+                        <input id="historial-cedula" type="file" name="cedula" placeholder="cedula" class="formlabel" accept="application/pdf" required>
                     </li>
                     <li><button id="historial-button" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                 </ul>
