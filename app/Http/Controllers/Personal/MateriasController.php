@@ -47,6 +47,7 @@ class MateriasController extends Controller
     public function getMaterias($id){
         $info = \DB::table('academico_asignaturas')
             ->where('id_user', '=', $id)
+            ->orderBy('fecha_inicio', 'desc')
             ->get();
         return $info;
     }

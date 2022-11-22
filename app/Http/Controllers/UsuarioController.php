@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class UsuarioController extends Controller
 {
@@ -95,13 +96,8 @@ class UsuarioController extends Controller
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
       $usuario->update($request->all());
-
       if($request->hasFile('foto')){
            $destino = 'imagenes/perfil/';
-            if(File::exists($destino))
-            {
-                File::delete($destino);
-            }
             $foto = $request->file('foto');
             $fotoname = time() . '-' . $foto->getClientOriginalName();
             $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
