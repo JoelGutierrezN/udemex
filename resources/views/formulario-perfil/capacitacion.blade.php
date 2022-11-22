@@ -19,7 +19,7 @@
                             <li style="color:white">Agregar</li>
                             <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
                             <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
-                            <li><select style="margin-top:10px" class="" name="tipo" >
+                            <li><select style="margin-top:10px" class="" name="solicitud" >
                                 <option value="conferencia">Dentro de UDEMEX</option>
                                 <option value="curso">Fuera de UDEMEX</option>
                             </select></li>
@@ -38,7 +38,7 @@
                                 <option value="certificacion">Certificación</option>
                             </select></li>
                             <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
-                            <li><a id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
+                            <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </form>
                     </ul> <br><br>
                     <h3 class="form-screen-title">CAPACITACIÓN SOLICITADA EN UDEMEX</h3>
@@ -86,6 +86,14 @@
         {{--Fin Subida de Documentos --}}
 <script>
     var archivosMenu = document.querySelector('#archivos-menu');
+
+    var enviarCapacitacion = document.querySelector('#agregar-capacitacion');
+
+    enviarCapacitacion.addEventListener('click', (e)=>{
+        Swal.fire('Cargando', 'Espera un momento', 'info');
+        e.submit();
+    });
+
     archivosMenu.addEventListener('click', ()=>{
         fetch('getCapacitaciones/{{ Auth::user()->id }}')
             .then(response => response.json())

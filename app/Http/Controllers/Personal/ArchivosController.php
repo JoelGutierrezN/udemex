@@ -34,6 +34,7 @@ class ArchivosController extends Controller
                     'fecha_inicio' => $request->inicio,
                     'fecha_fin' => $request->fin,
                     'horas' => $request->horas,
+                    'solicitud' => $request->solicitud,
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
