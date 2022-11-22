@@ -36,4 +36,26 @@ class Usuario extends Model
     protected $attributes = [
     'activo' => 1
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
+    public function getGetFullnameAttribute(){
+        return "$this->nombre $this->apellido_paterno $this->apellido_materno";
+    }
+
+    public function getGetActiveStatusAttribute(){
+        if($this->activo){
+            return "Activo";
+        }
+        return "Inactivo";
+    }
+
+    public function getGetActiveClassAttribute(){
+        if($this->activo){
+            return "active";
+        }
+        return "inactive";
+    }
 }

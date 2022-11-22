@@ -86,6 +86,34 @@ select:focus{
 input[type="time"]:focus{
     outline: 2px solid var(--gray);
 }
+
+.table{
+    width: 100%;
+    margin: 10px auto;
+    table-layout: fixed;
+}
+
+.table td{
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.table.table-green th{
+    background-color: var(--terciary);
+    color: var(--white);
+    padding: 10px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-bottom: 5px solid var(--secondary);
+}
+
+.table.table-green td{
+    border-bottom: 1px solid var(--primary);
+}
+
+.table.table-green{
+}
+
 .formlabel{
     font-size: 15px;
     margin-bottom:-10px
@@ -838,6 +866,48 @@ footer h5, footer h6{
      cursor: pointer;
 }
 
+.btn{
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: 3px;
+    transition: all 300ms;
+    margin: 5px auto;
+}
+
+.btn-primary-outline{
+    background-color: var(--white);
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+}
+
+.btn-primary-outline:hover{
+    background-color: var(--secondary);
+    color: white;
+}
+.btn-danger-outline{
+    background-color: var(--secondary);
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.btn-danger-outline:hover{
+    background-color: var(--gray);
+    color: var(--secondary);
+}
+
+
+.profile-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+
 .alert {
     display:block;
     height: auto;
@@ -891,10 +961,20 @@ footer h5, footer h6{
 .fotoperfil{
     border-radius:25%;
     -webkit-border-radius:25%;
-    box-shadow: 0px 0px 15px 15px #d1d3d6;
-    -webkit-box-shadow: 0px 0px 15px 15px #d1d3d6;
+    box-shadow: 0 0 15px 15px #d1d3d6;
+    -webkit-box-shadow: 0 0 15px 15px #d1d3d6;
     width: 120px;
     height: 120px;
+}
+
+/* Admin Modules */
+
+    /* Teachers index */
+#teachers--title{
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 2.4rem;
 }
 
 @keyframes from-top {
