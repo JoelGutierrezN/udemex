@@ -20,8 +20,8 @@
                             <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
                             <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
                             <li><select style="margin-top:10px" class="" name="solicitud" >
-                                <option value="conferencia">Dentro de UDEMEX</option>
-                                <option value="curso">Fuera de UDEMEX</option>
+                                <option value="dentro">Dentro de UDEMEX</option>
+                                <option value="fuera">Fuera de UDEMEX</option>
                             </select></li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
