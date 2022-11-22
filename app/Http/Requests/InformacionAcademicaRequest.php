@@ -21,11 +21,6 @@ class InformacionAcademicaRequest extends FormRequest
             'area_experiencia'          =>'required',
             'herramientas'              =>'required',
             'disponibilidad_asesor'     =>'required',
-            'labora_actualmente'        =>'required',
-            // 'lugar_labora'              =>'required',
-            'modalidad'                 =>'required',
-            'horario_laboral'           =>'required',
-            'dias_laboral'              =>'required',
             'curriculum_pdf'            =>'required',
         ];
     }

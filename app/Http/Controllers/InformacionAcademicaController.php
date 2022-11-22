@@ -34,26 +34,28 @@ class InformacionAcademicaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InformacionAcademicaRequest $request)
-    {
-        $newInfoAcademica = InformaconAcademica::create($request->all());
+    public function store(InformacionAcademicaRequest $request){
 
-        $newInfoAcademica->experiencia_presencial = $request -> experiencia_presencial;
-        $newInfoAcademica->experiencia_linea = $request -> experiencia_linea;
-        $newInfoAcademica->nivel_mayor_experiencia = $request -> nivel_mayor_experiencia;
-        $newInfoAcademica->area_experiencia = $request -> area_experiencia;
-        $newInfoAcademica->herramientas = $request -> herramientas;
-        $newInfoAcademica->disponibilidad_asesor = $request -> disponibilidad_asesor;
-        $newInfoAcademica->labora_actualmente = $request -> labora_actualmente;
-        $newInfoAcademica->lugar_labora;
-        $newInfoAcademica->modalidad = $request -> modalidad;
-        $newInfoAcademica->horario_laboral = $request -> horario_laboral;
-        $newInfoAcademica->dias_laboral = $request -> dias_laboral;
-        $newInfoAcademica->curriculum_pdf = $request -> curriculum_pdf;
+        $is_registered = Usuario::where('id_user', Auth::id())->count();
+        if ($is_registered){
+            Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en datos personales ');
+           return redirect()->route("teacher.welcome");
+        }
 
-        $newInfoAcademica->save();
+        $infoAcademica = InformacionAcademica::create($request->all());
 
-         return view("welcome");
+        if($request->hasFile('curriculum_pdf')){
+            $pdf = $request->file('curriculum_pdf');
+            $destino = 'documentos/Curriculum/';
+            $pdfname = time() . '-' . $pdf->getClientOriginalName();
+            $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
+            $infoAcademica->curriculum_pdf = $pdfname;
+        }
+
+        $infoAcademica->save();
+        Alert::alert()->success('Guardado!',' Sus datos personales han sido regristados correctamente.');
+            return redirect()->route("teacher.welcome");
+
     }
 
     /**
@@ -85,9 +87,21 @@ class InformacionAcademicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InformacionAcademicaRequest $request, InformacionAcademica $infoAcademica)
     {
-        //
+      $infoAcademica->update($request->all());
+
+      if($request->hasFile('curriculum_pdf')){
+        $pdf = $request->file('curriculum_pdf');
+        $destino = 'documentos/Curriculum/';
+        $pdfname = time() . '-' . $pdf->getClientOriginalName();
+        $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
+        $infoAcademica->curriculum_pdf = $pdfname;
+    }
+        $infoAcademica->save();
+
+         Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
+         return redirect()->route("teacher.welcome");
     }
 
     /**
