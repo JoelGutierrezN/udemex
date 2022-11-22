@@ -297,7 +297,7 @@
                 </div>
 
                 <div>
-                    <label for="text-input">Lugar donde labora</label>
+                    <label for="text-input">Nombre completo del lugar donde labora</label>
                     <input type="text" autocomplete="off" placeholder="Coloque el nombre del lugar en donde labora" id="datos_lugar_labora" name="lugar_labora">
                 </div>
 
