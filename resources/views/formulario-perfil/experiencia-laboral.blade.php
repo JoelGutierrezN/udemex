@@ -36,11 +36,6 @@
                         </div>
                         @endif
 
-                        {{-- <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                            <option value="AL">Alabama</option>
-                            <option value="WY">Wyoming</option>
-                        </select> --}}
-
                         <div>
                             <label for="text-input" class="is-required">Años de experiencia en modalidad línea</label>
                             <input class="acortado" type="number" autocomplete="off"
@@ -85,7 +80,7 @@
                                 endforeach;
                             @endphp
                             <div>
-                                {{-- <label class="is-required">Áreas de experiencia Laboral</label> --}}
+                                {{-- <label>Áreas de experiencia Laboral</label> --}}
                                 <ol>
                                 <label for="">Tus áreas de experiencia laboral son:</label>
                                 <p>Si desea modificar, coloque nuevamente las áreas de experiencia labora, en caso de que no, no coloque nada</p>
@@ -109,7 +104,7 @@
                             </div>
                         @else
                         <div>
-                            <label class="is-required">Áreas de experiencia Laboral</label>
+                            <label>Áreas de experiencia Laboral</label>
                             <select name="area_experiencia[]" class="js-example-basic-multiple" multiple="multiple">
                                 @foreach ($areas as $area)
                                 <option value="{{$area->id_area_experiencia}}">{{$area->nombre}}</option>
@@ -127,7 +122,7 @@
                                 endforeach;
                             @endphp
                             <div>
-                                {{-- <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label> --}}
+                                {{-- <label>Seleccione las herramientas tecnológicas que sabe utilizar</label> --}}
                                 <ol>
                                 <label for="">Tus herramientas que sabe utilizar son:</label>
                                 <p>Si desea modificar, coloque nuevamente las herramientas tecnológicas de experiencia labora, en caso de que no, no coloque nada</p>
@@ -144,7 +139,7 @@
                             </div>
                         @else
                             <div>
-                                <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label>
+                                <label>Seleccione las herramientas tecnológicas que sabe utilizar</label>
                                 <select  name="id_herramienta[]" class="js-example-basic-multiple" multiple="multiple">
                                     @foreach ($herramientas as $herramienta)
                                     <option value="{{$herramienta->id_herramienta}}">{{$herramienta->nombre}}</option>
@@ -152,11 +147,6 @@
                                   </select>
                             </div>
                         @endif
-                        {{-- @if($errors->first('id_herramienta'))
-                        <div class="invalid-feedback">
-                        <i>{{ $errors->first('id_herramienta') }}</i>
-                        </div>
-                        @endif --}}
 
                         <div>
                             <label for="select-input-2" class="is-required">Disponibilidad para ser asesor en la UDEMEX</label>
@@ -171,7 +161,7 @@
                         </div>
 
                         <div>
-                            <label for="select-input-2">¿Trabaja en otro lugar actualmente?</label>
+                            <label for="select-input-2" class="is-required">¿Trabaja en otro lugar actualmente?</label>
                             <ul class="col2">
                                 <li>
                                     <input type="radio" id="datos_labora_actualmente_no" name="labora_actualmente" value="No" checked @isset ($infoAcademica->labora_actualmente) @if($infoAcademica->labora_actualmente == "No") checked @endif @endisset>
