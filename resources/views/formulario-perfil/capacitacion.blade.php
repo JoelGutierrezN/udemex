@@ -17,18 +17,18 @@
                             <li class="formlabel">Tipo</li>
                             <li class="formlabel">Evidencia</li>
                             <li style="color:white">Agregar</li>
-                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="text-input"></li>
-                            <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="text-input"></li>
-                            <li><select style="margin-top:10px" class="" name="solicitud" >
+                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="capacitacion-nombre"></li>
+                            <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="capacitacion-instituto"></li>
+                            <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
                                 <option value="dentro">Dentro de UDEMEX</option>
                                 <option value="fuera">Fuera de UDEMEX</option>
                             </select></li>
-                            <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                            <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="text-input"></li>
-                            <li><input class="largo" name="horas" type="number" placeholder="Total de horas" id="text-input"
+                            <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="capacitacion-inicio"></li>
+                            <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="capacitacion-fin"></li>
+                            <li><input class="largo" name="horas" type="number" placeholder="Total de horas" id="capacitacion-horas"
                              onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                              autocomplete="off"></li>
-                            <li><select style="margin-top:10px" class="" name="tipo" >
+                            <li><select style="margin-top:10px" class="" name="tipo" id="capacitacion-tipo">
                                 <option value="conferencia">Conferencia</option>
                                 <option value="curso">Curso</option>
                                 <option value="taller">Taller</option>
@@ -37,10 +37,11 @@
                                 <option value="acreditacion">Acreditación</option>
                                 <option value="certificacion">Certificación</option>
                             </select></li>
-                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="text-input"></li>
+                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="capacitacion-evidencia" required></li>
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </form>
                     </ul> <br><br>
+                    <p>Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
                     <h3 class="form-screen-title">CAPACITACIÓN SOLICITADA EN UDEMEX</h3>
 
 
@@ -89,19 +90,49 @@
 
     var enviarCapacitacion = document.querySelector('#agregar-capacitacion');
 
+    let archivosForm = document.querySelector('#archivos-form');
+
     enviarCapacitacion.addEventListener('click', (e)=>{
+        e.preventDefault();
+        let data = new FormData(archivosForm);
+        //data.append('_token', '{{ csrf_token() }}');
+        console.log(data);
+
+        fetch("/profesores/updateFiles", {
+                method: 'POST',
+                headers: new Headers({
+                    'X-CSRF-Token': '{{ csrf_token() }}'
+                }),
+                body: data
+            }).then((response) => response.json())
+            .then((response)=>{
+                getCapacitacionData();
+                document.querySelector('#capacitacion-nombre').value='';
+                document.querySelector('#capacitacion-instituto').value='';
+                document.querySelector('#capacitacion-inicio').value='';
+                document.querySelector('#capacitacion-fin').value='';
+                document.querySelector('#capacitacion-solicitud').value='';
+                document.querySelector('#capacitacion-tipo').value='';
+                document.querySelector('#capacitacion-evidencia').value='';
+                document.querySelector('#capacitacion-horas').value='';
+                Swal.fire('Registro realizado correctamente', '', 'success');
+            });
+
         Swal.fire('Cargando', 'Espera un momento', 'info');
-        e.submit();
     });
 
     archivosMenu.addEventListener('click', ()=>{
+        getCapacitacionData();
+    });
+
+    function getCapacitacionData(){
         fetch('getCapacitaciones/{{ Auth::user()->id }}')
             .then(response => response.json())
             .then((response)=>{
                 createCapacitacionTable(response[0], 'dentro');
                 createCapacitacionTable(response[1], 'fuera');
             });
-        });
+        }
 
     function createCapacitacionTable(data, tabla){
         let table = document.querySelector(`#capacitaciones-table-${tabla}`);

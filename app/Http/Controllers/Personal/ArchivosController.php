@@ -51,12 +51,12 @@ class ArchivosController extends Controller
             }
             
 
-            // return view('welcome')
+            $data = array([
+                'state' => 'Registro realizado',
+                'from' => 'archivos'
+            ]);
 
-            Alert::alert()->success('Evidencia de la capacitacion guardada',' puede consultarlo en la pestaña de cursos.');
-            return redirect()->route('teacher.welcome');
-                    // ->with('alert', 'Evidencia de la capacitación guardada')
-                    // ->with('from', 'Cursos');
+            return response()->json($data, 200);
         }else{
             $data = array([
                 'state' => 'sin archivo'
