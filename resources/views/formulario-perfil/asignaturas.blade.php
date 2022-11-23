@@ -47,6 +47,7 @@
                     
         </div>
     </div>
+    <br><br><br>
 </div>
 {{--Fin Datos de materias impartidas --}}
 
