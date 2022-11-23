@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\InformacionAcademica;
 use App\Http\Requests\InformacionAcademicaRequest;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class InformacionAcademicaController extends Controller
 {
@@ -36,10 +38,12 @@ class InformacionAcademicaController extends Controller
      */
     public function store(InformacionAcademicaRequest $request){
 
-        $is_registered = Usuario::where('id_user', Auth::id())->count();
-        if ($is_registered){
-            Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en datos personales ');
-           return redirect()->route("teacher.welcome");
+        $nombreUser = auth()->user()->name;
+
+        $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
+        if ($is_registered_academic){
+            Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en experiencia laboral ');
+            return redirect()->route("teacher.welcome");
         }
 
         $infoAcademica = InformacionAcademica::create($request->all());
@@ -47,13 +51,13 @@ class InformacionAcademicaController extends Controller
         if($request->hasFile('curriculum_pdf')){
             $pdf = $request->file('curriculum_pdf');
             $destino = 'documentos/Curriculum/';
-            $pdfname = time() . '-' . $pdf->getClientOriginalName();
+            $pdfname = 'CV_'.$nombreUser;
             $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
             $infoAcademica->curriculum_pdf = $pdfname;
         }
 
         $infoAcademica->save();
-        Alert::alert()->success('Guardado!',' Sus datos personales han sido regristados correctamente.');
+        Alert::alert()->success('Guardado!',' Tu experiencia laboral han sido regristada correctamente.');
             return redirect()->route("teacher.welcome");
 
     }

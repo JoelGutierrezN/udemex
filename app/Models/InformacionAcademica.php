@@ -32,13 +32,10 @@ class InformacionAcademica extends Model
         'horario_laboral_inicio',
         'horario_laboral_fin',
         'disponibilidad_asesor',
-        'id_herramienta',
-        'id_area_experiencia',
         'numero_archivo_curriculum',
         'curriculum_pdf',
         'validar_archivo_curriculum',
-        'grado_maximo_estudios',
-        'id_usuario',
+        'id_user',
         'activo'
 
     ];
