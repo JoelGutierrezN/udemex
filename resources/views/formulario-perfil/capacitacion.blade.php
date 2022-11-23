@@ -5,30 +5,33 @@
             </h3>
             <div class="">
                 <div><br><br>
-                    <ul class="col9">
+                    
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <ul class="col3">
                             <li class="formlabel">Nombre completo</li>
-                            <li class="formlabel" style="font-size:13px; margin-top:-2%">Nombre completo de la institución donde se tomo</li>
+                            <li class="formlabel">Nombre completo de la institución donde se tomo</li>
                             <li class="formlabel">Solicitud</li>
+                            <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacion-nombre"></li>
+                            <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitación" id="capacitacion-instituto"></li>
+                            <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
+                                <option value="dentro">Dentro de UDEMEX</option>
+                                <option value="fuera">Fuera de UDEMEX</option>
+                            </select></li>
+                        </ul>
+                        <ul class="col6">
                             <li class="formlabel">Inicio</li>
                             <li class="formlabel">Fin</li>
                             <li class="formlabel">Número de horas</li>
                             <li class="formlabel">Tipo</li>
                             <li class="formlabel">Evidencia</li>
                             <li style="color:white">Agregar</li>
-                            <li><input name="nombre" type="text" placeholder="Nombre de capacitacion" id="capacitacion-nombre"></li>
-                            <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitacion" id="capacitacion-instituto"></li>
-                            <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
-                                <option value="dentro">Dentro de UDEMEX</option>
-                                <option value="fuera">Fuera de UDEMEX</option>
-                            </select></li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="capacitacion-inicio"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="capacitacion-fin"></li>
                             <li><input class="largo" name="horas" type="number" placeholder="Total de horas" id="capacitacion-horas"
                              onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
                              autocomplete="off"></li>
-                            <li><select style="margin-top:10px" class="" name="tipo" id="capacitacion-tipo">
+                            <li><select class="" name="tipo" id="capacitacion-tipo">
                                 <option value="conferencia">Conferencia</option>
                                 <option value="curso">Curso</option>
                                 <option value="taller">Taller</option>
@@ -39,17 +42,18 @@
                             </select></li>
                             <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="capacitacion-evidencia" required></li>
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
+                        </ul>
                         </form>
-                    </ul> <br><br>
-                    <p>Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
-                    <h3 class="form-screen-title">CAPACITACIÓN SOLICITADA EN UDEMEX</h3>
+                     <br><br><br>
+                    
+                    <label style="font-size: 2rem;" for="text-input"> Capacitación solicitada en UDEMEX</label>
 
 
                     <table id="table-capacitaciones" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Institución</th>
+                                <th>Nombre completo</th>
+                                <th>Institución donde se tomo</th>
                                 <th>Inicio</th>
                                 <th>Fin</th>
                                 <th>Horas</th>
@@ -61,13 +65,16 @@
                         <tbody id="capacitaciones-table-dentro"></tbody>
                       </table>
 
-                      <h5 class="form-screen-title">CAPACITACIÓN TOMADA AFUERA DE UDEMEX</h5>
+                      <br><br><br>
+
+                      
+                      <label for="text-input" style="font-size: 2rem;"> Capacitación tomada afuera de UDEMEX</label>
 
                       <table id="table-capacitaciones" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
-                                <th>Nombre</th>
-                                <th>Institución</th>
+                                <th>Nombre completo</th>
+                                <th>Institución donde se tomo</th>
                                 <th>Inicio</th>
                                 <th>Fin</th>
                                 <th>Horas</th>
@@ -80,6 +87,7 @@
                       </table>
 
                 </div><br>
+                <br><br><br>
 
 
             </div>

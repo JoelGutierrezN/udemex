@@ -67,6 +67,7 @@
             </table>
         </div>
     </div>
+    <br><br><br>
 </div>
 <script>
     var historialMenu = document.querySelector('#historial-menu');
