@@ -1,5 +1,6 @@
 {{-- Experiencial Laboral --}}
 
+
 @if($is_registered_academic)
          <form action="{{ route('teacher.infoacademica.update', $infoAcademica) }}" method="POST" enctype="multipart/form-data">
              @csrf
@@ -34,6 +35,12 @@
                         <i>{{ $errors->first('experiencia_presencial') }}</i>
                         </div>
                         @endif
+
+                        {{-- <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
+                            <option value="AL">Alabama</option>
+                            <option value="WY">Wyoming</option>
+                        </select> --}}
+
                         <div>
                             <label for="text-input" class="is-required">Años de experiencia en modalidad línea</label>
                             <input type="number" autocomplete="off"
@@ -50,21 +57,57 @@
                         <div>
                             <label for="nivel_mayor_experiencia">Seleccione el nivel más alto de experiencia docente</label>
                             <select name="nivel_mayor_experiencia" id="datos_nivel_mayor_experiencia">
+                                @php
+                                    $nivelesExperiencia = ['Preparatoria','Licenciatura', 'Maestría', 'Doctorado'];
+                                @endphp
                                 @if($is_registered_academic)
-                                <option value="{{ old('nivel_mayor_experiencia', $infoAcademica->nivel_mayor_experiencia ?? '') }}">{{ old('nivel_mayor_experiencia', $infoAcademica->nivel_mayor_experiencia ?? '') }}</option>
-                                {{-- <option value="Preparatoria">Preparatoria</option>
-                                <option value="Licenciatura">Licenciatura</option>
-                                <option value="Maestría">Maestría</option>
-                                <option value="Doctorado">Doctorado</option> --}}
+                                    @foreach ($nivelesExperiencia as $nivel)
+                                        @if ($infoAcademica->nivel_mayor_experiencia==$nivel)
+                                            <option value="{{$nivel}}" selected>{{$nivel}}</option>
+                                        @else
+                                            <option value="{{$nivel}}">{{$nivel}}</option>
+                                        @endif
+                                    @endforeach
                                 @else
-                                <option value="Preparatoria">Preparatoria</option>
-                                <option value="Licenciatura">Licenciatura</option>
-                                <option value="Maestría">Maestría</option>
-                                <option value="Doctorado">Doctorado</option>
+                                    @foreach ($nivelesExperiencia as $nivel)
+                                        <option value="{{$nivel}}">{{$nivel}}</option>
+                                    @endforeach
                                 @endif
                             </select>
                         </div>
 
+                        @if($is_registered_academic)
+                            @php
+                                $areas_registered = [];
+                                $areas_infoAcademica = App\Models\InfoAcademicArea::where("id_user", Auth::id())->get();
+                                foreach($areas_infoAcademica as $area):
+                                    array_push($areas_registered , App\Models\AreaExperiencia::where("id_area_experiencia", $area->id_area)->first());
+                                endforeach;
+                            @endphp
+                            <div>
+                                {{-- <label class="is-required">Áreas de experiencia Laboral</label> --}}
+                                <ol>
+                                <label for="">Tus áreas de experiencia laboral son:</label>
+                                <p>Si desea modificar, coloque nuevamente las áreas de experiencia labora, en caso de que no, no coloque nada</p>
+                                    @foreach ($areas_registered as $area)
+                                        <li>{{$area->nombre}}</li>
+                                    @endforeach
+                                </ol>
+                                <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
+                                    {{-- @foreach ($areas_registered as $area)
+                                        <option value="{{$area->id_area_experiencia}}" selected>{{$area->nombre}}</option>
+                                    @endforeach --}}
+                                    @foreach ($areas as $areabd)
+                                        {{-- @if ($area->id_area_experiencia!=$areabd->id_area_experiencia) --}}
+                                            <option value="{{$areabd->id_area_experiencia}}">{{$areabd->nombre}}</option>
+                                        {{-- @else --}}
+                                            {{-- @continue --}}
+                                        {{-- @endif --}}
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        @else
                         <div>
                             <label class="is-required">Áreas de experiencia Laboral</label>
                             <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
@@ -73,20 +116,42 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{-- @if($errors->first('area_experiencia[]'))
-                        <div class="invalid-feedback">
-                        <i>{{ $errors->first('area_experiencia[]') }}</i>
-                        </div>
-                        @endif --}}
+                        @endif
 
-                        <div>
-                            <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label>
-                            <select style="margin-top:10px" class="multi-select select2-multiple " name="id_herramienta[]" multiple="multiple">
-                                @foreach ($herramientas as $herramienta)
-                                <option value="{{$herramienta->id_herramienta}}">{{$herramienta->nombre}}</option>
-                                @endforeach
-                              </select>
-                        </div>
+                        @if($is_registered_academic)
+                            @php
+                                $herramientas_registered = [];
+                                $herramientas_infoAcademica = App\Models\InfoacademicHerramienta::where("id_user", Auth::id())->get();
+                                foreach($herramientas_infoAcademica as $herramienta):
+                                    array_push($herramientas_registered , App\Models\HerramientaTecnologica::where("id_herramienta", $herramienta->id_herramienta)->first());
+                                endforeach;
+                            @endphp
+                            <div>
+                                {{-- <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label> --}}
+                                <ol>
+                                <label for="">Tus herramientas que sabe utilizar son:</label>
+                                <p>Si desea modificar, coloque nuevamente las herramientas tecnológicas de experiencia labora, en caso de que no, no coloque nada</p>
+                                    @foreach ($herramientas_registered as $herramienta)
+                                        <li>{{$herramienta->nombre}}</li>
+                                    @endforeach
+                                </ol>
+                                <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
+                                    @foreach ($herramientas as $herramientabd)
+                                        <option value="{{$herramientabd->id_herramienta}}">{{$herramientabd->nombre}}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                        @else
+                            <div>
+                                <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label>
+                                <select style="margin-top:10px" class="multi-select select2-multiple " name="id_herramienta[]" multiple="multiple">
+                                    @foreach ($herramientas as $herramienta)
+                                    <option value="{{$herramienta->id_herramienta}}">{{$herramienta->nombre}}</option>
+                                    @endforeach
+                                  </select>
+                            </div>
+                        @endif
                         {{-- @if($errors->first('id_herramienta'))
                         <div class="invalid-feedback">
                         <i>{{ $errors->first('id_herramienta') }}</i>
@@ -128,35 +193,45 @@
                             <div>
                                 <label class="is-required">Seleccione la modalidad en la que labora</label>
                                 <select name="modalidad">
+                                    @php
+                                        $nivelesModalidad = ['Presencial','Línea'];
+                                    @endphp
                                     @if($is_registered_academic)
-                                        <option value="{{ old('modalidad', $infoAcademica->modalidad ?? '') }}">{{ old('modalidad', $infoAcademica->modalidad ?? '') }}</option>
-                                        <option value="presencial">Presencial</option>
-                                        <option value="linea">Línea</option>
+                                        @foreach ($nivelesModalidad as $modalidad)
+                                            @if ($infoAcademica->modalidad==$modalidad)
+                                                <option value="{{$modalidad}}" selected>{{$modalidad}}</option>
+                                            @else
+                                                <option value="{{$modalidad}}">{{$modalidad}}</option>
+                                            @endif
+                                        @endforeach
                                     @else
-                                        <option value="presencial">Presencial</option>
-                                        <option value="linea">Línea</option>
-                                    @endif
+                                    @foreach ($nivelesModalidad as $modalidad)
+                                        <option value="{{$modalidad}}">{{$modalidad}}</option>
+                                    @endforeach
+                                @endif
                                 </select>
                             </div>
 
                             <div>
                                 <label for="select-input-2" class="is-required">¿Cuál es el horario laboral en su otro trabajo?</label>
                                 <ul class="col2">
-                                    <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral_inicio"></li>
-                                    <li><label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00" name="horario_laboral_fin"></li>
+                                    <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00"
+                                        name="horario_laboral_inicio" value="{{ old('horario_laboral_inicio', $infoAcademica->horario_laboral_inicio ?? '') }}"></li>
+                                    <li><label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00"
+                                        name="horario_laboral_fin" value="{{ old('horario_laboral_fin', $infoAcademica->horario_laboral_fin ?? '') }}"></li>
                                 </ul>
                             </div>
 
                             <div>
                                 <label for="select-input-2" class="is-required">¿Cuáles son los días laborales en su otro trabajo? </label>
                                 <ul class="col8">
-                                    <li><input type="checkbox" id="l-otrolugar" name="lunes" value="si"><label > Lun.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="martes" value="si"><label > Mar.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="miercoles" value="si"><label > Mierc.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="jueves" value="si"><label > Juev.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="viernes" value="si"><label > Vier.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="sabado" value="si"><label > Sáb.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="domingo" value="si"><label > Dom.</label></li>
+                                    <li><input type="checkbox" id="l-otrolugar" name="lunes" value="si" @isset ($infoAcademica->lunes) @if($infoAcademica->lunes == "si") checked @endif @endisset><label > Lun.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral" name="martes" value="si" @isset ($infoAcademica->martes) @if($infoAcademica->martes == "si") checked @endif @endisset><label > Mar.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral" name="miercoles" value="si" @isset ($infoAcademica->miercoles) @if($infoAcademica->miercoles == "si") checked @endif @endisset><label > Mierc.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral" name="jueves" value="si" @isset ($infoAcademica->jueves) @if($infoAcademica->jueves == "si") checked @endif @endisset><label > Juev.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral" name="viernes" value="si" @isset ($infoAcademica->viernes) @if($infoAcademica->viernes == "si") checked @endif @endisset><label > Vier.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral" name="sabado" value="si" @isset ($infoAcademica->sabado) @if($infoAcademica->sabado == "si") checked @endif @endisset><label > Sáb.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral" name="domingo" value="si" @isset ($infoAcademica->domingo) @if($infoAcademica->domingo == "si") checked @endif @endisset><label > Dom.</label></li>
                                 </ul>
                             </div>
                         </div>
@@ -181,7 +256,7 @@
                         @if($is_registered_academic)
                             <button  type="submit" class="btn-primario">Actualizar</button>
                         @else
-                            <button  type="submit" class="btn-primario">Guardar Cambios info</button>
+                            <button  type="submit" class="btn-primario">Guardar Cambios</button>
                         @endif
                     </div><br>&nbsp;
 
@@ -202,7 +277,9 @@
                     const si_labora = document.querySelector('#datos_labora_actualmente');
                     const no_labora = document.querySelector('#datos_labora_actualmente_no');
 
-                    datos_si_labora.classList.add('d-none');
+                    if(!si_labora.checked){
+                        datos_si_labora.classList.add('d-none');
+                    }
 
                     si_labora.addEventListener('change', function (){
                         if(si_labora.checked){
@@ -210,7 +287,7 @@
                         }else{
                             if(!datos_si_labora.classList.contains('d-none')){
                                 datos_si_labora.classList.add('d-none');
-                        }
+                            }
                         }
                     });
 
@@ -237,4 +314,15 @@
                     this.value = this.value.slice(0,2);
                 });
 
-            </script>
+                </script>
+
+                <script src="{{ asset('js/select2/select2.min.js')}}"></script>
+
+                <script>
+                    $(document).ready(function() {
+                        $('.js-example-basic-single').select2();
+                    });
+                </script>
+
+
+

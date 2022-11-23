@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\InformacionAcademica;
+use App\Models\InfoAcademicArea;
+use App\Models\InfoAcademicHerramienta;
 use App\Http\Requests\InformacionAcademicaRequest;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -38,7 +40,23 @@ class InformacionAcademicaController extends Controller
      */
     public function store(InformacionAcademicaRequest $request){
 
+        // dd($request->all());
+
         $nombreUser = auth()->user()->name;
+
+        foreach($request->area_experiencia as $area){
+            InfoAcademicArea::create([
+                'id_area' => $area,
+                'id_user' => Auth::id()
+            ]);
+        }
+
+        foreach($request->id_herramienta as $herramienta){
+            InfoAcademicHerramienta::create([
+                'id_herramienta' => $herramienta,
+                'id_user' => Auth::id()
+            ]);
+        }
 
         $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
         if ($is_registered_academic){
@@ -93,6 +111,8 @@ class InformacionAcademicaController extends Controller
      */
     public function update(InformacionAcademicaRequest $request, InformacionAcademica $infoAcademica)
     {
+
+        // / -->forcedelet  seguido de le foreach del controlador (Para editar el array, se debe de borrar y llenar de nuevo)
       $infoAcademica->update($request->all());
 
       if($request->hasFile('curriculum_pdf')){

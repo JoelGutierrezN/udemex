@@ -720,7 +720,7 @@ footer h5, footer h6{
     height: 120px;
 }
 
-#datos_si_labora ~ div{
+#datos_si_labora div{
     width: 100%;
 }
 .is-required:before {
@@ -729,4 +729,12 @@ footer h5, footer h6{
     color: red;
     font-weight: bold;
     font-size: 1.8rem;
+}
+
+textarea{
+    width: 100%;
+}
+
+select{
+    width: 100%;
 }
