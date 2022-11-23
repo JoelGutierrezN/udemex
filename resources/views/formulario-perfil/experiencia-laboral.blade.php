@@ -55,7 +55,7 @@
                         @endif
 
                         <div>
-                            <label for="nivel_mayor_experiencia">Seleccione el nivel más alto de experiencia docente</label>
+                            <label for="nivel_mayor_experiencia" class="is-required">Seleccione el nivel más alto de experiencia docente</label>
                             <select name="nivel_mayor_experiencia" id="datos_nivel_mayor_experiencia">
                                 @php
                                     $nivelesExperiencia = ['Preparatoria','Licenciatura', 'Maestría', 'Doctorado'];
@@ -110,7 +110,7 @@
                         @else
                         <div>
                             <label class="is-required">Áreas de experiencia Laboral</label>
-                            <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
+                            <select name="area_experiencia[]" class="js-example-basic-multiple" multiple="multiple">
                                 @foreach ($areas as $area)
                                 <option value="{{$area->id_area_experiencia}}">{{$area->nombre}}</option>
                                 @endforeach
@@ -145,7 +145,7 @@
                         @else
                             <div>
                                 <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label>
-                                <select style="margin-top:10px" class="multi-select select2-multiple " name="id_herramienta[]" multiple="multiple">
+                                <select  name="id_herramienta[]" class="js-example-basic-multiple" multiple="multiple">
                                     @foreach ($herramientas as $herramienta)
                                     <option value="{{$herramienta->id_herramienta}}">{{$herramienta->nombre}}</option>
                                     @endforeach
@@ -322,6 +322,10 @@
                     $(document).ready(function() {
                         $('.js-example-basic-single').select2();
                     });
+                </script>
+
+               <script type="text/javascript">
+                $(".js-example-basic-multiple").select2();
                 </script>
 
 
