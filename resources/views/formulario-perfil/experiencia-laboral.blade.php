@@ -88,7 +88,7 @@
                                         <li>{{$area->nombre}}</li>
                                     @endforeach
                                 </ol>
-                                <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
+                                <select name="area_experiencia[]" class="js-example-basic-multiple" multiple="multiple">
                                     {{-- @foreach ($areas_registered as $area)
                                         <option value="{{$area->id_area_experiencia}}" selected>{{$area->nombre}}</option>
                                     @endforeach --}}
@@ -130,7 +130,7 @@
                                         <li>{{$herramienta->nombre}}</li>
                                     @endforeach
                                 </ol>
-                                <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
+                                <select name="area_experiencia[]"class="js-example-basic-multiple" multiple="multiple">
                                     @foreach ($herramientas as $herramientabd)
                                         <option value="{{$herramientabd->id_herramienta}}">{{$herramientabd->nombre}}</option>
                                     @endforeach
