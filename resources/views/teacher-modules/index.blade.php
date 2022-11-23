@@ -1,246 +1,190 @@
-@extends('layout.app')
+  @if($is_registered)
+         <form action="{{ route('teacher.usuarios.update', $usuario) }}" method="POST" enctype="multipart/form-data">
+             @csrf
+             @method('PUT')
+           @else
 
-@section('title', 'Inicio')
-
-@section('content')
-
-    <form action="#" method="POST">
+        <form action="{{ route('teacher.usuarios.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('POST')
-
-        <h3 class="form-screen-title">Registro de Información Personal</h3>
-
-        <div class="tabs">
-            <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>
-            <button type="button" data-tab-target="2">Datos del Historial Académico &blacktriangledown;</button>
-            <button type="button" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
-            <button type="button" data-tab-target="4">Subida de Documentos &blacktriangledown;</button>
-        </div>
-
-        {{-- Datos personales --}}
+        @endif
         <div class="mt-2" data-tab-id="1">
             <h3 class="tab--title">Datos personales</h3>
-            <div class="input-columns-2">
+            @if($is_registered)
+             <div class="alert alert-info">
+
+                <h6>¡Ya tenemos tus datos!</h6>
+                <p>
+                    Ya cuentas con tus datos registrados, a partir de ahora solo puedes actualizarlos.
+                </p>
+           </div>
+            @endif
+
+
+            <div class="input-columns-1">
                 <div>
-                    <label for="text-input">Nombres</label>
-                    <input type="text" placeholder="Coloque su nombre" id="text-input">
+                    <label for="text-input" class="is-required"> Número de empleado UDEMEX</label>
+                    <input type="text" placeholder="Número de empleado UDEMEX"
+                    autocomplete="off" id="xclave_empleado" name="clave_empleado"
+                    value="{{ old('clave_empleado', $usuario->clave_empleado ?? '') }}" pattern="[0-9]+">
                 </div>
+                     @if($errors->first('clave_empleado'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('clave_empleado') }}</i>
+                    </div>
+                    @endif
 
                 <div>
-                    <label for="text-input">Apellido paterno</label>
-                    <input type="text" placeholder="Coloque su apellido paterno" id="text-input">
+                    <label for="text-input" class="is-required"> Nombre(s)</label>
+                    <input type="text" placeholder="Coloque su nombre(s) iniciando por letra mayúscula. Ejemplo: 'Luis'"
+                    autocomplete="off" id="dato_nombre" name="nombre"
+                     value="{{ old('nombre', $usuario->nombre ?? '') }}">
                 </div>
+                    @if($errors->first('nombre'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('nombre') }}</i>
+                    </div>
+                    @endif
 
                 <div>
-                    <label for="text-input">Apellido materno</label>
-                    <input type="text" placeholder="Coloque su apellido materno" id="text-input">
+                    <label for="text-input" class="is-required"> Apellido paterno</label>
+                    <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo: 'González'"
+                     autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
+                       value="{{ old('apellido_paterno', $usuario->apellido_paterno ?? '') }}">
                 </div>
+                    @if($errors->first('apellido_paterno'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('apellido_paterno') }}</i>
+                    </div>
+                    @endif
 
                 <div>
-                    <label for="text-input">Número de empleado EDEMEX</label>
-                    <input type="text" placeholder="Número de empleado EDEMEX" id="text-input">
+                    <label for="text-input" class="is-required"> Apellido materno</label>
+                    <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo: 'González'"
+                    autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
+                     value="{{ old('apellido_materno', $usuario->apellido_materno ?? '') }}">
                 </div>
+                    @if($errors->first('apellido_materno'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('apellido_materno') }}</i>
+                    </div>
+                    @endif
 
                 <div>
-                    <label for="text-input">Teléfono de casa</label>
-                    <input type="text" placeholder="Coloque su teléfono de casa" id="text-input">
-                </div>
-
-                <div>
-                    <label for="text-input">Teléfono celular</label>
-                    <input type="text" placeholder="Coloque su teléfono celular" id="text-input">
-                </div>
-
-                <div>
-                    <label for="text-input">Correo electrónico de UDEMEX</label>
-                    <input type="text" placeholder="Coloque su correo electrónico de UDEMEX" id="text-input">
-                </div>
-
-                <div>
-                    <label for="text-input">Correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su Correo electrónico personal" id="text-input">
-                </div>
-
-                <div>
-                    <label for="select-input">Rol</label>
-                    <select id="select-input">
-                        <option value="">Docente</option>
-                        <option value="">Asistente</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="text-input">Confirmación de Correo electrónico personal</label>
-                    <input type="text" placeholder="Coloque su correo electrónico personal" id="text-input">
-                </div>
-
-                <div>
-                    <label for="select-input">Sexo</label>
+                    <label for="select-input" class="is-required"> Género</label>
                     <ul class="col2">
-                        <label><input type="radio" name="#" value="#">Femenino</label>&#160;&#160;&#160;&#160;&#160;
-                        <label><input type="radio" name="#" value="#" required>Masculino</label>
+                    <label><input type="radio" id="dato_sexo_masculino" name="sexo" value="1" checked @isset ($usuario->sexo) @if($usuario->sexo == 1) checked @endif @endisset>
+                        Masculino</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;
+                        <label><input type="radio" id="dato_sexo_femenino" name="sexo" value="0" @isset ($usuario->sexo) @if($usuario->sexo == 0)  checked @endif @endisset>
+                        Femenino</label>
                     </ul>
                 </div>
 
                 <div>
-                    <label for="text-input">Fotografía</label>
-                    <input type="file" placeholder="Coloque su fotografía" id="text-input">
+                    <label for="text-input" class="is-required"> Teléfono de casa</label>
+                    <input type="text" placeholder="Coloque su teléfono de casa. (10 dígitos)"
+                    autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
+                     value="{{ old('telefono_casa', $usuario->telefono_casa ?? '') }}"
+                     maxlength="10"
+                     onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;">
                 </div>
+                    @if($errors->first('telefono_casa'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('telefono_casa') }}</i>
+                    </div>
+                    @endif
+
+                <div>
+                    <label for="text-input" class="is-required"> Teléfono celular</label>
+                    <input type="text" placeholder="Coloque su teléfono celular. (10 dígitos)"
+                    autocomplete="off" id="dato_celular" name="celular"
+                    value="{{ old('celular', $usuario->celular ?? '') }}"
+                    maxlength="10"
+                    onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;">
+                </div>
+                     @if($errors->first('celular'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('celular') }}</i>
+                    </div>
+                    @endif
+
+                <div>
+                    <label for="text-input" class="is-required"> Correo electrónico Institucional</label>
+                    <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico Institucional"
+                    autocomplete="off" id="dato_email_udemex" name="email_udemex"
+                       value="{{ old('email_udemex', $usuario->email_udemex ?? '') }}">
+                </div>
+                    @if($errors->first('email_udemex'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('email_udemex') }}</i>
+                    </div>
+                    @endif
+
+                <div>
+                    <label for="text-input" class="is-required"> Correo electrónico personal</label>
+                    <input type="text" placeholder="Coloque su correo electrónico personal"
+                    autocomplete="off" id="dato_email_personal" name="email_personal"
+                     value="{{ old('email_personal', $usuario->email_personal ?? '') }}">
+                </div>
+                    @if($errors->first('email_personal'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('email_personal') }}</i>
+                    </div>
+                    @endif
+
+                    <div>
+                         @if($is_registered)
+                        <label for="text-input"> Fotografía</label>
+                        @else
+                         <label for="text-input" class="is-required"> Fotografía</label>
+                        @endif
+
+                        <p class= "text-foto">La fotografía no debe exceder los 2 Mb y solo acepta imágenes
+                            con extensiones 'jpeg, png, jfif'</p><br>&nbsp;
+
+                            @if($is_registered)
+                            <div id="imagePreview">
+                            <img class='fotoperfil' src="{{ asset('imagenes/perfil/' . $usuario->foto) }}" alt="" width="200px">
+                            </div>
+                            @else
+                            <div id="imagePreview"></div>
+                            @endif
+
+                        <input type="file" placeholder="Coloque su fotografía" id="foto" name="foto"
+                        accept="image/png,image/jpeg,jfif">
+
+                    </div>
+                         @if($errors->first('foto'))
+                        <div class="invalid-feedback">
+                        <i>{{ $errors->first('foto') }}</i>
+                        </div>
+                        @endif
 
 
+                <div>
+                    <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
+                </div>
             </div>
+
+            <div>
+                 @if($is_registered)
+                <button  type="submit" class="btn-primario">Actualizar</button>
+                @else
+                <button  type="submit" class="btn-primario">Guardar Cambios</button>
+                @endif
+            </div>
+            <br>&nbsp;
+            @if($is_registered)
+                    <div class="conte">
+                        <div class="left">
+                        </div>
+                        <div class="alert-info2">
+                            <p>Información actualizada a la fecha: {{ $usuario->updated_at->format('d-m-Y H:i:s') }}</p>
+                        </div>
+                    </div><br>&nbsp;
+                @endif
         </div>
-        {{--Fin Datos personales --}}
-
-        {{--Datos del Historial Académico --}}
-        <div class="mt-2" data-tab-id="2">
-            <h3 class="tab--title">Datos del Historial Académico</h3>
-            <div class="input-columns-2">
-                <div>
-                    <label>Materias que ha impartido en nivel preparatoria</label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="#">Mate prepa1</option>
-                        <option value="#">Mate prepa2</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Materias que ha impartido en nivel licenciatura</label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="#">Ingles lic 1</option>
-                        <option value="#">Ingles lic 2</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Materias que ha impartido en nivel maestria</label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="#">español mae 1</option>
-                        <option value="#">español mae 2</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Materias que ha impartido en nivel doctorado</label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="#">Doc doc 1</option>
-                        <option value="#">Doc doc 2</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        {{--Fin Datos del Historial Académico --}}
-
-        {{-- Experiencia Laboral --}}
-
-        <div class="mt-2" data-tab-id="3">
-            <h3 class="tab--title">Datos de Experiencia Laboral</h3>
-            <div class="input-columns-2">
-                <div>
-                    <label>Areas de Experiencia Laboral</label>
-                    <select style="margin-top:10px" class="select2-multiple" name="areas[]" multiple="multiple">
-                        <option value="Industrial">Industrial</option>
-                        <option value="Salud">Salud</option>
-                    </select>
-                </div>
-                <div>
-                    <label >Seleccione las herramientas tecnológicas que sabe utilizar
-                    </label>
-                    <select  style="margin-top:10px" class="select2-multiple" name="herramientas[]" multiple="multiple">
-                        <option value="Office">Office</option>
-                        <option value="Adobe">Adobe</option>
-                    </select>
-                </div>
-            </div>
-            <div class="contenedor-2col">
-                <div>
-                    <label for="select-input-2">Disponibilidad para ser asesor en la UDEMEX</label>
-                    <ul class="col2">
-                        <li><input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
-                            <label for=""> %100</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
-                            <label for=""> %75</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
-                            <label for=""> %50</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
-                            <label for=""> %25</label></li>
-                        <li>
-                    </ul>
-                </div>
-
-                <div style="margin-top:10px">
-                    <label for="select-input-2">¿Cuál es el horario laboral en su otro trabajo?</label>
-                    <ul class="col2">
-                        <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00"></li> </ul>
-                </div>
-
-            </div>
-            <div class="contenedor-2col">
-                <div>
-                    <label for="select-input-2">¿Trabaja en otro lugar actualmente?</label>
-                    <ul class="col2">
-
-                        <li><input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
-                            <label for=""> Si</label>&#160;&#160;&#160;&#160;<input type="radio" id="" name="" value="">
-                            <label for=""> No</label></li>
-                        <li>
-                    </ul>
-                </div>
-
-                <div>
-                    <label for="select-input-2">¿Cuáles son los dias laborales en su otro trabajo? </label>
-
-                    <ul class="col2"><input type="checkbox" id="l-otrolugar" name="labora-actualmente" value="Bike">
-                        <label > Lun.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Mar.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Mierc.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Juev.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Vier.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Sáb.</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="checkbox" id="" name="" value="">
-                        <label > Dom.</label></ul>
-                </div>
-            </div>
-            <div class="contenedor-2col">
-                <div>
-                    <label for="select-input-2">En este otro lugar donde trabaja, ¿está de...?</label>
-                    <ul class="col2">
-
-                        <li><input type="radio" id="" name="" value="">
-                            <label for=""> Tiempo Parcial</label>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<input type="radio" id="l-otrolugar" name="labora-actualmente" value="Bike">
-                            <label for=""> Tiempo Completo</label></li>
-                        <li>
-                        <li>
-
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-
-
-                </div>
-            </div>
-        </div>
-        {{--Fin Experiencia Laboral --}}
-
-        {{-- Subida de Documentos --}}
-
-        <div class="mt-2" data-tab-id="4">
-            <h3 class="tab--title">Subida de Documentos</h3>
-            <div class="input-columns-2">
-                <div>
-                    <label for="text-input"> Capacitación, anexar constancias con registro de datos:</label>
-                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
-                </div>
-                <div>
-                    <label for="text-input">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
-                    <small>El nombre del archivo debe de ser su nombre completo empezando
-                        por nombre. Ejemplo: CV_NayeliSalazarGomez</small>
-                    <input type="file" placeholder="Coloque su fotografia" id="text-input">
-
-                </div>
-            </div>
-        </div>
-        {{--Fin Subida de Documentos --}}
-
-
-    </form>
-
-@endsection
+        </form>
 
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/utilities/menu.js') }}"></script>
