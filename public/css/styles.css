@@ -74,7 +74,7 @@ select{
 
 
 input[type="time"],.acortado{
-    width: 45%;
+    width: 50%;
     height: 80%;
     margin: 10px auto 10px 0;
     border: 1px solid var(--gray);

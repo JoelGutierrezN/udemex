@@ -24,7 +24,7 @@
                     @endif
                     <div class="input-columns-1">
                         <div>
-                            <label for="text-input" class="is-required">Años de experiencia en modalidad presencial.</label>
+                            <label for="text-input" class="is-required">Años de experiencia en modalidad presencial</label>
                             <input class="acortado" type="number" autocomplete="off"
                             id="numero" name="experiencia_presencial"
                             onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" min="1" max="99"

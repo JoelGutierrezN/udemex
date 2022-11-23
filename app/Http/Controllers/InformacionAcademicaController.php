@@ -7,6 +7,7 @@ use App\Models\InformacionAcademica;
 use App\Models\InfoAcademicArea;
 use App\Models\InfoAcademicHerramienta;
 use App\Http\Requests\InformacionAcademicaRequest;
+use App\Http\Requests\InformacionAcademicaUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -109,11 +110,11 @@ class InformacionAcademicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InformacionAcademicaRequest $request, InformacionAcademica $infoAcademica)
+    public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
-
         // / -->forcedelet  seguido de le foreach del controlador (Para editar el array, se debe de borrar y llenar de nuevo)
-      $infoAcademica->update($request->all());
+        $infoAcademica->update($request->all());
+        // dd($request->all());
 
       if($request->hasFile('curriculum_pdf')){
         $pdf = $request->file('curriculum_pdf');
