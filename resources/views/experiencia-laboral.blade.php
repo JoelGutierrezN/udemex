@@ -21,11 +21,6 @@
                 @csrf
                 @method('PUT')
         @else
-
-           @php
-           $herramientas_registered = [];
-           @endphp
-
            <form action="{{ route('teacher.infoacademica.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
@@ -103,7 +98,7 @@
                                     <li>{{$area->nombre}}</li>
                                 @endforeach
                             </ol>
-                            <select  name="area_experiencia" id="datos_area_experiencia" class="js-example-basic-multiple" multiple="multiple">
+                            <select  name="area_experiencia[]" class="js-example-basic-multiple" multiple="multiple">
                                 {{-- @foreach ($areas_registered as $area)
                                     <option value="{{$area->id_area_experiencia}}" selected>{{$area->nombre}}</option>
                                 @endforeach --}}
@@ -119,20 +114,21 @@
                     @else
                     <div>
                         <label class="is-required">Áreas de experiencia Laboral</label>
-                        <select  name="area_experiencia" id="datos_area_experiencia" class="js-example-basic-multiple" multiple="multiple">
+                        <select  name="area_experiencia[]" class="js-example-basic-multiple" multiple="multiple">
                             @foreach ($areas as $area)
                             <option value="{{$area->id_area_experiencia}}">{{$area->nombre}}</option>
                             @endforeach
                         </select>
                     </div>
-                    @if($errors->first('area_experiencia'))
+                    @if($errors->first('area_experiencia[]'))
                             <div class="invalid-feedback">
-                                <i>{{ $errors->first('area_experiencia') }}</i>
+                                <i>{{ $errors->first('area_experiencia[]') }}</i>
                             </div>
                         @endif
                     @endif
                     @if($is_registered_academic)
                         @php
+                            $herramientas_registered = [];
                             $herramientas_infoAcademica = App\Models\InfoacademicHerramienta::where("id_user", Auth::id())->get();
                             foreach($herramientas_infoAcademica as $herramienta):
                                 array_push($herramientas_registered , App\Models\HerramientaTecnologica::where("id_herramienta", $herramienta->id_herramienta)->first());
@@ -146,7 +142,7 @@
                                         <li>{{$herramienta->nombre}}</li>
                                     @endforeach
                                 </ol>
-                            <select  name="id_herramienta[]" id="datos_id_herramienta" class="js-example-basic-multiple" multiple="multiple">
+                            <select  name="id_herramienta[]" class="js-example-basic-multiple" multiple="multiple">
                                 @foreach ($herramientas as $herramientabd)
                                     <option value="{{$herramientabd->id_herramienta}}">{{$herramientabd->nombre}}</option>
                                 @endforeach
@@ -155,17 +151,17 @@
                     @else
                         <div>
                             <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label>
-                            <select  name="id_herramienta[]" id="datos_id_herramienta" class="js-example-basic-multiple" multiple="multiple">
+                            <select  name="id_herramienta[]" class="js-example-basic-multiple" multiple="multiple">
                                 @foreach ($herramientas as $herramienta)
                                 <option value="{{$herramienta->id_herramienta}}">{{$herramienta->nombre}}</option>
                                 @endforeach
                               </select>
                         </div>
-                        @if($errors->first('id_herramienta[]'))
+                        {{-- @if($errors->first('id_herramienta[]'))
                             <div class="invalid-feedback">
                                 <i>{{ $errors->first('id_herramienta[]') }}</i>
                             </div>
-                        @endif
+                        @endif --}}
                     @endif
                     <div>
                         <label for="select-input-2" class="is-required">Disponibilidad para ser asesor en la UDEMEX</label>
@@ -395,7 +391,7 @@
         });
     </script>
 
-    <script>
+    {{-- <script>
         var formAcademico = document.querySelector('#form_experiencia');
         var experienciaButton = document.querySelector('#send_form_experiencia');
         function getSelectValues(select) {
@@ -453,7 +449,7 @@
                 }).catch((error)=>console.log);
             Swal.fire('Cargando', 'Espera un momento', 'info');
             });
-    </script>
+    </script> --}}
 
     <script type="text/javascript">
      $(".js-example-basic-multiple").select2();
