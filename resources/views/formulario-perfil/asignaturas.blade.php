@@ -8,7 +8,7 @@
                 <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                     @csrf
                     <li class="formlabel is-required" style="font-size:13px;">Nombre completo de la asignatura</li>
-                    <li class="formlabel is-required" style="font-size:13px; margin-top:-1%">Nombre completo de la institución donde se impartio</li>
+                    <li class="formlabel is-required" style="font-size:13px; margin-top:-1.5%">Nombre completo de la institución donde se impartio</li>
                     <li class="formlabel is-required">Inicio impartición</li>
                     <li class="formlabel is-required">Fin impartición</li>
                     <li class="formlabel is-required">Nivel Escolar</li>

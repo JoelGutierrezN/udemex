@@ -10,10 +10,10 @@
                             @csrf
                             <ul class="col3">
                             <li class="formlabel is-required">Nombre completo</li>
-                            <li class="formlabel is-required">Nombre completo de la institución donde se tomo</li>
+                            <li class="formlabel is-required" >Nombre completo de la institución donde se tomo</li>
                             <li class="formlabel is-required">Solicitud</li>
                             <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacion-nombre"></li>
-                            <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitación" id="capacitacion-instituto"></li>
+                            <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitación" id="capacitacion-instituto"></li>
                             <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
                                 <option value="dentro">Dentro de UDEMEX</option>
                                 <option value="fuera">Fuera de UDEMEX</option>
