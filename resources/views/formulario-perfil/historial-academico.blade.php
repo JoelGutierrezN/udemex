@@ -1,4 +1,22 @@
 {{-- Inicio historial academico --}}
+
+<style>
+    #historialAcademico-form ul{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        gap: 5px;
+    }
+    #historialAcademico-form ul li{
+        width: 100%;
+    }
+    #info-span{
+        grid-row: 1/3;
+    }
+    #historialAcademico-form ul li input, #historialAcademico-form ul li select{
+        height: 3.5rem;
+    }
+</style>
+
 <div class="mt-2" data-tab-id="5">
     <h3 class="tab--title">Historial Académico</h3>
 
@@ -7,7 +25,7 @@
             <label for="text-input">Estudios concluidos</label>
             <form action="{{ route('teacher.storeHistorial') }}" method="post" enctype="multipart/form-data" id="historialAcademico-form">
                 @csrf
-                <ul class="col5">
+                <ul class="col5" id="ul-form-historial">
                     <li class="formlabel is-required">Nombre del titulo</li>
                     <li class="formlabel is-required">Nombre de la institución</li>
                     <li class="formlabel is-required">Inicio</li>
@@ -29,16 +47,15 @@
                 </ul>
 
                 <ul class="col5">
-                    <li class="formlabel">
-                        Tipo de documento
-                        <p style="padding-right: 3px;">Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
+                    <li class="formlabel" id="info-span">
+                        <span>Tipo de documento</span> 
+                        <p style="font-size:13px; margin-top:-1.5%">Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
                     </li>
                     <li class="formlabel is-required">Título</li>
                     <li class="formlabel is-required">Certificado</li>
                     <li class="formlabel is-required">Cédula</li>
                     <li>&#160;</li>
 
-                    <li></li>
                     <li>
                         <input id="historial-titulo" type="file" name="titulo" placeholder="titulo" class="formlabel" accept="application/pdf" required>
                     </li>
@@ -51,7 +68,7 @@
                     <li><button id="historial-button" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                 </ul>
             </form>
-            
+            <p class="is-required">Campos obligatorios</p>
             <br>
             <table id="table-historial-academico" style="font-size: 1.3rem;">
                 <thead>

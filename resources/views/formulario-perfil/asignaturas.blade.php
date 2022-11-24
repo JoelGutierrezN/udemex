@@ -1,4 +1,59 @@
 {{--Datos de materias impartidas --}}
+
+<style>
+    #materias-form{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr;
+        gap: 5px;
+    }
+    #materias-form li {
+        width: 100%
+    }
+    #materias-form li input, #materias-form li select{
+        height: 3.5rem;
+    }
+</style>
+
+<style>
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background: rgb(0,0,0); /* Fallback color */
+                background: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+                 /* Modal Content/Box */
+            .modal-content {
+                background: #fefefe;
+                margin: auto; /* 15% from the top and centered */
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                height: 90vh; /* Could be more or less, depending on screen size */
+            }
+
+                /* The Close Button */
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        </style>
+
 <div class="mt-2" data-tab-id="2">
     <h3 class="tab--title">Asignaturas impartidas</h3>
     <div class="">
@@ -26,7 +81,7 @@
                     <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
                 </form>
             </ul>
-
+            <p class="is-required">Campos obligatorios</p>
             <table id="table-materias" style="font-size: 1.3rem;">
                 <thead>
                     <tr>

@@ -10,7 +10,7 @@
             <button type="button" id="personal-menu" data-tab-target="1">Datos Personales &blacktriangledown;</button>
             <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
-            <button type="button" id="experiencia-menu" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
+            <a href="{{ route('experienciaLaboral') }}"><button type="button" id="experiencia-menu">Experiencia Laboral &blacktriangledown;</button></a>
             <button type="button" id="archivos-menu" data-tab-target="4">Capacitación &blacktriangledown;</button>
         </div>
 
@@ -23,7 +23,7 @@
     {{--Fin Asignaturas --}}
 
     {{-- Experiencia Laboral --}}
-    @include('formulario-perfil.experiencia-laboral')
+    {{-- @include('formulario-perfil.experiencia-laboral') --}}
     {{--Fin Experiencia Laboral --}}
 
     {{-- Perfil capacitación --}}
@@ -34,45 +34,7 @@
     @include('formulario-perfil.historial-academico')
     {{-- Fin Historial académico --}}
 
-        <style>
-            .modal {
-                display: none; /* Hidden by default */
-                position: fixed; /* Stay in place */
-                z-index: 1; /* Sit on top */
-                left: 0;
-                top: 0;
-                width: 100%; /* Full width */
-                height: 100%; /* Full height */
-                overflow: auto; /* Enable scroll if needed */
-                background: rgb(0,0,0); /* Fallback color */
-                background: rgba(0,0,0,0.4); /* Black w/ opacity */
-            }
-
-                 /* Modal Content/Box */
-            .modal-content {
-                background: #fefefe;
-                margin: auto; /* 15% from the top and centered */
-                padding: 20px;
-                border: 1px solid #888;
-                width: 80%;
-                height: 90vh; /* Could be more or less, depending on screen size */
-            }
-
-                /* The Close Button */
-            .close {
-                color: #aaa;
-                float: right;
-                font-size: 28px;
-                font-weight: bold;
-            }
-
-            .close:hover,
-            .close:focus {
-                color: black;
-                text-decoration: none;
-                cursor: pointer;
-            }
-        </style>
+        
 
         <div id="myModal" class="modal">
 

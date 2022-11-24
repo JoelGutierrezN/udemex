@@ -42,24 +42,17 @@ class InformacionAcademicaController extends Controller
     public function store(Request $request){
 
         // dd($request->all());
-        //return $request->area_experiencia[0];
 
         $nombreUser = auth()->user()->name;
 
-        $data = [];
-
-        $areas = explode(',', $request->area_experiencia[0]);
-        $herramientas = explode(',', $request->id_herramienta[0]);
-        //return $areas;
-
-        foreach($areas as $area){
+        foreach($request->area_experiencia as $area){
             InfoAcademicArea::create([
                 'id_area' => $area,
                 'id_user' => Auth::id()
             ]);
         }
 
-        foreach($herramientas as $herramienta){
+        foreach($request->id_herramienta as $herramienta){
             InfoAcademicHerramienta::create([
                 'id_herramienta' => $herramienta,
                 'id_user' => Auth::id()
@@ -84,8 +77,8 @@ class InformacionAcademicaController extends Controller
 
         $infoAcademica->save();
         Alert::alert()->success('Guardado!',' Tu experiencia laboral han sido regristada correctamente.');
-            // return redirect()->route("teacher.welcome");
-            return response()->json($data, 200);
+            return redirect()->route("experienciaLaboral");
+            // return response()->json($data, 200);
 
     }
 

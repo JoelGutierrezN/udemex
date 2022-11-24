@@ -9,6 +9,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\InformacionAcademicaController;
+use App\Http\Controllers\ExperienciaInicioController;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 /* Auth 365 */
@@ -70,3 +71,4 @@ Route::middleware(['auth', 'support'])->prefix('soporte')->name('support.')->gro
     Route::view('/', 'support-modules.index')->name('index');
 });
 
+Route::get('/experienciaLaboral', ExperienciaInicioController::class)->name('experienciaLaboral');
