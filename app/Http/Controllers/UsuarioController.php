@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
 {
@@ -67,6 +68,8 @@ class UsuarioController extends Controller
             $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
             $newUsuario->curp_pdf = $pdfname;
         }
+
+        $newUsuario['uuid'] = (string) Str::uuid();
 
         $newUsuario->save();
         Alert::alert()->success('Guardado!',' Sus datos personales han sido regristados correctamente.');
@@ -138,4 +141,13 @@ class UsuarioController extends Controller
     {
         //
     }
+
+      public function download($uuid)
+    {
+        $usu = Usuario::where('uuid', $uuid)->firstOrFail();
+        $pathToFile = ("documentos/Curp/" . $usu->curp_pdf);
+        return response()->download($pathToFile);
+        // return response()->file($pathToFile);
+    }
+    
 }

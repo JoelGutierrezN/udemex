@@ -147,18 +147,29 @@
 
                 <div>
                     @if($is_registered)
-                    <label for="text-file"> Adjuntar archivo en pdf de su CURP</label>
+                    <label for="text-file"> Adjuntar archivo en pdf de su CURP  </label>
+
+                    <div class="conte">
+                        <div class="pdfleft">
+                            @if($is_registered)
+                            <input type="file" placeholder="Coloque su CURP" id="curp_pdf" name="curp_pdf"
+                            accept="application/pdf">
+                            @else
+                            <input type="file" placeholder="Coloque su fotografía" id="curp_pdf" name="curp_pdf"
+                            accept="application/pdf">
+                            @endif
+                        </div>
+                        <div class="">
+                        <a href="{{ route('teacher.usu.download', $usuario->uuid) }}">
+                        <img class="icon" src="{{ asset('img/pdf.jpg')}}" height ="40" width="40" /></a>
+                      <!-- {{$usuario->curp_pdf}} </a> -->
+                          </div>
+                    </div>
+                   
                     @else
                     <label for="text-input" class="is-required"> Adjuntar archivo en pdf de su CURP</label>
                     @endif
 
-                    @if($is_registered)
-                    <input type="file" placeholder="Coloque su CURP" id="curp_pdf" name="curp_pdf"
-                    accept="application/pdf">
-                    @else
-                    <input type="file" placeholder="Coloque su fotografía" id="curp_pdf" name="curp_pdf"
-                    accept="application/pdf">
-                    @endif
                 </div>
                          @if($errors->first('curp_pdf'))
                         <div class="invalid-feedback">
