@@ -16,6 +16,7 @@ class Usuario extends Model
     public $timestamp = false;
 
     protected $fillable = [
+        'uuid',
         'nombre',
         'apellido_paterno',
         'apellido_materno',

@@ -39,6 +39,7 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     Route::view('/', 'teacher-modules.index')->name('index');
     Route::get('/welcome', ProfesoresInicioController::class)->name('welcome');
     Route::resource('usuarios', UsuarioController::class);
+     Route::get('usu/{uuid}/download', [UsuarioController::class, 'download'])->name('usu.download');
     Route::resource('infoacademica', InformacionAcademicaController::class);
 
 
