@@ -86,7 +86,7 @@ input[type="time"],.acortado{
 }
 
 .acortadox2{
-    width: 15%;
+    width: 13%;
     height: 80%;
     margin: 10px auto 10px 0;
     border: 1px solid var(--gray);
@@ -721,6 +721,12 @@ footer h5, footer h6{
     font-size: 1.2rem;
 }
 
+.text-obligatorio {
+    font-size: 1.3rem;
+    font-style: italic;
+    text-align: center;
+}
+
 .conte {
     width: 100%;
 }
@@ -732,6 +738,16 @@ footer h5, footer h6{
     float: left;
     position: relative;
     width: 60%;
+    height: auto;
+}
+
+.right {
+    padding-right: 10px;
+    padding-top: 10px;
+    margin-right: 57px;
+    float: center;
+    position: relative;
+    width: 80%;
     height: auto;
 }
 

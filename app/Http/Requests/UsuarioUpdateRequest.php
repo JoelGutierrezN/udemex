@@ -35,6 +35,7 @@ class UsuarioUpdateRequest extends FormRequest
            'celular'            => ['required', 'max:10', 'regex:/^[0-9]+$/'],
            'email_udemex'       => ['required', 'email', 'max:60', Rule::unique('usuarios','email_udemex')->withoutTrashed()->ignore($this->usuario)],
            'email_personal'     => ['required', 'email', 'max:60', Rule::unique('usuarios','email_personal')->withoutTrashed()->ignore($this->usuario)],
+           'curp_pdf'           => 'mimes:pdf',
         ];
     }
 }

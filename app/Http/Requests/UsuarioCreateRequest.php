@@ -30,11 +30,14 @@ class UsuarioCreateRequest extends FormRequest
            'apellido_paterno'   => ['required','regex:/^[A-Z][A-Z,a-z, ,é,É,í,Í,ó,Ó,ú,Ú,á,Á,ü,Ü,ñ,Ñ]+$/'],
            'apellido_materno'   => ['required','regex:/^[A-Z][A-Z,a-z, ,é,É,í,Í,ó,Ó,ú,Ú,á,Á,ü,Ü,ñ,Ñ]+$/'],
            'sexo'               => 'required',
+           'fecha_nacimiento'   => 'required',
            'telefono_casa'      => ['required', 'max:10', 'regex:/^[0-9]+$/'],
            'celular'            => ['required', 'max:10', 'regex:/^[0-9]+$/'],
            'email_udemex'       => ['required', 'email', 'unique:usuarios,email_udemex', 'max:60'],
            'email_personal'     => ['required', 'email', 'unique:usuarios,email_personal', 'max:60'],
+           'email_personal'     => ['required', 'email', 'unique:usuarios,email_personal', 'max:60'],
            'foto'               => ['required', 'image', 'max:2048'],
+           'curp_pdf'           => ['required', 'mimes:pdf'],
         ];
     }
 }

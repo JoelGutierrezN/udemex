@@ -42,6 +42,8 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioCreateRequest $request)
     {
+        $nombreUser = auth()->user()->name;
+
         $is_registered = Usuario::where('id_user', Auth::id())->count();
         if ($is_registered){
             Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en datos personales ');
@@ -56,6 +58,14 @@ class UsuarioController extends Controller
             $fotoname = time() . '-' . $foto->getClientOriginalName();
             $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
             $newUsuario->foto = $fotoname;
+        }
+
+        if($request->hasFile('curp_pdf')){
+            $pdf = $request->file('curp_pdf');
+            $destino = 'documentos/Curp/';
+            $pdfname = 'CURP_'.$nombreUser.time().'.'.$pdf->guessExtension();
+            $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
+            $newUsuario->curp_pdf = $pdfname;
         }
 
         $newUsuario->save();
@@ -95,6 +105,7 @@ class UsuarioController extends Controller
      */
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
+      $nombreUser = auth()->user()->name;
       $usuario->update($request->all());
       if($request->hasFile('foto')){
            $destino = 'imagenes/perfil/';
@@ -103,6 +114,14 @@ class UsuarioController extends Controller
             $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
             $usuario->foto = $fotoname;
         }
+
+        if($request->hasFile('curp_pdf')){
+        $pdf = $request->file('curp_pdf');
+        $destino = 'documentos/Curp/';
+        $pdfname = 'CURP_'.$nombreUser.time().'.'.$pdf->guessExtension();
+        $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
+        $infoAcademica->curp_pdf = $pdfname;
+    }
         $usuario->save();
 
          Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
