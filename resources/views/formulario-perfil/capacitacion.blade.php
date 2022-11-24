@@ -1,4 +1,23 @@
 {{-- Subida de Documentos --}}
+
+        <style>
+            #capacitacion-inputs-1{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 3px;
+            }
+            #capacitacion-inputs-2{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr;
+                gap: 3px;
+            }
+            #capacitacion-inputs-1 li, #capacitacion-inputs-2 li {
+                width: 100%;
+            }
+            #capacitacion-inputs-1 li input, #capacitacion-inputs-1 li select, #capacitacion-inputs-2 li input, #capacitacion-inputs-2 li select{
+                height: 3.5rem;
+            }
+        </style>
         <div class="mt-2" data-tab-id="4">
             <h3 class="tab--title"> 
                     <label for="text-input"> Anexar constancias con registro de datos:</label>
@@ -8,18 +27,18 @@
                     
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <ul class="col3">
-                            <li class="formlabel is-required">Nombre completo</li>
-                            <li class="formlabel is-required" >Nombre completo de la institución donde se tomo</li>
-                            <li class="formlabel is-required">Solicitud</li>
-                            <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacion-nombre"></li>
-                            <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitación" id="capacitacion-instituto"></li>
-                            <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
-                                <option value="dentro">Dentro de UDEMEX</option>
-                                <option value="fuera">Fuera de UDEMEX</option>
-                            </select></li>
+                            <ul class="col3" id="capacitacion-inputs-1">
+                                <li class="formlabel is-required">Nombre completo</li>
+                                <li class="formlabel is-required" >Nombre completo de la institución donde se tomo</li>
+                                <li class="formlabel is-required">Solicitud</li>
+                                <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacion-nombre"></li>
+                                <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitación" id="capacitacion-instituto"></li>
+                                <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
+                                    <option value="dentro">Dentro de UDEMEX</option>
+                                    <option value="fuera">Fuera de UDEMEX</option>
+                                </select></li>
                         </ul>
-                        <ul class="col6">
+                        <ul class="col6" id="capacitacion-inputs-2">
                             <li class="formlabel is-required">Inicio</li>
                             <li class="formlabel is-required">Fin</li>
                             <li class="formlabel is-required">Número de horas</li>
@@ -44,6 +63,7 @@
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </ul>
                         </form>
+                        <p class="is-required">Campos obligatorios</p>
                      <br><br><br>
                     
                     <label style="font-size: 2rem;" for="text-input"> Capacitación solicitada en UDEMEX</label>
