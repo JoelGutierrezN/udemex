@@ -7,7 +7,7 @@
 <h3 class="form-screen-title">Registro de Información Personal</h3>
 
         <div class="tabs">
-            <a href="#"> <button type="button" id="personal-menu">Datos Personales &blacktriangledown;</button></a>
+            <a href="{{route('welcome')}}"> <button type="button" id="personal-menu">Datos Personales &blacktriangledown;</button></a>
             <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
             <button type="button" id="experiencia-menu" data-tab-target="1">Experiencia Laboral &blacktriangledown;</button></a>
