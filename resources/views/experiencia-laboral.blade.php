@@ -240,6 +240,7 @@
                             <label for="">Ya tenemos tu CV: {{ $infoAcademica->curriculum_pdf}}</label>
                             <li>Si desea modificar, coloque nuevamente su CV actualizado al día, en caso de que no, con coloque nada</li>
                             <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="datos_curriculum_pdf" name="curriculum_pdf">
+                            <a href="documentos/Curriculum/{{$infoAcademica->curriculum_pdf}}" target="blank_"><img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="40" width="40" /></a>
                         </div>
                     @else
                         <div>
@@ -365,57 +366,6 @@
            $('.select2-multiple').select2();
        });
    </script>
-
-    <script>
-     document.addEventListener('DOMContentLoaded',()=>{
-        fetch("getTeacherInfo/{{ Auth::user()->id }}")
-        .then(response => response.json())
-        .then((response)=>{
-            console.log(response)
-            var dato_clave_empleado =  document.querySelector('#dato_clave_empleado')
-            dato_clave_empleado.value=response.clave_empleado;
-            dato_clave_empleado.setAttribute("readonly", "true");
-
-            var dato_nombre =  document.querySelector('#dato_nombre')
-            dato_nombre.value=response.nombre;
-            dato_nombre.setAttribute("readonly", "true");
-
-            var dato_apellido_paterno =  document.querySelector('#dato_apellido_paterno')
-            dato_apellido_paterno.value=response.apellido_paterno;
-            dato_apellido_paterno.setAttribute("readonly", "true");
-
-            var dato_apellido_materno =  document.querySelector('#dato_apellido_materno')
-            dato_apellido_materno.value=response.apellido_materno;
-            dato_apellido_materno.setAttribute("readonly", "true");
-
-            var dato_sexo_masculino =  document.querySelector('#dato_sexo_masculino')
-            var dato_sexo_femenino =  document.querySelector('#dato_sexo_femenino')
-            if (response.sexo == 1){
-                dato_sexo_masculino.setAttribute("checked", "true");
-            }else {
-                dato_sexo_femenino.setAttribute("checked", "true");
-            }
-
-
-            var dato_telefono_casa =  document.querySelector('#dato_telefono_casa')
-            dato_telefono_casa.value=response.telefono_casa;
-            dato_telefono_casa.setAttribute("readonly", "true");
-
-            var dato_celular =  document.querySelector('#dato_celular')
-            dato_celular.value=response.celular;
-            dato_celular.setAttribute("readonly", "true");
-
-            var dato_email_udemex =  document.querySelector('#dato_email_udemex')
-            dato_email_udemex.value=response.email_udemex;
-            dato_email_udemex.setAttribute("readonly", "true");
-
-            var dato_email_personal =  document.querySelector('#dato_email_personal')
-            dato_email_personal.value=response.email_personal;
-            dato_email_personal.setAttribute("readonly", "true");
-
-        })/*.catch((error)=>{})*/
-    });
-    </script>
 
     @if(isset($from))
 
