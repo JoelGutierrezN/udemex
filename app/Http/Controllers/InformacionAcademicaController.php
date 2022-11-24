@@ -39,22 +39,27 @@ class InformacionAcademicaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InformacionAcademicaRequest $request){
+    public function store(Request $request){
 
         // dd($request->all());
+        //return $request->area_experiencia[0];
 
         $nombreUser = auth()->user()->name;
 
         $data = [];
 
-        foreach($request->area_experiencia as $area){
+        $areas = explode(',', $request->area_experiencia[0]);
+        $herramientas = explode(',', $request->id_herramienta[0]);
+        //return $areas;
+
+        foreach($areas as $area){
             InfoAcademicArea::create([
                 'id_area' => $area,
                 'id_user' => Auth::id()
             ]);
         }
 
-        foreach($request->id_herramienta as $herramienta){
+        foreach($herramientas as $herramienta){
             InfoAcademicHerramienta::create([
                 'id_herramienta' => $herramienta,
                 'id_user' => Auth::id()

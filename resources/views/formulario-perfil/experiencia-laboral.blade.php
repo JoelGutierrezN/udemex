@@ -7,6 +7,10 @@
              @method('PUT')
            @else
 
+           @php
+           $herramientas_registered = [];
+           @endphp
+
            <form action="{{ route('teacher.infoacademica.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
@@ -120,7 +124,7 @@
 
                         @if($is_registered_academic)
                             @php
-                                $herramientas_registered = [];
+                                
                                 $herramientas_infoAcademica = App\Models\InfoacademicHerramienta::where("id_user", Auth::id())->get();
                                 foreach($herramientas_infoAcademica as $herramienta):
                                     array_push($herramientas_registered , App\Models\HerramientaTecnologica::where("id_herramienta", $herramienta->id_herramienta)->first());
@@ -255,7 +259,7 @@
                         @endif
 
                         <div>
-                            <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
+                            <input hidden type="text" id="id_user_experiencia" value="{{ Auth::user()->id }}" name="id_user">
                         </div>
                     </div>
 
@@ -334,34 +338,52 @@
 
                 var formAcademico = document.querySelector('#form_experiencia');
                 var experienciaButton = document.querySelector('#send_form_experiencia');
+
+                function getSelectValues(select) {
+                    var result = [];
+                    var options = select && select.options;
+                    var opt;
+
+                    for (var i=0, iLen=options.length; i<iLen; i++) {
+                        opt = options[i];
+
+                        if (opt.selected) {
+                        result.push(opt.value || opt.text);
+                        }
+                    }
+                    return result;
+                }
+
                 experienciaButton.addEventListener('click', (e)=>{
                     e.preventDefault();
 
+                    let herramientas = document.querySelector('select[name="id_herramienta[]"]');
+                    let areas = document.querySelector('#datos_area_experiencia');
+
+                    //console.log(getSelectValues(herramientas))
                     let data = new FormData();
                     data.append('experiencia_presencial', document.querySelector('#numero').value);
                     data.append('experiencia_linea', document.querySelector('#numero2').value);
                     data.append('nivel_mayor_experiencia', document.querySelector('#datos_nivel_mayor_experiencia').value);
-                    data.append('area_experiencia[]', document.querySelector('#datos_area_experiencia').value);
-                    data.append('id_herramienta[]', document.querySelector('#datos_id_herramienta').value);
+                    data.append('area_experiencia[]', getSelectValues(areas));
+                    data.append('id_herramienta[]', getSelectValues(herramientas));
                     data.append('disponibilidad_asesor', document.querySelector('#datos_disponibilidad_asesor').value);
                     data.append('labora_actualmente', document.querySelector('input[name="labora_actualmente"]').value);
                     data.append('lugar_labora', document.querySelector('#datos_lugar_labora').value);
                     data.append('modalidad', document.querySelector('#datos_modalidad').value);
                     data.append('horario_laboral_inicio', document.querySelector('#datos_horario_laboral_inicio').value);
                     data.append('horario_laboral_fin', document.querySelector('#datos_horario_laboral_fin').value);
-                    data.append('lunes', document.querySelector('#dias_laboral_lunes').value);
-                    data.append('martes', document.querySelector('#dias_laboral_martes').value);
-                    data.append('miercoles', document.querySelector('#dias_laboral_miercoles').value);
-                    data.append('jueves', document.querySelector('#dias_laboral_jueves').value);
-                    data.append('viernes', document.querySelector('#dias_laboral_viernes').value);
-                    data.append('sabado', document.querySelector('#dias_laboral_sabado').value);
-                    data.append('domingo', document.querySelector('#dias_laboral_domingo').value);
+                    data.append('lunes', document.querySelector('#dias_laboral_lunes').checked ? 'si': 'no');
+                    data.append('martes', document.querySelector('#dias_laboral_martes').checked ? 'si': 'no');
+                    data.append('miercoles', document.querySelector('#dias_laboral_miercoles').checked ? 'si': 'no');
+                    data.append('jueves', document.querySelector('#dias_laboral_jueves').checked ? 'si': 'no');
+                    data.append('viernes', document.querySelector('#dias_laboral_viernes').checked ? 'si': 'no');
+                    data.append('sabado', document.querySelector('#dias_laboral_sabado').checked ? 'si': 'no');
+                    data.append('domingo', document.querySelector('#dias_laboral_domingo').checked ? 'si': 'no');
+                    data.append('id_user', document.querySelector('#id_user_experiencia').value);
                     data.append('curriculum_pdf', document.querySelector('#datos_curriculum_pdf').files[0]);
                     data.append('_token', '{{ csrf_token() }}');
                     console.log(data);
-
-
-
 
                     fetch("{{ route('teacher.infoacademica.store') }}", {
                             method: 'POST',
@@ -369,15 +391,17 @@
                                 'X-CSRF-Token': '{{ csrf_token() }}'
                             }),
                             body: data
-                        }).then((response) => response.json())
+                        }).then((response) => response.text())
                         .then((response)=>{
+                            console.log(response);
 
-                        Swal.fire('Registro realizado', '', 'success');
+                            Swal.fire('Registro realizado', '', 'success');
                         }).catch((error)=>console.log);
 
                     Swal.fire('Cargando', 'Espera un momento', 'info');
+
                     });
-                        </script>
+                    </script>
 
                <script type="text/javascript">
                 $(".js-example-basic-multiple").select2();

@@ -29,7 +29,10 @@
                 </ul>
 
                 <ul class="col5">
-                    <li class="formlabel">Tipo de documento</li>
+                    <li class="formlabel">
+                        Tipo de documento
+                        <p style="padding-right: 3px;">Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
+                    </li>
                     <li class="formlabel is-required">Título</li>
                     <li class="formlabel is-required">Certificado</li>
                     <li class="formlabel is-required">Cédula</li>
@@ -48,13 +51,13 @@
                     <li><button id="historial-button" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                 </ul>
             </form>
-            <p>Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
+            
             <br>
             <table id="table-historial-academico" style="font-size: 1.3rem;">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Institución</th>
+                        <th>Nombre del titulo</th>
+                        <th>Nombre de la institución</th>
                         <th>Inicio</th>
                         <th>Fin</th>
                         <th>Nivel Escolar</th>
