@@ -287,43 +287,6 @@
     @include('formulario-perfil.historial-academico')
     {{-- Fin Historial académico --}}
 
-    <style>
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background: rgb(0,0,0); /* Fallback color */
-            background: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-             /* Modal Content/Box */
-        .modal-content {
-            background: #fefefe;
-            margin: auto; /* 15% from the top and centered */
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            height: 90vh; /* Could be more or less, depending on screen size */
-        }
-            /* The Close Button */
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-    </style>
-
     {{-- Modals to PDF --}}
     <div id="myModal" class="modal">
     <!-- Modal content -->
@@ -367,7 +330,7 @@
         });
     </script>
 
-    {{-- Script para limitar os capos de años de experiencia --}}
+    {{-- Script para limitar los campos de años de experiencia --}}
     <script>
         var input =  document.getElementById('numero');
         input.addEventListener('input',function(){
@@ -391,81 +354,17 @@
         });
     </script>
 
-    {{-- <script>
-        var formAcademico = document.querySelector('#form_experiencia');
-        var experienciaButton = document.querySelector('#send_form_experiencia');
-        function getSelectValues(select) {
-            var result = [];
-            var options = select && select.options;
-            var opt;
-            for (var i=0, iLen=options.length; i<iLen; i++) {
-                opt = options[i];
-                if (opt.selected) {
-                result.push(opt.value || opt.text);
-                }
-            }
-            return result;
-        }
-
-        experienciaButton.addEventListener('click', (e)=>{
-            e.preventDefault();
-            let herramientas = document.querySelector('select[name="id_herramienta[]"]');
-            let areas = document.querySelector('#datos_area_experiencia');
-            let data = new FormData();
-
-            data.append('experiencia_presencial', document.querySelector('#numero').value);
-            data.append('experiencia_linea', document.querySelector('#numero2').value);
-            data.append('nivel_mayor_experiencia', document.querySelector('#datos_nivel_mayor_experiencia').value);
-            data.append('area_experiencia[]', getSelectValues(areas));
-            data.append('id_herramienta[]', getSelectValues(herramientas));
-            data.append('disponibilidad_asesor', document.querySelector('#datos_disponibilidad_asesor').value);
-            data.append('labora_actualmente', document.querySelector('input[name="labora_actualmente"]').value);
-            data.append('lugar_labora', document.querySelector('#datos_lugar_labora').value);
-            data.append('modalidad', document.querySelector('#datos_modalidad').value);
-            data.append('horario_laboral_inicio', document.querySelector('#datos_horario_laboral_inicio').value);
-            data.append('horario_laboral_fin', document.querySelector('#datos_horario_laboral_fin').value);
-            data.append('lunes', document.querySelector('#dias_laboral_lunes').checked ? 'si': 'no');
-            data.append('martes', document.querySelector('#dias_laboral_martes').checked ? 'si': 'no');
-            data.append('miercoles', document.querySelector('#dias_laboral_miercoles').checked ? 'si': 'no');
-            data.append('jueves', document.querySelector('#dias_laboral_jueves').checked ? 'si': 'no');
-            data.append('viernes', document.querySelector('#dias_laboral_viernes').checked ? 'si': 'no');
-            data.append('sabado', document.querySelector('#dias_laboral_sabado').checked ? 'si': 'no');
-            data.append('domingo', document.querySelector('#dias_laboral_domingo').checked ? 'si': 'no');
-            data.append('id_user', document.querySelector('#id_user_experiencia').value);
-            data.append('curriculum_pdf', document.querySelector('#datos_curriculum_pdf').files[0]);
-            data.append('_token', '{{ csrf_token() }}');
-            console.log(data);
-
-            fetch("{{ route('teacher.infoacademica.store') }}", {
-                    method: 'POST',
-                    headers: new Headers({
-                        'X-CSRF-Token': '{{ csrf_token() }}'
-                    }),
-                    body: data
-                }).then((response) => response.text())
-                .then((response)=>{
-                    console.log(response);
-                    Swal.fire('Registro realizado', '', 'success');
-                }).catch((error)=>console.log);
-            Swal.fire('Cargando', 'Espera un momento', 'info');
-            });
-    </script> --}}
-
     <script type="text/javascript">
-     $(".js-example-basic-multiple").select2();
-     </script>
-
-    <script type="text/javascript">
-     $(".js-example-basic-multiple").select2();
-     </script>
-
-    <script type="text/javascript" src="{{ asset('js/utilities/menu.js') }}"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('.select2-multiple').select2();
-        });
+        $(".js-example-basic-multiple").select2();
     </script>
+
+   <script type="text/javascript" src="{{ asset('js/utilities/menu.js') }}"></script>
+
+   <script>
+       $(document).ready(function() {
+           $('.select2-multiple').select2();
+       });
+   </script>
 
     <script>
      document.addEventListener('DOMContentLoaded',()=>{
