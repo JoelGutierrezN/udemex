@@ -7,11 +7,11 @@
             <ul class="col6">
                 <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                     @csrf
-                    <li class="formlabel" style="font-size:13px;">Nombre completo de la asignatura</li>
-                    <li class="formlabel" style="font-size:13px; margin-top:-1%">Nombre completo de la institución donde se impartio</li>
-                    <li class="formlabel">Inicio impartición</li>
-                    <li class="formlabel">Fin impartición</li>
-                    <li class="formlabel">Nivel Escolar</li>
+                    <li class="formlabel is-required" style="font-size:13px;">Nombre completo de la asignatura</li>
+                    <li class="formlabel is-required" style="font-size:13px; margin-top:-1%">Nombre completo de la institución donde se impartio</li>
+                    <li class="formlabel is-required">Inicio impartición</li>
+                    <li class="formlabel is-required">Fin impartición</li>
+                    <li class="formlabel is-required">Nivel Escolar</li>
                     <li style="color:white">Agregar</li>
                     <li><input id="materia-nombre" name="nombre" autocomplete="off" type="text" placeholder="Nombre completo de la asignatura"></li>
                     <li><input id="materia-institucion" name="institucion" autocomplete="off" type="text" placeholder="Nombre completo de la institucion donde se ímpartió"></li>

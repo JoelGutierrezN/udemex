@@ -9,9 +9,9 @@
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <ul class="col3">
-                            <li class="formlabel">Nombre completo</li>
-                            <li class="formlabel">Nombre completo de la institución donde se tomo</li>
-                            <li class="formlabel">Solicitud</li>
+                            <li class="formlabel is-required">Nombre completo</li>
+                            <li class="formlabel is-required">Nombre completo de la institución donde se tomo</li>
+                            <li class="formlabel is-required">Solicitud</li>
                             <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacion-nombre"></li>
                             <li><input style="margin-bottom:-10px" name="instituto" type="text" placeholder="Institución donde se tomo la capacitación" id="capacitacion-instituto"></li>
                             <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
@@ -20,11 +20,11 @@
                             </select></li>
                         </ul>
                         <ul class="col6">
-                            <li class="formlabel">Inicio</li>
-                            <li class="formlabel">Fin</li>
-                            <li class="formlabel">Número de horas</li>
-                            <li class="formlabel">Tipo</li>
-                            <li class="formlabel">Evidencia</li>
+                            <li class="formlabel is-required">Inicio</li>
+                            <li class="formlabel is-required">Fin</li>
+                            <li class="formlabel is-required">Número de horas</li>
+                            <li class="formlabel is-required">Tipo</li>
+                            <li class="formlabel is-required">Evidencia</li>
                             <li style="color:white">Agregar</li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="capacitacion-inicio"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="capacitacion-fin"></li>
