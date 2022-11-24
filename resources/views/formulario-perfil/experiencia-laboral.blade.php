@@ -2,7 +2,7 @@
 
 
 @if($is_registered_academic)
-         <form action="{{ route('teacher.infoacademica.update', $infoAcademica) }}" method="POST" enctype="multipart/form-data">
+         <form action="{{ route('teacher.infoacademica.update', $infoAcademica) }}" method="POST" enctype="multipart/form-data" id="form_experiencia">
              @csrf
              @method('PUT')
            @else
@@ -93,7 +93,7 @@
                                         <li>{{$area->nombre}}</li>
                                     @endforeach
                                 </ol>
-                                <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
+                                <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia" id="datos_area_experiencia" multiple="multiple">
                                     {{-- @foreach ($areas_registered as $area)
                                         <option value="{{$area->id_area_experiencia}}" selected>{{$area->nombre}}</option>
                                     @endforeach --}}
@@ -110,12 +110,17 @@
                         @else
                         <div>
                             <label class="is-required">Áreas de experiencia Laboral</label>
-                            <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
+                            <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia" id="datos_area_experiencia" multiple="multiple">
                                 @foreach ($areas as $area)
                                 <option value="{{$area->id_area_experiencia}}">{{$area->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
+                        @if($errors->first('area_experiencia'))
+                                <div class="invalid-feedback">
+                                    <i>{{ $errors->first('area_experiencia') }}</i>
+                                </div>
+                            @endif
                         @endif
 
                         @if($is_registered_academic)
@@ -127,15 +132,14 @@
                                 endforeach;
                             @endphp
                             <div>
-                                {{-- <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label> --}}
                                 <ol>
                                 <label for="">Tus herramientas que sabe utilizar son:</label>
-                                <p>Si desea modificar, coloque nuevamente las herramientas tecnológicas de experiencia labora, en caso de que no, no coloque nada</p>
-                                    @foreach ($herramientas_registered as $herramienta)
-                                        <li>{{$herramienta->nombre}}</li>
-                                    @endforeach
-                                </ol>
-                                <select style="margin-top:10px" class="multi-select select2-multiple" name="area_experiencia[]" multiple="multiple">
+                                    <p>Si desea modificar, coloque nuevamente las herramientas tecnológicas de experiencia labora, en caso de que no, no coloque nada</p>
+                                        @foreach ($herramientas_registered as $herramienta)
+                                            <li>{{$herramienta->nombre}}</li>
+                                        @endforeach
+                                    </ol>
+                                <select style="margin-top:10px" class="multi-select select2-multiple" name="id_herramienta[]" id="datos_id_herramienta" multiple="multiple">
                                     @foreach ($herramientas as $herramientabd)
                                         <option value="{{$herramientabd->id_herramienta}}">{{$herramientabd->nombre}}</option>
                                     @endforeach
@@ -145,18 +149,18 @@
                         @else
                             <div>
                                 <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label>
-                                <select style="margin-top:10px" class="multi-select select2-multiple " name="id_herramienta[]" multiple="multiple">
+                                <select style="margin-top:10px" class="multi-select select2-multiple " name="id_herramienta[]" id="datos_id_herramienta" multiple="multiple">
                                     @foreach ($herramientas as $herramienta)
                                     <option value="{{$herramienta->id_herramienta}}">{{$herramienta->nombre}}</option>
                                     @endforeach
                                   </select>
                             </div>
+                            @if($errors->first('id_herramienta[]'))
+                                <div class="invalid-feedback">
+                                    <i>{{ $errors->first('id_herramienta[]') }}</i>
+                                </div>
+                            @endif
                         @endif
-                        {{-- @if($errors->first('id_herramienta'))
-                        <div class="invalid-feedback">
-                        <i>{{ $errors->first('id_herramienta') }}</i>
-                        </div>
-                        @endif --}}
 
                         <div>
                             <label for="select-input-2" class="is-required">Disponibilidad para ser asesor en la UDEMEX</label>
@@ -192,7 +196,7 @@
 
                             <div>
                                 <label class="is-required">Seleccione la modalidad en la que labora</label>
-                                <select name="modalidad">
+                                <select name="modalidad" id="datos_modalidad">
                                     @php
                                         $nivelesModalidad = ['Presencial','Línea'];
                                     @endphp
@@ -216,35 +220,43 @@
                                 <label for="select-input-2" class="is-required">¿Cuál es el horario laboral en su otro trabajo?</label>
                                 <ul class="col2">
                                     <li><label for="">Inicio:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00"
-                                        name="horario_laboral_inicio" value="{{ old('horario_laboral_inicio', $infoAcademica->horario_laboral_inicio ?? '') }}"></li>
+                                        name="horario_laboral_inicio" id="datos_horario_laboral_inicio" value="{{ old('horario_laboral_inicio', $infoAcademica->horario_laboral_inicio ?? '') }}"></li>
                                     <li><label for="">Cierre:&#160;&#160;&#160;</label><input type="time" min="6:00:00" max="24:00:00"
-                                        name="horario_laboral_fin" value="{{ old('horario_laboral_fin', $infoAcademica->horario_laboral_fin ?? '') }}"></li>
+                                        name="horario_laboral_fin" id="datos_horario_laboral_fin" value="{{ old('horario_laboral_fin', $infoAcademica->horario_laboral_fin ?? '') }}"></li>
                                 </ul>
                             </div>
 
                             <div>
                                 <label for="select-input-2" class="is-required">¿Cuáles son los días laborales en su otro trabajo? </label>
                                 <ul class="col8">
-                                    <li><input type="checkbox" id="l-otrolugar" name="lunes" value="si" @isset ($infoAcademica->lunes) @if($infoAcademica->lunes == "si") checked @endif @endisset><label > Lun.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="martes" value="si" @isset ($infoAcademica->martes) @if($infoAcademica->martes == "si") checked @endif @endisset><label > Mar.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="miercoles" value="si" @isset ($infoAcademica->miercoles) @if($infoAcademica->miercoles == "si") checked @endif @endisset><label > Mierc.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="jueves" value="si" @isset ($infoAcademica->jueves) @if($infoAcademica->jueves == "si") checked @endif @endisset><label > Juev.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="viernes" value="si" @isset ($infoAcademica->viernes) @if($infoAcademica->viernes == "si") checked @endif @endisset><label > Vier.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="sabado" value="si" @isset ($infoAcademica->sabado) @if($infoAcademica->sabado == "si") checked @endif @endisset><label > Sáb.</label></li>
-                                    <li><input type="checkbox" id="dias_laboral" name="domingo" value="si" @isset ($infoAcademica->domingo) @if($infoAcademica->domingo == "si") checked @endif @endisset><label > Dom.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral_lunes" name="lunes" value="si" @isset ($infoAcademica->lunes) @if($infoAcademica->lunes == "si") checked @endif @endisset><label > Lun.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral_martes" name="martes" value="si" @isset ($infoAcademica->martes) @if($infoAcademica->martes == "si") checked @endif @endisset><label > Mar.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral_miercoles" name="miercoles" value="si" @isset ($infoAcademica->miercoles) @if($infoAcademica->miercoles == "si") checked @endif @endisset><label > Mierc.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral_jueves" name="jueves" value="si" @isset ($infoAcademica->jueves) @if($infoAcademica->jueves == "si") checked @endif @endisset><label > Juev.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral_viernes" name="viernes" value="si" @isset ($infoAcademica->viernes) @if($infoAcademica->viernes == "si") checked @endif @endisset><label > Vier.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral_sabado" name="sabado" value="si" @isset ($infoAcademica->sabado) @if($infoAcademica->sabado == "si") checked @endif @endisset><label > Sáb.</label></li>
+                                    <li><input type="checkbox" id="dias_laboral_domingo" name="domingo" value="si" @isset ($infoAcademica->domingo) @if($infoAcademica->domingo == "si") checked @endif @endisset><label > Dom.</label></li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div>
-                            <label for="text-input" class="is-required">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
-                            <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="curriculum_pdf" name="curriculum_pdf"
-                            value="{{ old('curriculum_pdf', $infoAcademica->curriculum_pdf ?? '') }}">
-                        </div>
-                        @if($errors->first('curriculum_pdf'))
-                        <div class="invalid-feedback">
-                        <i>{{ $errors->first('curriculum_pdf') }}</i>
-                        </div>
+                        @if($is_registered_academic)
+                            <div>
+                                <label for="">Ya tenemos tu CV: {{ $infoAcademica->curriculum_pdf}}</label>
+                                <li>Si desea modificar, coloque nuevamente su CV actualizado al día, en caso de que no, con coloque nada</li>
+                                <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="datos_curriculum_pdf" name="curriculum_pdf">
+                            </div>
+                        @else
+                            <div>
+                                <label for="text-input" class="is-required">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
+                                <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="datos_curriculum_pdf" name="curriculum_pdf"
+                                value="{{ old('curriculum_pdf', $infoAcademica->curriculum_pdf ?? '') }}">
+                            </div>
+                            @if($errors->first('curriculum_pdf'))
+                                <div class="invalid-feedback">
+                                    <i>{{ $errors->first('curriculum_pdf') }}</i>
+                                </div>
+                            @endif
                         @endif
 
                         <div>
@@ -254,9 +266,9 @@
 
                     <div>
                         @if($is_registered_academic)
-                            <button  type="submit" class="btn-primario">Actualizar</button>
+                            <button  type="submit" class="btn-primario" id="send_form_experiencia">Actualizar</button>
                         @else
-                            <button  type="submit" class="btn-primario">Guardar Cambios</button>
+                            <button  type="submit" class="btn-primario" id="send_form_experiencia">Guardar Cambios</button>
                         @endif
                     </div><br>&nbsp;
 
@@ -323,6 +335,54 @@
                         $('.js-example-basic-single').select2();
                     });
                 </script>
+            <script>
+
+                var formAcademico = document.querySelector('#form_experiencia');
+                var experienciaButton = document.querySelector('#send_form_experiencia');
+                experienciaButton.addEventListener('click', (e)=>{
+                    e.preventDefault();
+
+                    let data = new FormData();
+                    data.append('experiencia_presencial', document.querySelector('#numero').value);
+                    data.append('experiencia_linea', document.querySelector('#numero2').value);
+                    data.append('nivel_mayor_experiencia', document.querySelector('#datos_nivel_mayor_experiencia').value);
+                    data.append('area_experiencia[]', document.querySelector('#datos_area_experiencia').value);
+                    data.append('id_herramienta[]', document.querySelector('#datos_id_herramienta').value);
+                    data.append('disponibilidad_asesor', document.querySelector('#datos_disponibilidad_asesor').value);
+                    data.append('labora_actualmente', document.querySelector('input[name="labora_actualmente"]').value);
+                    data.append('lugar_labora', document.querySelector('#datos_lugar_labora').value);
+                    data.append('modalidad', document.querySelector('#datos_modalidad').value);
+                    data.append('horario_laboral_inicio', document.querySelector('#datos_horario_laboral_inicio').value);
+                    data.append('horario_laboral_fin', document.querySelector('#datos_horario_laboral_fin').value);
+                    data.append('lunes', document.querySelector('#dias_laboral_lunes').value);
+                    data.append('martes', document.querySelector('#dias_laboral_martes').value);
+                    data.append('miercoles', document.querySelector('#dias_laboral_miercoles').value);
+                    data.append('jueves', document.querySelector('#dias_laboral_jueves').value);
+                    data.append('viernes', document.querySelector('#dias_laboral_viernes').value);
+                    data.append('sabado', document.querySelector('#dias_laboral_sabado').value);
+                    data.append('domingo', document.querySelector('#dias_laboral_domingo').value);
+                    data.append('curriculum_pdf', document.querySelector('#datos_curriculum_pdf').files[0]);
+                    data.append('_token', '{{ csrf_token() }}');
+                    console.log(data);
+
+
+
+
+                    fetch("{{ route('teacher.infoacademica.store') }}", {
+                            method: 'POST',
+                            headers: new Headers({
+                                'X-CSRF-Token': '{{ csrf_token() }}'
+                            }),
+                            body: data
+                        }).then((response) => response.json())
+                        .then((response)=>{
+
+                        Swal.fire('Registro realizado', '', 'success');
+                        }).catch((error)=>console.log);
+
+                    Swal.fire('Cargando', 'Espera un momento', 'info');
+                    });
+                        </script>
 
 
 
