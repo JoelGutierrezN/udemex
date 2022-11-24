@@ -154,16 +154,16 @@
                             @if($is_registered)
                             <input type="file" placeholder="Coloque su CURP" id="curp_pdf" name="curp_pdf"
                             accept="application/pdf">
+                            <div class="">
+                            <a href="{{ route('teacher.usu.download', $usuario->uuid) }}">
+                            <img class="icon" src="{{ asset('img/pdf.jpg')}}" height ="40" width="40" /></a>
+                            </div>
                             @else
                             <input type="file" placeholder="Coloque su fotografía" id="curp_pdf" name="curp_pdf"
                             accept="application/pdf">
+                            
                             @endif
                         </div>
-                        <div class="">
-                        <a href="{{ route('teacher.usu.download', $usuario->uuid) }}">
-                        <img class="icon" src="{{ asset('img/pdf.jpg')}}" height ="40" width="40" /></a>
-                      <!-- {{$usuario->curp_pdf}} </a> -->
-                          </div>
                     </div>
                    
                     @else
