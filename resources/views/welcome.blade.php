@@ -10,7 +10,7 @@
             <button type="button" id="personal-menu" data-tab-target="1">Datos Personales &blacktriangledown;</button>
             <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
-            <button type="button" id="experiencia-menu" data-tab-target="3">Experiencia Laboral &blacktriangledown;</button>
+            <a href="{{ route('experienciaLaboral') }}"><button type="button" id="experiencia-menu">Experiencia Laboral &blacktriangledown;</button></a>
             <button type="button" id="archivos-menu" data-tab-target="4">Capacitación &blacktriangledown;</button>
         </div>
 
@@ -23,7 +23,7 @@
     {{--Fin Asignaturas --}}
 
     {{-- Experiencia Laboral --}}
-    @include('formulario-perfil.experiencia-laboral')
+    {{-- @include('formulario-perfil.experiencia-laboral') --}}
     {{--Fin Experiencia Laboral --}}
 
     {{-- Perfil capacitación --}}
