@@ -8,11 +8,11 @@
             <form action="{{ route('teacher.storeHistorial') }}" method="post" enctype="multipart/form-data" id="historialAcademico-form">
                 @csrf
                 <ul class="col5">
-                    <li class="formlabel">Nombre del titulo</li>
-                    <li class="formlabel">Nombre de la institución</li>
-                    <li class="formlabel">Inicio</li>
-                    <li class="formlabel">Fin</li>
-                    <li class="formlabel">Nivel Escolar</li>
+                    <li class="formlabel is-required">Nombre del titulo</li>
+                    <li class="formlabel is-required">Nombre de la institución</li>
+                    <li class="formlabel is-required">Inicio</li>
+                    <li class="formlabel is-required">Fin</li>
+                    <li class="formlabel is-required">Nivel Escolar</li>
 
                     <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre completo del titulo" id="historial-nombre"></li>
                     <li><input name="institucion" type="text" autocomplete="off" placeholder="Nombre completo de la institucion donde se estudio" id="historial-institucion"></li>
@@ -30,9 +30,9 @@
 
                 <ul class="col5">
                     <li class="formlabel">Tipo de documento</li>
-                    <li class="formlabel">Título</li>
-                    <li class="formlabel">Certificado</li>
-                    <li class="formlabel">Cédula</li>
+                    <li class="formlabel is-required">Título</li>
+                    <li class="formlabel is-required">Certificado</li>
+                    <li class="formlabel is-required">Cédula</li>
                     <li>&#160;</li>
 
                     <li></li>

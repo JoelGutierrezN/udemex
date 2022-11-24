@@ -115,7 +115,6 @@ class InformacionAcademicaController extends Controller
      */
     public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
-
         // / -->forcedelet  seguido de le foreach del controlador (Para editar el array, se debe de borrar y llenar de nuevo)
       $infoAcademica->update($request->all());
       $nombreUser = auth()->user()->name;

@@ -74,7 +74,19 @@ select{
 
 
 input[type="time"],.acortado{
-    width: 45%;
+    width: 50%;
+    height: 80%;
+    margin: 10px auto 10px 0;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    padding: 5px;
+    vertical-align: middle;
+    font-size: 1.5rem;
+}
+
+.acortadox2{
+    width: 15%;
     height: 80%;
     margin: 10px auto 10px 0;
     border: 1px solid var(--gray);
@@ -761,3 +773,6 @@ textarea{
 select{
     width: 100%;
 }
+
+
+

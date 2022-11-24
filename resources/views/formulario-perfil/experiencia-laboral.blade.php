@@ -24,8 +24,8 @@
                     @endif
                     <div class="input-columns-1">
                         <div>
-                            <label for="text-input" class="is-required">Años de experiencia en modalidad presencial.</label>
-                            <input class="acortado" type="number" autocomplete="off"
+                            <label for="text-input"  class="is-required ">Años de experiencia en modalidad presencial</label>
+                            <input class="acortadox2" type="number" autocomplete="off"
                             id="numero" name="experiencia_presencial"
                             onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" min="1" max="99"
                             value="{{ old('experiencia_presencial', $infoAcademica->experiencia_presencial ?? '') }}">
@@ -36,14 +36,9 @@
                         </div>
                         @endif
 
-                        {{-- <select class="js-example-basic-multiple" name="states[]" multiple="multiple">
-                            <option value="AL">Alabama</option>
-                            <option value="WY">Wyoming</option>
-                        </select> --}}
-
                         <div>
                             <label for="text-input" class="is-required">Años de experiencia en modalidad línea</label>
-                            <input class="acortado" type="number" autocomplete="off"
+                            <input class="acortadox2" type="number" autocomplete="off"
                             id="numero2" name="experiencia_linea"
                             onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;" min="1" max="99"
                             value="{{ old('experiencia_linea', $infoAcademica->experiencia_linea ?? '') }}">
@@ -55,7 +50,7 @@
                         @endif
 
                         <div>
-                            <label for="nivel_mayor_experiencia">Seleccione el nivel más alto de experiencia docente</label>
+                            <label for="nivel_mayor_experiencia" class="is-required">Seleccione el nivel más alto de experiencia docente</label>
                             <select name="nivel_mayor_experiencia" id="datos_nivel_mayor_experiencia">
                                 @php
                                     $nivelesExperiencia = ['Preparatoria','Licenciatura', 'Maestría', 'Doctorado'];
@@ -85,7 +80,7 @@
                                 endforeach;
                             @endphp
                             <div>
-                                {{-- <label class="is-required">Áreas de experiencia Laboral</label> --}}
+                                {{-- <label>Áreas de experiencia Laboral</label> --}}
                                 <ol>
                                 <label for="">Tus áreas de experiencia laboral son:</label>
                                 <p>Si desea modificar, coloque nuevamente las áreas de experiencia labora, en caso de que no, no coloque nada</p>
@@ -175,7 +170,7 @@
                         </div>
 
                         <div>
-                            <label for="select-input-2">¿Trabaja en otro lugar actualmente?</label>
+                            <label for="select-input-2" class="is-required">¿Trabaja en otro lugar actualmente?</label>
                             <ul class="col2">
                                 <li>
                                     <input type="radio" id="datos_labora_actualmente_no" name="labora_actualmente" value="No" checked @isset ($infoAcademica->labora_actualmente) @if($infoAcademica->labora_actualmente == "No") checked @endif @endisset>
@@ -383,6 +378,14 @@
                     Swal.fire('Cargando', 'Espera un momento', 'info');
                     });
                         </script>
+
+               <script type="text/javascript">
+                $(".js-example-basic-multiple").select2();
+                </script>
+
+               <script type="text/javascript">
+                $(".js-example-basic-multiple").select2();
+                </script>
 
 
 
