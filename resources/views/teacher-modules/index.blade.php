@@ -81,6 +81,19 @@
                 </div>
 
                 <div>
+                    <label for="date-input" class="is-required"> Fecha de nacimiento</label>
+                    <input type="date" placeholder="Coloque su Fecha de Nacimiento"
+                    autocomplete="off" id="dato_fecha_nacimiento" name="fecha_nacimiento"
+                     value="{{ old('fecha_nacimiento', $usuario->fecha_nacimiento ?? '') }}">
+                </div>
+                    @if($errors->first('fecha_nacimiento'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('fecha_nacimiento') }}</i>
+                    </div>
+                    @endif 
+
+
+                <div>
                     <label for="text-input" class="is-required"> Teléfono de casa</label>
                     <input type="text" placeholder="Coloque su teléfono de casa. (10 dígitos)"
                     autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
@@ -132,6 +145,27 @@
                     </div>
                     @endif
 
+                <div>
+                    @if($is_registered)
+                    <label for="text-file"> Adjuntar archivo en pdf de su CURP</label>
+                    @else
+                    <label for="text-input" class="is-required"> Adjuntar archivo en pdf de su CURP</label>
+                    @endif
+
+                    @if($is_registered)
+                    <input type="file" placeholder="Coloque su CURP" id="curp_pdf" name="curp_pdf"
+                    accept="application/pdf">
+                    @else
+                    <input type="file" placeholder="Coloque su fotografía" id="curp_pdf" name="curp_pdf"
+                    accept="application/pdf">
+                    @endif
+                </div>
+                         @if($errors->first('curp_pdf'))
+                        <div class="invalid-feedback">
+                        <i>{{ $errors->first('curp_pdf') }}</i>
+                        </div>
+                        @endif
+
                     <div>
                          @if($is_registered)
                         <label for="text-input"> Fotografía</label>
@@ -160,7 +194,6 @@
                         </div>
                         @endif
 
-
                 <div>
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
                 </div>
@@ -169,8 +202,16 @@
             <div>
                  @if($is_registered)
                 <button  type="submit" class="btn-primario">Actualizar</button>
+                <p class= "text-obligatorio">
+                     <label class="is-required"> </label>
+                    Los campos marcados con un asterisco son obligatorios.
+                </p><br>&nbsp;
                 @else
-                <button  type="submit" class="btn-primario">Guardar Cambios</button>
+                <button  type="submit" class="btn-primario">Guardar</button>
+                <p class= "text-obligatorio">
+                     <label class="is-required"> </label>
+                    Los campos marcados con un asterisco son obligatorios.
+                </p><br>&nbsp;
                 @endif
             </div>
             <br>&nbsp;
@@ -182,7 +223,7 @@
                             <p>Información actualizada a la fecha: {{ $usuario->updated_at->format('d-m-Y H:i:s') }}</p>
                         </div>
                     </div><br>&nbsp;
-                @endif
+            @endif
         </div>
         </form>
 
