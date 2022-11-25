@@ -17,7 +17,9 @@ class InformacionAcademicaRequest extends FormRequest
         return [
             'experiencia_presencial'    =>['required', 'max:2', 'regex:/^[0-9]+$/'],
             'experiencia_linea'         =>['required', 'max:2', 'regex:/^[0-9]+$/'],
-            'curriculum_pdf'            =>'required',
+            'area_experiencia'          =>'required',
+            'id_herramienta'            =>'required',
+            'curriculum_pdf'            =>['required', 'mimes:pdf'],
         ];
     }
 }

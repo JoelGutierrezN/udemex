@@ -172,7 +172,7 @@
                             <a class="sin" href="{{ route('teacher.usu.download', $usuario->uuid) }}"
                             target=”_blank”>
                             <img class="icon" src="{{ asset('img/pdf.jpg')}}" height ="45" width="45" />
-                           {{$usuario->curp_pdf}} </a>
+                           Descargar </a>
                         </div>
                      </div>
                      

@@ -36,6 +36,8 @@
                     </div>
                 @endif
                 <div class="input-columns-1">
+
+
                     <div>
                         <label for="text-input"  class="is-required ">Años de experiencia en modalidad presencial</label>
                         <input class="acortadox2" type="number" autocomplete="off"
@@ -48,6 +50,8 @@
                     <i>{{ $errors->first('experiencia_presencial') }}</i>
                     </div>
                     @endif
+
+
                     <div>
                         <label for="text-input" class="is-required">Años de experiencia en modalidad línea</label>
                         <input class="acortadox2" type="number" autocomplete="off"
@@ -60,6 +64,8 @@
                     <i>{{ $errors->first('experiencia_linea') }}</i>
                     </div>
                     @endif
+
+
                     <div>
                         <label for="nivel_mayor_experiencia" class="is-required">Seleccione el nivel más alto de experiencia docente</label>
                         <select name="nivel_mayor_experiencia" id="datos_nivel_mayor_experiencia">
@@ -81,7 +87,9 @@
                             @endif
                         </select>
                     </div>
-                    @if($is_registered_academic)
+
+
+                  @if($is_registered_academic)
                         @php
                             $areas_registered = [];
                             $areas_infoAcademica = App\Models\InfoAcademicArea::where("id_user", Auth::id())->get();
@@ -90,7 +98,7 @@
                             endforeach;
                         @endphp
                         <div>
-                            {{-- <label>Áreas de experiencia Laboral</label> --}}
+                         <label>Áreas de experiencia Laboral</label> 
                             <ol>
                             <label for="">Tus áreas de experiencia laboral son:</label>
                             <p>Si desea modificar, coloque nuevamente las áreas de experiencia labora, en caso de que no, no coloque nada</p>
@@ -115,17 +123,19 @@
                     <div>
                         <label class="is-required">Áreas de experiencia Laboral</label>
                         <select  name="area_experiencia[]" class="js-example-basic-multiple" multiple="multiple">
-                            @foreach ($areas as $area)
-                            <option value="{{$area->id_area_experiencia}}">{{$area->nombre}}</option>
-                            @endforeach
+                        @foreach ($areas as $area)
+                        <option value="{{$area->id_area_experiencia}}">{{$area->nombre}}</option>
+                         @endforeach
                         </select>
                     </div>
-                    @if($errors->first('area_experiencia[]'))
+                        @if($errors->first('area_experiencia'))
                             <div class="invalid-feedback">
-                                <i>{{ $errors->first('area_experiencia[]') }}</i>
+                                <i>{{ $errors->first('area_experiencia') }}</i>
                             </div>
                         @endif
                     @endif
+
+
                     @if($is_registered_academic)
                         @php
                             $herramientas_registered = [];
@@ -152,17 +162,19 @@
                         <div>
                             <label class="is-required">Seleccione las herramientas tecnológicas que sabe utilizar</label>
                             <select  name="id_herramienta[]" class="js-example-basic-multiple" multiple="multiple">
-                                @foreach ($herramientas as $herramienta)
-                                <option value="{{$herramienta->id_herramienta}}">{{$herramienta->nombre}}</option>
-                                @endforeach
-                              </select>
+                            @foreach ($herramientas as $herramienta)
+                            <option value="{{$herramienta->id_herramienta}}">{{$herramienta->nombre}}</option>
+                            @endforeach
+                            </select>
                         </div>
-                        {{-- @if($errors->first('id_herramienta[]'))
+                             @if($errors->first('id_herramienta'))
                             <div class="invalid-feedback">
-                                <i>{{ $errors->first('id_herramienta[]') }}</i>
+                            <i>{{ $errors->first('id_herramienta') }}</i>
                             </div>
-                        @endif --}}
+                             @endif 
                     @endif
+
+
                     <div>
                         <label for="select-input-2" class="is-required">Disponibilidad para ser asesor en la UDEMEX</label>
                         <ul class="col2">
@@ -174,6 +186,8 @@
                             <li>
                         </ul>
                     </div>
+
+
                     <div>
                         <label for="select-input-2" class="is-required">¿Trabaja en otro lugar actualmente?</label>
                         <ul class="col2">
@@ -185,6 +199,8 @@
                             <li>
                         </ul>
                     </div>
+
+
                     <div id="datos_si_labora">
                         <div>
                             <label for="datos_lugar_labora" class="is-required">Nombre completo del lugar donde labora</label>
@@ -192,6 +208,7 @@
                             id="datos_lugar_labora" name="lugar_labora"
                             value="{{ old('lugar_labora', $infoAcademica->lugar_labora ?? '') }}">
                         </div>
+
                         <div>
                             <label class="is-required">Seleccione la modalidad en la que labora</label>
                             <select name="modalidad" id="datos_modalidad">
@@ -262,7 +279,7 @@
                     @if($is_registered_academic)
                         <button  type="submit" class="btn-primario" id="send_form_experiencia">Actualizar</button>
                     @else
-                        <button  type="submit" class="btn-primario" id="send_form_experiencia">Guardar Cambios</button>
+                        <button  type="submit" class="btn-primario" id="send_form_experiencia">Guardar</button>
                     @endif
                 </div><br>&nbsp;
                 @if($is_registered_academic)

@@ -16,6 +16,7 @@ class InformacionAcademica extends Model
     public $timestamp = false;
 
     protected $fillable = [
+        'uuid',
         'experiencia_presencial',
         'experiencia_linea',
         'nivel_mayor_experiencia',

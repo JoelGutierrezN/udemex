@@ -10,6 +10,9 @@ use App\Http\Requests\InformacionAcademicaRequest;
 use App\Http\Requests\InformacionAcademicaUpdateRequest;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class InformacionAcademicaController extends Controller
 {
@@ -39,9 +42,7 @@ class InformacionAcademicaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request){
-
-        // dd($request->all());
+    public function store(InformacionAcademicaRequest $request){
 
         $nombreUser = auth()->user()->name;
 
@@ -70,15 +71,16 @@ class InformacionAcademicaController extends Controller
         if($request->hasFile('curriculum_pdf')){
             $pdf = $request->file('curriculum_pdf');
             $destino = 'documentos/Curriculum/';
-            $pdfname = 'CV_'.$nombreUser;
+            $pdfname = 'CV_'.$nombreUser.'.'.$pdf->guessExtension();
             $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
             $infoAcademica->curriculum_pdf = $pdfname;
         }
 
+        $infoAcademica['uuid'] = (string) Str::uuid();
+
         $infoAcademica->save();
-        Alert::alert()->success('Guardado!',' Tu experiencia laboral han sido regristada correctamente.');
-            return redirect()->route("experienciaLaboral");
-            // return response()->json($data, 200);
+        Alert::alert()->success('Guardado!',' Tu experiencia laboral ha sido actualizada correctamente.');
+        return redirect()->route("experienciaLaboral");
 
     }
 
