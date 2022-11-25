@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
+
 class UsuarioController extends Controller
 {
     /**
@@ -109,6 +110,7 @@ class UsuarioController extends Controller
      */
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
+
             $nombreUser = auth()->user()->name;
             
             if($request->curp_pdf  != '')

@@ -101,7 +101,7 @@
                     <input type="date" placeholder="Coloque su Fecha de Nacimiento"
                     autocomplete="off" id="fechaNacimiento" name="fecha_nacimiento"
                     min="1930-01-01" max="2010-12-31"
-                     value="{{ old('fecha_nacimiento', $usuario->fecha_nacimiento ?? '') }}">
+                    value="{{ old('fecha_nacimiento', $usuario->fecha_nacimiento ?? '') }}">
                 </div>
                     @if($errors->first('fecha_nacimiento'))
                     <div class="invalid-feedback">
@@ -110,6 +110,18 @@
                     @endif
 
                 <div id="edad"></div>
+
+                <div>
+                 @if($is_registered)
+                 <label for="date-input"> Tu edad</label>
+                 @php
+                 $fecha_de_nacimiento = $usuario->fecha_nacimiento;
+                 $hoy = date("d-m-Y");
+                 $diff = date_diff(date_create($fecha_de_nacimiento), date_create($hoy));
+                 @endphp
+                 <input type="text" readonly  id="edad" value="{{$diff->format('%y') }} años ">
+                 @endif
+                </div>
 
                 <div>
                     <label for="text-input" class="is-required"> Teléfono de casa</label>
@@ -355,8 +367,8 @@
                 if (this.value) {
                     //edad.innerText = `La edad es: ${calcularEdad(this.value)} años`;
                     edad.innerHTML = `
-                    <label class="is-required" for="edadCalculada">Tu edad</label>
-                    <input id="edadCalculada" value="${calcularEdad(this.value)}" disabled="disabled">
+                    <label for="edadCalculada">Tu edad</label>
+                    <input type="text" id="edadCalculada" value="${calcularEdad(this.value)} años"  disabled="disabled">
                     `
                 }
             });

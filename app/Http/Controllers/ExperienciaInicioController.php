@@ -38,9 +38,10 @@ class ExperienciaInicioController extends Controller
        
        $herramientas_no_seleccionadas = \DB::select('SELECT * FROM herramienta_tecnologicas WHERE NOT EXISTS (SELECT * FROM infoacademic_herramientas WHERE infoacademic_herramientas.id_herramienta = herramienta_tecnologicas.id_herramienta)');
 
-    //    dd($herramientas_no_seleccionadas);
+        
          return view("experiencia-laboral",compact('is_registered', 'usuario','is_registered_academic', 'infoAcademica', 'herramientas', 'areastabla',
-        'infoacademicareas', 'areas_no_seleccionadas', 'herramientas_no_seleccionadas' ));
+        'infoacademicareas', 'areas_no_seleccionadas', 'herramientas_no_seleccionadas', 'edad' ));
+
 
         }
 }
