@@ -278,8 +278,16 @@
                 <div>
                     @if($is_registered_academic)
                         <button  type="submit" class="btn-primario" id="send_form_experiencia">Actualizar</button>
+                        <p class= "text-obligatorio">
+                        <label class="is-required"> </label>
+                        Los campos marcados con un asterisco son obligatorios.
+                        </p><br>&nbsp;
                     @else
                         <button  type="submit" class="btn-primario" id="send_form_experiencia">Guardar</button>
+                        <p class= "text-obligatorio">
+                        <label class="is-required"> </label>
+                        Los campos marcados con un asterisco son obligatorios.
+                        </p><br>&nbsp;
                     @endif
                 </div><br>&nbsp;
                 @if($is_registered_academic)
