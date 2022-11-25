@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UsuarioCreateRequest;
 use App\Http\Requests\UsuarioUpdateRequest;
 use App\Models\Usuario;
+use App\Models\InformacionAcademica;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -161,6 +162,14 @@ class UsuarioController extends Controller
     {
         $usu = Usuario::where('uuid', $uuid)->firstOrFail();
         $pathToFile = ("documentos/Curp/" . $usu->curp_pdf);
+        // return response()->download($pathToFile);
+        return response()->file($pathToFile);
+    }
+
+      public function downloadinfo($uuid)
+    {
+        $infoacademic = InformacionAcademica::where('uuid', $uuid)->firstOrFail();
+        $pathToFile = ("documentos/Curriculum/" . $infoacademic->curriculum_pdf);
         // return response()->download($pathToFile);
         return response()->file($pathToFile);
     }
