@@ -10,7 +10,7 @@
             <button type="button" id="personal-menu" data-tab-target="1">Datos Personales &blacktriangledown;</button>
             <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
-            <a href="{{ route('experienciaLaboral') }}"><button type="button" id="experiencia-menu">Experiencia Laboral &blacktriangledown;</button></a>
+            <a href="{{ route('teacher.experienciaLaboral') }}"><button type="button" id="experiencia-menu">Experiencia Laboral &blacktriangledown;</button></a>
             <button type="button" id="archivos-menu" data-tab-target="4">Capacitación &blacktriangledown;</button>
         </div>
 
@@ -175,17 +175,17 @@
                            Descargar </a>
                         </div>
                      </div>
-                     
+
                         <input type="file" placeholder="Coloque su CURP" id="curp_pdf" name="curp_pdf"
                          accept="application/pdf">
-                    
+
                     @else
                        <label for="text-input" class="is-required"> Adjuntar archivo en pdf de su CURP</label>
                         <input type="file" placeholder="Coloque su fotografía" id="curp_pdf" name="curp_pdf"
                         accept="application/pdf">
                     @endif
                 </div>
-                
+
                     @if($errors->first('curp_pdf'))
                    <div class="invalid-feedback">
                    <i>{{ $errors->first('curp_pdf') }}</i>
@@ -265,7 +265,7 @@
     @include('formulario-perfil.historial-academico')
     {{-- Fin Historial académico --}}
 
-    
+
     {{-- Modal to PDF --}}
     <div id="myModal" class="modal">
     <!-- Modal content -->
