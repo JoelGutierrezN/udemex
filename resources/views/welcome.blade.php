@@ -169,7 +169,8 @@
                     </p>
                      <div class="conte">
                         <div class="pdfright">
-                            <a class="sin" href="{{ route('teacher.usu.download', $usuario->uuid) }}">
+                            <a class="sin" href="{{ route('teacher.usu.download', $usuario->uuid) }}"
+                            target=”_blank”>
                             <img class="icon" src="{{ asset('img/pdf.jpg')}}" height ="45" width="45" />
                            {{$usuario->curp_pdf}} </a>
                         </div>
@@ -182,15 +183,14 @@
                        <label for="text-input" class="is-required"> Adjuntar archivo en pdf de su CURP</label>
                         <input type="file" placeholder="Coloque su fotografía" id="curp_pdf" name="curp_pdf"
                         accept="application/pdf">
-
-                        @if($errors->first('curp_pdf'))
-                       <div class="invalid-feedback">
-                       <i>{{ $errors->first('curp_pdf') }}</i>
-                       </div>
-                       @endif
-
                     @endif
                 </div>
+                
+                    @if($errors->first('curp_pdf'))
+                   <div class="invalid-feedback">
+                   <i>{{ $errors->first('curp_pdf') }}</i>
+                   </div>
+                   @endif
 
                     <div>
                          @if($is_registered)
@@ -265,15 +265,7 @@
     @include('formulario-perfil.historial-academico')
     {{-- Fin Historial académico --}}
 
-@section('scripts')
-    <script type="text/javascript" src="{{ asset('js/utilities/menu.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            $('.select2-multiple').select2();
-        });
-    </script>
-@endsection
-
+    
     {{-- Modal to PDF --}}
     <div id="myModal" class="modal">
     <!-- Modal content -->
@@ -284,10 +276,16 @@
         </div>
     </div>
     {{-- Modal to PDF --}}
-@endsection
+    @endsection
 
-{{-- Scripts --}}
 @section('scripts')
+    <script type="text/javascript" src="{{ asset('js/utilities/menu.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2-multiple').select2();
+        });
+    </script>
+
     <script type="text/javascript" src="{{ asset('js/utilities/menu.js') }}"></script>
 
     <script>
@@ -314,7 +312,6 @@
                     reader.onload = function(e){
                         $('#imagePreview').html("<img class='fotoperfil' src='"+e.target.result+"'/>");
                     }
-
                     reader.readAsDataURL(input.files[0]);
                 }
             }

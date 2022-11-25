@@ -64,7 +64,7 @@ class UsuarioController extends Controller
         if($request->hasFile('curp_pdf')){
             $pdf = $request->file('curp_pdf');
             $destino = 'documentos/Curp/';
-            $pdfname = 'CURP_'.$nombreUser.time().'.'.$pdf->guessExtension();
+            $pdfname = 'CURP_'.$nombreUser.'.'.$pdf->guessExtension();
             $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
             $newUsuario->curp_pdf = $pdfname;
         }
@@ -108,27 +108,42 @@ class UsuarioController extends Controller
      */
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
-      $nombreUser = auth()->user()->name;
-      $usuario->update($request->all());
-      if($request->hasFile('foto')){
-            $foto = $request->file('foto');
-            $destino = 'imagenes/perfil/';
-            $fotoname = time() . '-' . $foto->getClientOriginalName();
-            $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
-            $usuario->foto = $fotoname;
-        }
+            $nombreUser = auth()->user()->name;
+            
+            if($request->curp_pdf  != '')
+            {
+            unlink('documentos/Curp/'.$usuario->curp_pdf);
+            }
 
-        if($request->hasFile('curp_pdf')){
-            $pdf = $request->file('curp_pdf');
-            $destino = 'documentos/Curp/';
-            $pdfname = 'CURP_'.$nombreUser.time().'.'.$pdf->guessExtension();
-            $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
-            $usuario->curp_pdf = $pdfname;
-    }
-        $usuario->save();
+            if($request->foto  != '')
+            {
+            unlink('imagenes/perfil/'.$usuario->foto);
+            }
 
-         Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
-         return redirect()->route("teacher.welcome");
+            $usuario->update($request->all());
+
+            
+            if($request->hasFile('foto')){
+                    $foto = $request->file('foto');
+                    $destino = 'imagenes/perfil/';
+                    $fotoname = time() . '-' . $foto->getClientOriginalName();
+                    $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
+                    $usuario->foto = $fotoname;
+                }
+
+                if($request->hasFile('curp_pdf')){
+                    $pdf = $request->file('curp_pdf');
+                    $destino = 'documentos/Curp/';
+                    $pdfname = 'CURP_'.$nombreUser.'.'.$pdf->guessExtension();
+                    $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
+                    $usuario->curp_pdf = $pdfname;
+                }
+                
+
+                $usuario->save();
+
+                Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
+                return redirect()->route("teacher.welcome");
     }
 
     /**
@@ -146,8 +161,8 @@ class UsuarioController extends Controller
     {
         $usu = Usuario::where('uuid', $uuid)->firstOrFail();
         $pathToFile = ("documentos/Curp/" . $usu->curp_pdf);
-        return response()->download($pathToFile);
-        // return response()->file($pathToFile);
+        // return response()->download($pathToFile);
+        return response()->file($pathToFile);
     }
     
 }
