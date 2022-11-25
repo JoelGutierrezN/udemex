@@ -741,13 +741,13 @@ footer h5, footer h6{
     height: auto;
 }
 
-.pdfleft {
-    /* padding-left: 0px;
-    padding-top: 10px;
-    margin-left: 57px; */
-    float: left;
+.pdfright {
+    padding-right: 0px;
+    /* padding-top: 10px;
+    margin-left: 57px;  */
+    float: right;
     position: relative;
-    width: 90%;
+    width: 20%;
     height: auto;
 }
 
@@ -798,6 +798,11 @@ textarea{
 
 select{
     width: 100%;
+}
+
+a.sin {
+    text-decoration: none;
+    color: #000;
 }
 
 

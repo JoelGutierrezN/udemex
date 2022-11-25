@@ -111,19 +111,19 @@ class UsuarioController extends Controller
       $nombreUser = auth()->user()->name;
       $usuario->update($request->all());
       if($request->hasFile('foto')){
-           $destino = 'imagenes/perfil/';
             $foto = $request->file('foto');
+            $destino = 'imagenes/perfil/';
             $fotoname = time() . '-' . $foto->getClientOriginalName();
             $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
             $usuario->foto = $fotoname;
         }
 
         if($request->hasFile('curp_pdf')){
-        $pdf = $request->file('curp_pdf');
-        $destino = 'documentos/Curp/';
-        $pdfname = 'CURP_'.$nombreUser.time().'.'.$pdf->guessExtension();
-        $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
-        $infoAcademica->curp_pdf = $pdfname;
+            $pdf = $request->file('curp_pdf');
+            $destino = 'documentos/Curp/';
+            $pdfname = 'CURP_'.$nombreUser.time().'.'.$pdf->guessExtension();
+            $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
+            $usuario->curp_pdf = $pdfname;
     }
         $usuario->save();
 
