@@ -19,4 +19,8 @@ class AreaExperiencia extends Model
         'nombre',
         'activo'
     ];
+
+    protected $attributes = [
+    'activo' => 1
+    ];
 }

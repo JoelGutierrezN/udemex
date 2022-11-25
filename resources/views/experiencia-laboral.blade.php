@@ -99,23 +99,13 @@
                         @endphp
                         <div>
                          <label>Áreas de experiencia Laboral</label>
-                            <ol>
-                            <label for="">Tus áreas de experiencia laboral son:</label>
-                            <p>Si desea modificar, coloque nuevamente las áreas de experiencia labora, en caso de que no, no coloque nada</p>
-                                @foreach ($areas_registered as $area)
-                                    <li>{{$area->nombre}}</li>
-                                @endforeach
-                            </ol>
                             <select  name="area_experiencia[]" class="js-example-basic-multiple" multiple="multiple">
-                                {{-- @foreach ($areas_registered as $area)
-                                    <option value="{{$area->id_area_experiencia}}" selected>{{$area->nombre}}</option>
-                                @endforeach --}}
-                                @foreach ($areas as $areabd)
-                                    {{-- @if ($area->id_area_experiencia!=$areabd->id_area_experiencia) --}}
-                                        <option value="{{$areabd->id_area_experiencia}}">{{$areabd->nombre}}</option>
-                                    {{-- @else --}}
-                                        {{-- @continue --}}
-                                    {{-- @endif --}}
+                                 @foreach ($areas_registered as $arearegi)
+                                    <option value="{{$arearegi->id_area_experiencia}}" selected>{{$arearegi->nombre}}</option>
+                                 @endforeach 
+                                 
+                                @foreach ($areas_no_seleccionadas as $areasnoselect)
+                                        <option value="{{$areasnoselect->id_area_experiencia}}">{{$areasnoselect->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -144,18 +134,17 @@
                                 array_push($herramientas_registered , App\Models\HerramientaTecnologica::where("id_herramienta", $herramienta->id_herramienta)->first());
                             endforeach;
                         @endphp
+
                         <div>
-                            <ol>
-                            <label for="">Tus herramientas que sabe utilizar son:</label>
-                                <p>Si desea modificar, coloque nuevamente las herramientas tecnológicas de experiencia labora, en caso de que no, no coloque nada</p>
-                                    @foreach ($herramientas_registered as $herramienta)
-                                        <li>{{$herramienta->nombre}}</li>
-                                    @endforeach
-                                </ol>
+                         <label>Seleccione las herramientas tecnológicas que sabe utilizar</label>
                             <select  name="id_herramienta[]" class="js-example-basic-multiple" multiple="multiple">
-                                @foreach ($herramientas as $herramientabd)
-                                    <option value="{{$herramientabd->id_herramienta}}">{{$herramientabd->nombre}}</option>
+                                @foreach ($herramientas_registered as $herramientabd)
+                                    <option value="{{$herramientabd->id_herramienta}}" selected>{{$herramientabd->nombre}}</option>
+                                @endforeach 
+                                   @foreach ($herramientas_no_seleccionadas as $herramientasnoselect)
+                                        <option value="{{$herramientasnoselect->id_herramienta}}">{{$herramientasnoselect->nombre}}</option>
                                 @endforeach
+                               
                             </select>
                         </div>
                     @else
