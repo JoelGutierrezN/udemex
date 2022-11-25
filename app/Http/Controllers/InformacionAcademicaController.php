@@ -115,9 +115,15 @@ class InformacionAcademicaController extends Controller
      */
     public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
+        if($request->curriculum_pdf  != '')
+        {
+            unlink('documentos/Curriculum/'.$usuario->curriculum_pdf);
+        }
+        
         // / -->forcedelet  seguido de le foreach del controlador (Para editar el array, se debe de borrar y llenar de nuevo)
-      $infoAcademica->update($request->all());
-      $nombreUser = auth()->user()->name;
+        
+        $infoAcademica->update($request->all());
+        $nombreUser = auth()->user()->name;
 
     //   foreach(){
     //     $infoAcademica->forceDelete($infoAcademica);
@@ -141,10 +147,11 @@ class InformacionAcademicaController extends Controller
       if($request->hasFile('curriculum_pdf')){
         $pdf = $request->file('curriculum_pdf');
         $destino = 'documentos/Curriculum/';
-        $pdfname = 'CV_'.$nombreUser;
+        $pdfname = 'CV_'.$nombreUser.'.'.$pdf->guessExtension();
         $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
         $infoAcademica->curriculum_pdf = $pdfname;
     }
+
         $infoAcademica->save();
 
          Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
