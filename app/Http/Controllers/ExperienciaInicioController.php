@@ -40,7 +40,7 @@ class ExperienciaInicioController extends Controller
 
         
          return view("experiencia-laboral",compact('is_registered', 'usuario','is_registered_academic', 'infoAcademica', 'herramientas', 'areastabla',
-        'infoacademicareas', 'areas_no_seleccionadas', 'herramientas_no_seleccionadas', 'edad' ));
+        'infoacademicareas', 'areas_no_seleccionadas', 'herramientas_no_seleccionadas' ));
 
 
         }
