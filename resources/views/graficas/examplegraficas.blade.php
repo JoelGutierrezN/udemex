@@ -4,9 +4,15 @@
 
 @section('content')
 
-    <form action="#" method="POST">
-        @csrf
-        @method('POST')
+    <style>
+      .graficas-container{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5px;
+      }
+    </style>
+
+    <div id="graficas">
 
         <h3 class="form-screen-title">Ejemplo de Graficas</h3>
 
@@ -16,42 +22,98 @@
         </div>
 
         <div class="mt-2" data-tab-id="1">
-            <h3 class="tab--title">Datos Personales</h3>
-            <div>
-                    <figure class="highcharts-figure">
-                        <div id="container"></div>
-                      </figure>
-            </div>
+            
+              <h3 class="tab--title">Datos Personales</h3>
+              <div class="graficas-container">
+                <div>
+                  <figure class="highcharts-figure">
+                    <div id="container-1"></div>
+                  </figure>
+                </div>
+                <div>
+                  <figure class="highcharts-figure">
+                    <div id="container-2"></div>
+                  </figure>
+                </div>
+              </div>
         </div>
 
         <div class="mt-2" data-tab-id="2">
-            <h3 class="tab--title">Datos de la Carrera Profesional</h3>
-            <div class="input-columns-2">
-                <div>
-                    <label for="text-input-2">Nombre del campo 2</label>
-                    <input type="text" placeholder="Este es un placeholder" id="text-input-2">
-                </div>
-
-                <div>
-                    <label for="select-input-2">Nombre del campo 2</label>
-                    <select id="select-input-2">
-                        <option value="">opcion 1</option>
-                        <option value="">opcion 2</option>
-                        <option value="">opcion 3</option>
-                    </select>
-                </div>
-            </div>
+            <h2>Pagina en construccion</h2>
         </div>
 
 
-    </form>
+</div>
 
 @endsection
 
 @section('scripts')
     <script type="text/javascript" src="{{ asset('js/utilities/menu.js') }}"></script>
+
+    <script>
+      Highcharts.chart('container-2', {
+        chart: {
+          type: 'column'
+        },
+        title: {
+          align: 'left',
+          text: 'Histoarial academico'
+        },
+        accessibility: {
+            announceNewData: {
+              enabled: true
+            },
+            point: {
+              valueSuffix: '%'
+            }
+          },
+          credits: {
+            enabled:false
+          },
+        
+          tooltip: {
+            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+          },
+
+          series: [{
+              name: "Browsers",
+              colorByPoint: true,
+              data: [
+                {
+                  name: "Chrome",
+                  y: 61.04,
+                  drilldown: "Chrome"
+                },
+                {
+                  name: "Safari",
+                  y: 9.47,
+                  drilldown: "Safari"
+                },
+                {
+                  name: "Edge",
+                  y: 9.32,
+                  drilldown: "Edge"
+                },
+                {
+                  name: "Firefox",
+                  y: 8.15,
+                  drilldown: "Firefox"
+                },
+                {
+                  name: "Other",
+                  y: 11.02,
+                  drilldown: null
+                }
+              ]
+            }
+          ],
+          
+      });
+    </script>
+
     <script>// Create the chart
-        Highcharts.chart('container', {
+        Highcharts.chart('container-1', {
           chart: {
             type: 'pie'
           },
