@@ -80,7 +80,7 @@ class InformacionAcademicaController extends Controller
 
         $infoAcademica->save();
         Alert::alert()->success('Guardado!',' Tu experiencia laboral ha sido actualizada correctamente.');
-        return redirect()->route("experienciaLaboral");
+        return redirect()->route("teacher.experienciaLaboral");
 
     }
 
@@ -148,7 +148,7 @@ class InformacionAcademicaController extends Controller
         $infoAcademica->save();
 
          Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
-         return redirect()->route("teacher.welcome");
+         return redirect()->route("teacher.experienciaLaboral");
     }
 
     public function forceDelete($infoAcademica)
