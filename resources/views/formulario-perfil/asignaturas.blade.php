@@ -81,7 +81,14 @@
                     <li><a href="#" id="agregar-materias" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></a></li>
                 </form>
             </ul>
-            <p class="is-required">Campos obligatorios</p>
+            <div id="asignatura-ultima-actualizacion">
+                <div style="width: 49%; display: inline-block">
+                    <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
+                </div>
+                <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
+                    <p>Información actualizada a la fecha: <span id="a-actualizacion"></span></p>
+                </div>
+            </div>
             <table id="table-materias" style="font-size: 1.3rem;">
                 <thead>
                     <tr>
@@ -168,6 +175,7 @@
                                 fetch(`delete-materia/${element.id_asignatura}`)
                                     .then((response) => response.json())
                                     .then((response) => {
+                                        getLastAsignatura()
                                         Swal.fire(response[0].alert, '', 'success');
                                         table.removeChild(tr);
                                     }).catch((error)=>{
@@ -181,6 +189,7 @@
     }
     materiasMenu.addEventListener('click', ()=>{
         createMateriasTable();
+        getLastAsignatura()
     });
 
     document.querySelector('#agregar-materias')
@@ -204,6 +213,7 @@
                 body: data
             }).then((response) => response.json())
                 .then((response)=>{
+                    getLastAsignatura()
                     createMateriasTable();
                     inputNombre.value = '';
                     inputInstitucion.value = '';
@@ -212,5 +222,13 @@
                     inputNivel.value = '';
                     Swal.fire(response[0].state, '', 'success');
                 });
-        })
+        });
+
+        function getLastAsignatura(){
+            fetch('{{ route("teacher.lastAsignatura") }}')
+                .then( (response) => response.json() )
+                .then( (response) => {
+                    document.querySelector('#a-actualizacion').innerHTML = new Date(response[0].created_at).toLocaleDateString('es-MX');
+                });
+        }
 </script>

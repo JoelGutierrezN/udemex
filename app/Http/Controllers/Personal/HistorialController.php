@@ -38,6 +38,7 @@ class HistorialController extends Controller
                     'fecha_fin' => $request->fin,
                     'nivel_escolar' => $request->nivel,
                     'id_user' => \Auth::user()->id,
+                    'created_at' => date('Y-m-d H:i:s'),
                     'activo' => 1
                 ]);
 
@@ -136,5 +137,16 @@ class HistorialController extends Controller
             'alert' => 'Registro eliminado'
         ]);
         return response()->json($data, 200);
+    }
+
+    public function ultimaActualizacion(){
+        $info = \DB::table('historial_academicos')
+            ->where('id_user', '=', \Auth::user()->id)
+            ->select('created_at')
+            ->orderBy('created_at', 'DESC')
+            ->limit(1)
+            ->get();
+
+        return $info;
     }
 }

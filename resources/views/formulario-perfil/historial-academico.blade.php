@@ -15,6 +15,7 @@
     #historialAcademico-form ul li input, #historialAcademico-form ul li select{
         height: 3.5rem;
     }
+    
 </style>
 
 <div class="mt-2" data-tab-id="5">
@@ -68,7 +69,15 @@
                     <li><button id="historial-button" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                 </ul>
             </form>
-            <p class="is-required">Campos obligatorios</p>
+            <div id="historial-ultima-actualizacion">
+                <div style="width: 49%; display: inline-block">
+                    <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
+                </div>
+                <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
+                    <p>Información actualizada a la fecha: <span id="h-actualizacion"></span></p>
+                </div>
+            </div>
+
             <br>
             <table id="table-historial-academico" style="font-size: 1.3rem;">
                 <thead>
@@ -127,6 +136,8 @@
         fetch("getHistorial/{{ Auth::user()->id }}")
             .then((response) => response.json())
             .then((response) => {
+
+                getLastHistorial();
                                     
                 // Get the modal
                 var modal = document.getElementById("myModal");
@@ -221,6 +232,7 @@
                                 fetch(`delete-historial/${ element.id_asignatura }`)
                                     .then((response) => response.json())
                                     .then((response) => {
+                                        getLastHistorial();
                                         Swal.fire(response[0].alert, '', 'success');
                                         table.removeChild(tr);
                                     }).catch((error)=>{
@@ -233,7 +245,17 @@
             });
     }
 
+    function getLastHistorial(){
+        fetch('{{ route("teacher.lastHistorial") }}')
+            .then( (response) => response.json() )
+            .then( (response) => {
+                document.querySelector('#h-actualizacion').innerHTML = new Date(response[0].created_at).toLocaleDateString('es-MX');
+            });
+    }
+                
+
     historialMenu.addEventListener('click', (e)=>{
         createHistorialTable();
+        getLastHistorial();
     });    
 </script>

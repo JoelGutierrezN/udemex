@@ -101,4 +101,15 @@ class ArchivosController extends Controller
         $info = [$dentro, $fuera];
         return $info;
     }
+
+    public function ultimaActualizacion(){
+        $info = \DB::table('capacitaciones')
+            ->where('id_user', '=', \Auth::user()->id)
+            ->select('created_at')
+            ->orderBy('created_at', 'DESC')
+            ->limit(1)
+            ->get();
+
+        return $info;
+    }
 }

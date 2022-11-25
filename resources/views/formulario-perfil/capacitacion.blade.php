@@ -63,7 +63,14 @@
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </ul>
                         </form>
-                        <p class="is-required">Campos obligatorios</p>
+                        <div id="capacitacion-ultima-actualizacion">
+                            <div style="width: 49%; display: inline-block">
+                                <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
+                            </div>
+                            <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
+                                <p>Información actualizada a la fecha: <span id="c-actualizacion"></span></p>
+                            </div>
+                        </div>
                      <br><br><br>
                     
                     <label style="font-size: 2rem;" for="text-input"> Capacitación solicitada en UDEMEX</label>
@@ -151,6 +158,7 @@
 
     archivosMenu.addEventListener('click', ()=>{
         getCapacitacionData();
+        getLastCapacitacion()
     });
 
     function getCapacitacionData(){
@@ -168,6 +176,8 @@
         //console.log('a');
         data.forEach((element)=>{
                     let tr = document.createElement('tr');
+
+                    getLastCapacitacion()
 
                     // Get the modal
                     var modal = document.getElementById("myModal");
@@ -250,6 +260,7 @@
                                 fetch(`delete-capacitacion/${ element.id_capacitacion }`)
                                     .then((response) => response.json())
                                     .then((response) => {
+                                        getLastCapacitacion()
                                         Swal.fire(response[0].alert, '', 'success');
                                         table.removeChild(tr);
                                     }).catch((error)=>{
@@ -259,5 +270,13 @@
                         });
                     });     
                 });
+    }
+
+    function getLastCapacitacion(){
+        fetch('{{ route("teacher.lastCapacitacion") }}')
+            .then( (response) => response.json() )
+            .then( (response) => {
+                document.querySelector('#c-actualizacion').innerHTML = new Date(response[0].created_at).toLocaleDateString('es-MX');
+            });
     }
 </script>

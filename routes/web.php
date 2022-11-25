@@ -48,16 +48,19 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     Route::post('/updateFiles', [ArchivosController::class, 'update'])->name('updateFiles');
     Route::get('/getCapacitaciones/{id}', [ArchivosController::class, 'getCapacitaciones'])->name('getCapacitaciones');
     Route::get('/delete-capacitacion/{id}', [ArchivosController::class, 'deleteCapacitacion'])->name('deleteCapacitacion');
+    Route::get('/capacitacion/ultimaActualizacion', [ArchivosController::class, 'ultimaActualizacion'])->name('lastCapacitacion');
 
     // * Rutas para las materias
     Route::post('/storeMaterias', [MateriasController::class, 'store'])->name('storeMaterias');
     Route::get('/getMaterias/{id}', [MateriasController::class, 'getMaterias'])->name('getMaterias');
     Route::get('/delete-materia/{id}', [MateriasController::class, 'deleteMateria'])->name('deleteMateria');
+    Route::get('/asignaturas/ultimaActualizacion', [MateriasController::class, 'ultimaActualizacion'])->name('lastAsignatura');
 
     // * Rutas para el historial
     Route::post('/storeHistorial', [HistorialController::class, 'store'])->name('storeHistorial');
     Route::get('/getHistorial/{id}', [HistorialController::class, 'getHistorial'])->name('getHistorial');
     Route::get('/delete-historial/{id}', [HistorialController::class, 'deleteHistorial'])->name('deleteHistorial');
+    Route::get('/historial/ultimaActualizacion', [HistorialController::class, 'ultimaActualizacion'])->name('lastHistorial');
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');
