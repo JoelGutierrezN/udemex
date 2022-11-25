@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class GraficasController extends Controller
 {
-    //
+    public function example(){
+        return view('graficas.examplegraficas');
+    }
 }

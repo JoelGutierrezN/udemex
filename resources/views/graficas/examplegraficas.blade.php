@@ -8,7 +8,7 @@
         @csrf
         @method('POST')
 
-        <h3 class="form-screen-title">Registro de Información Personal</h3>
+        <h3 class="form-screen-title">Ejemplo de Graficas</h3>
 
         <div class="tabs">
             <button type="button" data-tab-target="1">Datos Personales &blacktriangledown;</button>

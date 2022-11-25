@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
+use App\Http\Controllers\Graficas\GraficasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,9 @@ Route::prefix('auth')->group(function (){
     Route::get('login/temporal', [TemporalAuthController::class, 'login'])->name('login.temporal');
     Route::post('authenticate/temporal', [TemporalAuthController::class, 'authenticate'])->name('authenticate.temporal');
     Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
+});
+
+/* Rutas Administrativas */
+Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
+    Route::get('/graficas', [GraficasController::class, 'example'])->name('example-graficas');
 });
