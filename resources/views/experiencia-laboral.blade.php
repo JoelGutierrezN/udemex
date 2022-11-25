@@ -254,14 +254,24 @@
                     </div>
                     @if($is_registered_academic)
                         <div>
-                            <label for="">Ya tenemos tu CV: {{ $infoAcademica->curriculum_pdf}}</label>
-                            <li>Si desea modificar, coloque nuevamente su CV actualizado al día, en caso de que no, con coloque nada</li>
+                            <label for="">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy</label>
+                             <p class= "text-foto">
+                             Si desea actualizar el archivo, coloque nuevamente su archivo CV en caso contrario no coloque nada.
+                            </p>
+                    <div class="conte">
+                        <div class="pdfright">
+                            <a class="sin" href="{{ route('teacher.infoacademic.downloadinfo', $infoAcademica->uuid) }}"
+                            target=”_blank”>
+                            <img class="icon" src="{{ asset('img/pdf.jpg')}}" height ="45" width="45" />
+                           Descargar </a>
+                        </div>
+                     </div>
                             <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="datos_curriculum_pdf" name="curriculum_pdf">
-                            <a href="documentos/Curriculum/{{$infoAcademica->curriculum_pdf}}" target="blank_"><img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="40" width="40" /></a>
+                            <!-- <a href="documentos/Curriculum/{{$infoAcademica->curriculum_pdf}}" target="blank_"><img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="40" width="40" /></a> -->
                         </div>
                     @else
                         <div>
-                            <label for="text-input" class="is-required">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy:</label>
+                            <label for="text-input" class="is-required">Adjuntar archivo en pdf de su CV con ortografía actualizado al día de hoy</label>
                             <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="datos_curriculum_pdf" name="curriculum_pdf"
                             value="{{ old('curriculum_pdf', $infoAcademica->curriculum_pdf ?? '') }}">
                         </div>
@@ -289,7 +299,7 @@
                         Los campos marcados con un asterisco son obligatorios.
                         </p><br>&nbsp;
                     @endif
-                </div><br>&nbsp;
+                </div>
                 @if($is_registered_academic)
                     <div class="conte">
                         <div class="left"></div>
