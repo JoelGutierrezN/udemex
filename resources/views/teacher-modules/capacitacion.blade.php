@@ -243,7 +243,7 @@
                     // * Eventlisteners
                     pdfPreview.addEventListener('click', (e)=>{
                         e.preventDefault();
-                        let archivo = `documentos/Capacitaciones/${element.constancia_pdf}`;
+                        let archivo = `{{ env('APP_URL') }}/profesores/documentos/Capacitaciones/${element.constancia_pdf}`;
                         iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                         modal.style.display = "block";
                     });
