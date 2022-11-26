@@ -39,6 +39,7 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
 /* Rutas de Profesores */
 Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
     Route::get('/', ProfesoresInicioController::class)->name('index');
+    Route::view('welcome', 'teacher-modules.welcome')->name('welcome');
     Route::get('experienciaLaboral', ExperienciaInicioController::class)->name('experienciaLaboral');
     Route::resource('usuarios', UsuarioController::class);
     Route::get('usu/{uuid}/download', [UsuarioController::class, 'download'])->name('usu.download');
