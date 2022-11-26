@@ -28,6 +28,7 @@
                     <td>
                         <form action="{{ route('admin.teachers.edit', $user->usuario ) }}" method="POST">
                             @csrf
+                            @method('GET')
                             <button class="btn btn-primary-outline">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                                     <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>

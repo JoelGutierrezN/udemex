@@ -35,9 +35,7 @@ Route::prefix('auth')->group(function (){
 /* Rutas Administrativas */
 Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
     Route::get('bienvenida', AdminIndexController::class)->name('welcome');
-    Route::get('profesores', [TeacherController::class, 'index'])->name('teachers.index');
-    Route::post('profesores/{teacher}', [TeacherController::class, 'edit'])->name('teachers.edit');
-    Route::put('profesores/{teacher}', [TeacherController::class, 'update'])->name('teachers.update');
+    Route::resource('profesores', TeacherController::class)->except('show')->names('teachers')->parameters(['profesores' => 'teacher']);
 });
 
 /* Rutas de Profesores */
