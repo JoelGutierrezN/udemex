@@ -9,6 +9,7 @@ use App\Http\Controllers\PDFController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\InformacionAcademicaController;
+use App\Http\Controllers\ExperienciaInicioController;
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 
@@ -37,27 +38,31 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
 
 /* Rutas de Profesores */
 Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
-    Route::get('/welcome', ProfesoresInicioController::class)->name('index');
+    Route::get('/', ProfesoresInicioController::class)->name('index');
+    Route::get('experienciaLaboral', ExperienciaInicioController::class)->name('experienciaLaboral');
     Route::resource('usuarios', UsuarioController::class);
-    Route::resource('infoacademica', InformacionAcademicaController::class);
+    Route::get('usu/{uuid}/download', [UsuarioController::class, 'download'])->name('usu.download');
+    Route::get('infoacademic/{uuid}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');
+    Route::resource('infoacademica', InformacionAcademicaController::class)->parameters(["infoacademica"=>"infoAcademica"]);
 
 
     // * Rutas para las capacitaciones
     Route::post('/updateFiles', [ArchivosController::class, 'update'])->name('updateFiles');
     Route::get('/getCapacitaciones/{id}', [ArchivosController::class, 'getCapacitaciones'])->name('getCapacitaciones');
     Route::get('/delete-capacitacion/{id}', [ArchivosController::class, 'deleteCapacitacion'])->name('deleteCapacitacion');
+    Route::get('/capacitacion/ultimaActualizacion', [ArchivosController::class, 'ultimaActualizacion'])->name('lastCapacitacion');
 
     // * Rutas para las materias
     Route::post('/storeMaterias', [MateriasController::class, 'store'])->name('storeMaterias');
     Route::get('/getMaterias/{id}', [MateriasController::class, 'getMaterias'])->name('getMaterias');
     Route::get('/delete-materia/{id}', [MateriasController::class, 'deleteMateria'])->name('deleteMateria');
+    Route::get('/asignaturas/ultimaActualizacion', [MateriasController::class, 'ultimaActualizacion'])->name('lastAsignatura');
 
     // * Rutas para el historial
     Route::post('/storeHistorial', [HistorialController::class, 'store'])->name('storeHistorial');
     Route::get('/getHistorial/{id}', [HistorialController::class, 'getHistorial'])->name('getHistorial');
     Route::get('/delete-historial/{id}', [HistorialController::class, 'deleteHistorial'])->name('deleteHistorial');
-    Route::view('/bienvenido', 'teacher-modules.welcome')->name('welcome');
-    Route::view('/perfil', 'teacher-modules.profile')->name('profile');
+    Route::get('/historial/ultimaActualizacion', [HistorialController::class, 'ultimaActualizacion'])->name('lastHistorial');
 
     // * Rutas para generar los PDF
     Route::get('/pdf', [PDFController::class, 'pdfExport'])->name('pdfExport');

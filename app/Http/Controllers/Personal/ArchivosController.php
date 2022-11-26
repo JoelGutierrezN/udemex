@@ -23,7 +23,8 @@ class ArchivosController extends Controller
 
         if($request->file('evidencia') != ""){
             $nombre = Auth::user()->name;
-            $nombreConvert = strtr($nombre, " ", "_");
+            $nombreConvert = str_replace(" ", "", $nombre);
+            $nombreConvert = str_replace('ñ', 'n', $nombreConvert);
             $storage_path = $nombreConvert.'_'.$request->nombre.'_'.$request->tipo.'.pdf';
 
             \DB::table('capacitaciones')
@@ -33,6 +34,7 @@ class ArchivosController extends Controller
                     'fecha_inicio' => $request->inicio,
                     'fecha_fin' => $request->fin,
                     'horas' => $request->horas,
+                    'solicitud' => $request->solicitud,
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
@@ -42,22 +44,19 @@ class ArchivosController extends Controller
                 ]);
 
             
-             if(file_exists('/storage/app/Capacitaciones/'.$storage_path)){
-            
-            //\Storage::disk('local')->put($storage_path, \File::get($file));
-            }else{
+             if(!file_exists('/documentos/Capacitaciones/'.$storage_path)){
                 $file = $request->file('evidencia');
-                //\Storage::putFileAs('/Capacitaciones/',$file,$storage_path);
-                \Storage::disk('local')->put('/Capacitaciones/'.$storage_path, \File::get($file));
+                $destino = 'documentos/Capacitaciones';
+                $request->file('evidencia')->move($destino, $storage_path);
             }
             
 
-            // return view('welcome')
+            $data = array([
+                'state' => 'Registro realizado',
+                'from' => 'archivos'
+            ]);
 
-            Alert::alert()->success('Evidencia de la capacitacion guardada',' puede consultarlo en la pestaña de cursos.');
-            return redirect()->route('teacher.welcome');
-                    // ->with('alert', 'Evidencia de la capacitación guardada')
-                    // ->with('from', 'Cursos');
+            return response()->json($data, 200);
         }else{
             $data = array([
                 'state' => 'sin archivo'
@@ -70,28 +69,47 @@ class ArchivosController extends Controller
         $capacitacion = Capacitacione::findOrFail($id);
         $capacitacion->delete();
         $nombre = Auth::user()->name;
-            $nombreConvert = strtr($nombre, " ", "_");
-            $storage_path = $capacitacion->constancia_pdf;
-        if(file_exists('/storage/app/Capacitaciones/'.$storage_path)){
-            \File::delete('/storage/app/Capacitaciones/'.$storage_path);
+        $nombreConvert = strtr($nombre, " ", "_");
+
+        $storage_path = $capacitacion->constancia_pdf;
+
+        if(file_exists('/documentos/Capacitaciones/'.$storage_path)){
+            \File::delete('/documentos/Capacitaciones/'.$storage_path);
             //\Storage::disk('local')->put($storage_path, \File::get($file));
-            }else{
+        }else{
                 
-            }
+        }
         $data = array([
             'alert' => 'Registro eliminado'
         ]);
         return response()->json($data, 200);
-        
-
-        
     }
 
     public function getCapacitaciones($id){
-        $info = \DB::table('capacitaciones')
+        $dentro = \DB::table('capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
             ->where('id_user', '=', $id)
+            ->where('solicitud', '=', 'dentro')
+            ->orderBy('fecha_inicio', 'desc')
             ->get();
+        $fuera = \DB::table('capacitaciones')
+            ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
+            ->where('id_user', '=', $id)
+            ->where('solicitud', '=', 'fuera')
+            ->orderBy('fecha_inicio', 'desc')
+            ->get();
+        $info = [$dentro, $fuera];
+        return $info;
+    }
+
+    public function ultimaActualizacion(){
+        $info = \DB::table('capacitaciones')
+            ->where('id_user', '=', \Auth::user()->id)
+            ->select('created_at')
+            ->orderBy('created_at', 'DESC')
+            ->limit(1)
+            ->get();
+
         return $info;
     }
 }
