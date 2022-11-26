@@ -13,7 +13,7 @@ class TeacherController extends Controller
 
     public function index()
     {
-        $users = User::latest()->where('role', 2)->with('usuario')->get();
+        $users = User::latest()->where('role', 2)->has('usuario')->with('usuario')->get();
 
         return view('admin-modules.teachers.index', compact('users'));
     }

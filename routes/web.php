@@ -10,8 +10,6 @@ use App\Http\Controllers\Personal\HistorialController;
 use App\Http\Controllers\Personal\MateriasController;
 use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\ProfesoresInicioController;
-use App\Http\Controllers\InformacionAcademicaController;
 use App\Http\Controllers\ExperienciaInicioController;
 use Illuminate\Support\Facades\Route;
 
