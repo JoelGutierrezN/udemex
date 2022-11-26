@@ -19,12 +19,12 @@
             }
         </style>
         <div class="mt-2" data-tab-id="4">
-            <h3 class="tab--title"> 
+            <h3 class="tab--title">
                     <label for="text-input"> Anexar constancias con registro de datos:</label>
             </h3>
             <div class="">
                 <div><br><br>
-                    
+
                         <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <ul class="col3" id="capacitacion-inputs-1">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                      <br><br><br>
-                    
+
                     <label style="font-size: 2rem;" for="text-input"> Capacitación solicitada en UDEMEX</label>
 
 
@@ -94,7 +94,7 @@
 
                       <br><br><br>
 
-                      
+
                       <label for="text-input" style="font-size: 2rem;"> Capacitación tomada afuera de UDEMEX</label>
 
                       <table id="table-capacitaciones" style="font-size: 1.3rem;">
@@ -133,7 +133,7 @@
         //data.append('_token', '{{ csrf_token() }}');
         console.log(data);
 
-        fetch("/profesores/updateFiles", {
+        fetch("{{ env('APP_URL') }}/profesores/updateFiles", {
                 method: 'POST',
                 headers: new Headers({
                     'X-CSRF-Token': '{{ csrf_token() }}'
@@ -162,7 +162,7 @@
     });
 
     function getCapacitacionData(){
-        fetch('getCapacitaciones/{{ Auth::user()->id }}')
+        fetch('{{ env('APP_URL') }}/profesores/getCapacitaciones/{{ Auth::user()->id }}')
             .then(response => response.json())
             .then((response)=>{
                 createCapacitacionTable(response[0], 'dentro');
@@ -209,7 +209,7 @@
                     tipo_curso.innerHTML = `${ element.tipo_curso }`;
                     pdfPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="40" width="40">`;
                     deleteButton.innerHTML = `<a><img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40"><div>`;
-                        
+
 
                     // * Attr
                     constancia_pdf.setAttribute('align', 'center');
@@ -238,7 +238,7 @@
                         if (event.target == modal) {
                             modal.style.display = "none";
                         }
-                    } 
+                    }
 
                     // * Eventlisteners
                     pdfPreview.addEventListener('click', (e)=>{
@@ -257,7 +257,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((result)=>{
                             if(result.isConfirmed){
-                                fetch(`delete-capacitacion/${ element.id_capacitacion }`)
+                                fetch(`{{ env('APP_URL') }}/profesores/delete-capacitacion/${ element.id_capacitacion }`)
                                     .then((response) => response.json())
                                     .then((response) => {
                                         getLastCapacitacion()
@@ -268,7 +268,7 @@
                                     });
                             }
                         });
-                    });     
+                    });
                 });
     }
 

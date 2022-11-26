@@ -15,7 +15,7 @@
     #historialAcademico-form ul li input, #historialAcademico-form ul li select{
         height: 3.5rem;
     }
-    
+
 </style>
 
 <div class="mt-2" data-tab-id="5">
@@ -49,7 +49,7 @@
 
                 <ul class="col5">
                     <li class="formlabel" id="info-span">
-                        <span>Tipo de documento</span> 
+                        <span>Tipo de documento</span>
                         <p style="font-size:13px; margin-top:-1.5%">Los archivos subidos no deben exceder los 2MB, solo se permiten archivos PDF</p>
                     </li>
                     <li class="formlabel is-required">Título</li>
@@ -108,7 +108,7 @@
     historialButton.addEventListener('click', (e)=>{
         e.preventDefault();
         let data = new FormData(historialForm);
-        
+
         fetch("/profesores/storeHistorial", {
                 method: 'POST',
                 headers: new Headers({
@@ -133,12 +133,12 @@
     });
 
     function createHistorialTable(){
-        fetch("getHistorial/{{ Auth::user()->id }}")
+        fetch("{{ env('APP_URL') }}/profesores/getHistorial/{{ Auth::user()->id }}")
             .then((response) => response.json())
             .then((response) => {
 
                 getLastHistorial();
-                                    
+
                 // Get the modal
                 var modal = document.getElementById("myModal");
                 // Get the <span> element that closes the modal
@@ -177,7 +177,7 @@
                     titulo.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver título</span>`;
                     certificado.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cerfiticado</span>`;
                     cedula.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cédula</span>`;
-                
+
                     deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
                     tr.appendChild(nombre);
@@ -203,7 +203,7 @@
                         if (event.target == modal) {
                             modal.style.display = "none";
                         }
-                    } 
+                    }
 
                     titulo.addEventListener('click',(e)=>{
                         let archivo = `documentos/Historial/${element.titulo}`;
@@ -229,7 +229,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((response)=>{
                             if(response.isConfirmed){
-                                fetch(`delete-historial/${ element.id_asignatura }`)
+                                fetch(`{{ env('APP_URL') }}/profesores/delete-historial/${ element.id_asignatura }`)
                                     .then((response) => response.json())
                                     .then((response) => {
                                         getLastHistorial();
@@ -252,10 +252,10 @@
                 document.querySelector('#h-actualizacion').innerHTML = new Date(response[0].created_at).toLocaleDateString('es-MX');
             });
     }
-                
+
 
     historialMenu.addEventListener('click', (e)=>{
         createHistorialTable();
         getLastHistorial();
-    });    
+    });
 </script>
