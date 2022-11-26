@@ -62,4 +62,15 @@ class MateriasController extends Controller
         return response()->json($data, 200);
         
     }
+
+    public function ultimaActualizacion(){
+        $info = \DB::table('academico_asignaturas')
+            ->where('id_user', '=', \Auth::user()->id)
+            ->select('created_at')
+            ->orderBy('created_at', 'DESC')
+            ->limit(1)
+            ->get();
+
+        return $info;
+    }
 }

@@ -29,12 +29,14 @@ class UsuarioUpdateRequest extends FormRequest
            'apellido_paterno'   => ['required','regex:/^[A-Z][A-Z,a-z, ,é,É,í,Í,ó,Ó,ú,Ú,á,Á,ü,Ü,ñ,Ñ]+$/'],
            'apellido_materno'   => ['required','regex:/^[A-Z][A-Z,a-z, ,é,É,í,Í,ó,Ó,ú,Ú,á,Á,ü,Ü,ñ,Ñ]+$/'],
            'sexo'               => 'required',
+           'fecha_nacimiento'   => ['required','date','max:10'],
            'clave_empleado'     => ['required', Rule::unique('usuarios','clave_empleado')->withoutTrashed()->ignore($this->usuario)],
            'foto'               => ['image', 'max:2048'],
            'telefono_casa'      => ['required', 'max:10', 'regex:/^[0-9]+$/'],
            'celular'            => ['required', 'max:10', 'regex:/^[0-9]+$/'],
            'email_udemex'       => ['required', 'email', 'max:60', Rule::unique('usuarios','email_udemex')->withoutTrashed()->ignore($this->usuario)],
            'email_personal'     => ['required', 'email', 'max:60', Rule::unique('usuarios','email_personal')->withoutTrashed()->ignore($this->usuario)],
+           'curp_pdf'           => 'mimes:pdf',
         ];
     }
 }

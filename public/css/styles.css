@@ -61,9 +61,34 @@ select{
     font-size: 1.5rem;
 }
 
+.multi-select{
+    width: 100%;
+    height: 100%;
+    margin: 10px auto 10px 0;
+    vertical-align: middle;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    padding: 5px;
+    font-size: 1.5rem;
+}
+
 
 input[type="time"],.acortado{
     width: 30%;
+    width: 50%;
+    height: 80%;
+    margin: 10px auto 10px 0;
+    border: 1px solid var(--gray);
+    border-radius: 5px;
+    background-color: var(--light-gray);
+    padding: 5px;
+    vertical-align: middle;
+    font-size: 1.5rem;
+}
+
+.acortadox2{
+    width: 13%;
     height: 80%;
     margin: 10px auto 10px 0;
     border: 1px solid var(--gray);
@@ -248,7 +273,7 @@ input[type="time"]:focus{
     flex-wrap: wrap;
 }
 
-.input-columns-1 div{
+.input-columns-1 > div{
     width: 51%;
     display: flex;
     align-items: start;
@@ -304,6 +329,29 @@ PADDING-LEFT: 2px;
 FLOAT: left;
 PADDING-BOTTOM: 2px;
 WIDTH: 50%;
+PADDING-TOP: 2px;
+}
+
+UL.col3
+{
+PADDING-RIGHT: 0px;
+PADDING-LEFT: 0px;
+FLOAT: left;
+PADDING-BOTTOM: 0px;
+MARGIN: 15px 0px;
+WIDTH: 100%;
+PADDING-TOP: 0px;
+LIST-STYLE-TYPE: none
+}
+
+UL.col3 LI
+{
+PADDING-RIGHT: 2px;
+DISPLAY: inline;
+PADDING-LEFT: 2px;
+FLOAT: left;
+PADDING-BOTTOM: 2px;
+WIDTH: 33.333%;
 PADDING-TOP: 2px;
 }
 
@@ -439,7 +487,7 @@ PADDING-TOP: 2px;
 
 
 .d-none{
-    display: none;
+    display: none!important;
 }
 
 .mt-1{
@@ -966,6 +1014,12 @@ footer h5, footer h6{
     font-size: 1.2rem;
 }
 
+.text-obligatorio {
+    font-size: 1.3rem;
+    font-style: italic;
+    text-align: center;
+}
+
 .conte {
     width: 100%;
 }
@@ -977,6 +1031,26 @@ footer h5, footer h6{
     float: left;
     position: relative;
     width: 60%;
+    height: auto;
+}
+
+.pdfright {
+    padding-right: 0px;
+    /* padding-top: 10px;
+    margin-left: 57px;  */
+    float: right;
+    position: relative;
+    width: 10%;
+    height: auto;
+}
+
+.right {
+    padding-right: 10px;
+    padding-top: 10px;
+    margin-right: 57px;
+    float: center;
+    position: relative;
+    width: 80%;
     height: auto;
 }
 
@@ -1039,4 +1113,31 @@ footer h5, footer h6{
         transform: scale(1.1, 1.1);
     }
 }
+
+
+#datos_si_labora div{
+    width: 100%;
+}
+.is-required:before {
+    content: '*';
+    margin-left: 0px;
+    color: red;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+textarea{
+    width: 100%;
+}
+
+select{
+    width: 100%;
+}
+
+a.sin {
+    text-decoration: none;
+    color: #000;
+}
+
+
 

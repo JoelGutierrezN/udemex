@@ -16,21 +16,26 @@ class InformacionAcademica extends Model
     public $timestamp = false;
 
     protected $fillable = [
+        'uuid',
         'experiencia_presencial',
         'experiencia_linea',
         'nivel_mayor_experiencia',
-        'area_experiencia',
         'labora_actualmente',
         'lugar_labora',
         'modalidad',
-        'dias_laboral',
-        'horario_laboral',
+        'lunes',
+        'martes',
+        'miercoles',
+        'jueves',
+        'viernes',
+        'sabado',
+        'domingo',
+        'horario_laboral_inicio',
+        'horario_laboral_fin',
         'disponibilidad_asesor',
-        'id_herramienta',
         'numero_archivo_curriculum',
         'curriculum_pdf',
         'validar_archivo_curriculum',
-        'grado_maximo_estudios',
         'id_user',
         'activo'
 

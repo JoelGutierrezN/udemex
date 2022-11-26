@@ -4,7 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\InformacionAcademica;
+use App\Models\InfoAcademicArea;
+use App\Models\InfoAcademicHerramienta;
 use App\Http\Requests\InformacionAcademicaRequest;
+use App\Http\Requests\InformacionAcademicaUpdateRequest;
+use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class InformacionAcademicaController extends Controller
 {
@@ -34,26 +42,46 @@ class InformacionAcademicaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(InformacionAcademicaRequest $request)
-    {
-        $newInfoAcademica = InformaconAcademica::create($request->all());
+    public function store(InformacionAcademicaRequest $request){
 
-        $newInfoAcademica->experiencia_presencial = $request -> experiencia_presencial;
-        $newInfoAcademica->experiencia_linea = $request -> experiencia_linea;
-        $newInfoAcademica->nivel_mayor_experiencia = $request -> nivel_mayor_experiencia;
-        $newInfoAcademica->area_experiencia = $request -> area_experiencia;
-        $newInfoAcademica->herramientas = $request -> herramientas;
-        $newInfoAcademica->disponibilidad_asesor = $request -> disponibilidad_asesor;
-        $newInfoAcademica->labora_actualmente = $request -> labora_actualmente;
-        $newInfoAcademica->lugar_labora;
-        $newInfoAcademica->modalidad = $request -> modalidad;
-        $newInfoAcademica->horario_laboral = $request -> horario_laboral;
-        $newInfoAcademica->dias_laboral = $request -> dias_laboral;
-        $newInfoAcademica->curriculum_pdf = $request -> curriculum_pdf;
+        $nombreUser = auth()->user()->name;
 
-        $newInfoAcademica->save();
+        foreach($request->area_experiencia as $area){
+            InfoAcademicArea::create([
+                'id_area' => $area,
+                'id_user' => Auth::id()
+            ]);
+        }
 
-         return view("welcome");
+        foreach($request->id_herramienta as $herramienta){
+            InfoAcademicHerramienta::create([
+                'id_herramienta' => $herramienta,
+                'id_user' => Auth::id()
+            ]);
+        }
+
+        $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
+        if ($is_registered_academic){
+            Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en experiencia laboral ');
+            return redirect()->route("teacher.welcome");
+        }
+
+        $infoAcademica = InformacionAcademica::create($request->all());
+
+        if($request->hasFile('curriculum_pdf')){
+            $pdf = $request->file('curriculum_pdf');
+            $destino = 'documentos/Curriculum/';
+            $pdfname = 'CV_'.$nombreUser.'.'.$pdf->guessExtension();
+            $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
+            $infoAcademica->curriculum_pdf = $pdfname;
+        }
+
+        $infoAcademica['uuid'] = (string) Str::uuid();
+
+        $infoAcademica->save();
+        Alert::alert()->success('Guardado!',' Tu experiencia laboral ha sido actualizada correctamente.');
+        return redirect()->route("teacher.experienciaLaboral");
+
     }
 
     /**
@@ -85,10 +113,65 @@ class InformacionAcademicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
-        //
+        // dd($infoAcademica);
+
+        if($request->curriculum_pdf  != '')
+        {
+            unlink('documentos/Curriculum/'.$infoAcademica->curriculum_pdf);
+        }
+
+        // / -->forcedelet  seguido de le foreach del controlador (Para editar el array, se debe de borrar y llenar de nuevo)
+
+        $infoAcademica->update($request->all());
+        $nombreUser = auth()->user()->name;
+
+        $infoacademicareas = InfoAcademicArea::where('id_user', Auth::id())->get();
+        foreach ($infoacademicareas as $area){
+            $area->delete(); //en caso de no tener SoftDeletes
+        }
+
+        $infoacademicherramientas = InfoAcademicHerramienta::where('id_user', Auth::id())->get();
+        foreach ($infoacademicherramientas as $herramienta){
+            $herramienta->delete(); //en caso de no tener SoftDeletes
+        }
+
+        foreach($request->area_experiencia as $area){
+          InfoAcademicArea::create([
+              'id_area' => $area,
+              'id_user' => Auth::id()
+            ]);
     }
+
+    foreach($request->id_herramienta as $herramienta){
+        InfoAcademicHerramienta::create([
+            'id_herramienta' => $herramienta,
+            'id_user' => Auth::id()
+        ]);
+    }
+
+      if($request->hasFile('curriculum_pdf')){
+        $pdf = $request->file('curriculum_pdf');
+        $destino = 'documentos/Curriculum/';
+        $pdfname = 'CV_'.$nombreUser.'.'.$pdf->guessExtension();
+        $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
+        $infoAcademica->curriculum_pdf = $pdfname;
+    }
+
+        $infoAcademica->save();
+
+         Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
+         return redirect()->route("teacher.experienciaLaboral");
+    }
+
+    // public function forceDelete($infoAcademica)
+    // {
+    //     foreach($infoAcademica as $info){
+    //         InfoAcademicArea::where('id_user'==Auth::id())->forceDelete();
+    //         InfoAcademicHerramienta::where('id_user'==Auth::id())->forceDelete();
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.
