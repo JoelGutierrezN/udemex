@@ -39,4 +39,5 @@ Route::prefix('auth')->group(function (){
 /* Rutas Administrativas */
 Route::middleware(['auth'])->prefix('administradores')->name('admin.')->group( function(){
     Route::get('/graficas', [GraficasController::class, 'example'])->name('example-graficas');
+    Route::get('/getDataHistorial', [GraficasController::class, 'getDataHistorial'])->name('getDataHistorial');
 });
