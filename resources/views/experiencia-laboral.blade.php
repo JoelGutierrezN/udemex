@@ -21,7 +21,7 @@
                 @csrf
                 @method('PUT')
         @else
-           <form action="{{ route('teacher.infoAcademica.store') }}" method="POST" enctype="multipart/form-data">
+           <form action="{{ route('teacher.infoacademica.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
         @endif

@@ -113,7 +113,7 @@ class InformacionAcademicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
+    public function actualizar(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
         dd($infoAcademica);
 

@@ -19,19 +19,19 @@ class ExperienciaInicioController extends Controller
 
         $usuario = Usuario::where('id_user', Auth::id())->first();
 
-        
+        $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
+
         $infoAcademica = Informacionacademica::where('id_user', Auth::id())->first();
         // dd($infoAcademica);
-        $areastabla = AreaExperiencia::all();
-        
+
         $herramientas = HerramientaTecnologica::all();
+
+        $areas = AreaExperiencia::all();
         
-        $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
         // $selected_areas = collect([]);
 
         if($is_registered_academic){
           $infoacademicareas = InfoAcademicArea::where('id_user', Auth::id())->get();
-         
         }
 
        $areas_no_seleccionadas = \DB::select('SELECT * FROM area_experiencias WHERE NOT EXISTS (SELECT * FROM infoacademic_areas WHERE infoacademic_areas.id_area = area_experiencias.id_area_experiencia)');
@@ -39,8 +39,8 @@ class ExperienciaInicioController extends Controller
        $herramientas_no_seleccionadas = \DB::select('SELECT * FROM herramienta_tecnologicas WHERE NOT EXISTS (SELECT * FROM infoacademic_herramientas WHERE infoacademic_herramientas.id_herramienta = herramienta_tecnologicas.id_herramienta)');
 
         
-         return view("experiencia-laboral",compact('is_registered', 'usuario','is_registered_academic', 'herramientas', 'areastabla',
-        'infoacademicareas', 'areas_no_seleccionadas', 'herramientas_no_seleccionadas', 'infoAcademica' ));
+         return view("experiencia-laboral",compact('is_registered', 'usuario','is_registered_academic', 'herramientas', 'areas',
+     'areas_no_seleccionadas', 'herramientas_no_seleccionadas', 'infoAcademica' ));
 
 
         }
