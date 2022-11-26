@@ -21,7 +21,7 @@
                 @csrf
                 @method('PUT')
         @else
-           <form action="{{ route('teacher.infoacademica.store') }}" method="POST" enctype="multipart/form-data">
+           <form action="{{ route('teacher.infoAcademica.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
         @endif
@@ -92,7 +92,7 @@
                   @if($is_registered_academic)
                         @php
                             $areas_registered = [];
-                            $areas_infoAcademica = App\Models\InfoAcademicArea::where("id_user", Auth::id())->get();
+                            $areas_infoAcademica = App\Models\infoAcademicarea::where("id_user", Auth::id())->get();
                             foreach($areas_infoAcademica as $area):
                                 array_push($areas_registered , App\Models\AreaExperiencia::where("id_area_experiencia", $area->id_area)->first());
                             endforeach;

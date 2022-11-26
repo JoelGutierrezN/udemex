@@ -115,6 +115,8 @@ class InformacionAcademicaController extends Controller
      */
     public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
+        dd($infoAcademica);
+
         if($request->curriculum_pdf  != '')
         {
             unlink('documentos/Curriculum/'.$usuario->curriculum_pdf);
@@ -130,19 +132,19 @@ class InformacionAcademicaController extends Controller
     //     $infoAcademica->forceDelete($infoAcademica);
     //   }
 
-      foreach($infoAcademica->area_experiencia as $area){
-        InfoAcademicArea::create([
-            'id_area' => $area,
-            'id_user' => Auth::id()
-        ]);
-    }
+    //   foreach($infoAcademica->area_experiencia as $area){
+    //     InfoAcademicArea::create([
+    //         'id_area' => $area,
+    //         'id_user' => Auth::id()
+    //     ]);
+    // }
 
-    foreach($infoAcademica->id_herramienta as $herramienta){
-        InfoAcademicHerramienta::create([
-            'id_herramienta' => $herramienta,
-            'id_user' => Auth::id()
-        ]);
-    }
+    // foreach($infoAcademica->id_herramienta as $herramienta){
+    //     InfoAcademicHerramienta::create([
+    //         'id_herramienta' => $herramienta,
+    //         'id_user' => Auth::id()
+    //     ]);
+    // }
 
       if($request->hasFile('curriculum_pdf')){
         $pdf = $request->file('curriculum_pdf');
