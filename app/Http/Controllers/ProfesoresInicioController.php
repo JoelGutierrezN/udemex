@@ -25,7 +25,7 @@ class ProfesoresInicioController extends Controller
 
      $areas = AreaExperiencia::all();
 
-     return view("welcome",compact('is_registered', 'usuario', 'is_registered_academic', 'infoAcademica', 'herramientas', 'areas'));
+     return view("teacher-modules.index",compact('is_registered', 'usuario', 'is_registered_academic', 'infoAcademica', 'herramientas', 'areas'));
 
     }
 

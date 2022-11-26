@@ -113,38 +113,43 @@ class InformacionAcademicaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function actualizar(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
+    public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
-        dd($infoAcademica);
+        // dd($infoAcademica);
 
         if($request->curriculum_pdf  != '')
         {
-            unlink('documentos/Curriculum/'.$usuario->curriculum_pdf);
+            unlink('documentos/Curriculum/'.$infoAcademica->curriculum_pdf);
         }
-        
+
         // / -->forcedelet  seguido de le foreach del controlador (Para editar el array, se debe de borrar y llenar de nuevo)
-        
+
         $infoAcademica->update($request->all());
         $nombreUser = auth()->user()->name;
 
-    //   foreach(){
-    //     $infoAcademica->forceDelete($infoAcademica);
-    //     $infoAcademica->forceDelete($infoAcademica);
-    //   }
+        $infoacademicareas = InfoAcademicArea::where('id_user', Auth::id())->get();
+        foreach ($infoacademicareas as $area){
+            $area->delete(); //en caso de no tener SoftDeletes
+        }
 
-    //   foreach($infoAcademica->area_experiencia as $area){
-    //     InfoAcademicArea::create([
-    //         'id_area' => $area,
-    //         'id_user' => Auth::id()
-    //     ]);
-    // }
+        $infoacademicherramientas = InfoAcademicHerramienta::where('id_user', Auth::id())->get();
+        foreach ($infoacademicherramientas as $herramienta){
+            $herramienta->delete(); //en caso de no tener SoftDeletes
+        }
 
-    // foreach($infoAcademica->id_herramienta as $herramienta){
-    //     InfoAcademicHerramienta::create([
-    //         'id_herramienta' => $herramienta,
-    //         'id_user' => Auth::id()
-    //     ]);
-    // }
+        foreach($request->area_experiencia as $area){
+          InfoAcademicArea::create([
+              'id_area' => $area,
+              'id_user' => Auth::id()
+            ]);
+    }
+
+    foreach($request->id_herramienta as $herramienta){
+        InfoAcademicHerramienta::create([
+            'id_herramienta' => $herramienta,
+            'id_user' => Auth::id()
+        ]);
+    }
 
       if($request->hasFile('curriculum_pdf')){
         $pdf = $request->file('curriculum_pdf');
@@ -160,13 +165,13 @@ class InformacionAcademicaController extends Controller
          return redirect()->route("teacher.experienciaLaboral");
     }
 
-    public function forceDelete($infoAcademica)
-    {
-        foreach($infoAcademica as $info){
-            InfoAcademicArea::where('id_user'==Auth::id())->forceDelete();
-            InfoAcademicHerramienta::where('id_user'==Auth::id())->forceDelete();
-        }
-    }
+    // public function forceDelete($infoAcademica)
+    // {
+    //     foreach($infoAcademica as $info){
+    //         InfoAcademicArea::where('id_user'==Auth::id())->forceDelete();
+    //         InfoAcademicHerramienta::where('id_user'==Auth::id())->forceDelete();
+    //     }
+    // }
 
     /**
      * Remove the specified resource from storage.

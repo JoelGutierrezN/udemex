@@ -21,7 +21,7 @@ class TemporalAuthController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('profesores/welcome');
+            return redirect()->intended('profesores/');
         }else{
             return redirect()->route('login.temporal')->with('message', 'Credenciales de Acceso Incorrectas');
         }

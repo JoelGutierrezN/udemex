@@ -52,7 +52,7 @@ class UsuarioController extends Controller
             Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en datos personales ');
            return redirect()->route("teacher.welcome");
         }
-        
+
         $newUsuario = Usuario::create($request->all());
 
         if($request->hasFile('foto')){
@@ -75,7 +75,7 @@ class UsuarioController extends Controller
 
         $newUsuario->save();
         Alert::alert()->success('Guardado!',' Sus datos personales han sido regristados correctamente.');
-         return redirect()->route("teacher.welcome");
+         return redirect()->route("teacher.index");
     }
 
 
@@ -112,7 +112,7 @@ class UsuarioController extends Controller
     {
 
             $nombreUser = auth()->user()->name;
-            
+
             if($request->curp_pdf  != '')
             {
             unlink('documentos/Curp/'.$usuario->curp_pdf);
@@ -125,7 +125,7 @@ class UsuarioController extends Controller
 
             $usuario->update($request->all());
 
-            
+
             if($request->hasFile('foto')){
                     $foto = $request->file('foto');
                     $destino = 'imagenes/perfil/';
@@ -141,12 +141,12 @@ class UsuarioController extends Controller
                     $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
                     $usuario->curp_pdf = $pdfname;
                 }
-                
+
 
                 $usuario->save();
 
                 Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
-                return redirect()->route("teacher.welcome");
+                return redirect()->route("teacher.index");
     }
 
     /**
@@ -175,5 +175,5 @@ class UsuarioController extends Controller
         // return response()->download($pathToFile);
         return response()->file($pathToFile);
     }
-    
+
 }

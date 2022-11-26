@@ -7,7 +7,7 @@
 <h3 class="form-screen-title">Registro de Información Personal</h3>
 
         <div class="tabs">
-            <a href="{{route('teacher.welcome')}}"> <button type="button" id="personal-menu">Datos Personales &blacktriangledown;</button></a>
+            <a href="{{route('teacher.index')}}"> <button type="button" id="personal-menu">Datos Personales &blacktriangledown;</button></a>
             <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
             <button type="button" id="experiencia-menu" data-tab-target="1">Experiencia Laboral &blacktriangledown;</button></a>
@@ -102,8 +102,8 @@
                             <select  name="area_experiencia[]" class="js-example-basic-multiple" multiple="multiple">
                                  @foreach ($areas_registered as $arearegi)
                                     <option value="{{$arearegi->id_area_experiencia}}" selected>{{$arearegi->nombre}}</option>
-                                 @endforeach 
-                                 
+                                 @endforeach
+
                                 @foreach ($areas_no_seleccionadas as $areasnoselect)
                                         <option value="{{$areasnoselect->id_area_experiencia}}">{{$areasnoselect->nombre}}</option>
                                 @endforeach
@@ -140,11 +140,11 @@
                             <select  name="id_herramienta[]" class="js-example-basic-multiple" multiple="multiple">
                                 @foreach ($herramientas_registered as $herramientabd)
                                     <option value="{{$herramientabd->id_herramienta}}" selected>{{$herramientabd->nombre}}</option>
-                                @endforeach 
+                                @endforeach
                                    @foreach ($herramientas_no_seleccionadas as $herramientasnoselect)
                                         <option value="{{$herramientasnoselect->id_herramienta}}">{{$herramientasnoselect->nombre}}</option>
                                 @endforeach
-                               
+
                             </select>
                         </div>
                     @else
@@ -247,16 +247,15 @@
                              <p class= "text-foto">
                              Si desea actualizar el archivo, coloque nuevamente su archivo CV en caso contrario no coloque nada.
                             </p>
-                    <div class="conte">
-                        <div class="pdfright">
-                            <a class="sin" href="{{ route('teacher.infoacademic.downloadinfo', $infoAcademica->uuid) }}"
-                            target=”_blank”>
-                            <img class="icon" src="{{ asset('img/pdf.jpg')}}" height ="45" width="45" />
-                           Descargar </a>
-                        </div>
-                     </div>
+                            <div class="conte">
+                                <div class="pdfright">
+                                    <a class="sin" href="{{ route('teacher.infoacademic.downloadinfo', $infoAcademica->uuid) }}"
+                                    target=”_blank”>
+                                    <img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="45" width="45" />
+                                   Descargar </a>
+                                </div>
+                             </div>
                             <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="datos_curriculum_pdf" name="curriculum_pdf">
-                            <!-- <a href="documentos/Curriculum/{{$infoAcademica->curriculum_pdf}}" target="blank_"><img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="40" width="40" /></a> -->
                         </div>
                     @else
                         <div>
@@ -293,7 +292,12 @@
                     <div class="conte">
                         <div class="left"></div>
                         <div class="alert-info2">
-                            <p>Información actualizada a la fecha: {{ $infoAcademica->updated_at->format('d-m-Y H:i:s') }}</p>
+                            <p>Información actualizada a la fecha:
+                                {{\Carbon\Carbon::parse($infoAcademica->updated_at)->locale('es')->day}}
+                                {{\Carbon\Carbon::parse($infoAcademica->updated_at)->locale('es')->monthName}}
+                                {{\Carbon\Carbon::parse($infoAcademica->updated_at)->locale('es')->year}} a las
+                                {{ $infoAcademica->updated_at->format('H:i:s') }}
+                            </p>
                         </div>
                     </div><br>&nbsp;
                 @endif
@@ -301,15 +305,15 @@
         </form>
 
     {{-- Asignaturas --}}
-    @include('formulario-perfil.asignaturas')
+    @include('teacher-modules.asignaturas')
     {{--Fin Asignaturas --}}
 
     {{-- Perfil capacitación --}}
-    @include('formulario-perfil.capacitacion')
+    @include('teacher-modules.capacitacion')
     {{-- Fin capacitación --}}
 
     {{-- Historial académico --}}
-    @include('formulario-perfil.historial-academico')
+    @include('teacher-modules.historial-academico')
     {{-- Fin Historial académico --}}
 
     {{-- Modals to PDF --}}

@@ -109,19 +109,22 @@
                     </div>
                     @endif
 
-                <div id="edad"></div>
+                    <div id="edad">
+                        <div>
+                            @if($is_registered)
+                                <label for="date-input"> Tu edad</label>
+                                @php
+                                    $fecha_de_nacimiento = $usuario->fecha_nacimiento;
+                                    $hoy = date("d-m-Y");
+                                    $diff = date_diff(date_create($fecha_de_nacimiento), date_create($hoy));
+                                @endphp
+                            <input type="text" readonly  id="edad" value="{{$diff->format('%y') }} años ">
+                            @endif
+                        </div>
+                    </div>
 
-                <div>
-                 @if($is_registered)
-                 <label for="date-input"> Tu edad</label>
-                 @php
-                 $fecha_de_nacimiento = $usuario->fecha_nacimiento;
-                 $hoy = date("d-m-Y");
-                 $diff = date_diff(date_create($fecha_de_nacimiento), date_create($hoy));
-                 @endphp
-                 <input type="text" readonly  id="edad" value="{{$diff->format('%y') }} años ">
-                 @endif
-                </div>
+                    <div id="edad"></div>
+
 
                 <div>
                     <label for="text-input" class="is-required"> Teléfono de casa</label>
@@ -185,7 +188,7 @@
                         <div class="pdfright">
                             <a class="sin" href="{{ route('teacher.usu.download', $usuario->uuid) }}"
                             target=”_blank”>
-                            <img class="icon" src="{{ asset('img/pdf.jpg')}}" height ="45" width="45" />
+                            <img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="45" width="45" />
                            Descargar </a>
                         </div>
                      </div>
@@ -260,7 +263,12 @@
                         <div class="left">
                         </div>
                         <div class="alert-info2">
-                            <p>Información actualizada a la fecha: {{ $usuario->updated_at->format('d-m-Y H:i:s') }}</p>
+                            <p>Información actualizada a la fecha:
+                                {{\Carbon\Carbon::parse($usuario->updated_at)->locale('es')->day}}
+                                {{\Carbon\Carbon::parse($usuario->updated_at)->locale('es')->monthName}}
+                                {{\Carbon\Carbon::parse($usuario->updated_at)->locale('es')->year}} a las
+                                {{ $usuario->updated_at->format('H:i:s') }}
+                            </p>
                         </div>
                     </div><br>&nbsp;
             @endif
@@ -268,15 +276,15 @@
         </form>
 
     {{-- Asignaturas --}}
-    @include('formulario-perfil.asignaturas')
+    @include('teacher-modules.asignaturas')
     {{--Fin Asignaturas --}}
 
     {{-- Perfil capacitación --}}
-    @include('formulario-perfil.capacitacion')
+    @include('teacher-modules.capacitacion')
     {{-- Fin capacitación --}}
 
     {{-- Historial académico --}}
-    @include('formulario-perfil.historial-academico')
+    @include('teacher-modules.historial-academico')
     {{-- Fin Historial académico --}}
 
 
