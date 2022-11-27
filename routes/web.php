@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminIndexController;
-use App\Http\Controllers\Admin\Teachers\AdminHistorialController;
-use App\Http\Controllers\Admin\Teachers\AdminInformacionAcademicaController;
-use App\Http\Controllers\Admin\Teachers\AdminMateriasController;
-use App\Http\Controllers\Admin\Teachers\TeacherController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\ExperienciaInicioController;
 use App\Http\Controllers\InformacionAcademicaController;
@@ -16,6 +12,7 @@ use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\Teachers\AdminArchivosController;
+use App\Http\Controllers\Graficas\GraficasController;
 
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
@@ -38,6 +35,11 @@ Route::prefix('auth')->group(function (){
     Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
 });
 
+/* Rutas Administrativas */
+Route::middleware(['auth'])->prefix('administradores')->name('admin.')->group( function(){
+    Route::get('/graficas', [GraficasController::class, 'example'])->name('example-graficas');
+    Route::get('/getDataHistorial', [GraficasController::class, 'getDataHistorial'])->name('getDataHistorial');
+});
 /* Rutas Administrativas */
 Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
     Route::get('bienvenida', AdminIndexController::class)->name('welcome');
