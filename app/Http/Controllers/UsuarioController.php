@@ -58,7 +58,7 @@ class UsuarioController extends Controller
         if($request->hasFile('foto')){
             $foto = $request->file('foto');
             $destino = 'imagenes/perfil/';
-            $fotoname = time() . '-' . $foto->getClientOriginalName();
+            $fotoname = $nombreUser.'.'.$foto->getClientOriginalName();
             $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
             $newUsuario->foto = $fotoname;
         }
@@ -129,7 +129,7 @@ class UsuarioController extends Controller
             if($request->hasFile('foto')){
                     $foto = $request->file('foto');
                     $destino = 'imagenes/perfil/';
-                    $fotoname = time() . '-' . $foto->getClientOriginalName();
+                    $fotoname = $nombreUser.'.'.$foto->getClientOriginalName();
                     $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
                     $usuario->foto = $fotoname;
                 }
