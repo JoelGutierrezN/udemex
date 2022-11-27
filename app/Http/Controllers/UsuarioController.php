@@ -17,147 +17,84 @@ use Illuminate\Support\Str;
 
 class UsuarioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(UsuarioCreateRequest $request)
     {
         $nombreUser = auth()->user()->name;
 
         $is_registered = Usuario::where('id_user', Auth::id())->count();
-        if ($is_registered){
+        if ($is_registered) {
             Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en datos personales ');
-           return redirect()->route("teacher.welcome");
+            return redirect()->route("teacher.welcome");
         }
 
         $newUsuario = Usuario::create($request->all());
 
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $foto = $request->file('foto');
-            $fotoname = $nombreUser.'.'.$foto->getClientOriginalName();
+            $fotoname = $nombreUser . '.' . $foto->getClientOriginalName();
             Storage::disk('local')->put($fotoname, \File::get($foto));
             $newUsuario->foto = $fotoname;
         }
 
-        if($request->hasFile('curp_pdf')){
+        if ($request->hasFile('curp_pdf')) {
             $pdf = $request->file('curp_pdf');
             $destino = 'documentos/Curp/';
-            $pdfname = 'CURP_'.$nombreUser.'.'.$pdf->guessExtension();
+            $pdfname = 'CURP_' . $nombreUser . '.' . $pdf->guessExtension();
             $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
             $newUsuario->curp_pdf = $pdfname;
         }
 
-        $newUsuario['uuid'] = (string) Str::uuid();
+        $newUsuario['uuid'] = (string)Str::uuid();
 
         $newUsuario->save();
-        Alert::alert()->success('Guardado!',' Sus datos personales han sido regristados correctamente.');
-         return redirect()->route("teacher.index");
+        Alert::alert()->success('Guardado!', ' Sus datos personales han sido regristados correctamente.');
+        return redirect()->route("teacher.index");
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
 
-            $nombreUser = auth()->user()->name;
+        $nombreUser = auth()->user()->name;
 
-            if($request->curp_pdf  != '')
-            {
-            unlink('documentos/Curp/'.$usuario->curp_pdf);
-            }
+        if ($request->curp_pdf != '') {
+            unlink('documentos/Curp/' . $usuario->curp_pdf);
+        }
 
-            if(Storage::disk('local')->exists("$usuario->foto")){
-               Storage::disk('local')->delete("$usuario->foto");
-            }
+        if (Storage::disk('local')->exists("$usuario->foto")) {
+            Storage::disk('local')->delete("$usuario->foto");
+        }
 
-            $usuario->update($request->all());
+        $usuario->update($request->all());
 
-             if($request->hasFile('foto')){
-                $foto = $request->file('foto');
-                $fotoname = $nombreUser.'.'.$foto->getClientOriginalName();
-                Storage::disk('local')->put($fotoname, \File::get($foto));
-                $usuario->foto = $fotoname;
-             }
-                
-
-                if($request->hasFile('curp_pdf')){
-                    $pdf = $request->file('curp_pdf');
-                    $destino = 'documentos/Curp/';
-                    $pdfname = 'CURP_'.$nombreUser.'.'.$pdf->guessExtension();
-                    $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
-                    $usuario->curp_pdf = $pdfname;
-                }
+        if ($request->hasFile('foto')) {
+            $foto = $request->file('foto');
+            $fotoname = $nombreUser . '.' . $foto->getClientOriginalName();
+            Storage::disk('local')->put($fotoname, \File::get($foto));
+            $usuario->foto = $fotoname;
+        }
 
 
-                $usuario->save();
+        if ($request->hasFile('curp_pdf')) {
+            $pdf = $request->file('curp_pdf');
+            $destino = 'documentos/Curp/';
+            $pdfname = 'CURP_' . $nombreUser . '.' . $pdf->guessExtension();
+            $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
+            $usuario->curp_pdf = $pdfname;
+        }
 
-                Alert::alert()->success('Actualizado!',' Sus datos personales han sido actualizados correctamente.');
-                return redirect()->route("teacher.index");
+
+        $usuario->save();
+
+        Alert::alert()->success('Actualizado!', ' Sus datos personales han sido actualizados correctamente.');
+        return redirect()->route("teacher.index");
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
     }
 
-      public function download($uuid)
+    public function download($uuid)
     {
         $usu = Usuario::where('uuid', $uuid)->firstOrFail();
         $pathToFile = ("documentos/Curp/" . $usu->curp_pdf);
@@ -165,7 +102,7 @@ class UsuarioController extends Controller
         return response()->file($pathToFile);
     }
 
-      public function downloadinfo($uuid)
+    public function downloadinfo($uuid)
     {
         $infoacademic = InformacionAcademica::where('uuid', $uuid)->firstOrFail();
         $pathToFile = ("documentos/Curriculum/" . $infoacademic->curriculum_pdf);

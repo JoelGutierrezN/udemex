@@ -35,6 +35,11 @@ return [
             'root' => public_path('imagenes/perfil'),
         ],
 
+        'curp' => [
+            'driver' => 'local',
+            'root' => public_path('documentos/Curp'),
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),

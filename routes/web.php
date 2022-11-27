@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminIndexController;
-use App\Http\Controllers\Admin\TeacherController;
+use App\Http\Controllers\Admin\Teachers\AdminHistorialController;
+use App\Http\Controllers\Admin\Teachers\AdminInformacionAcademicaController;
+use App\Http\Controllers\Admin\Teachers\AdminMateriasController;
+use App\Http\Controllers\Admin\Teachers\TeacherController;
 use App\Http\Controllers\Auth\TemporalAuthController;
+use App\Http\Controllers\ExperienciaInicioController;
 use App\Http\Controllers\InformacionAcademicaController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\Personal\ArchivosController;
@@ -10,8 +14,9 @@ use App\Http\Controllers\Personal\HistorialController;
 use App\Http\Controllers\Personal\MateriasController;
 use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\ExperienciaInicioController;
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\Admin\Teachers\AdminArchivosController;
+
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
 
@@ -36,7 +41,29 @@ Route::prefix('auth')->group(function (){
 /* Rutas Administrativas */
 Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
     Route::get('bienvenida', AdminIndexController::class)->name('welcome');
-    Route::resource('profesores', TeacherController::class)->except('show')->names('teachers')->parameters(['profesores' => 'teacher']);
+    Route::get('experienciaLaboral/{id}', [AdminInformacionAcademicaController::class, 'index'])->name('teachers.experienciaLaboral');
+    Route::get('usu/{uuid}/download', [TeacherController::class, 'download'])->name('teachers.usu.download');
+    Route::resource('profesores', TeacherController::class)->except('show')->names('teachers')->parameters(['profesores' => 'usuario']);
+    Route::get('infoacademic/{uuid}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');
+    Route::resource('infoacademica', AdminInformacionAcademicaController::class)->parameters(["infoacademica"=>"infoAcademica"])->except('index');
+
+    // * Rutas para las capacitaciones
+    Route::post('/updateFiles', [AdminArchivosController::class, 'update'])->name('teachers.updateFiles');
+    Route::get('/getCapacitaciones/{id}', [AdminArchivosController::class, 'getCapacitaciones'])->name('teachers.getCapacitaciones');
+    Route::get('/delete-capacitacion/{id}', [AdminArchivosController::class, 'deleteCapacitacion'])->name('teachers.deleteCapacitacion');
+    Route::get('/capacitacion/ultimaActualizacion', [AdminArchivosController::class, 'ultimaActualizacion'])->name('teachers.lastCapacitacion');
+
+    // * Rutas para las materias
+    Route::post('/storeMaterias', [AdminMateriasController::class, 'store'])->name('teachers.storeMaterias');
+    Route::get('/getMaterias/{id}', [AdminMateriasController::class, 'getMaterias'])->name('teachers.getMaterias');
+    Route::get('/delete-materia/{id}', [AdminMateriasController::class, 'deleteMateria'])->name('teachers.deleteMateria');
+    Route::get('/asignaturas/ultimaActualizacion', [AdminMateriasController::class, 'ultimaActualizacion'])->name('teachers.lastAsignatura');
+
+    // * Rutas para el historial
+    Route::post('/storeHistorial', [AdminHistorialController::class, 'store'])->name('teachers.storeHistorial');
+    Route::get('/getHistorial/{id}', [AdminHistorialController::class, 'getHistorial'])->name('teachers.getHistorial');
+    Route::get('/delete-historial/{id}', [AdminHistorialController::class, 'deleteHistorial'])->name('teachers.deleteHistorial');
+    Route::get('/historial/ultimaActualizacion', [AdminHistorialController::class, 'ultimaActualizacion'])->name('teachers.lastHistorial');
 });
 
 /* Rutas de Profesores */

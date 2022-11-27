@@ -42,7 +42,7 @@ class InformacionAcademica extends Model
     ];
 
     protected $attributes = [
-    'activo' => 1
+        'activo' => 1,
     ];
 
     public function user(){
