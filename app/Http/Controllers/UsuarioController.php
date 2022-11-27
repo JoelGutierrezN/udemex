@@ -55,11 +55,10 @@ class UsuarioController extends Controller
 
         $newUsuario = Usuario::create($request->all());
 
-        if($request->hasFile('foto')){
+        if($request->isMethod('POST')){
             $foto = $request->file('foto');
-            $destino = 'imagenes/perfil/';
-            $fotoname = time() . '-' . $foto->getClientOriginalName();
-            $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
+            $fotoname = $nombreUser.'.'.$foto->getClientOriginalName();
+            Storage::disk('local')->put($fotoname, \File::get($foto));
             $newUsuario->foto = $fotoname;
         }
 
@@ -118,21 +117,19 @@ class UsuarioController extends Controller
             unlink('documentos/Curp/'.$usuario->curp_pdf);
             }
 
-            if($request->foto  != '')
-            {
-            unlink('imagenes/perfil/'.$usuario->foto);
+            if(Storage::disk('local')->exists("$usuario->foto")){
+               Storage::disk('local')->delete("$usuario->foto");
             }
 
             $usuario->update($request->all());
 
-
-            if($request->hasFile('foto')){
-                    $foto = $request->file('foto');
-                    $destino = 'imagenes/perfil/';
-                    $fotoname = time() . '-' . $foto->getClientOriginalName();
-                    $uploadSuccess = $request->file('foto')->move($destino, $fotoname);
-                    $usuario->foto = $fotoname;
-                }
+             if($request->hasFile('foto')){
+                $foto = $request->file('foto');
+                $fotoname = $nombreUser.'.'.$foto->getClientOriginalName();
+                Storage::disk('local')->put($fotoname, \File::get($foto));
+                $usuario->foto = $fotoname;
+             }
+                
 
                 if($request->hasFile('curp_pdf')){
                     $pdf = $request->file('curp_pdf');

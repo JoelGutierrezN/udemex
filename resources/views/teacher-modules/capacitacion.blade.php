@@ -243,7 +243,14 @@
                     // * Eventlisteners
                     pdfPreview.addEventListener('click', (e)=>{
                         e.preventDefault();
+                        /*
+                         * TODO:
+                         * ESTA LINEA ES PARA PRODUCCION TEMPORALMENTE BUSCAR UNA FORMA DE SOLUCION
+                            let archivo = `{{ env('app_url') }}documentos/Capacitaciones/${element.constancia_pdf}`;
+                         */
+
                         let archivo = `documentos/Capacitaciones/${element.constancia_pdf}`;
+
                         iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                         modal.style.display = "block";
                     });
