@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminIndexController;
+use App\Http\Controllers\Admin\Teachers\AdminHistorialController;
+use App\Http\Controllers\Admin\Teachers\AdminInformacionAcademicaController;
+use App\Http\Controllers\Admin\Teachers\AdminMateriasController;
+use App\Http\Controllers\Admin\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\ExperienciaInicioController;
@@ -10,7 +15,6 @@ use App\Http\Controllers\Personal\HistorialController;
 use App\Http\Controllers\Personal\MateriasController;
 use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\UsuarioController;
-use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\Teachers\AdminArchivosController;
 use App\Http\Controllers\Graficas\GraficasController;
 
