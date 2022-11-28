@@ -105,7 +105,7 @@
                                  @endforeach
 
                                 @foreach ($areas_no_seleccionadas as $areasnoselect)
-                                        <option value="{{$areasnoselect->id_area_experiencia}}">{{$areasnoselect->nombre}}</option>
+                                    <option value="{{$areasnoselect->id_area_experiencia}}">{{$areasnoselect->nombre}}</option>
                                 @endforeach
                             </select>
                         </div>
