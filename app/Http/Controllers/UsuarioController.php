@@ -36,11 +36,10 @@ class UsuarioController extends Controller
             $newUsuario->foto = $fotoname;
         }
 
-        if ($request->hasFile('curp_pdf')) {
+        if ($request->isMethod('POST')) {
             $pdf = $request->file('curp_pdf');
-            $destino = 'documentos/Curp/';
             $pdfname = 'CURP_' . $nombreUser . '.' . $pdf->guessExtension();
-            $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
+            Storage::disk('curp')->put($pdfname, \File::get($pdf));
             $newUsuario->curp_pdf = $pdfname;
         }
 
@@ -56,12 +55,13 @@ class UsuarioController extends Controller
 
         $nombreUser = auth()->user()->name;
 
-        if ($request->curp_pdf != '') {
-            unlink('documentos/Curp/' . $usuario->curp_pdf);
-        }
 
         if (Storage::disk('local')->exists("$usuario->foto")) {
             Storage::disk('local')->delete("$usuario->foto");
+        }
+
+        if (Storage::disk('curp')->exists("$usuario->curp_pdf")) {
+            Storage::disk('curp')->delete("$usuario->curp_pdf");
         }
 
         $usuario->update($request->all());
@@ -76,9 +76,8 @@ class UsuarioController extends Controller
 
         if ($request->hasFile('curp_pdf')) {
             $pdf = $request->file('curp_pdf');
-            $destino = 'documentos/Curp/';
             $pdfname = 'CURP_' . $nombreUser . '.' . $pdf->guessExtension();
-            $uploadSuccess = $request->file('curp_pdf')->move($destino, $pdfname);
+            Storage::disk('curp')->put($pdfname, \File::get($pdf));
             $usuario->curp_pdf = $pdfname;
         }
 

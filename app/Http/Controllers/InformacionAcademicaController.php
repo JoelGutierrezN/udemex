@@ -68,12 +68,12 @@ class InformacionAcademicaController extends Controller
 
         $infoAcademica = InformacionAcademica::create($request->all());
 
-        if($request->hasFile('curriculum_pdf')){
-            $pdf = $request->file('curriculum_pdf');
-            $destino = 'documentos/Curriculum/';
-            $pdfname = 'CV_'.$nombreUser.'.'.$pdf->guessExtension();
-            $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
-            $infoAcademica->curriculum_pdf = $pdfname;
+
+        if ($request->isMethod('POST')) {
+            $cv = $request->file('curriculum_pdf');
+            $cvname = 'CV_' . $nombreUser . '.' . $cv->guessExtension();
+            Storage::disk('cv')->put($cvname, \File::get($cv));
+            $infoAcademica->curriculum_pdf = $cvname;
         }
 
         $infoAcademica['uuid'] = (string) Str::uuid();
@@ -117,12 +117,9 @@ class InformacionAcademicaController extends Controller
     {
         // dd($infoAcademica);
 
-        if($request->curriculum_pdf  != '')
-        {
-            unlink('documentos/Curriculum/'.$infoAcademica->curriculum_pdf);
+        if (Storage::disk('cv')->exists("$infoAcademica->curriculum_pdf")) {
+            Storage::disk('cv')->delete("$infoAcademica->curriculum_pdf");
         }
-
-        // / -->forcedelet  seguido de le foreach del controlador (Para editar el array, se debe de borrar y llenar de nuevo)
 
         $infoAcademica->update($request->all());
         $nombreUser = auth()->user()->name;
@@ -151,12 +148,12 @@ class InformacionAcademicaController extends Controller
         ]);
     }
 
-      if($request->hasFile('curriculum_pdf')){
-        $pdf = $request->file('curriculum_pdf');
-        $destino = 'documentos/Curriculum/';
-        $pdfname = 'CV_'.$nombreUser.'.'.$pdf->guessExtension();
-        $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
-        $infoAcademica->curriculum_pdf = $pdfname;
+
+    if ($request->hasFile('curriculum_pdf')) {
+        $cv = $request->file('curriculum_pdf');
+        $cvname = 'CV_' . $nombreUser . '.' . $cv->guessExtension();
+        Storage::disk('cv')->put($cvname, \File::get($cv));
+        $infoAcademica->curriculum_pdf = $cvname;
     }
 
         $infoAcademica->save();

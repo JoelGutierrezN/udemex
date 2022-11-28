@@ -35,6 +35,11 @@ return [
             'root' => public_path('imagenes/perfil'),
         ],
 
+        'cv' => [
+            'driver' => 'local',
+            'root' => public_path('documentos/Curriculum'),
+        ],
+
         'curp' => [
             'driver' => 'local',
             'root' => public_path('documentos/Curp'),
