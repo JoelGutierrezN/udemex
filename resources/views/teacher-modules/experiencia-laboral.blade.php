@@ -194,13 +194,13 @@
                         <div>
                             <label for="datos_lugar_labora" class="is-required">Nombre completo del lugar donde labora</label>
                             <input type="text" autocomplete="off" placeholder="Coloque el nombre del lugar en donde labora"
-                            id="datos_lugar_labora" name="lugar_labora"
+                            id="datos_lugar_labora" name="lugar_labora" style="height: 30px;"
                             value="{{ old('lugar_labora', $infoAcademica->lugar_labora ?? '') }}">
                         </div>
 
                         <div>
                             <label class="is-required">Seleccione la modalidad en la que labora</label>
-                            <select name="modalidad" id="datos_modalidad">
+                            <select name="modalidad" id="datos_modalidad" style="height: 30px;">
                                 @php
                                     $nivelesModalidad = ['Presencial','Línea'];
                                 @endphp
