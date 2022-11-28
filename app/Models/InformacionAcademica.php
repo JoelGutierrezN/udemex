@@ -42,6 +42,10 @@ class InformacionAcademica extends Model
     ];
 
     protected $attributes = [
-    'activo' => 1
+        'activo' => 1,
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
 }

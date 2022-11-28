@@ -221,7 +221,7 @@
 
                             @if($is_registered)
                             <div id="imagePreview">
-                            <img class='fotoperfil' src="{{ asset('imagenes/perfil/' . $usuario->foto) }}" alt="" width="200px">
+                            <img class='fotoperfil' src="{{ asset('imagenes/perfil/' .$usuario->foto)}}" alt="" width="200px">
                             </div>
                             @else
                             <div id="imagePreview"></div>

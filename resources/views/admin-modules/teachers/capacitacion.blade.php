@@ -25,7 +25,7 @@
             <div class="">
                 <div><br><br>
 
-                        <form id="archivos-form" action="{{ route('teacher.updateFiles') }}" method="post" enctype="multipart/form-data">
+                        <form id="archivos-form" action="{{ route('admin.teachers.updateFiles') }}" method="post" enctype="multipart/form-data">
                             @csrf
                             <ul class="col3" id="capacitacion-inputs-1">
                                 <li class="formlabel is-required">Nombre completo</li>
@@ -133,7 +133,7 @@
         //data.append('_token', '{{ csrf_token() }}');
         console.log(data);
 
-        fetch("{{ env('APP_URL') }}/profesores/updateFiles", {
+        fetch("{{ env('APP_URL') }}/administradores/updateFiles?id={{ $usuario->user->id }}", {
                 method: 'POST',
                 headers: new Headers({
                     'X-CSRF-Token': '{{ csrf_token() }}'
@@ -162,7 +162,7 @@
     });
 
     function getCapacitacionData(){
-        fetch('{{ env('APP_URL') }}/profesores/getCapacitaciones/{{ Auth::user()->id }}')
+        fetch('{{ env('APP_URL') }}/administradores/getCapacitaciones/{{ $usuario->user->id }}')
             .then(response => response.json())
             .then((response)=>{
                 createCapacitacionTable(response[0], 'dentro');
@@ -264,7 +264,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((result)=>{
                             if(result.isConfirmed){
-                                fetch(`{{ env('APP_URL') }}/profesores/delete-capacitacion/${ element.id_capacitacion }`)
+                                fetch(`{{ env('APP_URL') }}/administradores/delete-capacitacion/${ element.id_capacitacion }?id={{ $usuario->user->id }}`)
                                     .then((response) => response.json())
                                     .then((response) => {
                                         getLastCapacitacion()
@@ -280,10 +280,11 @@
     }
 
     function getLastCapacitacion(){
-        fetch('{{ route("teacher.lastCapacitacion") }}')
-            .then( (response) => response.json() )
-            .then( (response) => {
-                document.querySelector('#c-actualizacion').innerHTML = new Date(response[0].created_at).toLocaleDateString('es-MX');
+        fetch('{{ route("admin.teachers.lastCapacitacion", ['id' => $usuario->user->id]) }}')
+            .then( response => response.json() )
+            .then( ({ created_at }) => {
+                console.log(created_at);
+                document.querySelector('#c-actualizacion').innerHTML = new Date(created_at).toLocaleDateString('es-MX');
             });
     }
 </script>

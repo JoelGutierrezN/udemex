@@ -17,7 +17,7 @@ class TeacherMiddleware
         elseif (Auth::user()->role == 3)
             return redirect()->route('support.index');
         elseif (Auth::user()->role == 1)
-            return redirect()->route('admin.index');
+            return redirect()->route('admin.welcome');
 
     }
 }

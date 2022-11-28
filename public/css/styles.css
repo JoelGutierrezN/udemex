@@ -57,6 +57,7 @@ select{
     border-radius: 5px;
     background-color: var(--light-gray);
     padding: 5px;
+    vertical-align: middle;
     font-size: 1.5rem;
 }
 
@@ -74,6 +75,7 @@ select{
 
 
 input[type="time"],.acortado{
+    width: 30%;
     width: 50%;
     height: 80%;
     margin: 10px auto 10px 0;
@@ -110,6 +112,39 @@ select:focus{
 input[type="time"]:focus{
     outline: 2px solid var(--gray);
 }
+
+.table{
+    width: 100%;
+    margin: 10px auto;
+    table-layout: fixed;
+}
+
+.table form{
+    display: inline;
+}
+
+.table td{
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.table.table-green th{
+    background-color: var(--terciary);
+    color: var(--white);
+    padding: 10px 0;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-bottom: 5px solid var(--secondary);
+}
+
+.table.table-green td{
+    border-bottom: 1px solid var(--primary);
+}
+
+.table.table-green{
+    background-color: rgba(60, 160, 55, 0.03);
+}
+
 .formlabel{
     font-size: 15px;
     margin-bottom:-10px
@@ -471,6 +506,10 @@ PADDING-TOP: 2px;
     margin-bottom: 20px;
 }
 
+.text-green{
+    color: var(--primary)!important;
+}
+
 /* Header */
 
 header{
@@ -575,11 +614,11 @@ header{
     background-color: var(--primary);
 }
 
-.header--navbar li{
+.header--navbar > li{
     height: 100%;
 }
 
-.header--navbar li a{
+.header--navbar > li > a{
     width: 100%;
     height: 100%;
     display: inline-block;
@@ -591,16 +630,16 @@ header{
     transition: all 400ms;
 }
 
-.header--navbar li a:hover{
+.header--navbar > li > a:hover{
     background-color: var(--primary);
 }
 
-.header--navbar li:first-child a{
+.header--navbar > li:first-child > a{
     padding: 0 5px;
     background-color: var(--primary);
 }
 
-.header--navbar li:first-child a:hover{
+.header--navbar > li:first-child > a:hover{
     background-color: var(--secondary);
 }
 
@@ -623,6 +662,56 @@ header div:last-child{
 #header--navbar--button:hover{
     cursor: pointer;
     background-color: var(--secondary);
+}
+
+.header--navbar #teachers-dropdown{
+    position: relative;
+    border: none;
+    background-color: var(--secondary);
+    height: 100%;
+    color: white;
+    transition: all 300ms;
+    padding: 0 10px;
+}
+
+.header--navbar #teachers-dropdown:hover{
+    background-color: var(--primary);
+}
+
+.header--navbar #teachers-dropdown:hover > ul{
+    display: block;
+}
+
+.header--navbar #teachers-dropdown > ul{
+    position: absolute;
+    left: 0;
+    top: 100%;
+    width: 100%;
+    display: none;
+}
+
+.header--navbar #teachers-dropdown > ul > li{
+    display: block;
+    width: 100%;
+}
+
+.header--navbar #teachers-dropdown > ul > li > a{
+    display: block;
+    padding: 10px 5px;
+    width: 100%;
+    font-size: 1.2rem;
+    text-decoration: none;
+    background-color: var(--secondary);
+    color: white;
+    transition: all 300ms;
+}
+
+.header--navbar #teachers-dropdown > ul > li > a:hover{
+    background-color: var(--primary);
+}
+
+.header--navbar #teachers-dropdown:hover{
+    background-color: var(--primary);
 }
 
 /* */
@@ -653,6 +742,168 @@ footer h5, footer h6{
     font-weight: bold;
     font-size: 1.4rem;
     line-height: 40px;
+}
+
+/* welcome page */
+
+.welcome-container{
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#welcome-admin{
+    min-height: 100%;
+    height: 70vh;
+}
+
+.welcome--image-container{
+    text-align: center;
+}
+
+.welcome--divisor-line{
+    background-color: #3CA037;
+    width: 30%;
+    height: 10px;
+    border-radius: 0 0 25px 25px;
+}
+
+.welcome--divisor-line-inverse{
+    background-color: #3CA037;
+    width: 60%;
+    height: 10px;
+    border-radius: 25px 25px 0 0;
+}
+
+.welcome-container h1{
+    font-weight: bold;
+    font-size: 3rem;
+    margin: 20px auto;
+}
+
+.welcome--module-container{
+    width: 100%;
+    margin: 20px auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 10px solid var(--secondary);
+    border-bottom: 10px solid var(--secondary);
+    border-radius: 25px 0 25px 0;
+    height: 250px;
+}
+
+.welcome--module-container > a{
+    background-color: rgba(60, 160, 55, 0.05);
+    width: 20%;
+    margin: 0 10px;
+    height: 80%;
+    border-radius: 0 25px 0 25px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 0 0 5px 1px var(--terciary);
+    transition: all 300ms;
+    text-decoration: none;
+}
+
+.welcome--module-container > a > svg{
+    width: 50px;
+    height: 50px;
+    color: var(--secondary);
+}
+
+.welcome--module-container > a > h3{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--secondary);
+}
+
+.welcome--module-container > a:hover{
+    color: var(--white);
+    background-color: var(--secondary);
+    animation: expand 300ms both;
+}
+
+.welcome--module-container > a:hover > svg{
+    animation: from-top 300ms both;
+    color: white;
+}
+
+.welcome--module-container > a:hover > h3{
+    animation: from-left 300ms both;
+    color: white;
+}
+
+/* Perfil */
+
+.profile-container{
+    padding: 20px;
+    display: flex;
+}
+
+.profile-container--personal-information{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 70vh;
+    max-height: 80vh;
+    border-right: 5px solid var(--secondary);
+}
+
+.personal--information-image{
+    background-color: var(--light-gray);
+    box-shadow: 1px 1px 5px 1px var(--light-gray);
+    padding: 10px;
+    width: auto;
+    margin: 0 auto;
+}
+
+.profile-container--personal-information img{
+    width: 150px;
+    height: 150px;
+}
+
+.personal--information-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    height: 70%;
+}
+
+.personal--information-info div:first-child > h6{
+    color: var(--gray);
+}
+
+.personal--information-info h6{
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.personal--information-info span{
+    font-size: 1.4rem;
+    color: var(--gray);
+    font-weight: bold;
+}
+
+.profile-container--profesional-information{
+    width: 75%;
+    text-align: center;
+}
+
+.profile-container--profesional-information h2{
+    font-weight: bold;
+    font-size: 2rem;
+    margin-top: 50px;
+    color: red;
 }
 
 /* Animations */
@@ -690,6 +941,48 @@ footer h5, footer h6{
 .btn-primario:hover {
     background-color: var(--secondary);
      cursor: pointer;
+}
+
+.btn{
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    border-radius: 3px;
+    transition: all 300ms;
+    margin: 5px auto;
+}
+
+.btn-primary-outline{
+    background-color: var(--white);
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+}
+
+.btn-primary-outline:hover{
+    background-color: var(--secondary);
+    color: white;
+}
+.btn-danger-outline{
+    background-color: var(--secondary);
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.btn-danger-outline:hover{
+    background-color: var(--gray);
+    color: var(--secondary);
+}
+
+
+.profile-image{
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
 }
 
 .alert {
@@ -775,11 +1068,52 @@ footer h5, footer h6{
 .fotoperfil{
     border-radius:25%;
     -webkit-border-radius:25%;
-    box-shadow: 0px 0px 15px 15px #d1d3d6;
-    -webkit-box-shadow: 0px 0px 15px 15px #d1d3d6;
+    box-shadow: 0 0 15px 15px #d1d3d6;
+    -webkit-box-shadow: 0 0 15px 15px #d1d3d6;
     width: 120px;
     height: 120px;
 }
+
+/* Admin Modules */
+
+    /* Teachers index */
+#teachers--title{
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 2.4rem;
+}
+
+@keyframes from-top {
+    from{
+        transform: translateY(-200%);
+    }
+
+    to{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes from-left {
+    from{
+        transform: translateX(-200%);
+    }
+
+    to{
+        transform: translateX(0%);
+    }
+}
+
+@keyframes expand {
+    from{
+        transform: scale(1, 1);
+    }
+
+    to{
+        transform: scale(1.1, 1.1);
+    }
+}
+
 
 #datos_si_labora div{
     width: 100%;

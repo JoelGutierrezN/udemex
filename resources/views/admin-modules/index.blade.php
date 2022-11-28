@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('admin-modules.layout.app')
 
 @section('title', 'Inicio')
 

@@ -129,7 +129,7 @@
                     @if($is_registered_academic)
                         @php
                             $herramientas_registered = [];
-                            $herramientas_infoAcademica = App\Models\InfoacademicHerramienta::where("id_user", Auth::id())->get();
+                            $herramientas_infoAcademica = App\Models\InfoAcademicHerramienta::where("id_user", Auth::id())->get();
                             foreach($herramientas_infoAcademica as $herramienta):
                                 array_push($herramientas_registered , App\Models\HerramientaTecnologica::where("id_herramienta", $herramienta->id_herramienta)->first());
                             endforeach;
