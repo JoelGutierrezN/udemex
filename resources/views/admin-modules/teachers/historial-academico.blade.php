@@ -16,6 +16,13 @@
         height: 3.5rem;
     }
 
+    .file-preview{
+        border-bottom: 5px;
+    }
+    .file-preview:hover{
+        background: white;
+    }
+
 </style>
 
 <div class="mt-2" data-tab-id="5">
@@ -174,9 +181,9 @@
                     inicio.innerHTML = new Date(element.fecha_inicio).toLocaleDateString('es-MX');
                     fin.innerHTML = new Date(element.fecha_fin).toLocaleDateString('es-MX');
                     nivel.innerHTML = element.nivel_escolar;
-                    titulo.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver título</span>`;
-                    certificado.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cerfiticado</span>`;
-                    cedula.innerHTML = `<span><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cédula</span>`;
+                    titulo.innerHTML = `<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver título</span>`;
+                    certificado.innerHTML = `<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cerfiticado</span>`;
+                    cedula.innerHTML = `<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cédula</span>`;
 
                     deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
@@ -196,6 +203,7 @@
                     // When the user clicks on <span> (x), close the modal
                     span.onclick = function() {
                         modal.style.display = "none";
+                        iframe.setAttribute('data', '');
                     }
 
                     // When the user clicks anywhere outside of the modal, close it

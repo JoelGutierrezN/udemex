@@ -106,7 +106,7 @@
                             $hoy = date("d-m-Y");
                             $diff = date_diff(date_create($fecha_de_nacimiento), date_create($hoy));
                         @endphp
-                        <input type="text" readonly id="edad" value="{{$diff->format('%y') }} años ">
+                        <input type="text" readonly id="edad" style="height: 30px;" value="{{$diff->format('%y') }} años ">
                     </div>
                 </div>
 
