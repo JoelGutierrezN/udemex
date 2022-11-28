@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Storage;
 
 class AdminHistorialController extends Controller
 {
@@ -22,7 +23,7 @@ class AdminHistorialController extends Controller
             'nivel' => 'required'
         ]);
 
-        if( $request->file('titulo') != '' && $request->file('certificado') != '' && $request->file('cedula') != '' ){
+        if( $request->hasFile('titulo') && $request->hasFile('certificado') && $request->hasFile('cedula') ){
 
             $nombre = $user->name;
             $nombreConvert = str_replace(" ", "", $nombre);
@@ -72,18 +73,10 @@ class AdminHistorialController extends Controller
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
 
-            if(!file_exists('/documentos/Historial/'.$titulo)){
-                $destino = 'documentos/Historial';
-                $request->file('titulo')->move($destino, $titulo);
-            }
-            if(!file_exists('/documentos/Historial/'.$cedula)){
-                $destino = 'documentos/Historial';
-                $request->file('cedula')->move($destino, $cedula);
-            }
-            if(!file_exists('/documentos/Historial/'.$certificado)){
-                $destino = 'documentos/Historial';
-                $request->file('certificado')->move($destino, $certificado);
-            }
+                if(!Storage::disk('historial')->exists($titulo)) Storage::disk('historial')->putFileAs('', $request->file('titulo'), $titulo);
+                if(!Storage::disk('historial')->exists($cedula)) Storage::disk('historial')->putFileAs('', $request->file('cedula'), $cedula);
+                if(!Storage::disk('historial')->exists($certificado)) Storage::disk('historial')->putFileAs('', $request->file('certificado'), $certificado);
+
 
             $data = array([
                 'state' => 'Registro realizado',
@@ -123,15 +116,9 @@ class AdminHistorialController extends Controller
         $historial = \DB::table('historial_academicos')->select('id_asignatura')->where('id_asignatura', '=', $id)->get();
         $archivo = \DB::table('archivo_academicos')->select('titulo_pdf', 'cedula_pdf', 'certificado_pdf')->where('id_historial', '=', $historial[0]->id_asignatura)->get();
 
-        if(file_exists('/documentos/Historial/'.$archivo[0]->titulo_pdf)){
-            \File::delete('/documentos/Historial/'.$archivo[0]->titulo_pdf);
-        }
-        if(file_exists('/documentos/Historial/'.$archivo[0]->cedula_pdf)){
-            \File::delete('/documentos/Historial/'.$archivo[0]->cedula_pdf);
-        }
-        if(file_exists('/documentos/Historial/'.$archivo[0]->certificado_pdf)){
-            \File::delete('/documentos/Historial/'.$archivo[0]->certificado_pdf);
-        }
+        if(Storage::disk('historial')->exists($archivo[0]->titulo_pdf)) Storage::disk('historial')->delete($archivo[0]->titulo_pdf);
+        if(Storage::disk('historial')->exists($archivo[0]->cedula_pdf)) Storage::disk('historial')->delete($archivo[0]->cedula_pdf);
+        if(Storage::disk('historial')->exists($archivo[0]->certificado_pdf)) Storage::disk('historial')->delete($archivo[0]->certificado_pdf);
 
         \DB::table('archivo_academicos')->where('id_historial', '=', $historial[0]->id_asignatura)->delete();
         \DB::table('historial_academicos')->where('id_user', '=', $id)->delete();
