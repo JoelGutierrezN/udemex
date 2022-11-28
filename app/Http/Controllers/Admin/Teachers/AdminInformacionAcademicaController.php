@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 
@@ -92,9 +93,6 @@ class AdminInformacionAcademicaController extends Controller
     public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
         $user = User::find($request->id);
-        if ($request->curriculum_pdf != '') {
-            unlink('documentos/Curriculum/' . $infoAcademica->curriculum_pdf);
-        }
 
         $infoAcademica->update($request->all());
         $nombreUser = $user->name;
@@ -124,11 +122,11 @@ class AdminInformacionAcademicaController extends Controller
         }
 
         if ($request->hasFile('curriculum_pdf')) {
-            $pdf = $request->file('curriculum_pdf');
-            $destino = 'documentos/Curriculum/';
-            $pdfname = 'CV_' . $nombreUser . '.' . $pdf->guessExtension();
-            $uploadSuccess = $request->file('curriculum_pdf')->move($destino, $pdfname);
-            $infoAcademica->curriculum_pdf = $pdfname;
+            if (Storage::disk('cv')->exists("$infoAcademica->curriculum_pdf")) {
+                Storage::disk('cv')->delete("$infoAcademica->curriculum_pdf");
+            }
+            $cvname = 'CV_' . $nombreUser . '.' . $request->file('curriculum_pdf')->guessExtension();
+            $infoAcademica->curriculum_pdf = Storage::disk('cv')->putFileAs('', $request->file('curriculum_pdf'), $cvname);
         }
 
         $infoAcademica->save();

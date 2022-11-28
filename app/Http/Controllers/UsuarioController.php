@@ -52,38 +52,27 @@ class UsuarioController extends Controller
 
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
-
-        $nombreUser = auth()->user()->name;
-
-
-        if (Storage::disk('local')->exists("$usuario->foto")) {
-            Storage::disk('local')->delete("$usuario->foto");
-        }
-
-        if (Storage::disk('curp')->exists("$usuario->curp_pdf")) {
-            Storage::disk('curp')->delete("$usuario->curp_pdf");
-        }
-
-        $usuario->update($request->all());
+        $usuario->update($request->except(['id_user', 'foto', 'curp_pdf']));
 
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto');
-            $fotoname = $nombreUser . '.' . $foto->getClientOriginalName();
-            Storage::disk('local')->put($fotoname, \File::get($foto));
-            $usuario->foto = $fotoname;
+            if (Storage::disk('imagenes')->exists("$usuario->foto")) {
+                Storage::disk('imagenes')->delete("$usuario->foto");
+            }
+            $usuario->foto = Storage::disk('imagenes')->putFile('', $request->file('foto'));
         }
 
 
         if ($request->hasFile('curp_pdf')) {
-            $pdf = $request->file('curp_pdf');
-            $pdfname = 'CURP_' . $nombreUser . '.' . $pdf->guessExtension();
-            Storage::disk('curp')->put($pdfname, \File::get($pdf));
-            $usuario->curp_pdf = $pdfname;
+            if (Storage::disk('curp')->exists("$usuario->curp_pdf")) {
+                Storage::disk('curp')->delete("$usuario->curp_pdf");
+            }
+            $nombreUser = auth()->user()->name;
+            $pdf_name = 'CURP_' . $nombreUser . '.' . $request->file('curp_pdf')->guessExtension();
+            $usuario->curp_pdf = Storage::disk('curp')->putFileAs('', $request->file('curp_pdf'), $pdf_name);
         }
 
 
         $usuario->save();
-
         Alert::alert()->success('Actualizado!', ' Sus datos personales han sido actualizados correctamente.');
         return redirect()->route("teacher.index");
     }

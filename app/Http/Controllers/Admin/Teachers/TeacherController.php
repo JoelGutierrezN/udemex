@@ -39,10 +39,10 @@ class TeacherController extends Controller
         }
 
         if ($request->hasFile('foto')) {
-            if (Storage::disk('local')->exists("$usuario->foto")) {
-                Storage::disk('local')->delete("$usuario->foto");
+            if (Storage::disk('imagenes')->exists("$usuario->foto")) {
+                Storage::disk('imagenes')->delete("$usuario->foto");
             }
-            $usuario->foto = Storage::disk('local')->putFile('', $request->foto);
+            $usuario->foto = Storage::disk('imagenes')->putFile('', $request->foto);
         }
 
         $usuario->save();

@@ -32,6 +32,21 @@ return [
 
         'local' => [
             'driver' => 'local',
+            'root' => storage_path('app'),
+        ],
+
+        'historial' => [
+            'driver' => 'local',
+            'root' => public_path('documentos/Historial'),
+        ],
+
+        'capacitaciones' => [
+            'driver' => 'local',
+            'root' => public_path('documentos/Capacitaciones'),
+        ],
+
+        'imagenes' => [
+            'driver' => 'local',
             'root' => public_path('imagenes/perfil'),
         ],
 

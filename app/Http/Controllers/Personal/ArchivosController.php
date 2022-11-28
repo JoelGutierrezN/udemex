@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Capacitacione;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ArchivosController extends Controller
@@ -25,6 +26,7 @@ class ArchivosController extends Controller
             $nombre = Auth::user()->name;
             $nombreConvert = str_replace(" ", "", $nombre);
             $nombreConvert = str_replace('ñ', 'n', $nombreConvert);
+
             $storage_path = $nombreConvert.'_'.$request->nombre.'_'.$request->tipo.'.pdf';
 
             \DB::table('capacitaciones')
@@ -43,13 +45,10 @@ class ArchivosController extends Controller
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
 
-            
-             if(!file_exists('/documentos/Capacitaciones/'.$storage_path)){
-                $file = $request->file('evidencia');
-                $destino = 'documentos/Capacitaciones';
-                $request->file('evidencia')->move($destino, $storage_path);
+
+            if(!Storage::disk('capacitaciones')->exists($storage_path)){
+                Storage::disk('capacitaciones')->putFileAs('', $request->file('evidencia'), $storage_path);
             }
-            
 
             $data = array([
                 'state' => 'Registro realizado',
@@ -65,7 +64,7 @@ class ArchivosController extends Controller
         }
     }
     public function deleteCapacitacion($id){
-        
+
         $capacitacion = Capacitacione::findOrFail($id);
         $capacitacion->delete();
         $nombre = Auth::user()->name;
@@ -73,11 +72,8 @@ class ArchivosController extends Controller
 
         $storage_path = $capacitacion->constancia_pdf;
 
-        if(file_exists('/documentos/Capacitaciones/'.$storage_path)){
-            \File::delete('/documentos/Capacitaciones/'.$storage_path);
-            //\Storage::disk('local')->put($storage_path, \File::get($file));
-        }else{
-                
+        if(Storage::disk('capacitaciones')->exists($storage_path)){
+            Storage::disk('capacitaciones')->delete($storage_path);
         }
         $data = array([
             'alert' => 'Registro eliminado'
