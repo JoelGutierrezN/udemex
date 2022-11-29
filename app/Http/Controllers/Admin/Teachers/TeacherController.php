@@ -43,4 +43,12 @@ class TeacherController extends Controller
         Alert::alert()->success('Actualizado!', ' Sus datos personales han sido actualizados correctamente.');
         return redirect()->route("admin.teachers.index");
     }
+
+     public function destroy(Usuario $usuario)
+    {
+         $usuario->Delete();
+         Alert::alert()->success('Eliminado!', ' El docente ha sido eliminado correctamente.');
+        return redirect()->route("admin.teachers.index");
+
+    }
 }

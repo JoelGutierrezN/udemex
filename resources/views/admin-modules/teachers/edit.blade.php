@@ -343,5 +343,11 @@
         });
     </script>
 
+      <script>
+    function mayus(e) {
+        e.value = e.value.toUpperCase();
+    }
+    </script>
+
 @endsection
 
