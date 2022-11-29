@@ -74,14 +74,7 @@
                     <li><button id="historial-button" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                 </ul>
             </form>
-            <div id="historial-ultima-actualizacion">
-                <div style="width: 49%; display: inline-block">
-                    <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
-                </div>
-                <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
-                    <p>Información actualizada a la fecha: <span id="h-actualizacion"></span></p>
-                </div>
-            </div>
+            
 
             <br>
             <table id="table-historial-academico" style="font-size: 1.3rem;">
@@ -99,6 +92,14 @@
 
                 <tbody id="historial-table"></tbody>
             </table>
+        </div>
+    </div><br>
+    <div id="historial-ultima-actualizacion">
+        <div style="width: 49%; display: inline-block">
+            <p id="campos-obligatorios"></p>
+        </div>
+        <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
+            <p>Información actualizada a la fecha: <span id="h-actualizacion"></span></p>
         </div>
     </div>
     <br><br><br>
@@ -179,10 +180,9 @@
                     inicio.innerHTML = new Date(element.fecha_inicio).toLocaleDateString('es-MX');
                     fin.innerHTML = new Date(element.fecha_fin).toLocaleDateString('es-MX');
                     nivel.innerHTML = element.nivel_escolar;
-                    titulo.innerHTML = `<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver título</span>`;
-                    certificado.innerHTML = `<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cerfiticado</span>`;
-                    cedula.innerHTML = `<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/337/337946.png" class="icon" alt="" height ="20" width="20">Ver cédula</span>`;
-
+                    titulo.innerHTML = `<span>Título</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20"></span> <a href="documentos/Historial/${element.titulo}" download="${element.titulo}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
+                    certificado.innerHTML = `<span>Cerfiticado</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20"></span> <a href="documentos/Historial/${element.certificado}" download="${element.certificado}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
+                    cedula.innerHTML = `<span>Cédula</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20"></span> <a href="documentos/Historial/${element.cedula}" download="${element.cedula}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
                     deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
                     tr.appendChild(nombre);
