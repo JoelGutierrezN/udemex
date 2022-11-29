@@ -63,14 +63,7 @@
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </ul>
                         </form>
-                        <div id="capacitacion-ultima-actualizacion">
-                            <div style="width: 49%; display: inline-block">
-                                <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
-                            </div>
-                            <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
-                                <p>Información actualizada a la fecha: <span id="c-actualizacion"></span></p>
-                            </div>
-                        </div>
+                        
                      <br><br><br>
 
                     <label style="font-size: 2rem;" for="text-input"> Capacitación dentro de UDEMEX</label>
@@ -114,10 +107,17 @@
                       </table>
 
                 </div><br>
-                <br><br><br>
+                
 
 
+            </div><br>
+            <div id="capacitacion-ultima-actualizacion">
+                
+                <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
+                    <p>Información actualizada a la fecha: <span id="c-actualizacion"></span></p>
+                </div>
             </div>
+            <br><br><br>
         </div>
         {{--Fin Subida de Documentos --}}
 <script>
