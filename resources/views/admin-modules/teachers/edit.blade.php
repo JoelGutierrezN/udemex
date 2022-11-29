@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <h3 class="form-screen-title">Registro de Información Personal</h3>
+    <h3 class="form-screen-title">Registro de información personal</h3>
 
     <div class="tabs">
-        <button type="button" id="personal-menu" data-tab-target="1">Datos Personales &blacktriangledown;</button>
+        <button type="button" id="personal-menu" data-tab-target="1">Datos personales &blacktriangledown;</button>
         <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
         <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
         <a href="{{ route('admin.teachers.experienciaLaboral', $usuario->user->id ) }}">
@@ -112,6 +112,18 @@
 
                 <div id="edad"></div>
 
+                  <div>
+                    <label for="text-input" class="is-required"> CURP</label>
+                    <input type="text" onkeyup="mayus(this);"
+                    placeholder="Coloque su CURP. (HEPA920722HMCRRL07)"
+                    autocomplete="off" name="curp" maxlength="18"
+                    value="{{ old('curp', $usuario->curp ?? '') }}">
+                </div>
+                     @if($errors->first('curp'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('curp') }}</i>
+                    </div>
+                    @endif
 
                 <div>
                     <label for="text-input" class="is-required"> Teléfono de casa</label>
@@ -166,31 +178,6 @@
                 @endif
 
                 <div>
-                    <label for="text-file"> Adjuntar archivo en pdf de su CURP </label>
-                    <p class="text-foto">
-                        Si desea actualizar el archivo, coloque nuevamente su archivo CURP en caso contrario no
-                        coloque nada.
-                    </p>
-                    <div class="conte">
-                        <div class="pdfright">
-                            <a class="sin" href="{{ route('admin.teachers.usu.download', $usuario->uuid) }}"
-                               target=”_blank”>
-                                <img class="icon" src="{{ asset('img/pdfdownload.png')}}" height="45" width="45"/>
-                                Descargar </a>
-                        </div>
-                    </div>
-
-                    <input type="file" placeholder="Coloque su CURP" id="curp_pdf" name="curp_pdf"
-                           accept="application/pdf">
-                </div>
-
-                @if($errors->first('curp_pdf'))
-                    <div class="invalid-feedback">
-                        <i>{{ $errors->first('curp_pdf') }}</i>
-                    </div>
-                @endif
-
-                <div>
                     <label for="text-input"> Fotografía</label>
                     <p class="text-foto">La fotografía no debe exceder los 2 Mb y solo acepta imágenes
                         con extensiones 'jpeg, png, jfif'</p><br>&nbsp;
@@ -222,6 +209,14 @@
                     Los campos marcados con un asterisco son obligatorios.
                 </p><br>&nbsp;
             </div>
+             <div class="conte">
+                <div class="leftregresar">
+                </div>
+
+                  <div>
+                  <a title="Regresar" href="{{ route('admin.teachers.index') }}" class="text-end fs-6 text-secundario"><img src="{{ asset('assets/img/return.png')}}" width="30" height="30"></a>
+                  </div>
+           </div>
             <br>&nbsp;
             <div class="conte">
                 <div class="left">

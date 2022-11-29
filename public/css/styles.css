@@ -1034,6 +1034,16 @@ footer h5, footer h6{
     height: auto;
 }
 
+.leftregresar {
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-left: 57px;
+    float: left;
+    position: relative;
+    width: 19%;
+    height: auto;
+}
+
 .pdfright {
     padding-right: 0px;
     /* padding-top: 10px;

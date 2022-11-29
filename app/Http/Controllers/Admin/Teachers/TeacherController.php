@@ -29,14 +29,7 @@ class TeacherController extends Controller
 
         $nombreUser = "{$usuario->nombre}_{$usuario->apellido_paterno}_{$usuario->apellido_materno}";
 
-        $usuario->update($request->except('id_user', 'foto', 'curp_pdf'));
-
-        if($request->hasFile('curp_pdf')){
-            if(Storage::exists($usuario->get('curp_pdf'))){
-                Storage::disk('curp')->delete('curp_pdf');
-            }
-            $usuario->curp_pdf = $request->file('curp_pdf')->storeAs('', "$nombreUser.pdf", 'curp');
-        }
+        $usuario->update($request->except('id_user', 'foto'));
 
         if ($request->hasFile('foto')) {
             if (Storage::disk('imagenes')->exists("$usuario->foto")) {
@@ -49,11 +42,5 @@ class TeacherController extends Controller
 
         Alert::alert()->success('Actualizado!', ' Sus datos personales han sido actualizados correctamente.');
         return redirect()->route("admin.teachers.index");
-    }
-
-    public function download($uuid)
-    {
-        $usu = Usuario::where('uuid', $uuid)->firstOrFail();
-        return response()->file( public_path("documentos/Curp/$usu->curp_pdf") );
     }
 }

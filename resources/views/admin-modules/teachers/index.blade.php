@@ -2,7 +2,7 @@
 @section('title', 'Docentes')
 @section('content')
 
-    <h1 id="teachers--title">Listado de Docentes</h1>
+    <h1 id="teachers--title">Listado de docentes</h1>
 
     <table class="table table-green">
         <thead>
