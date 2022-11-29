@@ -92,14 +92,7 @@
                                                                                              width="40"/></a></li>
                 </form>
             </ul>
-            <div id="asignatura-ultima-actualizacion">
-                <div style="width: 49%; display: inline-block">
-                    <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
-                </div>
-                <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
-                    <p>Información actualizada a la fecha: <span id="a-actualizacion"></span></p>
-                </div>
-            </div>
+            
             <table id="table-materias" style="font-size: 1.3rem;">
                 <thead>
                 <tr>
@@ -116,9 +109,18 @@
 
                 </tbody>
 
-            </table>
+            </table><br>
+            <div id="asignatura-ultima-actualizacion">
+                <div style="width: 49%; display: inline-block">
+                    <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
+                </div>
+                <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
+                    <p>Información actualizada a la fecha: <span id="a-actualizacion"></span></p>
+                </div>
+            </div>
 
         </div>
+        
     </div>
     <br><br><br>
 </div>
