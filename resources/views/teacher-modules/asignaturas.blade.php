@@ -60,13 +60,13 @@
     <h3 class="tab--title">Asignaturas impartidas</h3>
     <div class="">
         <div>
-            <label for="text-input"> Coloque las asignaturas impartidas</label>
+            <label for="text-input"> Coloque asignaturas impartidas en otras instituciones</label>
             <ul class="col6">
                 <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                     @csrf
                     <li class="formlabel is-required" style="font-size:13px;">Nombre completo de la asignatura</li>
                     <li class="formlabel is-required" style="font-size:13px; margin-top:-1.5%">Nombre completo de la
-                        institución donde se impartio
+                        institución donde se impartió
                     </li>
                     <li class="formlabel is-required">Inicio impartición</li>
                     <li class="formlabel is-required">Fin impartición</li>
@@ -75,7 +75,7 @@
                     <li><input id="materia-nombre" name="nombre" autocomplete="off" type="text"
                                placeholder="Nombre completo de la asignatura"></li>
                     <li><input id="materia-institucion" name="institucion" autocomplete="off" type="text"
-                               placeholder="Nombre completo de la institucion donde se ímpartió"></li>
+                               placeholder="Nombre completo de la institución donde se ímpartió"></li>
                     <li><input id="materia-inicio" name="inicio" type="date"
                                placeholder="Inicio de la asignatura impartida"></li>
                     <li><input id="materia-fin" name="fin" type="date" placeholder="Fin de la asignatura impartida">
