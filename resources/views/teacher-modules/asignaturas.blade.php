@@ -111,7 +111,9 @@
 
             </table><br>
             <div id="asignatura-ultima-actualizacion">
-                
+                <div style="width: 49%; display: inline-block">
+                    <p  id="campos-obligatorios"></p>
+                </div>
                 <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
                     <p>Información actualizada a la fecha: <span id="a-actualizacion"></span></p>
                 </div>
