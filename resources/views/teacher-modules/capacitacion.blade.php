@@ -29,10 +29,10 @@
                             @csrf
                             <ul class="col3" id="capacitacion-inputs-1">
                                 <li class="formlabel is-required">Nombre completo</li>
-                                <li class="formlabel is-required" >Nombre completo de la institución donde se tomo</li>
-                                <li class="formlabel is-required">Solicitud</li>
+                                <li class="formlabel is-required" >Nombre completo de la institución donde se tomó</li>
+                                <li class="formlabel is-required">Categoria de petición</li>
                                 <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacion-nombre"></li>
-                                <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitación" id="capacitacion-instituto"></li>
+                                <li><input name="instituto" type="text" placeholder="Institución donde se tomó la capacitación" id="capacitacion-instituto"></li>
                                 <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
                                     <option value="dentro">Dentro de UDEMEX</option>
                                     <option value="fuera">Fuera de UDEMEX</option>
@@ -43,7 +43,7 @@
                             <li class="formlabel is-required">Fin</li>
                             <li class="formlabel is-required">Número de horas</li>
                             <li class="formlabel is-required">Tipo</li>
-                            <li class="formlabel is-required">Evidencia</li>
+                            <li class="formlabel is-required">Documento de respaldo</li>
                             <li style="color:white">Agregar</li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="capacitacion-inicio"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="capacitacion-fin"></li>
@@ -59,7 +59,7 @@
                                 <option value="acreditacion">Acreditación</option>
                                 <option value="certificacion">Certificación</option>
                             </select></li>
-                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="capacitacion-evidencia" required></li>
+                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="capacitacion-evidencia" required>Subir archivo PDF no mayor a 2 Mb</li>
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </ul>
                         </form>
@@ -73,14 +73,14 @@
                         </div>
                      <br><br><br>
 
-                    <label style="font-size: 2rem;" for="text-input"> Capacitación solicitada en UDEMEX</label>
+                    <label style="font-size: 2rem;" for="text-input"> Capacitación dentro de UDEMEX</label>
 
 
                     <table id="table-capacitaciones" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
                                 <th>Nombre completo</th>
-                                <th>Institución donde se tomo</th>
+                                <th>Institución donde se tomó</th>
                                 <th>Inicio</th>
                                 <th>Fin</th>
                                 <th>Horas</th>
@@ -95,13 +95,13 @@
                       <br><br><br>
 
 
-                      <label for="text-input" style="font-size: 2rem;"> Capacitación tomada afuera de UDEMEX</label>
+                      <label for="text-input" style="font-size: 2rem;"> Capacitación fuera de UDEMEX</label>
 
                       <table id="table-capacitaciones" style="font-size: 1.3rem;">
                         <thead>
                             <tr>
                                 <th>Nombre completo</th>
-                                <th>Institución donde se tomo</th>
+                                <th>Institución donde se tomó</th>
                                 <th>Inicio</th>
                                 <th>Fin</th>
                                 <th>Horas</th>
