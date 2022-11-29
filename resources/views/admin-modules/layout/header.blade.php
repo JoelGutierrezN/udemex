@@ -72,6 +72,9 @@
                         <li>
                             <a href="{{ route('admin.teachers.index') }}">Lista de Docentes</a>
                         </li>
+                        <li>
+                            <a href="{{ route('admin.teachersimport.index') }}">Inserción Excel Docentes</a>
+                        </li>
                     </ul>
                 </button>
             </li>

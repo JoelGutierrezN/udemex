@@ -280,6 +280,22 @@ input[type="time"]:focus{
     justify-content: center;
     flex-direction: column;
 }
+
+.input-columns-excel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.input-columns-excel>div {
+    width: 80%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .input-columns-2{
     display: flex;
     justify-content: space-around;
@@ -1006,8 +1022,19 @@ footer h5, footer h6{
     margin-bottom: 10px;
 }
 
+.alert-info h5{
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
 .alert-info p{
     font-size: 1.2rem;
+}
+
+.parrafo{
+    font-size: 1.1rem;
+    text-align: left;
 }
 
 .text-foto{
@@ -1034,6 +1061,16 @@ footer h5, footer h6{
     height: auto;
 }
 
+.leftexcel {
+    padding-left:60px;
+    padding-top: 10px;
+    margin-left: 57px;
+    float: left;
+    position: relative;
+    width: 70%;
+    height: auto;
+}
+
 .pdfright {
     padding-right: 0px;
     /* padding-top: 10px;
@@ -1051,6 +1088,17 @@ footer h5, footer h6{
     float: center;
     position: relative;
     width: 80%;
+    height: auto;
+}
+
+.rightexcel {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    padding-right: 0px;
+    padding-top: 0px;
+    margin-right: 0px;
+    position: relative;
     height: auto;
 }
 

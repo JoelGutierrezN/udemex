@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\ExperienciaInicioController;
 use App\Http\Controllers\InformacionAcademicaController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\ImportarDocenteController;
 use App\Http\Controllers\Personal\ArchivosController;
 use App\Http\Controllers\Personal\HistorialController;
 use App\Http\Controllers\Personal\MateriasController;
@@ -50,6 +51,7 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
     Route::get('experienciaLaboral/{id}', [AdminInformacionAcademicaController::class, 'index'])->name('teachers.experienciaLaboral');
     Route::get('usu/{uuid}/download', [TeacherController::class, 'download'])->name('teachers.usu.download');
     Route::resource('profesores', TeacherController::class)->except('show')->names('teachers')->parameters(['profesores' => 'usuario']);
+    Route::resource('docentesimport', ImportarDocenteController::class)->except('show')->names('teachersimport');
     Route::get('infoacademic/{uuid}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');
     Route::resource('infoacademica', AdminInformacionAcademicaController::class)->parameters(["infoacademica"=>"infoAcademica"])->except('index');
 
