@@ -30,6 +30,7 @@ class UsuarioUpdateRequest extends FormRequest
            'apellido_materno'   => ['required','regex:/^[A-Z][A-Z,a-z, ,é,É,í,Í,ó,Ó,ú,Ú,á,Á,ü,Ü,ñ,Ñ]+$/'],
            'sexo'               => 'required',
            'fecha_nacimiento'   => ['required','date','max:10'],
+           'curp'               => ['required', 'regex:/^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/', Rule::unique('usuarios','curp')->withoutTrashed()->ignore($this->usuario)],
            'clave_empleado'     => ['required', Rule::unique('usuarios','clave_empleado')->withoutTrashed()->ignore($this->usuario)],
            'foto'               => ['image', 'max:2048'],
            'telefono_casa'      => ['required', 'max:10', 'regex:/^[0-9]+$/'],

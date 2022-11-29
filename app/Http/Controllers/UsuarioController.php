@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 
 class UsuarioController extends Controller
@@ -29,21 +28,7 @@ class UsuarioController extends Controller
 
         $newUsuario = Usuario::create($request->all());
 
-        if ($request->isMethod('POST')) {
-            $foto = $request->file('foto');
-            $fotoname = $nombreUser . '.' . $foto->getClientOriginalName();
-            Storage::disk('local')->put($fotoname, \File::get($foto));
-            $newUsuario->foto = $fotoname;
-        }
-
-        if ($request->isMethod('POST')) {
-            $pdf = $request->file('curp_pdf');
-            $pdfname = 'CURP_' . $nombreUser . '.' . $pdf->guessExtension();
-            Storage::disk('curp')->put($pdfname, \File::get($pdf));
-            $newUsuario->curp_pdf = $pdfname;
-        }
-
-        $newUsuario['uuid'] = (string)Str::uuid();
+        $newUsuario->foto = Storage::disk('imagenes')->putFile('', $request->file('foto'));
 
         $newUsuario->save();
         Alert::alert()->success('Guardado!', ' Sus datos personales han sido regristados correctamente.');
@@ -52,7 +37,7 @@ class UsuarioController extends Controller
 
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
-        $usuario->update($request->except(['id_user', 'foto', 'curp_pdf']));
+        $usuario->update($request->except(['id_user', 'foto']));
 
         if ($request->hasFile('foto')) {
             if (Storage::disk('imagenes')->exists("$usuario->foto")) {
@@ -60,17 +45,6 @@ class UsuarioController extends Controller
             }
             $usuario->foto = Storage::disk('imagenes')->putFile('', $request->file('foto'));
         }
-
-
-        if ($request->hasFile('curp_pdf')) {
-            if (Storage::disk('curp')->exists("$usuario->curp_pdf")) {
-                Storage::disk('curp')->delete("$usuario->curp_pdf");
-            }
-            $nombreUser = auth()->user()->name;
-            $pdf_name = 'CURP_' . $nombreUser . '.' . $request->file('curp_pdf')->guessExtension();
-            $usuario->curp_pdf = Storage::disk('curp')->putFileAs('', $request->file('curp_pdf'), $pdf_name);
-        }
-
 
         $usuario->save();
         Alert::alert()->success('Actualizado!', ' Sus datos personales han sido actualizados correctamente.');
@@ -80,14 +54,6 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function download($uuid)
-    {
-        $usu = Usuario::where('uuid', $uuid)->firstOrFail();
-        $pathToFile = ("documentos/Curp/" . $usu->curp_pdf);
-        // return response()->download($pathToFile);
-        return response()->file($pathToFile);
     }
 
     public function downloadinfo($uuid)

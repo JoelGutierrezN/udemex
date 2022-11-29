@@ -1030,7 +1030,7 @@ footer h5, footer h6{
     margin-left: 57px;
     float: left;
     position: relative;
-    width: 60%;
+    width: 50%;
     height: auto;
 }
 
@@ -1059,7 +1059,7 @@ footer h5, footer h6{
     color:#126408;
     display: flex;
     justify-content: center;
-    width: 30%;
+    width: 40%;
 }
 
 .alert-info2 p{

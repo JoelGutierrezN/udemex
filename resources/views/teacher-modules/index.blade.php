@@ -4,10 +4,10 @@
 
 @section('content')
 
-        <h3 class="form-screen-title">Registro de Información Personal</h3>
+        <h3 class="form-screen-title">Registro de información personal</h3>
 
         <div class="tabs">
-            <button type="button" id="personal-menu" data-tab-target="1">Datos Personales &blacktriangledown;</button>
+            <button type="button" id="personal-menu" data-tab-target="1">Datos personales &blacktriangledown;</button>
             <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
             <a href="{{ route('teacher.experienciaLaboral') }}"><button type="button" id="experiencia-menu">Experiencia Laboral &blacktriangledown;</button></a>
@@ -64,7 +64,7 @@
 
                 <div>
                     <label for="text-input" class="is-required"> Apellido paterno</label>
-                    <input type="text" placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo: 'González'"
+                    <input type="text" placeholder="Coloque su apellido paterno iniciando por letra mayúscula. Ejemplo: 'González'"
                      autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
                        value="{{ old('apellido_paterno', $usuario->apellido_paterno ?? '') }}">
                 </div>
@@ -76,7 +76,7 @@
 
                 <div>
                     <label for="text-input" class="is-required"> Apellido materno</label>
-                    <input type="text" placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo: 'González'"
+                    <input type="text" placeholder="Coloque su apellido materno iniciando por letra mayúscula. Ejemplo: 'González'"
                     autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
                      value="{{ old('apellido_materno', $usuario->apellido_materno ?? '') }}">
                 </div>
@@ -125,11 +125,24 @@
 
                     <div id="edad"></div>
 
+                <div>
+                    <label for="text-input" class="is-required"> CURP</label>
+                    <input type="text" onkeyup="mayus(this);"
+                    placeholder="Coloque su CURP. (HEPA920722HMCRRL07)"
+                    autocomplete="off" name="curp" maxlength="18"
+                    value="{{ old('curp', $usuario->curp ?? '') }}">
+                </div>
+                     @if($errors->first('curp'))
+                    <div class="invalid-feedback">
+                    <i>{{ $errors->first('curp') }}</i>
+                    </div>
+                    @endif
+
 
                 <div>
                     <label for="text-input" class="is-required"> Teléfono de casa</label>
                     <input type="text" placeholder="Coloque su teléfono de casa. (10 dígitos)"
-                    autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
+                     autocomplete="off" id="dato_telefono_casa" name="telefono_casa"
                      value="{{ old('telefono_casa', $usuario->telefono_casa ?? '') }}"
                      maxlength="10"
                      onKeypress="if (event.keyCode < 48 || event.keyCode > 57) event.returnValue = false;">
@@ -177,37 +190,6 @@
                     <i>{{ $errors->first('email_personal') }}</i>
                     </div>
                     @endif
-
-                <div>
-                    @if($is_registered)
-                    <label for="text-file"> Adjuntar archivo en pdf de su CURP  </label>
-                    <p class= "text-foto">
-                        Si desea actualizar el archivo, coloque nuevamente su archivo CURP en caso contrario no coloque nada.
-                    </p>
-                     <div class="conte">
-                        <div class="pdfright">
-                            <a class="sin" href="{{ route('teacher.usu.download', $usuario->uuid) }}"
-                            target=”_blank”>
-                            <img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="45" width="45" />
-                           Descargar </a>
-                        </div>
-                     </div>
-
-                        <input type="file" placeholder="Coloque su CURP" id="curp_pdf" name="curp_pdf"
-                         accept="application/pdf">
-
-                    @else
-                       <label for="text-input" class="is-required"> Adjuntar archivo en pdf de su CURP</label>
-                        <input type="file" placeholder="Coloque su fotografía" id="curp_pdf" name="curp_pdf"
-                        accept="application/pdf">
-                    @endif
-                </div>
-
-                    @if($errors->first('curp_pdf'))
-                   <div class="invalid-feedback">
-                   <i>{{ $errors->first('curp_pdf') }}</i>
-                   </div>
-                   @endif
 
                     <div>
                          @if($is_registered)
@@ -381,6 +363,12 @@
                 }
             });
         });
+    </script>
+
+    <script>
+    function mayus(e) {
+        e.value = e.value.toUpperCase();
+    }
     </script>
 
 @endsection
