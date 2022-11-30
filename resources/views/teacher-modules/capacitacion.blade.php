@@ -30,7 +30,7 @@
                             <ul class="col3" id="capacitacion-inputs-1">
                                 <li class="formlabel is-required">Nombre completo</li>
                                 <li class="formlabel is-required" >Nombre completo de la institución donde se tomó</li>
-                                <li class="formlabel is-required">Categoria de petición</li>
+                                <li class="formlabel is-required">Categoría de petición</li>
                                 <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacion-nombre"></li>
                                 <li><input name="instituto" type="text" placeholder="Institución donde se tomó la capacitación" id="capacitacion-instituto"></li>
                                 <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">

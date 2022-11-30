@@ -4,13 +4,13 @@
 
 @section('content')
 
-<h3 class="form-screen-title">Registro de Información Personal</h3>
+<h3 class="form-screen-title">Registro de información personal</h3>
 
         <div class="tabs">
-            <a href="{{route('teacher.index')}}"> <button type="button" id="personal-menu">Datos Personales &blacktriangledown;</button></a>
+            <a href="{{route('teacher.index')}}"> <button type="button" id="personal-menu">Datos personales &blacktriangledown;</button></a>
             <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
             <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
-            <button type="button" id="experiencia-menu" data-tab-target="1">Experiencia Laboral &blacktriangledown;</button></a>
+            <button type="button" id="experiencia-menu" data-tab-target="1">Experiencia laboral &blacktriangledown;</button></a>
             <button type="button" id="archivos-menu" data-tab-target="4">Capacitación &blacktriangledown;</button>
             {{-- {{ route('experienciaLaboral') }} --}}
         </div>
@@ -26,7 +26,7 @@
             @method('POST')
         @endif
             <div class="mt-2" data-tab-id="1">
-                <h3 class="tab--title">Datos de Experiencia Laboral</h3>
+                <h3 class="tab--title">Datos de experiencia laboral</h3>
                 @if($is_registered_academic)
                     <div class="alert alert-info">
                         <h6>¡Ya tenemos tus datos!</h6>
