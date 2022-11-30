@@ -170,21 +170,34 @@
                     let certificado = document.createElement('tr');
                     let cedula = document.createElement('tr');
 
+                    let tituloPreview = document.createElement('span');
+                    let certificadoPreview = document.createElement('span');
+                    let cedulaPreview = document.createElement('span');
+
                     opciones.setAttribute('style', 'text-align: center;');
                     titulo.setAttribute('style', 'cursor: pointer;');
                     certificado.setAttribute('style', 'cursor: pointer;');
                     cedula.setAttribute('style', 'cursor: pointer;');
+                    tituloPreview.setAttribute('class', 'file-preview');
+                    certificadoPreview.setAttribute('class', 'file-preview');
+                    cedulaPreview.setAttribute('class', 'file-preview');
 
                     nombre.innerHTML = element.nombre_asignatura;
                     institucion.innerHTML = element.nombre_institucion;
                     inicio.innerHTML = new Date(element.fecha_inicio).toLocaleDateString('es-MX');
                     fin.innerHTML = new Date(element.fecha_fin).toLocaleDateString('es-MX');
                     nivel.innerHTML = element.nivel_escolar;
-                    titulo.innerHTML = `<span>Título</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20"></span> <a href="documentos/Historial/${element.titulo}" download="${element.titulo}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
-                    certificado.innerHTML = `<span>Cerfiticado</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20"></span> <a href="documentos/Historial/${element.certificado}" download="${element.certificado}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
-                    cedula.innerHTML = `<span>Cédula</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="file-preview"><img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20"></span> <a href="documentos/Historial/${element.cedula}" download="${element.cedula}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
+                    tituloPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20">`;
+                    titulo.innerHTML = `<span>Título</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="documentos/Historial/${element.titulo}" download="${element.titulo}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
+                    certificadoPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20">`;
+                    certificado.innerHTML = `<span>Cerfiticado</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="documentos/Historial/${element.certificado}" download="${element.certificado}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
+                    cedulaPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20">`;
+                    cedula.innerHTML = `<span>Cédula</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="documentos/Historial/${element.cedula}" download="${element.cedula}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
                     deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
+                    titulo.appendChild(tituloPreview);
+                    certificado.appendChild(certificadoPreview);
+                    cedula.appendChild(cedulaPreview);
                     tr.appendChild(nombre);
                     tr.appendChild(institucion);
                     tr.appendChild(inicio);
@@ -211,17 +224,17 @@
                         }
                     }
 
-                    titulo.addEventListener('click',(e)=>{
+                    tituloPreview.addEventListener('click',(e)=>{
                         let archivo = `documentos/Historial/${element.titulo}`;
                         iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                         modal.style.display = "block";
                     });
-                    certificado.addEventListener('click',(e)=>{
+                    certificadoPreview.addEventListener('click',(e)=>{
                         let archivo = `documentos/Historial/${element.certificado}`;
                         iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                         modal.style.display = "block";
                     });
-                    cedula.addEventListener('click',(e)=>{
+                    cedulaPreview.addEventListener('click',(e)=>{
                         let archivo = `documentos/Historial/${element.cedula}`;
                         iframe.setAttribute('data', '{{ asset("") }}'+archivo);
                         modal.style.display = "block";
