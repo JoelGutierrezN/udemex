@@ -211,32 +211,41 @@
                     tr.appendChild(opciones);
                     table.appendChild(tr);
 
-                    // When the user clicks on <span> (x), close the modal
+                    // When the user clicks on <span> (x), close the modalmodal
                     span.onclick = function() {
                         modal.style.display = "none";
-                        iframe.setAttribute('data', '');
+                        modal.setAttribute('src', '');
+                        iframe.setAttribute('src', '');
+                        document.getElementById('archivo-view').contentWindow.location.reload(true);
                     }
 
                     // When the user clicks anywhere outside of the modal, close it
                     window.onclick = function(event) {
                         if (event.target == modal) {
                             modal.style.display = "none";
+                            modal.setAttribute('src', '');
+                            iframe.setAttribute('src', '');
+                            document.getElementById('archivo-view').contentWindow.location.reload(true);
+                            iframe.src = iframe.src;
                         }
                     }
 
                     tituloPreview.addEventListener('click',(e)=>{
                         let archivo = `documentos/Historial/${element.titulo}`;
-                        iframe.setAttribute('data', '{{ asset("") }}'+archivo);
+                        iframe.src ='{{ asset("") }}'+archivo;
                         modal.style.display = "block";
+                        iframe.src = iframe.src;
                     });
                     certificadoPreview.addEventListener('click',(e)=>{
                         let archivo = `documentos/Historial/${element.certificado}`;
-                        iframe.setAttribute('data', '{{ asset("") }}'+archivo);
+                        iframe.src ='{{ asset("") }}'+archivo;
                         modal.style.display = "block";
+                        iframe.src = iframe.src;
                     });
                     cedulaPreview.addEventListener('click',(e)=>{
                         let archivo = `documentos/Historial/${element.cedula}`;
-                        iframe.setAttribute('data', '{{ asset("") }}'+archivo);
+                        iframe.src ='{{ asset("") }}'+archivo;
+                        iframe.src = iframe.src;
                         modal.style.display = "block";
                     });
 

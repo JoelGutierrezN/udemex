@@ -233,12 +233,19 @@
                     // When the user clicks on <span> (x), close the modal
                     span.onclick = function() {
                         modal.style.display = "none";
+                        modal.setAttribute('src', '');
+                        iframe.setAttribute('src', '');
+                        document.getElementById('archivo-view').contentWindow.location.reload(true);
                     }
 
                     // When the user clicks anywhere outside of the modal, close it
                     window.onclick = function(event) {
                         if (event.target == modal) {
                             modal.style.display = "none";
+                            modal.setAttribute('src', '');
+                            iframe.setAttribute('src', '');
+                            document.getElementById('archivo-view').contentWindow.location.reload(true);
+                            iframe.src = iframe.src;
                         }
                     }
 
@@ -253,7 +260,7 @@
 
                         let archivo = `documentos/Capacitaciones/${element.constancia_pdf}`;
 
-                        iframe.setAttribute('data', '{{ asset("") }}'+archivo);
+                        iframe.src ='{{ asset("") }}'+archivo;
                         modal.style.display = "block";
                     });
 
