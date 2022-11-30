@@ -64,8 +64,8 @@
     $('.formulario-eliminar').submit(function(e){
         e.preventDefault();
         Swal.fire({
-        title: 'Eliminar docente',
-        text: "¿Está seguro que desea eliminar al docente seleccionado?",
+        title: '¿Seguro que desea eliminar?',
+        text: "Este elemento se eliminará permanentemente. Esta acción no se puede deshacer.",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#549950',
@@ -74,11 +74,6 @@
         cancelButtonText: 'Cancelar'
         }).then((result) => {
         if (result.isConfirmed) {
-            // Swal.fire(
-            // 'Eliminado!',
-            // 'El docente ha sido eliminado correctamente.',
-            // 'success'
-            // )
             this.submit();
         }
         });
