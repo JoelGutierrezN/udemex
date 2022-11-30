@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\EjemploDocenteExport;
+use App\Imports\UsuariosImport;
+use App\Http\Requests\ImportarUsuariosRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ImportarDocenteController extends Controller
 {
@@ -15,6 +20,7 @@ class ImportarDocenteController extends Controller
     {
          return view('admin-modules.importar.Docentes.importdocente');
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -32,9 +38,19 @@ class ImportarDocenteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ImportarUsuariosRequest $request)
     {
-        //
+       $file = $request->file('archivo');
+
+       if (empty($file)) 
+       {
+        return redirect()->route('admin.teachersimport.index');
+       }
+       else{
+        Excel::import(new UsuariosImport, $file);
+          Alert::alert()->success('Guardado!', 'Usuarios importados exitosamente.');
+        return redirect()->route('admin.teachers.index');
+       }
     }
 
     /**
@@ -80,5 +96,9 @@ class ImportarDocenteController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function exportarejemplodocentes(){
+        return Excel::download(new EjemploDocenteExport, 'UDEMEX_Docentes.xlsx');
     }
 }

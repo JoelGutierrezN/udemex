@@ -1017,6 +1017,17 @@ footer h5, footer h6{
 }
 
 
+.alert-info-danger{
+    background-color: #F8D7D4;
+    color:#932029;
+    font-size: 1.4rem;
+    text-align: left;
+    float: left;
+    width: 100%;
+    height: auto;
+}
+
+
 .alert-info h6{
     font-size: 2rem;
     margin-bottom: 10px;

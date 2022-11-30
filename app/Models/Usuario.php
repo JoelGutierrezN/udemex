@@ -16,12 +16,12 @@ class Usuario extends Model
     public $timestamp = false;
 
     protected $fillable = [
-        'uuid',
         'nombre',
         'apellido_paterno',
         'apellido_materno',
         'sexo',
         'fecha_nacimiento',
+        'curp',
         'clave_empleado',
         'foto',
         'telefono_casa',
