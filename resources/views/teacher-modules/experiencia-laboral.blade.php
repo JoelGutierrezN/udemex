@@ -249,7 +249,7 @@
                             </p>
                             <div class="conte">
                                 <div class="pdfright">
-                                    <a class="sin" href="{{ route('teacher.infoacademic.downloadinfo', $infoAcademica->uuid) }}"
+                                    <a class="sin" href="{{ route('teacher.infoacademic.downloadinfo', $infoAcademica->user->id) }}"
                                     target=”_blank”>
                                     <img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="45" width="45" />
                                    Descargar </a>

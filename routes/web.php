@@ -78,7 +78,7 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
     Route::get('experienciaLaboral', ExperienciaInicioController::class)->name('experienciaLaboral');
     Route::resource('usuarios', UsuarioController::class);
     Route::get('usu/{uuid}/download', [UsuarioController::class, 'download'])->name('usu.download');
-    Route::get('infoacademic/{uuid}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');
+    Route::get('infoacademic/{id}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');
     Route::resource('infoacademica', InformacionAcademicaController::class)->parameters(["infoacademica"=>"infoAcademica"]);
 
 
