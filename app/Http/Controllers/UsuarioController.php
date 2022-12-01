@@ -59,8 +59,7 @@ class UsuarioController extends Controller
     public function downloadinfo($id)
     {
         $infoacademic = InformacionAcademica::where('id_user', $id)->firstOrFail();
-        $pathToFile = ("documentos/Curriculum/" . $infoacademic->curriculum_pdf);
-        // return response()->download($pathToFile);
+        $pathToFile = public_path("documentos/Curriculum/{$infoacademic->curriculum_pdf}");
         return response()->file($pathToFile);
     }
 
