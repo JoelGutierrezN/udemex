@@ -11,7 +11,7 @@ class InfoAcademicArea extends Model
 
     protected $primaryKey = "id_infoacademic_area";
 
-    protected $table = "infoacademic_areas";
+    protected $table = "cd_infoacademic_areas";
 
     public $timestamp = false;
 

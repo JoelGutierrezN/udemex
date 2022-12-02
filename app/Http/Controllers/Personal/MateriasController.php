@@ -22,7 +22,7 @@ class MateriasController extends Controller
         ]);*/
 
         try{
-            \DB::table('academico_asignaturas')->insert([
+            \DB::table('cd_academico_asignaturas')->insert([
                 'nombre_asignatura' => $request->nombre,
                 'nombre_institucion' => $request->institucion,
                 'fecha_inicio' => $request->inicio,
@@ -45,7 +45,7 @@ class MateriasController extends Controller
     }
 
     public function getMaterias($id){
-        $info = \DB::table('academico_asignaturas')
+        $info = \DB::table('cd_academico_asignaturas')
             ->where('id_user', '=', $id)
             ->orderBy('fecha_inicio', 'desc')
             ->get();
@@ -64,7 +64,7 @@ class MateriasController extends Controller
     }
 
     public function ultimaActualizacion(){
-        $info = \DB::table('academico_asignaturas')
+        $info = \DB::table('cd_academico_asignaturas')
             ->where('id_user', '=', \Auth::user()->id)
             ->select('created_at')
             ->orderBy('created_at', 'DESC')

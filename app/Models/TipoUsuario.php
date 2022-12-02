@@ -11,7 +11,7 @@ class TipoUsuario extends Model
 
     protected $primaryKey = "id_tipo_usuario";
 
-    protected $table = "tipo_usuarios";
+    protected $table = "cd_tipo_usuarios";
 
     public $timestamp = false;
 

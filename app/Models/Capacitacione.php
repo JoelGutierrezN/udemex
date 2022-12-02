@@ -11,7 +11,7 @@ class Capacitacione extends Model
 
     protected $primaryKey = "id_capacitacion";
 
-    protected $table = "capacitaciones";
+    protected $table = "cd_capacitaciones";
 
     public $timestamp = false;
 

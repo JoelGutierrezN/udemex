@@ -12,7 +12,7 @@ class InfoAcademicHerramienta extends Model
 
     protected $primaryKey = "id_infoacademic_herramienta";
 
-    protected $table = "infoacademic_herramientas";
+    protected $table = "cd_infoacademic_herramientas";
 
     public $timestamp = false;
 
