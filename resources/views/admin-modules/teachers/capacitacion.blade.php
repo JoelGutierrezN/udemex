@@ -29,10 +29,10 @@
                             @csrf
                             <ul class="col3" id="capacitacion-inputs-1">
                                 <li class="formlabel is-required">Nombre completo</li>
-                                <li class="formlabel is-required" >Nombre completo de la institución donde se tomo</li>
-                                <li class="formlabel is-required">Solicitud</li>
-                                <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacion-nombre"></li>
-                                <li><input name="instituto" type="text" placeholder="Institución donde se tomo la capacitación" id="capacitacion-instituto"></li>
+                                <li class="formlabel is-required" >Nombre completo de la institución donde se tomó</li>
+                                <li class="formlabel is-required">Categoría de petición</li>
+                                <li><input name="nombre" type="text" placeholder="Nombre de capacitación" id="capacitacionSolicitud-nombre"></li>
+                                <li><input name="instituto" type="text" placeholder="Institución donde se tomó la capacitación" id="capacitacion-instituto"></li>
                                 <li><select style="margin-top:10px" class="" name="solicitud" id="capacitacion-solicitud">
                                     <option value="dentro">Dentro de UDEMEX</option>
                                     <option value="fuera">Fuera de UDEMEX</option>
@@ -43,7 +43,7 @@
                             <li class="formlabel is-required">Fin</li>
                             <li class="formlabel is-required">Número de horas</li>
                             <li class="formlabel is-required">Tipo</li>
-                            <li class="formlabel is-required">Evidencia</li>
+                            <li class="formlabel is-required">Documento de respaldo</li>
                             <li style="color:white">Agregar</li>
                             <li><input name="inicio" type="date" placeholder="Inicio de capacitacion" id="capacitacion-inicio"></li>
                             <li><input name="fin" type="date" placeholder="Inicio de capacitacion" id="capacitacion-fin"></li>
@@ -59,18 +59,11 @@
                                 <option value="acreditacion">Acreditación</option>
                                 <option value="certificacion">Certificación</option>
                             </select></li>
-                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="capacitacion-evidencia" required></li>
+                            <li><input type="file" accept="application/pdf" name="evidencia" placeholder="Coloque su evidencia" id="capacitacion-evidencia" required>Subir archivo PDF no mayor a 2 Mb</li>
                             <li><button id="agregar-capacitacion" type="submit" class="btnplus"><img class="icon" src="{{ asset('img/save.png')}}" height ="40" width="40" /></button></li>
                         </ul>
                         </form>
-                        <div id="capacitacion-ultima-actualizacion">
-                            <div style="width: 49%; display: inline-block">
-                                <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
-                            </div>
-                            <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
-                                <p>Información actualizada a la fecha: <span id="c-actualizacion"></span></p>
-                            </div>
-                        </div>
+                        
                      <br><br><br>
 
                     <label style="font-size: 2rem;" for="text-input"> Capacitación solicitada en UDEMEX</label>
@@ -80,7 +73,7 @@
                         <thead>
                             <tr>
                                 <th>Nombre completo</th>
-                                <th>Institución donde se tomo</th>
+                                <th>Institución donde se tomó</th>
                                 <th>Inicio</th>
                                 <th>Fin</th>
                                 <th>Horas</th>
@@ -101,7 +94,7 @@
                         <thead>
                             <tr>
                                 <th>Nombre completo</th>
-                                <th>Institución donde se tomo</th>
+                                <th>Institución donde se tomó</th>
                                 <th>Inicio</th>
                                 <th>Fin</th>
                                 <th>Horas</th>
@@ -114,6 +107,14 @@
                       </table>
 
                 </div><br>
+                <div id="capacitacion-ultima-actualizacion">
+                    <div style="width: 49%; display: inline-block">
+                        <p  id="campos-obligatorios"></p>
+                    </div>
+                    <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
+                        <p>Información actualizada a la fecha: <span id="c-actualizacion"></span></p>
+                    </div>
+                </div>
                 <br><br><br>
 
 
@@ -231,12 +232,19 @@
                     // When the user clicks on <span> (x), close the modal
                     span.onclick = function() {
                         modal.style.display = "none";
+                        modal.setAttribute('src', '');
+                        iframe.setAttribute('src', '');
+                        document.getElementById('archivo-view').contentWindow.location.reload(true);
                     }
 
                     // When the user clicks anywhere outside of the modal, close it
                     window.onclick = function(event) {
                         if (event.target == modal) {
                             modal.style.display = "none";
+                            modal.setAttribute('src', '');
+                            iframe.setAttribute('src', '');
+                            document.getElementById('archivo-view').contentWindow.location.reload(true);
+                            iframe.src = iframe.src;
                         }
                     }
 
@@ -251,7 +259,7 @@
 
                         let archivo = `documentos/Capacitaciones/${element.constancia_pdf}`;
 
-                        iframe.setAttribute('data', '{{ asset("") }}'+archivo);
+                        iframe.src ='{{ asset("") }}'+archivo;
                         modal.style.display = "block";
                     });
 

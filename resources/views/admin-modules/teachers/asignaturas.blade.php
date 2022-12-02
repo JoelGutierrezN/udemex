@@ -60,13 +60,13 @@
     <h3 class="tab--title">Asignaturas impartidas</h3>
     <div class="">
         <div>
-            <label for="text-input"> Coloque las asignaturas impartidas</label>
+            <label for="text-input"> Coloque asignaturas impartidas en otras instituciones</label>
             <ul class="col6">
                 <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                     @csrf
                     <li class="formlabel is-required" style="font-size:13px;">Nombre completo de la asignatura</li>
                     <li class="formlabel is-required" style="font-size:13px; margin-top:-1.5%">Nombre completo de la
-                        institución donde se impartio
+                        institución donde se impartió
                     </li>
                     <li class="formlabel is-required">Inicio impartición</li>
                     <li class="formlabel is-required">Fin impartición</li>
@@ -92,14 +92,7 @@
                                                                                              width="40"/></a></li>
                 </form>
             </ul>
-            <div id="asignatura-ultima-actualizacion">
-                <div style="width: 49%; display: inline-block">
-                    <p class="is-required" id="campos-obligatorios">Campos obligatorios</p>
-                </div>
-                <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
-                    <p>Información actualizada a la fecha: <span id="a-actualizacion"></span></p>
-                </div>
-            </div>
+            
             <table id="table-materias" style="font-size: 1.3rem;">
                 <thead>
                 <tr>
@@ -118,6 +111,14 @@
 
             </table>
 
+        </div>
+    </div><br>
+    <div id="asignatura-ultima-actualizacion">
+        <div style="width: 49%; display: inline-block">
+            <p  id="campos-obligatorios"></p>
+        </div>
+        <div class="alert-info2" style="width: 49%; display: inline-block; padding: 5px;">
+            <p>Información actualizada a la fecha: <span id="a-actualizacion"></span></p>
         </div>
     </div>
     <br><br><br>

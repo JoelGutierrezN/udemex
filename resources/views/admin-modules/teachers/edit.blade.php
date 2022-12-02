@@ -250,13 +250,13 @@
     {{-- Modal to PDF --}}
     <div id="myModal" class="modal">
         <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <p></p>
-            <object id="archivo-view" src="" type="application/PDF" width="100%" height="95%" frameborder="0"></object>
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p></p>
+                <iframe id="archivo-view" src="" type="application/PDF" width="100%" height="95%" frameborder="0"></iframe>
+            </div>
         </div>
-    </div>
-    {{-- Modal to PDF --}}
+        {{-- Modal to PDF --}}
 @endsection
 
 @section('scripts')
