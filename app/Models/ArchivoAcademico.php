@@ -11,7 +11,7 @@ class ArchivoAcademico extends Model
 
     protected $primaryKey = "id_archivo_academico";
 
-    protected $table = "archivo_academicos";
+    protected $table = "cd_archivo_academicos";
 
     public $timestamp = false;
 

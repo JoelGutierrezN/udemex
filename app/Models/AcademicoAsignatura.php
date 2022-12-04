@@ -11,7 +11,7 @@ class AcademicoAsignatura extends Model
 
     protected $primaryKey = "id_asignatura";
 
-    protected $table = "academico_asignaturas";
+    protected $table = "cd_academico_asignaturas";
 
     public $timestamp = false;
     

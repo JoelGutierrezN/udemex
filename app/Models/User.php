@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = "cd_users";
+
     protected $fillable = [
         'name',
         'apellido_pat',

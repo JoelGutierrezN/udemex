@@ -29,7 +29,7 @@ class ArchivosController extends Controller
 
             $storage_path = $nombreConvert.'_'.$request->nombre.'_'.$request->tipo.'.pdf';
 
-            \DB::table('capacitaciones')
+            \DB::table('cd_capacitaciones')
                 ->insert([
                     'nombre_curso' => $request->nombre,
                     'nombre_institucion' => $request->instituto,
@@ -82,13 +82,13 @@ class ArchivosController extends Controller
     }
 
     public function getCapacitaciones($id){
-        $dentro = \DB::table('capacitaciones')
+        $dentro = \DB::table('cd_capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
             ->where('id_user', '=', $id)
             ->where('solicitud', '=', 'dentro')
             ->orderBy('fecha_inicio', 'desc')
             ->get();
-        $fuera = \DB::table('capacitaciones')
+        $fuera = \DB::table('cd_capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
             ->where('id_user', '=', $id)
             ->where('solicitud', '=', 'fuera')
@@ -99,7 +99,7 @@ class ArchivosController extends Controller
     }
 
     public function ultimaActualizacion(){
-        $info = \DB::table('capacitaciones')
+        $info = \DB::table('cd_capacitaciones')
             ->where('id_user', '=', \Auth::user()->id)
             ->select('created_at')
             ->orderBy('created_at', 'DESC')

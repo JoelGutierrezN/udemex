@@ -19,8 +19,7 @@ use \App\Http\Controllers\Admin\Teachers\AdminArchivosController;
 use App\Http\Controllers\Graficas\GraficasController;
 use App\Http\Controllers\UserController;
 
-
-Route::redirect('/', 'auth/login/temporal')->middleware('guest');
+Route::get('/', [TemporalAuthController::class, 'login'])->name('login.temporal')->middleware('guest');
 
 /* Auth 365 */
 Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers\Auth'], function(){
@@ -35,7 +34,6 @@ Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app'
 
 /* Auth Normal Temporal*/
 Route::prefix('auth')->group(function (){
-    Route::get('login/temporal', [TemporalAuthController::class, 'login'])->name('login.temporal');
     Route::post('authenticate/temporal', [TemporalAuthController::class, 'authenticate'])->name('authenticate.temporal');
     Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
 });

@@ -11,7 +11,7 @@ class Institucione extends Model
 
     protected $primaryKey = "id_institucion";
 
-    protected $table = "instituciones";
+    protected $table = "cd_instituciones";
 
     public $timestamp = false;
 

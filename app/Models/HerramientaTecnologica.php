@@ -11,7 +11,7 @@ class HerramientaTecnologica extends Model
 
     protected $primaryKey = "id_herramienta";
 
-    protected $table = "herramienta_tecnologicas";
+    protected $table = "cd_herramienta_tecnologicas";
 
     public $timestamp = false;
 

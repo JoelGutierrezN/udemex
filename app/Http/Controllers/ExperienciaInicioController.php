@@ -36,9 +36,9 @@ class ExperienciaInicioController extends Controller
 
         $usuario_id = Auth::id();
 
-    $areas_no_seleccionadas = DB::select('SELECT * FROM area_experiencias WHERE NOT EXISTS (SELECT * FROM infoacademic_areas WHERE infoacademic_areas.id_area = area_experiencias.id_area_experiencia && infoacademic_areas.id_user='.$usuario_id.' )');
+    $areas_no_seleccionadas = DB::select('SELECT * FROM cd_area_experiencias WHERE NOT EXISTS (SELECT * FROM cd_infoacademic_areas WHERE cd_infoacademic_areas.id_area = cd_area_experiencias.id_area_experiencia && cd_infoacademic_areas.id_user='.$usuario_id.' )');
 
-       $herramientas_no_seleccionadas = DB::select('SELECT * FROM herramienta_tecnologicas WHERE NOT EXISTS (SELECT * FROM infoacademic_herramientas WHERE infoacademic_herramientas.id_herramienta = herramienta_tecnologicas.id_herramienta && infoacademic_herramientas.id_user='.$usuario_id.')');
+       $herramientas_no_seleccionadas = DB::select('SELECT * FROM cd_herramienta_tecnologicas WHERE NOT EXISTS (SELECT * FROM cd_infoacademic_herramientas WHERE cd_infoacademic_herramientas.id_herramienta = cd_herramienta_tecnologicas.id_herramienta && cd_infoacademic_herramientas.id_user='.$usuario_id.')');
 
         return view("teacher-modules.experiencia-laboral",compact('is_registered', 'usuario', 'usuario_id','is_registered_academic', 'herramientas', 'areas',
             'areas_no_seleccionadas', 'herramientas_no_seleccionadas', 'infoAcademica' ));

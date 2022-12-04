@@ -11,7 +11,7 @@ class AreaExperiencia extends Model
 
     protected $primaryKey = "id_area_experiencia";
 
-    protected $table = "area_experiencias";
+    protected $table = "cd_area_experiencias";
 
     public $timestamp = false;
 
