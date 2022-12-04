@@ -58,6 +58,7 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
     Route::get('usuarios/get', [UserController::class, 'getUsers'])->name('users.get');
     Route::get('usuarios/ver/{id}', [UserController::class, 'verUser'])->name('users.ver');
     Route::get('usuarios/delete/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
+    Route::post('usuarios/update/{id}', [UserController::class, 'update'])->name('users.update');
 
     // * Rutas para las capacitaciones
     Route::post('/updateFiles', [AdminArchivosController::class, 'update'])->name('teachers.updateFiles');
