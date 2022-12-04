@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\Admin\Teachers\AdminArchivosController;
 use App\Http\Controllers\Graficas\GraficasController;
+use App\Http\Controllers\UserController;
 
 
 Route::redirect('/', 'auth/login/temporal')->middleware('guest');
@@ -51,6 +52,14 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
     Route::resource('profesores', TeacherController::class)->except('show')->names('teachers')->parameters(['profesores' => 'usuario']);
     Route::get('infoacademic/{uuid}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');
     Route::resource('infoacademica', AdminInformacionAcademicaController::class)->parameters(["infoacademica"=>"infoAcademica"])->except('index');
+
+    // * Rutas para los usuarios
+    Route::get('usuarios', function(){
+        return view('admin-modules.user.index');
+    })->name('user.index');
+    Route::get('usuarios/get', [UserController::class, 'getUsers'])->name('users.get');
+    Route::get('usuarios/ver/{id}', [UserController::class, 'verUser'])->name('users.ver');
+    Route::get('usuarios/delete/{id}', [UserController::class, 'deleteUser'])->name('users.delete');
 
     // * Rutas para las capacitaciones
     Route::post('/updateFiles', [AdminArchivosController::class, 'update'])->name('teachers.updateFiles');
