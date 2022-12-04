@@ -51,6 +51,13 @@
                     @endif
 
                 <div>
+                    <label for="text-input"> Nombre completo</label>
+                    <input type="text" autocomplete="off" readonly
+                     value="{{ Auth::user()->name }}">
+                </div>
+
+
+                <!-- <div>
                     <label for="text-input" class="is-required"> Nombre(s)</label>
                     <input type="text" placeholder="Coloque su nombre(s) iniciando por letra mayúscula. Ejemplo: 'Luis'"
                     autocomplete="off" id="dato_nombre" name="nombre"
@@ -60,9 +67,9 @@
                     <div class="invalid-feedback">
                     <i>{{ $errors->first('nombre') }}</i>
                     </div>
-                    @endif
+                    @endif -->
 
-                <div>
+                <!-- <div>
                     <label for="text-input" class="is-required"> Apellido paterno</label>
                     <input type="text" placeholder="Coloque su apellido paterno iniciando por letra mayúscula. Ejemplo: 'González'"
                      autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
@@ -72,9 +79,9 @@
                     <div class="invalid-feedback">
                     <i>{{ $errors->first('apellido_paterno') }}</i>
                     </div>
-                    @endif
+                    @endif -->
 
-                <div>
+                <!-- <div>
                     <label for="text-input" class="is-required"> Apellido materno</label>
                     <input type="text" placeholder="Coloque su apellido materno iniciando por letra mayúscula. Ejemplo: 'González'"
                     autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
@@ -84,7 +91,7 @@
                     <div class="invalid-feedback">
                     <i>{{ $errors->first('apellido_materno') }}</i>
                     </div>
-                    @endif
+                    @endif -->
 
                 <div>
                     <label for="select-input" class="is-required"> Género</label>
@@ -168,16 +175,10 @@
                     @endif
 
                 <div>
-                    <label for="text-input" class="is-required"> Correo electrónico Institucional</label>
-                    <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico Institucional"
-                    autocomplete="off" id="dato_email_udemex" name="email_udemex"
-                       value="{{ old('email_udemex', $usuario->email_udemex ?? '') }}">
+                    <label for="text-input"> Correo electrónico Institucional</label>
+                    <input type="text"  autocomplete="off" readonly
+                       value="{{ Auth::user()->email }}">
                 </div>
-                    @if($errors->first('email_udemex'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('email_udemex') }}</i>
-                    </div>
-                    @endif
 
                 <div>
                     <label for="text-input" class="is-required"> Correo electrónico personal</label>
