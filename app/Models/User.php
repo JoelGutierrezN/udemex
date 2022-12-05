@@ -43,4 +43,8 @@ class User extends Authenticatable
     public function usuario(){
         return $this->hasOne(Usuario::class, 'id_user');
     }
+
+      public function getGetFullnameAttribute(){
+        return "$this->name $this->apellido_pat $this->apellido_mat";
+    }
 }

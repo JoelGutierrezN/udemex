@@ -15,6 +15,7 @@ class UserController extends Controller
             ->select(\DB::raw('cd_users.id as id, CONCAT(cd_users.name, " ", cd_users.apellido_pat, if(cd_users.apellido_mat != null, cd_users.apellido_mat, "")) as name, cd_users.email as email, cd_tipo_usuarios.nombre as role'))
             ->join('cd_tipo_usuarios', 'cd_users.role', '=', 'cd_tipo_usuarios.id_tipo_usuario')
             ->where('active', '=', 1)
+            ->where('role', '=', 2 )
             ->get();
         return $info;
     }

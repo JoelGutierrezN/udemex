@@ -2,7 +2,7 @@
 @section('title', 'Docentes')
 @section('content')
 
-<h1 id="teachers--title">Listado de Usuarios</h1>
+<h1 id="teachers--title">Listado de usuarios docentes</h1>
 <div id="usuarios-table"></div>
 
 @endsection
