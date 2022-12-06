@@ -53,21 +53,25 @@
                 <div>
                     <label for="text-input"> Nombre completo</label>
                     <input type="text" autocomplete="off" readonly
+                     value="{{ Auth::user()->name }}  {{ Auth::user()->apellido_pat }}  {{ Auth::user()->apellido_mat }}">
+                </div>
+
+
+                <div>
+                    <input type="text" hidden autocomplete="off" id="dato_nombre" name="nombre"
                      value="{{ Auth::user()->name }}">
                 </div>
 
-
-                <!-- <div>
-                    <label for="text-input" class="is-required"> Nombre(s)</label>
-                    <input type="text" placeholder="Coloque su nombre(s) iniciando por letra mayúscula. Ejemplo: 'Luis'"
-                    autocomplete="off" id="dato_nombre" name="nombre"
-                     value="{{ old('nombre', $usuario->nombre ?? '') }}">
+                <div>
+                    <input type="text" hidden autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
+                     value="{{ Auth::user()->apellido_pat }}">
                 </div>
-                    @if($errors->first('nombre'))
-                    <div class="invalid-feedback">
-                    <i>{{ $errors->first('nombre') }}</i>
-                    </div>
-                    @endif -->
+
+                <div>
+                    <input type="text" hidden autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
+                     value="{{ Auth::user()->apellido_mat }}">
+                </div>
+                   
 
                 <!-- <div>
                     <label for="text-input" class="is-required"> Apellido paterno</label>
@@ -176,7 +180,7 @@
 
                 <div>
                     <label for="text-input"> Correo electrónico Institucional</label>
-                    <input type="text"  autocomplete="off" readonly
+                    <input type="text"  autocomplete="off" name="email_udemex" readonly
                        value="{{ Auth::user()->email }}">
                 </div>
 
@@ -205,7 +209,7 @@
                             @if($is_registered)
                             <div id="imagePreview">
                             <img class='fotoperfil' src="{{ asset('imagenes/perfil/' .$usuario->foto)}}" alt="" width="200px">
-                            </div>
+                        </div>
                             @else
                             <div id="imagePreview"></div>
                             @endif
@@ -222,6 +226,9 @@
 
                 <div>
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
+                </div>
+                <div>
+                    <input hidden type="text" value="{{ Auth::user()->role }}" name="id_tipo_usuario">
                 </div>
             </div>
 
