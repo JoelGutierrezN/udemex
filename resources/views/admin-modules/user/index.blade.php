@@ -2,6 +2,17 @@
 @section('title', 'Docentes')
 @section('content')
 
+<style>
+    thead tr td input {
+        height: 2em;
+        width: 90%;
+    }
+    tfoot tr th select{
+        width: auto;
+        height: 1.8em;
+    }
+</style>
+
 <h1 id="teachers--title">Listado de Usuarios</h1>
 <div id="usuarios-table"></div>
 
