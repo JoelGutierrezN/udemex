@@ -22,7 +22,7 @@ class UsuarioController extends Controller
 
         $is_registered = Usuario::where('id_user', Auth::id())->count();
         if ($is_registered) {
-            Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en datos personales ');
+            Alert::alert()->info('Ya estás registrado', 'No puedes tener más de un registro en datos personales ');
             return redirect()->route("teacher.welcome");
         }
 
