@@ -17,6 +17,7 @@ use App\Http\Controllers\ProfesoresInicioController;
 use App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\Admin\Teachers\AdminArchivosController;
 use App\Http\Controllers\Graficas\GraficasController;
+use App\Http\Controllers\Admin\ListaAdminController;
 
 Route::get('/', [TemporalAuthController::class, 'login'])->name('login.temporal')->middleware('guest');
 
@@ -45,6 +46,7 @@ Route::middleware(['auth'])->prefix('administradores')->name('admin.')->group( f
 /* Rutas Administrativas */
 Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
     Route::get('bienvenida', AdminIndexController::class)->name('welcome');
+    Route::resource('lista', ListaAdminController::class)->names('lista');
     Route::get('experienciaLaboral/{id}', [AdminInformacionAcademicaController::class, 'index'])->name('teachers.experienciaLaboral');
     Route::resource('profesores', TeacherController::class)->except('show')->names('teachers')->parameters(['profesores' => 'usuario']);
     Route::get('infoacademic/{uuid}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');
