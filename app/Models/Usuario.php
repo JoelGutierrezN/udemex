@@ -20,6 +20,7 @@ class Usuario extends Authenticatable
     public $timestamp = false;
 
     protected $fillable = [
+        'id_usuario', //Esto solo es en desarrollo
         'nombre',
         'apellido_paterno',
         'apellido_materno',
