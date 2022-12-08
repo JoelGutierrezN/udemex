@@ -12,17 +12,33 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = "cd_users";
+    protected $table = "cd_usuarios";
+    
+    protected $primaryKey = "id_usuario";
 
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'role'
+        'nombre',
+        'apellido_paterno',
+        'apellido_materno',
+        'sexo',
+        'fecha_nacimiento',
+        'curp',
+        'clave_empleado',
+        'foto',
+        'telefono_casa',
+        'celular',
+        'email_udemex',
+        'email_personal',
+        'curp_pdf',
+        'rol',
+        'id_tipo_usuario',
+        'id_user',
+        'activo'
     ];
 
     protected $attributes = [
-        'role' => 2
+        'rol' => 2,
+        'activo' => 1
     ];
 
     protected $hidden = [
@@ -33,12 +49,22 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function informacionAcademica(){
-        return $this->hasOne(InformacionAcademica::class, 'id_user');
+    
+    public function getGetFullnameAttribute(){
+        return "$this->nombre $this->apellido_paterno $this->apellido_materno";
     }
 
-    public function usuario(){
-        return $this->hasOne(Usuario::class, 'id_user');
+    public function getGetActiveStatusAttribute(){
+        if($this->activo){
+            return "Activo";
+        }
+        return "Inactivo";
+    }
+
+    public function getGetActiveClassAttribute(){
+        if($this->activo){
+            return "active";
+        }
+        return "inactive";
     }
 }

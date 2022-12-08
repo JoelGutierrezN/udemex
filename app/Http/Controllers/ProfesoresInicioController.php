@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Usuario;
+use App\Models\User;
 use App\Models\HerramientaTecnologica;
 use App\Models\InformacionAcademica;
 use App\Models\AreaExperiencia;
@@ -13,9 +13,9 @@ class ProfesoresInicioController extends Controller
 {
     public function __invoke(){
     // dd("estoy en el controlador");
-     $is_registered = Usuario::where('id_user', Auth::id())->count();
+     $is_registered = User::where('id_usuario', Auth::id())->count();
 
-     $usuario = Usuario::where('id_user', Auth::id())->first();
+     $usuario = User::where('id_usuario', Auth::id())->first();
 
      $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
 

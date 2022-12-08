@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddRoleColumnToUsersTable extends Migration
+class AddRoleAndEmailToUsuariosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddRoleColumnToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->unsignedSmallInteger('role')->default(2)->comment('1- Adminstrador, 2- Profesor, 3- Soporte');
+        Schema::table('cd_usuarios', function (Blueprint $table) {
+            $table->tinyInteger('role');
         });
     }
 
@@ -25,7 +25,7 @@ class AddRoleColumnToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::table('usuarios', function (Blueprint $table) {
             $table->dropColumn('role');
         });
     }

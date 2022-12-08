@@ -15,9 +15,8 @@ class NewMicrosoft365SignInListener
 
         if ($token->user_id == null) {
             $user = User::create([
-                'name'     => $event->token['info']['displayName'],
-                'email'    => $event->token['info']['mail'],
-                'password' => '',
+                'nombre'     => $event->token['info']['displayName'],
+                'email_udemex'    => $event->token['info']['mail'],
             ]);
 
             $token->user_id = $user->id;

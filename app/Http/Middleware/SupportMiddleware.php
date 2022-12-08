@@ -12,11 +12,11 @@ class SupportMiddleware
     public function handle(Request $request, Closure $next)
     {
 
-        if(Auth::user()->role == 3)
+        if(Auth::user()->rol == 3)
             return $next($request);
-        elseif (Auth::user()->role == 1)
+        elseif (Auth::user()->rol == 1)
             return redirect()->route('admin.welcome');
-        elseif (Auth::user()->role == 2)
+        elseif (Auth::user()->rol == 2)
             return redirect()->route('teacher.index');
 
     }

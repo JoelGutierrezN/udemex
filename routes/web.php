@@ -18,7 +18,8 @@ use App\Http\Controllers\UsuarioController;
 use \App\Http\Controllers\Admin\Teachers\AdminArchivosController;
 use App\Http\Controllers\Graficas\GraficasController;
 
-Route::get('/', [TemporalAuthController::class, 'login'])->name('login.temporal')->middleware('guest');
+// Route::get('/', [TemporalAuthController::class, 'login'])->name('login.temporal')->middleware('guest');
+Route::redirect('/', 'login');
 
 /* Auth 365 */
 Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers\Auth'], function(){
@@ -26,16 +27,16 @@ Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Control
     Route::get('connect', 'AuthController@connect')->name('connect');
 });
 
-Route::group(['middleware' => ['web', 'MsGraphAuthenticated'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
-    // Route::get('/', 'PagesController@app')->name('app');
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
+    Route::get('/', 'PagesController@app')->name('app');
     Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 });
 
 /* Auth Normal Temporal*/
-Route::prefix('auth')->group(function (){
-    Route::post('authenticate/temporal', [TemporalAuthController::class, 'authenticate'])->name('authenticate.temporal');
-    Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
-});
+// Route::prefix('MsGraphAuthenticated')->group(function (){
+//     Route::post('authenticate/temporal', [TemporalAuthController::class, 'authenticate'])->name('authenticate.temporal');
+//     Route::post('logout/temporal', [TemporalAuthController::class, 'logout'])->name('logout.temporal');
+// });
 
 /* Rutas Administrativas */
 Route::middleware(['auth'])->prefix('administradores')->name('admin.')->group( function(){
