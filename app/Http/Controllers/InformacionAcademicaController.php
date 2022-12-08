@@ -63,7 +63,7 @@ class InformacionAcademicaController extends Controller
     {
 
         $infoAcademica->update($request->all());
-        $nombreUser = auth()->user()->name;
+        $nombreUser = Auth::user()->nombre;
 
         $infoacademicareas = InfoAcademicArea::where('id_usuario', Auth::user()->id_usuario)->get();
         foreach ($infoacademicareas as $area) {
@@ -97,7 +97,9 @@ class InformacionAcademicaController extends Controller
 
             $cvname = 'CV_' . $nombreUser . '.' . $request->file('curriculum_pdf')->guessExtension();
             $infoAcademica->curriculum_pdf = Storage::disk('cv')->putFileAs('', $request->file('curriculum_pdf'), $cvname);
+            // dd($infoAcademica->curriculum_pdf);
         }
+
 
         $infoAcademica->save();
 

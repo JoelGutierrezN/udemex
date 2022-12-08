@@ -248,12 +248,12 @@
                              Si desea actualizar el archivo, coloque nuevamente su archivo CV en caso contrario no coloque nada.
                             </p>
                             <div class="conte">
-                                {{-- <div class="pdfright">
-                                    <a class="sin" href="{{ route('teacher.infoacademic.downloadinfo', $infoAcademica->user->id) }}"
+                                <div class="pdfright">
+                                    <a class="sin" href="{{ route('teacher.infoacademic.downloadinfo', $infoAcademica->id_usuario) }}"
                                     target=”_blank”>
                                     <img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="45" width="45" />
                                    Descargar </a>
-                                </div> --}}
+                                </div>
                              </div>
                             <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="datos_curriculum_pdf" name="curriculum_pdf">
                         </div>
