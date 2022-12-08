@@ -18,9 +18,9 @@ class UsuarioController extends Controller
 {
     public function store(UsuarioCreateRequest $request)
     {
-        $nombreUser = auth()->user()->name;
+        $nombreUser = Auth::user()->nombre;
 
-        $is_registered = Usuario::where('id_user', Auth::id())->count();
+        $is_registered = Usuario::where('id_usuario', Auth::user()->id_usuario)->count();
         if ($is_registered) {
             Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en datos personales ');
             return redirect()->route("teacher.welcome");
@@ -37,7 +37,7 @@ class UsuarioController extends Controller
 
     public function update(UsuarioUpdateRequest $request, Usuario $usuario)
     {
-        $usuario->update($request->except(['id_user', 'foto']));
+        $usuario->update($request->except(['id_usuario', 'foto']));
 
         if ($request->hasFile('foto')) {
             if (Storage::disk('imagenes')->exists("$usuario->foto")) {

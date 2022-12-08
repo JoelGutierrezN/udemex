@@ -52,24 +52,24 @@
 
                 <div>
                     <label for="text-input"> Nombre completo</label>
-                    <input type="text" autocomplete="off" readonly
-                     value="{{ Auth::user()->name }}  {{ Auth::user()->apellido_pat }}  {{ Auth::user()->apellido_mat }}">
+                    <input type="text" autocomplete="off" readonly   disabled="disabled"
+                     value="{{ Auth::user()->nombre }}  {{ Auth::user()->apellido_paterno }}  {{ Auth::user()->apellido_materno }}">
                 </div>
 
 
                 <div>
                     <input type="text" hidden autocomplete="off" id="dato_nombre" name="nombre"
-                     value="{{ Auth::user()->name }}">
+                     value="{{ Auth::user()->nombre }}">
                 </div>
 
                 <div>
                     <input type="text" hidden autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
-                     value="{{ Auth::user()->apellido_pat }}">
+                     value="{{ Auth::user()->apellido_paterno }}">
                 </div>
 
                 <div>
                     <input type="text" hidden autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
-                     value="{{ Auth::user()->apellido_mat }}">
+                     value="{{ Auth::user()->apellido_materno }}">
                 </div>
                    
 
@@ -180,8 +180,8 @@
 
                 <div>
                     <label for="text-input"> Correo electrónico Institucional</label>
-                    <input type="text"  autocomplete="off" name="email_udemex" readonly
-                       value="{{ Auth::user()->email }}">
+                    <input type="text"  autocomplete="off" name="email_udemex" readonly disabled="disabled"
+                       value="{{ Auth::user()->email_udemex }}">
                 </div>
 
                 <div>
@@ -228,7 +228,7 @@
                     <input hidden type="text" value="{{ Auth::user()->id }}" name="id_user">
                 </div>
                 <div>
-                    <input hidden type="text" value="{{ Auth::user()->role }}" name="id_tipo_usuario">
+                    <input hidden type="text" value="{{ Auth::user()->id_tipo_usuario }}" name="id_tipo_usuario">
                 </div>
             </div>
 

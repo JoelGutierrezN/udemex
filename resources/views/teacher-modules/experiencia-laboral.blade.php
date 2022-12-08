@@ -270,7 +270,7 @@
                         @endif
                     @endif
                     <div>
-                        <input type="text" id="id_user_experiencia" value="{{ Auth::user()->id_usuario }}" name="id_usuario">
+                        <input type="text" hidden id="id_user_experiencia" value="{{ Auth::user()->id_usuario }}" name="id_usuario">
                     </div>
                 </div>
                 <div>
