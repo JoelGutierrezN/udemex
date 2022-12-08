@@ -6,7 +6,6 @@ use App\Http\Controllers\Admin\Teachers\AdminInformacionAcademicaController;
 use App\Http\Controllers\Admin\Teachers\AdminMateriasController;
 use App\Http\Controllers\Admin\Teachers\TeacherController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Usuario;
 use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\ExperienciaInicioController;
 use App\Http\Controllers\InformacionAcademicaController;
@@ -24,12 +23,12 @@ use App\Http\Controllers\Admin\ListaAdminController;
 Route::redirect('/', 'login');
 
 /* Auth 365 */
-Route::group(['middleware' => ['web'], 'namespace' => 'App\Http\Controllers\Auth'], function(){
+Route::group(['middleware' => ['web', 'guest'], 'namespace' => 'App\Http\Controllers\Auth'], function(){
     Route::get('login', 'AuthController@login')->name('login');
     Route::get('connect', 'AuthController@connect')->name('connect');
 });
 
-Route::group(['middleware' => ['web'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
+Route::group(['middleware' => ['web', 'auth'], 'prefix' => 'app', 'namespace' => 'App\Http\Controllers'], function(){
     Route::get('/', 'PagesController@app')->name('app');
     Route::get('logout', 'Auth\AuthController@logout')->name('logout');
 });
@@ -41,12 +40,12 @@ Route::group(['middleware' => ['web'], 'prefix' => 'app', 'namespace' => 'App\Ht
 // });
 
 /* Rutas Administrativas */
-Route::middleware(['web'])->prefix('administradores')->name('admin.')->group( function(){
+Route::middleware(['auth'])->prefix('administradores')->name('admin.')->group( function(){
     Route::get('/graficas', [GraficasController::class, 'example'])->name('example-graficas');
     Route::get('/getDataHistorial', [GraficasController::class, 'getDataHistorial'])->name('getDataHistorial');
 });
 /* Rutas Administrativas */
-Route::middleware(['web'])->prefix('administradores')->name('admin.')->group( function(){
+Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
     Route::get('bienvenida', AdminIndexController::class)->name('welcome');
     Route::resource('lista', ListaAdminController::class)->names('lista');
     Route::get('experienciaLaboral/{id}', [AdminInformacionAcademicaController::class, 'index'])->name('teachers.experienciaLaboral');
@@ -74,7 +73,7 @@ Route::middleware(['web'])->prefix('administradores')->name('admin.')->group( fu
 });
 
 /* Rutas de Profesores */
-Route::middleware(['web'])->prefix('profesores')->name('teacher.')->group( function(){
+Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->group( function(){
     Route::get('/', ProfesoresInicioController::class)->name('index');
     Route::view('welcome', 'teacher-modules.welcome')->name('welcome');
     Route::get('experienciaLaboral', ExperienciaInicioController::class)->name('experienciaLaboral');
@@ -110,6 +109,6 @@ Route::middleware(['web'])->prefix('profesores')->name('teacher.')->group( funct
 });
 
 /* Rutas Rutas de Soporte */
-Route::middleware(['web'])->prefix('soporte')->name('support.')->group( function(){
+Route::middleware(['auth', 'support'])->prefix('soporte')->name('support.')->group( function(){
     Route::view('/', 'support-modules.index')->name('index');
 });
