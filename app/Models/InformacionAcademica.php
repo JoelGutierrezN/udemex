@@ -36,7 +36,7 @@ class InformacionAcademica extends Model
         'numero_archivo_curriculum',
         'curriculum_pdf',
         'validar_archivo_curriculum',
-        'id_user',
+        'id_usuario',
         'activo'
 
     ];

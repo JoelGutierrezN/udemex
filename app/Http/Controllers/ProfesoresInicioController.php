@@ -13,13 +13,13 @@ class ProfesoresInicioController extends Controller
 {
     public function __invoke(){
     // dd("estoy en el controlador");
-     $is_registered = User::where('id_usuario', Auth::id())->count();
+     $is_registered = User::where('id_usuario', Auth::user()->id_usuario)->count();
 
-     $usuario = User::where('id_usuario', Auth::id())->first();
+     $usuario = User::where('id_usuario', Auth::user()->id_usuario)->first();
 
-     $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
+     $is_registered_academic = InformacionAcademica::where('id_usuario', Auth::user()->id_usuario)->count();
 
-     $infoAcademica = Informacionacademica::where('id_user', Auth::id())->first();
+     $infoAcademica = Informacionacademica::where('id_usuario', Auth::user()->id_usuario)->first();
 
      $herramientas = HerramientaTecnologica::all();
 

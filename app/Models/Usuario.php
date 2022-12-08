@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Usuario extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    
+
 
     protected $primaryKey = "id_usuario";
 
@@ -36,7 +36,7 @@ class Usuario extends Authenticatable
         'curp_pdf',
         'rol',
         'id_tipo_usuario',
-        'id_user',
+        'id_usuario',
         'activo'
 
     ];

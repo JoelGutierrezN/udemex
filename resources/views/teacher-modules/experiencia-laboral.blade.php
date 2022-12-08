@@ -92,7 +92,7 @@
                   @if($is_registered_academic)
                         @php
                             $areas_registered = [];
-                            $areas_infoAcademica = App\Models\infoAcademicarea::where("id_user", Auth::id())->get();
+                            $areas_infoAcademica = App\Models\infoAcademicarea::where("id_usuario", Auth::id())->get();
                             foreach($areas_infoAcademica as $area):
                                 array_push($areas_registered , App\Models\AreaExperiencia::where("id_area_experiencia", $area->id_area)->first());
                             endforeach;
@@ -129,7 +129,7 @@
                     @if($is_registered_academic)
                         @php
                             $herramientas_registered = [];
-                            $herramientas_infoAcademica = App\Models\InfoAcademicHerramienta::where("id_user", Auth::id())->get();
+                            $herramientas_infoAcademica = App\Models\InfoAcademicHerramienta::where("id_usuario", Auth::id())->get();
                             foreach($herramientas_infoAcademica as $herramienta):
                                 array_push($herramientas_registered , App\Models\HerramientaTecnologica::where("id_herramienta", $herramienta->id_herramienta)->first());
                             endforeach;
@@ -248,12 +248,12 @@
                              Si desea actualizar el archivo, coloque nuevamente su archivo CV en caso contrario no coloque nada.
                             </p>
                             <div class="conte">
-                                <div class="pdfright">
+                                {{-- <div class="pdfright">
                                     <a class="sin" href="{{ route('teacher.infoacademic.downloadinfo', $infoAcademica->user->id) }}"
                                     target=”_blank”>
                                     <img class="icon" src="{{ asset('img/pdfdownload.png')}}" height ="45" width="45" />
                                    Descargar </a>
-                                </div>
+                                </div> --}}
                              </div>
                             <input type="file" accept="application/pdf" placeholder="Coloque su fotografia" id="datos_curriculum_pdf" name="curriculum_pdf">
                         </div>
@@ -270,7 +270,7 @@
                         @endif
                     @endif
                     <div>
-                        <input hidden type="text" id="id_user_experiencia" value="{{ Auth::user()->id }}" name="id_user">
+                        <input type="text" id="id_user_experiencia" value="{{ Auth::user()->id_usuario }}" name="id_usuario">
                     </div>
                 </div>
                 <div>

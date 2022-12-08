@@ -18,6 +18,6 @@ class InfoAcademicHerramienta extends Model
 
     protected $fillable = [
         'id_herramienta',
-        'id_user'
+        'id_usuario'
     ];
 }

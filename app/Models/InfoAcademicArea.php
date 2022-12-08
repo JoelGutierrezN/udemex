@@ -17,6 +17,6 @@ class InfoAcademicArea extends Model
 
     protected $fillable = [
         'id_area',
-        'id_user'
+        'id_usuario'
     ];
 }

@@ -19,23 +19,23 @@ class InformacionAcademicaController extends Controller
     public function store(InformacionAcademicaRequest $request)
     {
 
-        $nombreUser = auth()->user()->name;
+        $nombreUser = Auth::user()->nombre;
 
         foreach ($request->area_experiencia as $area) {
             InfoAcademicArea::create([
                 'id_area' => $area,
-                'id_user' => Auth::id()
+                'id_usuario' => Auth::user()->id_usuario
             ]);
         }
 
         foreach ($request->id_herramienta as $herramienta) {
             InfoAcademicHerramienta::create([
                 'id_herramienta' => $herramienta,
-                'id_user' => Auth::id()
+                'id_usuario' => Auth::user()->id_usuario
             ]);
         }
 
-        $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
+        $is_registered_academic = InformacionAcademica::where('id_usuario', Auth::user()->id_usuario)->count();
         if ($is_registered_academic) {
             Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en experiencia laboral ');
             return redirect()->route("teacher.welcome");
@@ -65,12 +65,12 @@ class InformacionAcademicaController extends Controller
         $infoAcademica->update($request->all());
         $nombreUser = auth()->user()->name;
 
-        $infoacademicareas = InfoAcademicArea::where('id_user', Auth::id())->get();
+        $infoacademicareas = InfoAcademicArea::where('id_usuario', Auth::user()->id_usuario)->get();
         foreach ($infoacademicareas as $area) {
             $area->delete();
         }
 
-        $infoacademicherramientas = InfoAcademicHerramienta::where('id_user', Auth::id())->get();
+        $infoacademicherramientas = InfoAcademicHerramienta::where('id_usuario', Auth::user()->id_usuario)->get();
         foreach ($infoacademicherramientas as $herramienta) {
             $herramienta->delete();
         }
@@ -78,14 +78,14 @@ class InformacionAcademicaController extends Controller
         foreach ($request->area_experiencia as $area) {
             InfoAcademicArea::create([
                 'id_area' => $area,
-                'id_user' => Auth::id()
+                'id_usuario' => Auth::user()->id_usuario
             ]);
         }
 
         foreach ($request->id_herramienta as $herramienta) {
             InfoAcademicHerramienta::create([
                 'id_herramienta' => $herramienta,
-                'id_user' => Auth::id()
+                'id_usuario' => Auth::user()->id_usuario
             ]);
         }
 
