@@ -139,7 +139,7 @@
     });
 
     function createHistorialTable(){
-        fetch("{{ env('APP_URL') }}/profesores/getHistorial/{{ Auth::user()->id }}")
+        fetch("{{ env('APP_URL') }}/profesores/getHistorial/{{ Auth::user()->id_usuario }}")
             .then((response) => response.json())
             .then((response) => {
 

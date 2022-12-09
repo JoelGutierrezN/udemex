@@ -28,7 +28,7 @@ class MateriasController extends Controller
                 'fecha_inicio' => $request->inicio,
                 'fecha_fin' => $request->fin,
                 'nivel_escolar' => $request->nivel,
-                'id_user' => \Auth::user()->id,
+                'id_user' => \Auth::user()->id_usuario,
                 'activo' => 1,
                 'created_at' => date('Y-m-d h:i:s')
             ]);
@@ -65,7 +65,7 @@ class MateriasController extends Controller
 
     public function ultimaActualizacion(){
         $info = \DB::table('cd_academico_asignaturas')
-            ->where('id_user', '=', \Auth::user()->id)
+            ->where('id_user', '=', \Auth::user()->id_usuario)
             ->select('created_at')
             ->orderBy('created_at', 'DESC')
             ->limit(1)

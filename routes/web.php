@@ -109,6 +109,6 @@ Route::middleware(['auth', 'teacher'])->prefix('profesores')->name('teacher.')->
 });
 
 /* Rutas Rutas de Soporte */
-Route::middleware(['auth', 'support'])->prefix('soporte')->name('support.')->group( function(){
+/*Route::middleware(['auth', 'support'])->prefix('soporte')->name('support.')->group( function(){
     Route::view('/', 'support-modules.index')->name('index');
-});
+});*/

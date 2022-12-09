@@ -23,7 +23,7 @@ class ArchivosController extends Controller
         ]);
 
         if($request->file('evidencia') != ""){
-            $nombre = Auth::user()->name;
+            $nombre = Auth::user()->nombre;
             $nombreConvert = str_replace(" ", "", $nombre);
             $nombreConvert = str_replace('ñ', 'n', $nombreConvert);
 
@@ -40,7 +40,7 @@ class ArchivosController extends Controller
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
-                    'id_user' => Auth::user()->id,
+                    'id_user' => Auth::user()->id_usuario,
                     'activo' => 1,
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
@@ -100,7 +100,7 @@ class ArchivosController extends Controller
 
     public function ultimaActualizacion(){
         $info = \DB::table('cd_capacitaciones')
-            ->where('id_user', '=', \Auth::user()->id)
+            ->where('id_user', '=', \Auth::user()->id_usuario)
             ->select('created_at')
             ->orderBy('created_at', 'DESC')
             ->limit(1)

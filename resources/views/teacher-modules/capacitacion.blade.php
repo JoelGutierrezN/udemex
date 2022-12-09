@@ -164,7 +164,7 @@
     });
 
     function getCapacitacionData(){
-        fetch('{{ env('APP_URL') }}/profesores/getCapacitaciones/{{ Auth::user()->id }}')
+        fetch('{{ env('APP_URL') }}/profesores/getCapacitaciones/{{ Auth::user()->id_usuario }}')
             .then(response => response.json())
             .then((response)=>{
                 createCapacitacionTable(response[0], 'dentro');

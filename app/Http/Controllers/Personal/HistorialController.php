@@ -22,7 +22,7 @@ class HistorialController extends Controller
 
         if( $request->hasFile('titulo') && $request->hasFile('certificado') && $request->hasFile('cedula') ){
 
-            $nombre = \Auth::user()->name;
+            $nombre = \Auth::user()->nombre;
             $nombreConvert = str_replace(" ", "", $nombre);
             $nombreConvert = str_replace('ñ', 'n', $nombreConvert);
 
@@ -38,7 +38,7 @@ class HistorialController extends Controller
                     'fecha_inicio' => $request->inicio,
                     'fecha_fin' => $request->fin,
                     'nivel_escolar' => $request->nivel,
-                    'id_user' => \Auth::user()->id,
+                    'id_user' => \Auth::user()->id_usuario,
                     'created_at' => date('Y-m-d H:i:s'),
                     'activo' => 1
                 ]);
@@ -50,7 +50,7 @@ class HistorialController extends Controller
                 ->where('nombre_institucion', '=', $request->institucion)
                 ->where('fecha_inicio', '=', $request->inicio)
                 ->where('fecha_fin', '=', $request->fin)
-                ->where('id_user', '=', \Auth::user()->id)
+                ->where('id_user', '=', \Auth::user()->id_usuario)
                 ->get();
 
             \DB::table('cd_archivo_academicos')
@@ -64,7 +64,7 @@ class HistorialController extends Controller
                     'numero_archivo_cedula' => '',
                     'cedula_pdf' => $cedula,
                     'validar_archivo_cedula' => false,
-                    'id_user' => \Auth::user()->id,
+                    'id_user' => \Auth::user()->id_usuario,
                     'id_historial' => $idHistorial[0]->id_asignatura,
                     'activo' => 1,
                     'created_at' => date('Y-m-d h:i:s')
@@ -127,7 +127,7 @@ class HistorialController extends Controller
 
     public function ultimaActualizacion(){
         $info = \DB::table('cd_historial_academicos')
-            ->where('id_user', '=', \Auth::user()->id)
+            ->where('id_user', '=', \Auth::user()->id_usuario)
             ->select('created_at')
             ->orderBy('created_at', 'DESC')
             ->limit(1)

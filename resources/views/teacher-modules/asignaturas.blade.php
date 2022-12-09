@@ -137,7 +137,7 @@
     var inputNivel = document.querySelector('#materia-nivel');
 
     function createMateriasTable() {
-        fetch('{{ env('APP_URL') }}/profesores/getMaterias/{{ Auth::user()->id }}')
+        fetch('{{ env('APP_URL') }}/profesores/getMaterias/{{ Auth::user()->id_usuario }}')
             .then(response => response.json())
             .then(response => {
                 let table = document.querySelector('#materias-table');
