@@ -38,23 +38,23 @@
                 <div>
                     <label for="text-input"> Nombre completo</label>
                     <input type="text" autocomplete="off" readonly   disabled="disabled"
-                     value="{{ Auth::user()->nombre }}  {{ Auth::user()->apellido_paterno }}  {{ Auth::user()->apellido_materno }}">
+                     value="{{ $usuario->nombre }}  {{ $usuario->apellido_paterno }}  {{ $usuario->apellido_materno }}">
                 </div>
 
 
                 <div>
                     <input type="text" hidden autocomplete="off" id="dato_nombre" name="nombre"
-                     value="{{ Auth::user()->nombre }}">
+                     value="{{ $usuario->nombre }}">
                 </div>
 
                 <div>
                     <input type="text" hidden autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
-                     value="{{ Auth::user()->apellido_paterno }}">
+                     value="{{ $usuario->apellido_paterno }}">
                 </div>
 
                 <div>
                     <input type="text" hidden autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
-                     value="{{ Auth::user()->apellido_materno }}">
+                     value="{{ $usuario->apellido_materno }}">
                 </div>
 
                 <!-- <div>

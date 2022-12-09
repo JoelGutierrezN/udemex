@@ -24,7 +24,7 @@
               enctype="multipart/form-data" id="form_experiencia">
             @csrf
             @method('PUT')
-            <input type="hidden" name="id" value="{{ $usuario->user->id }}">
+            <input type="hidden" name="id" value="{{ $usuario->id_usuario }}">
             @else
                 <form action="{{ route('admin.infoacademica.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -102,7 +102,7 @@
                             @if($is_registered_academic)
                                 @php
                                     $areas_registered = [];
-                                    $areas_infoAcademica = App\Models\infoAcademicarea::where("id_user", $usuario->user->id)->get();
+                                    $areas_infoAcademica = App\Models\infoAcademicarea::where("id_usuario", $usuario->id_usuario)->get();
                                     foreach($areas_infoAcademica as $area):
                                         array_push($areas_registered , App\Models\AreaExperiencia::where("id_area_experiencia", $area->id_area)->first());
                                     endforeach;
@@ -143,7 +143,7 @@
                             @if($is_registered_academic)
                                 @php
                                     $herramientas_registered = [];
-                                    $herramientas_infoAcademica = App\Models\InfoAcademicHerramienta::where("id_user", $usuario->user->id)->get();
+                                    $herramientas_infoAcademica = App\Models\InfoAcademicHerramienta::where("id_usuario", $usuario->id_usuario)->get();
                                     foreach($herramientas_infoAcademica as $herramienta):
                                         array_push($herramientas_registered , App\Models\HerramientaTecnologica::where("id_herramienta", $herramienta->id_herramienta)->first());
                                     endforeach;
@@ -318,7 +318,7 @@
                                     <div class="conte">
                                         <div class="pdfright">
                                             <a class="sin"
-                                               href="{{ route('admin.infoacademic.downloadinfo', $infoAcademica->uuid) }}"
+                                               href="{{ route('admin.infoacademic.downloadinfo', $infoAcademica->id_usuario) }}"
                                                target=”_blank”>
                                                 <img class="icon" src="{{ asset('img/pdfdownload.png')}}" height="45"
                                                      width="45"/>
@@ -343,8 +343,8 @@
                                 @endif
                             @endif
                             <div>
-                                <input hidden type="text" id="id_user_experiencia" value="{{ $usuario->user->id }}"
-                                       name="id_user">
+                                <input hidden type="text" id="id_user_experiencia" value="{{ $usuario->id_usuario }}"
+                                       name="id_usuario">
                             </div>
                         </div>
                         <div>

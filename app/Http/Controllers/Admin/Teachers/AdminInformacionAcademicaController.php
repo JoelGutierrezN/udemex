@@ -10,7 +10,6 @@ use App\Models\InfoAcademicArea;
 use App\Models\InfoAcademicHerramienta;
 use App\Http\Requests\InformacionAcademicaRequest;
 use App\Http\Requests\InformacionAcademicaUpdateRequest;
-use App\Models\User;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,26 +20,27 @@ use Illuminate\Support\Str;
 class AdminInformacionAcademicaController extends Controller
 {
     public function index($id){
-        $user = User::find($id);
-        $is_registered = Usuario::where('id_user', $user->id)->count();
+        $user = Usuario::find($id);
 
-        $usuario = Usuario::where('id_user', $user->id)->first();
+        $is_registered = Usuario::where('id_usuario', $user->id_usuario)->count();
 
-        $is_registered_academic = InformacionAcademica::where('id_user', $user->id)->count();
+        $usuario = Usuario::where('id_usuario', $user->id_usuario)->first();
 
-        $infoAcademica = Informacionacademica::where('id_user', $user->id)->first();
+        $is_registered_academic = InformacionAcademica::where('id_usuario', $user->id_usuario)->count();
+
+        $infoAcademica = Informacionacademica::where('id_usuario', $user->id_usuario)->first();
 
         $herramientas = HerramientaTecnologica::all();
 
         $areas = AreaExperiencia::all();
 
         if ($is_registered_academic) {
-            $infoacademicareas = InfoAcademicArea::where('id_user', $user->id)->get();
+            $infoacademicareas = InfoAcademicArea::where('id_usuario', $user->id_usuario)->get();
         }
 
-        $areas_no_seleccionadas = DB::select('SELECT * FROM area_experiencias WHERE NOT EXISTS (SELECT * FROM infoacademic_areas WHERE infoacademic_areas.id_area = area_experiencias.id_area_experiencia)');
+        $areas_no_seleccionadas = DB::select('SELECT * FROM cd_area_experiencias WHERE NOT EXISTS (SELECT * FROM cd_infoacademic_areas WHERE cd_infoacademic_areas.id_area = cd_area_experiencias.id_area_experiencia)');
 
-        $herramientas_no_seleccionadas = DB::select('SELECT * FROM herramienta_tecnologicas WHERE NOT EXISTS (SELECT * FROM infoacademic_herramientas WHERE infoacademic_herramientas.id_herramienta = herramienta_tecnologicas.id_herramienta)');
+        $herramientas_no_seleccionadas = DB::select('SELECT * FROM cd_herramienta_tecnologicas WHERE NOT EXISTS (SELECT * FROM cd_infoacademic_herramientas WHERE cd_infoacademic_herramientas.id_herramienta = cd_herramienta_tecnologicas.id_herramienta)');
 
 
         return view("admin-modules.teachers.experiencia-laboral", compact('is_registered', 'usuario', 'is_registered_academic', 'herramientas', 'areas',
@@ -50,23 +50,24 @@ class AdminInformacionAcademicaController extends Controller
     public function store(InformacionAcademicaRequest $request)
     {
 
-        $nombreUser = auth()->user()->name;
+          $user = Usuario::find($request->id_usuario);
+          $nombreUser = $user->nombre;
 
         foreach ($request->area_experiencia as $area) {
             InfoAcademicArea::create([
                 'id_area' => $area,
-                'id_user' => Auth::id()
+                'id_usuario' => $user->id_usuario
             ]);
         }
 
         foreach ($request->id_herramienta as $herramienta) {
             InfoAcademicHerramienta::create([
                 'id_herramienta' => $herramienta,
-                'id_user' => Auth::id()
+                'id_usuario' => $user->id_usuario
             ]);
         }
 
-        $is_registered_academic = InformacionAcademica::where('id_user', Auth::id())->count();
+        $is_registered_academic = InformacionAcademica::where('id_usuario', $user->id_usuario)->count();
         if ($is_registered_academic) {
             Alert::alert()->info('Ya estás registrado', 'No puenes tener más de un registro en experiencia laboral ');
             return redirect()->route("teacher.welcome");
@@ -85,24 +86,27 @@ class AdminInformacionAcademicaController extends Controller
         $infoAcademica['uuid'] = (string)Str::uuid();
 
         $infoAcademica->save();
-        Alert::alert()->success('Guardado!', ' Tu experiencia laboral ha sido actualizada correctamente.');
-        return redirect()->route("teacher.experienciaLaboral");
+        Alert::alert()->success('Guardado!', ' Tu experiencia laboral ha sido regristada correctamente.');
+        // return redirect()->route("admin.teachers.edit", $user);
+        return back();
+       
 
     }
 
     public function update(InformacionAcademicaUpdateRequest $request, InformacionAcademica $infoAcademica)
     {
-        $user = User::find($request->id);
+        $user = Usuario::find($request->id_usuario);
+        // dd($user);
 
         $infoAcademica->update($request->all());
-        $nombreUser = $user->name;
+        $nombreUser = $user->nombre;
 
-        $infoacademicareas = InfoAcademicArea::where('id_user', $user->id)->get();
+        $infoacademicareas = InfoAcademicArea::where('id_usuario', $user->id_usuario)->get();
         foreach ($infoacademicareas as $area) {
             $area->delete(); //en caso de no tener SoftDeletes
         }
 
-        $infoacademicherramientas = InfoAcademicHerramienta::where('id_user', $user->id)->get();
+        $infoacademicherramientas = InfoAcademicHerramienta::where('id_usuario', $user->id_usuario)->get();
         foreach ($infoacademicherramientas as $herramienta) {
             $herramienta->delete(); //en caso de no tener SoftDeletes
         }
@@ -110,14 +114,14 @@ class AdminInformacionAcademicaController extends Controller
         foreach ($request->area_experiencia as $area) {
             InfoAcademicArea::create([
                 'id_area' => $area,
-                'id_user' => $user->id
+                'id_usuario' => $user->id_usuario
             ]);
         }
 
         foreach ($request->id_herramienta as $herramienta) {
             InfoAcademicHerramienta::create([
                 'id_herramienta' => $herramienta,
-                'id_user' => $user->id
+                'id_usuario' => $user->id_usuario
             ]);
         }
 
@@ -131,7 +135,7 @@ class AdminInformacionAcademicaController extends Controller
 
         $infoAcademica->save();
 
-        Alert::alert()->success('Actualizado!', ' Sus datos personales han sido actualizados correctamente.');
+       Alert::alert()->success('Actualizado!', ' Tu experiencia laboral ha sido actualizada correctamente.');
 
         return back();
     }

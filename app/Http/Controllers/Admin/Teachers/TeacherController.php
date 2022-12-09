@@ -32,7 +32,7 @@ class TeacherController extends Controller
 
         $nombreUser = "{$usuario->nombre}_{$usuario->apellido_paterno}_{$usuario->apellido_materno}";
 
-        $usuario->update($request->except('id_user', 'foto'));
+        $usuario->update($request->except('id_usuario', 'foto'));
 
         if ($request->hasFile('foto')) {
             if (Storage::disk('imagenes')->exists("$usuario->foto")) {
@@ -50,7 +50,7 @@ class TeacherController extends Controller
 
      public function destroy(Usuario $usuario)
     {
-        $archivos = ArchivoAcademico::where("id_user",$usuario->id_user)->get();
+        $archivos = ArchivoAcademico::where("id_usuario",$usuario->id_usuario)->get();
         foreach($archivos as $archivo):
             if (Storage::disk('historial')->exists("$archivo->titulo_pdf")) {
                 Storage::disk('historial')->delete("$archivo->titulo_pdf");
@@ -64,7 +64,7 @@ class TeacherController extends Controller
         endforeach;
       
 
-        $capacitaciones = Capacitacione::where("id_user",$usuario->id_user)->get();
+        $capacitaciones = Capacitacione::where("id_usuario",$usuario->id_usuario)->get();
         foreach($capacitaciones as $capacitacion):
             if (Storage::disk('capacitaciones')->exists("$capacitacion->constancia_pdf")) {
                 Storage::disk('capacitaciones')->delete("$capacitacion->constancia_pdf");
@@ -75,14 +75,14 @@ class TeacherController extends Controller
             Storage::disk('imagenes')->delete("$usuario->foto");
         }
 
-        $informacion_academica = InformacionAcademica::where("id_user",$usuario->id_user)->get();
+        $informacion_academica = InformacionAcademica::where("id_usuario",$usuario->id_usuario)->get();
         foreach($informacion_academica as $info):
         if (Storage::disk('cv')->exists("$info->curriculum_pdf")) {
             Storage::disk('cv')->delete("$info->curriculum_pdf");
         }
         endforeach;
 
-         $user = User::where("id",$usuario->id_user)->first();
+         $user = Usuario::where("id_usuario",$usuario->id_usuario)->first();
          $user->Delete();
          Alert::alert()->success('Eliminado!', ' El docente ha sido eliminado correctamente.');
         return redirect()->route("admin.teachers.index");
