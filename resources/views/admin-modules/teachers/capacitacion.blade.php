@@ -134,7 +134,7 @@
         //data.append('_token', '{{ csrf_token() }}');
         console.log(data);
 
-        fetch("{{ env('APP_URL') }}/administradores/updateFiles?id={{ $usuario->user->id }}", {
+        fetch("{{ env('APP_URL') }}/administradores/updateFiles?id={{ $usuario->id_usuario }}", {
                 method: 'POST',
                 headers: new Headers({
                     'X-CSRF-Token': '{{ csrf_token() }}'
@@ -163,7 +163,7 @@
     });
 
     function getCapacitacionData(){
-        fetch('{{ env('APP_URL') }}/administradores/getCapacitaciones/{{ $usuario->user->id }}')
+        fetch('{{ env('APP_URL') }}/administradores/getCapacitaciones/{{ $usuario->id_usuario }}')
             .then(response => response.json())
             .then((response)=>{
                 createCapacitacionTable(response[0], 'dentro');
@@ -272,7 +272,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((result)=>{
                             if(result.isConfirmed){
-                                fetch(`{{ env('APP_URL') }}/administradores/delete-capacitacion/${ element.id_capacitacion }?id={{ $usuario->user->id }}`)
+                                fetch(`{{ env('APP_URL') }}/administradores/delete-capacitacion/${ element.id_capacitacion }?id={{ $usuario->id_usuario }}`)
                                     .then((response) => response.json())
                                     .then((response) => {
                                         getLastCapacitacion()
@@ -288,7 +288,7 @@
     }
 
     function getLastCapacitacion(){
-        fetch('{{ route("admin.teachers.lastCapacitacion", ['id' => $usuario->user->id]) }}')
+        fetch('{{ route("admin.teachers.lastCapacitacion", ['id' => $usuario->id_usuario]) }}')
             .then( response => response.json() )
             .then( ({ created_at }) => {
                 console.log(created_at);

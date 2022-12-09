@@ -10,7 +10,7 @@
         <button type="button" id="personal-menu" data-tab-target="1">Datos personales &blacktriangledown;</button>
         <button type="button" id="historial-menu" data-tab-target="5">Historial académico &blacktriangledown;</button>
         <button type="button" id="materias-menu" data-tab-target="2">Asignaturas impartidas &blacktriangledown;</button>
-        <a href="{{ route('admin.teachers.experienciaLaboral', $usuario->user->id ) }}">
+        <a href="{{ route('admin.teachers.experienciaLaboral', $usuario->id_usuario ) }}">
             <button type="button" id="experiencia-menu">Experiencia laboral &blacktriangledown;</button>
         </a>
         <button type="button" id="archivos-menu" data-tab-target="4">Capacitación &blacktriangledown;</button>
@@ -36,42 +36,49 @@
                 @endif
 
                 <div>
+                    <label for="text-input"> Nombre completo</label>
+                    <input type="text" autocomplete="off" readonly   disabled="disabled"
+                     value="{{ Auth::user()->nombre }}  {{ Auth::user()->apellido_paterno }}  {{ Auth::user()->apellido_materno }}">
+                </div>
+
+
+                <div>
+                    <input type="text" hidden autocomplete="off" id="dato_nombre" name="nombre"
+                     value="{{ Auth::user()->nombre }}">
+                </div>
+
+                <div>
+                    <input type="text" hidden autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
+                     value="{{ Auth::user()->apellido_paterno }}">
+                </div>
+
+                <div>
+                    <input type="text" hidden autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
+                     value="{{ Auth::user()->apellido_materno }}">
+                </div>
+
+                <!-- <div>
                     <label for="text-input" class="is-required"> Nombre(s)</label>
                     <input type="text" placeholder="Coloque su nombre(s) iniciando por letra mayúscula. Ejemplo: 'Luis'"
                            autocomplete="off" id="dato_nombre" name="nombre"
                            value="{{ old('nombre', $usuario->nombre ?? '') }}">
-                </div>
-                @if($errors->first('nombre'))
-                    <div class="invalid-feedback">
-                        <i>{{ $errors->first('nombre') }}</i>
-                    </div>
-                @endif
+                </div> -->
 
-                <div>
+                <!-- <div>
                     <label for="text-input" class="is-required"> Apellido paterno</label>
                     <input type="text"
                            placeholder="Coloque apellido paterno iniciando por letra mayúscula. Ejemplo: 'González'"
                            autocomplete="off" id="dato_apellido_paterno" name="apellido_paterno"
                            value="{{ old('apellido_paterno', $usuario->apellido_paterno ?? '') }}">
-                </div>
-                @if($errors->first('apellido_paterno'))
-                    <div class="invalid-feedback">
-                        <i>{{ $errors->first('apellido_paterno') }}</i>
-                    </div>
-                @endif
+                </div> -->
 
-                <div>
+                <!-- <div>
                     <label for="text-input" class="is-required"> Apellido materno</label>
                     <input type="text"
                            placeholder="Coloque apellido materno iniciando por letra mayúscula. Ejemplo: 'González'"
                            autocomplete="off" id="dato_apellido_materno" name="apellido_materno"
                            value="{{ old('apellido_materno', $usuario->apellido_materno ?? '') }}">
-                </div>
-                @if($errors->first('apellido_materno'))
-                    <div class="invalid-feedback">
-                        <i>{{ $errors->first('apellido_materno') }}</i>
-                    </div>
-                @endif
+                </div> -->
 
                 <div>
                     <label for="select-input" class="is-required"> Género</label>
@@ -156,7 +163,7 @@
                 <div>
                     <label for="text-input" class="is-required"> Correo electrónico Institucional</label>
                     <input type="text" name="email_udemex" placeholder="Coloque su correo electrónico Institucional"
-                           autocomplete="off" id="dato_email_udemex" name="email_udemex"
+                           autocomplete="off" id="dato_email_udemex" name="email_udemex" disabled="disabled"
                            value="{{ old('email_udemex', $usuario->email_udemex ?? '') }}">
                 </div>
                 @if($errors->first('email_udemex'))

@@ -136,7 +136,7 @@
     var inputNivel = document.querySelector('#materia-nivel');
 
     function createMateriasTable() {
-        fetch('{{ env('APP_URL') }}/administradores/getMaterias/{{ $usuario->user->id }}')
+        fetch('{{ env('APP_URL') }}/administradores/getMaterias/{{ $usuario->id_usuario }}')
             .then(response => response.json())
             .then(response => {
                 let table = document.querySelector('#materias-table');
@@ -238,7 +238,7 @@
         });
 
     function getLastAsignatura() {
-        fetch('{{ route("admin.teachers.lastAsignatura", ['id' => $usuario->user->id]) }}')
+        fetch('{{ route("admin.teachers.lastAsignatura", ['id' => $usuario->id_usuario]) }}')
             .then((response) => response.json())
             .then(({ created_at }) => {
                 console.log(created_at);

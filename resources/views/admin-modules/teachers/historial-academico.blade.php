@@ -118,7 +118,7 @@
         e.preventDefault();
         let data = new FormData(historialForm);
 
-        fetch("/administradores/storeHistorial?id={{ $usuario->user->id }}", {
+        fetch("/administradores/storeHistorial?id={{ $usuario->id_usuario }}", {
                 method: 'POST',
                 headers: new Headers({
                     'X-CSRF-Token': '{{ csrf_token() }}'
@@ -142,7 +142,7 @@
     });
 
     function createHistorialTable(){
-        fetch("{{ env('APP_URL') }}/administradores/getHistorial/{{ $usuario->user->id }}")
+        fetch("{{ env('APP_URL') }}/administradores/getHistorial/{{ $usuario->id_usuario }}")
             .then((response) => response.json())
             .then((response) => {
 
@@ -277,7 +277,7 @@
     }
 
     function getLastHistorial(){
-        fetch('{{ route("admin.teachers.lastHistorial", ['id' => $usuario->user->id]) }}')
+        fetch('{{ route("admin.teachers.lastHistorial", ['id' => $usuario->id_usuario]) }}')
             .then( (response) => response.json() )
             .then( ({ created_at }) => {
                 document.querySelector('#h-actualizacion').innerHTML = new Date(created_at).toLocaleDateString('es-MX');

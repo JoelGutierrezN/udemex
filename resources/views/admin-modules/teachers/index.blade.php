@@ -17,16 +17,16 @@
             @foreach($users as $user)
                 <tr>
                     <td>
-                        @isset($user->usuario->foto)
-                        <img class='profile-image' src="{{ asset('imagenes/perfil/' . $user->usuario->foto) }}" alt="foto">
+                        @isset($user->foto)
+                        <img class='profile-image' src="{{ asset('imagenes/perfil/' . $user->foto) }}" alt="foto">
                         @endisset
                     </td>
-                    <td>{{ $user->usuario->clave_empleado }}</td>
-                    <td>{{ $user->usuario->get_fullname }}</td>
-                    <td>{{ $user->usuario->get_active_status }}</td>
+                    <td>{{ $user->clave_empleado }}</td>
+                    <td>{{ $user->get_fullname }}</td>
+                    <td>{{ $user->get_active_status }}</td>
                     <td>Estado</td>
                     <td>
-                        <form action="{{ route('admin.teachers.edit', $user->usuario ) }}" method="POST">
+                        <form action="{{ route('admin.teachers.edit', $user ) }}" method="POST">
                             @csrf
                             @method('GET')
                             <button class="btn btn-primary-outline">
@@ -37,7 +37,7 @@
                             </button>
                         </form>
 
-                        <form action="{{ route('admin.teachers.destroy', $user->usuario) }}" method="POST" class="formulario-eliminar">
+                        <form action="{{ route('admin.teachers.destroy', $user) }}" method="POST" class="formulario-eliminar">
                             @csrf
                             @method('DELETE')
                         <button type="submit" class="btn btn-danger-outline">

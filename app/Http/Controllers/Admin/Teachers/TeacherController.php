@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin\Teachers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuarioUpdateRequest;
-use App\Models\User;
 use App\Models\Usuario;
 use App\Models\Capacitacione;
 use App\Models\InformacionAcademica;
@@ -17,7 +16,8 @@ class TeacherController extends Controller
 
     public function index()
     {
-        $users = User::latest()->where('role', 2)->has('usuario')->with('usuario')->get();
+        $users = Usuario::all()->where('id_tipo_usuario', 2);
+        // ->has('usuarios')->with('usuarios')->get();
 
         return view('admin-modules.teachers.index', compact('users'));
     }
@@ -44,7 +44,8 @@ class TeacherController extends Controller
         $usuario->save();
 
         Alert::alert()->success('Actualizado!', ' Sus datos personales han sido actualizados correctamente.');
-        return redirect()->route("admin.teachers.index");
+        // return redirect()->route("admin.teachers.edit");
+        return view("admin-modules.teachers.edit", compact('usuario'));
     }
 
      public function destroy(Usuario $usuario)
