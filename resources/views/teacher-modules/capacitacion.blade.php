@@ -135,7 +135,7 @@
         //data.append('_token', '{{ csrf_token() }}');
         console.log(data);
 
-        fetch("{{ env('APP_URL') }}/profesores/updateFiles", {
+        fetch("/profesores/updateFiles", {
                 method: 'POST',
                 headers: new Headers({
                     'X-CSRF-Token': '{{ csrf_token() }}'
@@ -164,7 +164,7 @@
     });
 
     function getCapacitacionData(){
-        fetch('{{ env('APP_URL') }}/profesores/getCapacitaciones/{{ Auth::user()->id_usuario }}')
+        fetch('/profesores/getCapacitaciones/{{ Auth::user()->id_usuario }}')
             .then(response => response.json())
             .then((response)=>{
                 createCapacitacionTable(response[0], 'dentro');
@@ -273,7 +273,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((result)=>{
                             if(result.isConfirmed){
-                                fetch(`{{ env('APP_URL') }}/profesores/delete-capacitacion/${ element.id_capacitacion }`)
+                                fetch(`/profesores/delete-capacitacion/${ element.id_capacitacion }`)
                                     .then((response) => response.json())
                                     .then((response) => {
                                         getLastCapacitacion()

@@ -137,7 +137,7 @@
     var inputNivel = document.querySelector('#materia-nivel');
 
     function createMateriasTable() {
-        fetch('{{ env('APP_URL') }}/profesores/getMaterias/{{ Auth::user()->id_usuario }}')
+        fetch('/profesores/getMaterias/{{ Auth::user()->id_usuario }}')
             .then(response => response.json())
             .then(response => {
                 let table = document.querySelector('#materias-table');
@@ -185,7 +185,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((response) => {
                             if (response.isConfirmed) {
-                                fetch(`{{ env('APP_URL') }}/profesores/delete-materia/${element.id_asignatura}`)
+                                fetch(`/profesores/delete-materia/${element.id_asignatura}`)
                                     .then((response) => response.json())
                                     .then((response) => {
                                         getLastAsignatura()
@@ -219,7 +219,7 @@
             data.append('nivel', document.querySelector('#materia-nivel').value);
             data.append('_token', '{{ csrf_token() }}');
 
-            fetch('{{ env('APP_URL') }}/profesores/storeMaterias', {
+            fetch('/profesores/storeMaterias', {
                 method: 'POST',
                 headers: new Headers({
                     'X-CSRF-Token': '{{ csrf_token() }}'

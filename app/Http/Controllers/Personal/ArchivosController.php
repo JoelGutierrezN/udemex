@@ -40,7 +40,7 @@ class ArchivosController extends Controller
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
-                    'id_user' => Auth::user()->id_usuario,
+                    'id_usuario' => Auth::user()->id_usuario,
                     'activo' => 1,
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
@@ -84,13 +84,13 @@ class ArchivosController extends Controller
     public function getCapacitaciones($id){
         $dentro = \DB::table('cd_capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
-            ->where('id_user', '=', $id)
+            ->where('id_usuario', '=', $id)
             ->where('solicitud', '=', 'dentro')
             ->orderBy('fecha_inicio', 'desc')
             ->get();
         $fuera = \DB::table('cd_capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
-            ->where('id_user', '=', $id)
+            ->where('id_usuario', '=', $id)
             ->where('solicitud', '=', 'fuera')
             ->orderBy('fecha_inicio', 'desc')
             ->get();
@@ -100,7 +100,7 @@ class ArchivosController extends Controller
 
     public function ultimaActualizacion(){
         $info = \DB::table('cd_capacitaciones')
-            ->where('id_user', '=', \Auth::user()->id_usuario)
+            ->where('id_usuario', '=', \Auth::user()->id_usuario)
             ->select('created_at')
             ->orderBy('created_at', 'DESC')
             ->limit(1)
