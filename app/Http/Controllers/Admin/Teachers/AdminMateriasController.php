@@ -13,7 +13,7 @@ class AdminMateriasController extends Controller
     public function store(Request $request){
         $user = User::find($request->id);
         try{
-            \DB::table('academico_asignaturas')->insert([
+            \DB::table('cd_academico_asignaturas')->insert([
                 'nombre_asignatura' => $request->nombre,
                 'nombre_institucion' => $request->institucion,
                 'fecha_inicio' => $request->inicio,
@@ -36,7 +36,7 @@ class AdminMateriasController extends Controller
     }
 
     public function getMaterias($id){
-        $info = \DB::table('academico_asignaturas')
+        $info = \DB::table('cd_academico_asignaturas')
             ->where('id_usuario', '=', $id)
             ->orderBy('fecha_inicio', 'desc')
             ->get();
@@ -55,7 +55,7 @@ class AdminMateriasController extends Controller
     }
 
     public function ultimaActualizacion(Request $request){
-        $info = \DB::table('academico_asignaturas')
+        $info = \DB::table('cd_academico_asignaturas')
             ->latest()
             ->where('id_usuario', '=', $request->id)
             ->select('created_at')

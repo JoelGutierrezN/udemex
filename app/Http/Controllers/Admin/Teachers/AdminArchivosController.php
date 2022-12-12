@@ -32,7 +32,7 @@ class AdminArchivosController extends Controller
 
             $storage_path = $nombreConvert.'_'.$request->nombre.'_'.$request->tipo.'.pdf';
 
-            \DB::table('capacitaciones')
+            \DB::table('cd_capacitaciones')
                 ->insert([
                     'nombre_curso' => $request->nombre,
                     'nombre_institucion' => $request->instituto,
@@ -49,9 +49,9 @@ class AdminArchivosController extends Controller
                 ]);
 
 
-                if(!Storage::disk('capacitaciones')->exists($storage_path)){
-                    // Storage::disk('capacitaciones')->putFileAs ('', $request->file('evidencia'), $storage_path);
-                    Storage::disk('capacitaciones')->putFileAs('', $request->file('evidencia'), $storage_path);
+                if(!Storage::disk('cd_capacitaciones')->exists($storage_path)){
+                    // Storage::disk('cd_capacitaciones')->putFileAs ('', $request->file('evidencia'), $storage_path);
+                    Storage::disk('cd_capacitaciones')->putFileAs('', $request->file('evidencia'), $storage_path);
             }
 
 
@@ -78,8 +78,8 @@ class AdminArchivosController extends Controller
 
         $storage_path = $capacitacion->constancia_pdf;
 
-        if(Storage::disk('capacitaciones')->exists($storage_path)){
-            Storage::disk('capacitaciones')->delete($storage_path);
+        if(Storage::disk('cd_capacitaciones')->exists($storage_path)){
+            Storage::disk('cd_capacitaciones')->delete($storage_path);
 
         }
         $data = array([
@@ -89,13 +89,13 @@ class AdminArchivosController extends Controller
     }
 
     public function getCapacitaciones($id){
-        $dentro = \DB::table('capacitaciones')
+        $dentro = \DB::table('cd_capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
             ->where('id_usuario', '=', $id)
             ->where('solicitud', '=', 'dentro')
             ->orderBy('fecha_inicio', 'desc')
             ->get();
-        $fuera = \DB::table('capacitaciones')
+        $fuera = \DB::table('cd_capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
             ->where('id_usuario', '=', $id)
             ->where('solicitud', '=', 'fuera')
@@ -106,7 +106,7 @@ class AdminArchivosController extends Controller
     }
 
     public function ultimaActualizacion(Request $request){
-        $info = \DB::table('capacitaciones')
+        $info = \DB::table('cd_capacitaciones')
             ->latest()
             ->select('created_at')
             ->where('id_usuario' , $request->id)

@@ -34,7 +34,7 @@ class AdminHistorialController extends Controller
             $certificado = 'Certificado'.$request->nivel.'_'.$nombreConvert.'_'.$request->nombre.'.pdf';
             $cedula = 'Cedula'.$request->nivel.'_'.$nombreConvert.'_'.$request->nombre.'.pdf';
 
-            \DB::table('historial_academicos')
+            \DB::table('cd_cd_historial_academicos')
                 ->insert([
                     'nombre_asignatura' => $request->nombre,
                     'nombre_institucion' => $request->institucion,
@@ -47,7 +47,7 @@ class AdminHistorialController extends Controller
                 ]);
 
             //return 'Aqui';
-            $idHistorial = \DB::table('historial_academicos')
+            $idHistorial = \DB::table('cd_historial_academicos')
                 ->select('id_asignatura')
                 ->where('nombre_asignatura', '=', $request->nombre)
                 ->where('nombre_institucion', '=', $request->institucion)
@@ -56,7 +56,7 @@ class AdminHistorialController extends Controller
                 ->where('id_usuario', '=', $user->id)
                 ->get();
 
-            \DB::table('archivo_academicos')
+            \DB::table('cd_archivo_academicos')
                 ->insert([
                     'numero_archivo_titulo' => '',
                     'titulo_pdf' => $titulo,
@@ -92,36 +92,36 @@ class AdminHistorialController extends Controller
     }
 
     public function getHistorial($id){
-        $info = \DB::table('historial_academicos')
-            ->where('historial_academicos.id_usuario', '=', $id)
-            ->join('archivo_academicos', 'historial_academicos.id_asignatura', '=', 'archivo_academicos.id_historial')
+        $info = \DB::table('cd_historial_academicos')
+            ->where('cd_historial_academicos.id_usuario', '=', $id)
+            ->join('cd_archivo_academicos', 'cd_historial_academicos.id_asignatura', '=', 'cd_archivo_academicos.id_historial')
             ->select(\DB::raw('
-                historial_academicos.id_asignatura as id_asignatura,
-                historial_academicos.nombre_asignatura as nombre_asignatura,
-                historial_academicos.nombre_institucion as nombre_institucion,
-                historial_academicos.fecha_inicio as fecha_inicio,
-                historial_academicos.fecha_fin as fecha_fin,
-                historial_academicos.nivel_escolar as nivel_escolar,
-                archivo_academicos.titulo_pdf as titulo,
-                archivo_academicos.certificado_pdf as certificado,
-                archivo_academicos.cedula_pdf as cedula
+                cd_historial_academicos.id_asignatura as id_asignatura,
+                cd_historial_academicos.nombre_asignatura as nombre_asignatura,
+                cd_historial_academicos.nombre_institucion as nombre_institucion,
+                cd_historial_academicos.fecha_inicio as fecha_inicio,
+                cd_historial_academicos.fecha_fin as fecha_fin,
+                cd_historial_academicos.nivel_escolar as nivel_escolar,
+                cd_archivo_academicos.titulo_pdf as titulo,
+                cd_archivo_academicos.certificado_pdf as certificado,
+                cd_archivo_academicos.cedula_pdf as cedula
                 '))
-            ->orderBy('historial_academicos.fecha_inicio', 'desc')
+            ->orderBy('cd_historial_academicos.fecha_inicio', 'desc')
             ->get();
 
         return $info;
     }
 
     public function deleteHistorial($id){
-        $historial = \DB::table('historial_academicos')->select('id_asignatura')->where('id_asignatura', '=', $id)->get();
-        $archivo = \DB::table('archivo_academicos')->select('titulo_pdf', 'cedula_pdf', 'certificado_pdf')->where('id_historial', '=', $historial[0]->id_asignatura)->get();
+        $historial = \DB::table('cd_cd_historial_academicos')->select('id_asignatura')->where('id_asignatura', '=', $id)->get();
+        $archivo = \DB::table('cd_archivo_academicos')->select('titulo_pdf', 'cedula_pdf', 'certificado_pdf')->where('id_historial', '=', $historial[0]->id_asignatura)->get();
 
         if(Storage::disk('historial')->exists($archivo[0]->titulo_pdf)) Storage::disk('historial')->delete($archivo[0]->titulo_pdf);
         if(Storage::disk('historial')->exists($archivo[0]->cedula_pdf)) Storage::disk('historial')->delete($archivo[0]->cedula_pdf);
         if(Storage::disk('historial')->exists($archivo[0]->certificado_pdf)) Storage::disk('historial')->delete($archivo[0]->certificado_pdf);
 
-        \DB::table('archivo_academicos')->where('id_historial', '=', $historial[0]->id_asignatura)->delete();
-        \DB::table('historial_academicos')->where('id_usuario', '=', $id)->delete();
+        \DB::table('cd_archivo_academicos')->where('id_historial', '=', $historial[0]->id_asignatura)->delete();
+        \DB::table('cd_historial_academicos')->where('id_usuario', '=', $id)->delete();
 
         $data = array([
             'alert' => 'Registro eliminado'
@@ -130,7 +130,7 @@ class AdminHistorialController extends Controller
     }
 
     public function ultimaActualizacion(Request $request){
-        $info = \DB::table('historial_academicos')
+        $info = \DB::table('cd_historial_academicos')
             ->latest()
             ->where('id_usuario', '=', $request->id)
             ->select('created_at')
