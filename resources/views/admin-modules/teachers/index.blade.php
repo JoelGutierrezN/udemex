@@ -51,6 +51,9 @@
             @endforeach
         </tbody>
     </table>
+    <div id="descargarExcel">
+        <a href="#"><img class="icon" src="{{ asset('img/excel.png')}}" height ="50" width="50"/></a>
+    </div>
 
 @endsection
 
