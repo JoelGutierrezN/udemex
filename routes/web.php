@@ -56,7 +56,7 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
     // * Rutas para las graficas
     Route::get('/graficas', function(){
         return view('admin-modules.graficas.index');
-    });
+    })->name('graficas');
 
     // * Rutas para las capacitaciones
     Route::post('/updateFiles', [AdminArchivosController::class, 'update'])->name('teachers.updateFiles');
