@@ -19,7 +19,7 @@ class AdminMateriasController extends Controller
                 'fecha_inicio' => $request->inicio,
                 'fecha_fin' => $request->fin,
                 'nivel_escolar' => $request->nivel,
-                'id_user' => $user->id,
+                'id_usuario' => $user->id,
                 'activo' => 1,
                 'created_at' => date('Y-m-d h:i:s')
             ]);
@@ -37,7 +37,7 @@ class AdminMateriasController extends Controller
 
     public function getMaterias($id){
         $info = \DB::table('academico_asignaturas')
-            ->where('id_user', '=', $id)
+            ->where('id_usuario', '=', $id)
             ->orderBy('fecha_inicio', 'desc')
             ->get();
         return $info;
@@ -57,7 +57,7 @@ class AdminMateriasController extends Controller
     public function ultimaActualizacion(Request $request){
         $info = \DB::table('academico_asignaturas')
             ->latest()
-            ->where('id_user', '=', $request->id)
+            ->where('id_usuario', '=', $request->id)
             ->select('created_at')
             ->first();
 

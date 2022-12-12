@@ -41,7 +41,7 @@ class AdminHistorialController extends Controller
                     'fecha_inicio' => $request->inicio,
                     'fecha_fin' => $request->fin,
                     'nivel_escolar' => $request->nivel,
-                    'id_user' => $user->id,
+                    'id_usuario' => $user->id,
                     'created_at' => date('Y-m-d H:i:s'),
                     'activo' => 1
                 ]);
@@ -53,7 +53,7 @@ class AdminHistorialController extends Controller
                 ->where('nombre_institucion', '=', $request->institucion)
                 ->where('fecha_inicio', '=', $request->inicio)
                 ->where('fecha_fin', '=', $request->fin)
-                ->where('id_user', '=', $user->id)
+                ->where('id_usuario', '=', $user->id)
                 ->get();
 
             \DB::table('archivo_academicos')
@@ -67,7 +67,7 @@ class AdminHistorialController extends Controller
                     'numero_archivo_cedula' => '',
                     'cedula_pdf' => $cedula,
                     'validar_archivo_cedula' => false,
-                    'id_user' => $user->id,
+                    'id_usuario' => $user->id,
                     'id_historial' => $idHistorial[0]->id_asignatura,
                     'activo' => 1,
                     'created_at' => date('Y-m-d h:i:s')
@@ -93,7 +93,7 @@ class AdminHistorialController extends Controller
 
     public function getHistorial($id){
         $info = \DB::table('historial_academicos')
-            ->where('historial_academicos.id_user', '=', $id)
+            ->where('historial_academicos.id_usuario', '=', $id)
             ->join('archivo_academicos', 'historial_academicos.id_asignatura', '=', 'archivo_academicos.id_historial')
             ->select(\DB::raw('
                 historial_academicos.id_asignatura as id_asignatura,
@@ -121,7 +121,7 @@ class AdminHistorialController extends Controller
         if(Storage::disk('historial')->exists($archivo[0]->certificado_pdf)) Storage::disk('historial')->delete($archivo[0]->certificado_pdf);
 
         \DB::table('archivo_academicos')->where('id_historial', '=', $historial[0]->id_asignatura)->delete();
-        \DB::table('historial_academicos')->where('id_user', '=', $id)->delete();
+        \DB::table('historial_academicos')->where('id_usuario', '=', $id)->delete();
 
         $data = array([
             'alert' => 'Registro eliminado'
@@ -132,7 +132,7 @@ class AdminHistorialController extends Controller
     public function ultimaActualizacion(Request $request){
         $info = \DB::table('historial_academicos')
             ->latest()
-            ->where('id_user', '=', $request->id)
+            ->where('id_usuario', '=', $request->id)
             ->select('created_at')
             ->first();
 

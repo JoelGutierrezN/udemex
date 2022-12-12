@@ -43,7 +43,7 @@ class AdminArchivosController extends Controller
                     'tipo_curso' => $request->tipo,
                     'numero_archivo_constancia' => 1,
                     'constancia_pdf' => $storage_path,
-                    'id_user' => $user->id,
+                    'id_usuario' => $user->id,
                     'activo' => 1,
                     'created_at' => date('Y-m-d h:i:s')
                 ]);
@@ -91,13 +91,13 @@ class AdminArchivosController extends Controller
     public function getCapacitaciones($id){
         $dentro = \DB::table('capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
-            ->where('id_user', '=', $id)
+            ->where('id_usuario', '=', $id)
             ->where('solicitud', '=', 'dentro')
             ->orderBy('fecha_inicio', 'desc')
             ->get();
         $fuera = \DB::table('capacitaciones')
             ->select('id_capacitacion', 'nombre_curso', 'nombre_institucion', 'fecha_inicio', 'fecha_fin', 'tipo_curso', 'horas', 'constancia_pdf')
-            ->where('id_user', '=', $id)
+            ->where('id_usuario', '=', $id)
             ->where('solicitud', '=', 'fuera')
             ->orderBy('fecha_inicio', 'desc')
             ->get();
@@ -109,7 +109,7 @@ class AdminArchivosController extends Controller
         $info = \DB::table('capacitaciones')
             ->latest()
             ->select('created_at')
-            ->where('id_user' , $request->id)
+            ->where('id_usuario' , $request->id)
             ->first();
 
         return response()->json($info, 200);
