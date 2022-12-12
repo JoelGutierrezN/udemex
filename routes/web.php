@@ -53,6 +53,11 @@ Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')-
     Route::get('infoacademic/{uuid}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');
     Route::resource('infoacademica', AdminInformacionAcademicaController::class)->parameters(["infoacademica"=>"infoAcademica"])->except('index');
 
+    // * Rutas para las graficas
+    Route::get('/graficas', function(){
+        return view('admin-modules.graficas.index');
+    });
+
     // * Rutas para las capacitaciones
     Route::post('/updateFiles', [AdminArchivosController::class, 'update'])->name('teachers.updateFiles');
     Route::get('/getCapacitaciones/{id}', [AdminArchivosController::class, 'getCapacitaciones'])->name('teachers.getCapacitaciones');
