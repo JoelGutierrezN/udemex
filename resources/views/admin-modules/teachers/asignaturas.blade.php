@@ -136,7 +136,7 @@
     var inputNivel = document.querySelector('#materia-nivel');
 
     function createMateriasTable() {
-        fetch('{{ env('APP_URL') }}/administradores/getMaterias/{{ $usuario->id_usuario }}')
+        fetch('/administradores/getMaterias/{{ $usuario->id_usuario }}')
             .then(response => response.json())
             .then(response => {
                 let table = document.querySelector('#materias-table');
@@ -184,7 +184,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((response) => {
                             if (response.isConfirmed) {
-                                fetch(`{{ env('APP_URL') }}/administradores/delete-materia/${element.id_asignatura}`)
+                                fetch(`/administradores/delete-materia/${element.id_asignatura}`)
                                     .then((response) => response.json())
                                     .then((response) => {
                                         getLastAsignatura()

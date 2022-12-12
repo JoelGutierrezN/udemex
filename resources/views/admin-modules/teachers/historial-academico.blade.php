@@ -142,7 +142,7 @@
     });
 
     function createHistorialTable(){
-        fetch("{{ env('APP_URL') }}/administradores/getHistorial/{{ $usuario->id_usuario }}")
+        fetch("/administradores/getHistorial/{{ $usuario->id_usuario }}")
             .then((response) => response.json())
             .then((response) => {
 
@@ -260,7 +260,7 @@
                             cancelButtonText: 'Cancelar'
                         }).then((response)=>{
                             if(response.isConfirmed){
-                                fetch(`{{ env('APP_URL') }}/administradores/delete-historial/${ element.id_asignatura }`)
+                                fetch(`/administradores/delete-historial/${ element.id_asignatura }`)
                                     .then((response) => response.json())
                                     .then((response) => {
                                         getLastHistorial();
