@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Teachers\AdminHistorialController;
 use App\Http\Controllers\Admin\Teachers\AdminInformacionAcademicaController;
 use App\Http\Controllers\Admin\Teachers\AdminMateriasController;
 use App\Http\Controllers\Admin\Teachers\TeacherController;
+use App\Http\Controllers\Admin\Teachers\UsuariosExportController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\TemporalAuthController;
 use App\Http\Controllers\ExperienciaInicioController;
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->prefix('administradores')->name('admin.')->group( f
 Route::middleware(['auth', 'admin'])->prefix('administradores')->name('admin.')->group( function(){
     Route::get('bienvenida', AdminIndexController::class)->name('welcome');
     Route::resource('lista', ListaAdminController::class)->names('lista');
+    Route::get('/profesores/export', [UsuariosExportController::class, 'dowloadTeachers'])->name('downloadTeachers');
     Route::get('experienciaLaboral/{id}', [AdminInformacionAcademicaController::class, 'index'])->name('teachers.experienciaLaboral');
     Route::resource('profesores', TeacherController::class)->except('show')->names('teachers')->parameters(['profesores' => 'usuario']);
     Route::get('infoacademic/{uuid}/downloadinfo', [UsuarioController::class, 'downloadinfo'])->name('infoacademic.downloadinfo');

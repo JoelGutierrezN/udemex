@@ -3,6 +3,11 @@
 @section('content')
 
     <h1 id="teachers--title">Listado de docentes</h1>
+    <div id="descargarExcel">
+        <a href="{{route('admin.downloadTeachers')}}"><img class="icon" src="{{ asset('img/excel.png')}}" height ="50" width="50"/>
+            <p>Descargar</p>
+        </a>
+    </div>
 
     <table class="table table-green">
         <thead>
@@ -51,9 +56,6 @@
             @endforeach
         </tbody>
     </table>
-    <div id="descargarExcel">
-        <a href="#"><img class="icon" src="{{ asset('img/excel.png')}}" height ="50" width="50"/></a>
-    </div>
 
 @endsection
 
