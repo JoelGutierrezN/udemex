@@ -4,8 +4,8 @@
 @section('content')
 
 <div class="tabs">
-    <button type="button" id="personal-menu" data-tab-target="1">Evaluacion Docente &blacktriangledown;</button>
-    <button type="button" id="historial-menu" data-tab-target="2">Porcentajes de Aprobacion &blacktriangledown;</button>
+    <button type="button" id="personal-menu" data-tab-target="1">Evaluación Docente &blacktriangledown;</button>
+    <button type="button" id="historial-menu" data-tab-target="2">Porcentajes de Aprobación &blacktriangledown;</button>
 </div>
 
 <div data-tab-id="1">

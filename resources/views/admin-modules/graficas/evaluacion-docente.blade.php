@@ -28,8 +28,8 @@
             </td>
             <td style="text-align: right">
                     <select name="programa" id="" style="text-align: right">
-                        <option value="">Licenciatura en Informatica Administrativa</option>
-                        <option value="">Ingenieria en Desarrollo y Gestion de Software</option>
+                        <option value="">Licenciatura en Informática Administrativa</option>
+                        <option value="">Ingeniería en Desarrollo y Gestión de Software</option>
                     </select>
             </td>
         </tr>
@@ -45,7 +45,7 @@
                 <th>Asignatura</th>
                 <th>Grupo</th>
                 <th>No. Estudiantes</th>
-                <th>Calificacion</th>
+                <th>Calificación</th>
             </tr>
         </thead>
         <tbody>
@@ -123,9 +123,9 @@
                     allowPointSelect: true,
                     cursor: 'pointer',
                     dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %'
-                    }
+                        enabled: false
+                    },
+                    showInLegend: true
                 }
             },
             lang: {
@@ -182,7 +182,7 @@
                 }
             },
         series: [{
-            name: 'Promedio de evaluacion',
+            name: 'Promedio de evaluación',
             colorByPoint: true,
             data: [
                 {
