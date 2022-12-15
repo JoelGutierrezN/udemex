@@ -22,10 +22,10 @@
             @foreach($users as $user)
                 <tr>
                     <td>
-                        {{-- @isset($user->foto)
+                        @isset($user->foto)
                         <img class='profile-image' src="{{ asset('imagenes/perfil/' . $user->foto) }}" alt="foto">
-                        @endisset --}}
-                        <img src="{{asset('img/sinfoto.jpeg')}}" alt="sinFoto" height ="50" width="50">
+                        @endisset
+                        {{-- <img src="{{asset('img/sinfoto.jpeg')}}" alt="sinFoto" height ="50" width="50"> --}}
                     </td>
                     <td>{{ $user->clave_empleado }}</td>
                     <td>{{ $user->get_fullname }}</td>
