@@ -1,11 +1,5 @@
-<style>
-    .graficas{
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-</style>
 
-<h1 id="teachers--title">Listado de docentes</h1>
+<h1 id="teachers--title">Listado de asesores</h1>
 
 <section class="selects">
     <table style="margin: auto">
@@ -40,7 +34,7 @@
     <table class="table table-green">
         <thead>
             <tr>
-                <th>Clave Profesor</th>
+                <th>Clave Asesor</th>
                 <th>Nombre Completo</th>
                 <th>Asignatura</th>
                 <th>Grupo</th>
@@ -86,7 +80,6 @@
 </section>
 
 <section class="graficas">
-    <div id="grafica-pastel"></div>
     <div id="grafica-barras"></div>
 </section>
 
@@ -102,64 +95,6 @@
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
 <script>
-    Highcharts.chart('grafica-pastel', {
-        chart: {
-              type: 'pie'
-            },
-            title: {
-              align: 'center',
-              text: 'Porcentaje de aprobación'
-            },
-            accessibility: {
-                announceNewData: {
-                  enabled: true
-                },
-              },
-              credits: {
-                enabled:false
-              },
-              plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false
-                    },
-                    showInLegend: true
-                }
-            },
-            lang: {
-                downloadPDF: 'Descargar PDF'
-            },
-            exporting: {
-                buttons: {
-                    contextButton: {
-                        menuItems: ['downloadPDF']
-                    }
-                }
-            },
-              tooltip: {
-                headerFormat: '<span style="font-size:11px">{point.name}</span><br>',
-                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.percentage:.1f}%</b><br/>'
-              },
-
-              series: [{
-                  name: "Porcentaje de aprobacion",
-                  colorByPoint: true,
-                  data: [
-                    {
-                        name: 'Aprobados',
-                        y: 75
-                    },
-                    {
-                        name: 'Reprobados',
-                        y: 25
-                    }
-                  ]
-                }
-              ],
-    });
-
     Highcharts.chart('grafica-barras', {
         chart: {
             type: 'bar'

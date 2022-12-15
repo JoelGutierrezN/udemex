@@ -13,7 +13,7 @@
     }
 </style>
 
-<h1 id="teachers--title">Porcentaje de aprobación en la evaluación docente</h1>
+<h1 id="teachers--title">Porcentaje de aprobación en la evaluación de asesores</h1>
 
 <section class="plantilla">
     <table>
@@ -54,9 +54,9 @@
             <tr>
                 <th>Programa Educativo</th>
                 <th>Nivel</th>
-                <th>Profesores Evaluados</th>
-                <th>Alumnos que contestaron la encuesta</th>
-                <th>Promedio de evaluación docente</th>
+                <th>Asesores Evaluados</th>
+                <th>estudiantes que contestaron la encuesta</th>
+                <th>Promedio de evaluación de asesores</th>
             </tr>
         </thead>
         <tbody>
@@ -97,14 +97,14 @@
             </tr>
             <tr>
                 <td>Maestría en Administración Pública y Gobierno</td>
-                <td>Postgrado</td>
+                <td>Maestría</td>
                 <td>23</td>
                 <td>20</td>
                 <td>8.2</td>
             </tr>
             <tr>
                 <td>Maestría en Tecnología Digital para la Educación</td>
-                <td>Postgrado</td>
+                <td>Maestría</td>
                 <td>15</td>
                 <td>10</td>
                 <td>9.8</td>
@@ -134,7 +134,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Porcentaje de alumnos que aplicaron la evaluación docente por Programa educativo',
+                text: 'Porcentaje de estudiantes que aplicaron la evaluación de asesores por Programa educativo',
                 align: 'center'
             },
             tooltip: {
@@ -198,7 +198,7 @@
             align: 'center'
         },
         xAxis: {
-            categories: ['TSU', 'Licenciatura', 'Postgrado']
+            categories: ['TSU', 'Licenciatura', 'Maestría']
         },
         yAxis: {
             title: null,
