@@ -5,7 +5,7 @@
     <table style="margin: auto">
         <tr>
             <td style="text-align: right">
-                <label for="plantilla">Seleccion Plantilla</label>
+                <label for="plantilla">Selección Plantilla</label>
             </td>
             <td style="text-align: right">
 
