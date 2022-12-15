@@ -218,7 +218,7 @@
                 data: [30, 40, 35],
                 stack: 'Asia'
             }, {
-                name: 'Reporbados',
+                name: 'Reprobados',
                 data: [4, 1, 4],
                 stack: 'Europe'
             }
