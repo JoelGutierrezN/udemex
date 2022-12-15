@@ -60,7 +60,7 @@
     <h3 class="tab--title">Asignaturas impartidas</h3>
     <div class="">
         <div>
-            <label for="text-input"> Coloque asignaturas impartidas en otras instituciones</label>
+            <label for="text-input">Coloque asignaturas impartidas en otras instituciones</label>
             <ul class="col6">
                 <form id="materias-form" action="" method="post" enctype="multipart/form-data">
                     @csrf

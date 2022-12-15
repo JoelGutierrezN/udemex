@@ -13,7 +13,7 @@
     }
 </style>
 
-<h1 id="teachers--title">Porcentaje de aprobación en la evaluación docente</h1>
+<h1 id="teachers--title">Porcentaje de aprobación en la evaluación de asesores</h1>
 
 <section class="plantilla">
     <table>
@@ -32,16 +32,16 @@
             </td>
             <td>
                     <div>
-                        <input type="radio" name="" id="bachillerato"><label for="">Bachillerato</label>
+                        <input type="checkbox" name="" id="bachillerato"><label for="">Bachillerato</label>
                     </div>
                     <div>
-                        <input type="radio" name="" id="tsu"  checked><label for="">TSU</label>
+                        <input type="checkbox" name="" id="tsu"  checked><label for="">TSU</label>
                     </div>
                     <div>
-                        <input type="radio" name="" id="licenciatura"  checked><label for="">Licenciatura</label>
+                        <input type="checkbox" name="" id="licenciatura"  checked><label for="">Licenciatura</label>
                     </div>
                     <div>
-                        <input type="radio" name="" id="postgrado"  checked><label for="">Postgrados</label>
+                        <input type="checkbox" name="" id="postgrado"  checked><label for="">Postgrados</label>
                     </div>
             </td>
         </tr>
@@ -54,28 +54,28 @@
             <tr>
                 <th>Programa Educativo</th>
                 <th>Nivel</th>
-                <th>Profesores Evaluados</th>
-                <th>Alumnos que contestaron la encuesta</th>
-                <th>Promedio de evaluacion docente</th>
+                <th>Asesores Evaluados</th>
+                <th>estudiantes que contestaron la encuesta</th>
+                <th>Promedio de evaluación de asesores</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td>Licenciatura en Informatica Administrativa</td>
+                <td>Licenciatura en Informática Administrativa</td>
                 <td>Licenciatura</td>
                 <td>23</td>
                 <td>50</td>
                 <td>9.6</td>
             </tr>
             <tr>
-                <td>Licenciatura en Psicologia</td>
+                <td>Licenciatura en Psicología</td>
                 <td>Licenciatura</td>
                 <td>30</td>
                 <td>40</td>
                 <td>7.8</td>
             </tr>
             <tr>
-                <td>Licenciatura en Seguridad Publica</td>
+                <td>Licenciatura en Seguridad Pública</td>
                 <td>Licenciatura</td>
                 <td>45</td>
                 <td>60</td>
@@ -89,22 +89,22 @@
                 <td>8.6</td>
             </tr>
             <tr>
-                <td>TSU en Informatica</td>
+                <td>TSU en Informática</td>
                 <td>TSU</td>
                 <td>34</td>
                 <td>70</td>
                 <td>7.6</td>
             </tr>
             <tr>
-                <td>Maestria en Administración Publica y Gobierno</td>
-                <td>Postgrado</td>
+                <td>Maestría en Administración Pública y Gobierno</td>
+                <td>Maestría</td>
                 <td>23</td>
                 <td>20</td>
                 <td>8.2</td>
             </tr>
             <tr>
-                <td>Maestria en Tecnologia Digital para la Educación</td>
-                <td>Postgrado</td>
+                <td>Maestría en Tecnología Digital para la Educación</td>
+                <td>Maestría</td>
                 <td>15</td>
                 <td>10</td>
                 <td>9.8</td>
@@ -134,27 +134,47 @@
                 type: 'pie'
             },
             title: {
-                text: 'Porcentaje de alumnos que aplicaron la evaluación docuente por Programa educativo',
+                text: 'Porcentaje de estudiantes que aplicaron la evaluación de asesores por Programa educativo',
                 align: 'center'
             },
             tooltip: {
                 headerFormat: '<span style="font-size:11px">{point.name}</span><br>',
                 pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.percentage:.1f}%</b><br/>'
             },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            lang: {
+                downloadPDF: 'Descargar PDF'
+            },
+            exporting: {
+                buttons: {
+                    contextButton: {
+                        menuItems: ['downloadPDF']
+                    }
+                }
+            },
             series: [{
                   name: "Porcentaje de aplicación",
                   colorByPoint: true,
                   data: [
                     {
-                        name: 'Licenciatura en Informatica Administrativa',
+                        name: 'Licenciatura en Informática Administrativa',
                         y: 50
                     },
                     {
-                        name: 'Licenciatura en Psicologia',
+                        name: 'Licenciatura en Psicología',
                         y: 40
                     },
                     {
-                        name: 'Licenciatura en Seguridad Publica',
+                        name: 'Licenciatura en Seguridad Pública',
                         y: 60
                     },
                     {
@@ -178,11 +198,21 @@
             align: 'center'
         },
         xAxis: {
-            categories: ['TSU', 'Licenciatura', 'Postgrado']
+            categories: ['TSU', 'Licenciatura', 'Maestría']
         },
         yAxis: {
             title: null,
         },
+        lang: {
+                downloadPDF: 'Descargar PDF'
+            },
+            exporting: {
+                buttons: {
+                    contextButton: {
+                        menuItems: ['downloadPDF']
+                    }
+                }
+            },
         series: [{
                 name: 'Aprobados',
                 data: [30, 40, 35],

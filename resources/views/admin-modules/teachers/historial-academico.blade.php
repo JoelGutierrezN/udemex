@@ -34,13 +34,13 @@
             <form action="{{ route('admin.teachers.storeHistorial') }}" method="post" enctype="multipart/form-data" id="historialAcademico-form">
                 @csrf
                 <ul class="col5" id="ul-form-historial">
-                    <li class="formlabel is-required">Nombre del titulo</li>
+                    <li class="formlabel is-required">Nombre del título</li>
                     <li class="formlabel is-required">Nombre de la institución</li>
                     <li class="formlabel is-required">Inicio</li>
                     <li class="formlabel is-required">Fin</li>
                     <li class="formlabel is-required">Nivel Escolar</li>
 
-                    <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre completo del titulo" id="historial-nombre"></li>
+                    <li><input name="nombre" type="text" autocomplete="off" placeholder="Nombre completo del título" id="historial-nombre"></li>
                     <li><input name="institucion" type="text" autocomplete="off" placeholder="Nombre completo de la institucion donde se estudio" id="historial-institucion"></li>
                     <li><input name="inicio" type="date" placeholder="Inicio de capacitación" id="historial-inicio"></li>
                     <li><input name="fin" type="date" placeholder="Fin de capacitación" id="historial-fin"></li>
@@ -65,7 +65,7 @@
                     <li>&#160;</li>
 
                     <li>
-                        <input id="historial-titulo" type="file" name="titulo" placeholder="titulo" class="formlabel" accept="application/pdf" required>
+                        <input id="historial-título" type="file" name="título" placeholder="título" class="formlabel" accept="application/pdf" required>
                     </li>
                     <li>
                         <input id="historial-certificado" type="file" name="certificado" placeholder="certificado" class="formlabel" accept="application/pdf" required>
@@ -82,7 +82,7 @@
             <table id="table-historial-academico" style="font-size: 1.3rem;">
                 <thead>
                     <tr>
-                        <th>Nombre del titulo</th>
+                        <th>Nombre del título</th>
                         <th>Nombre de la institución</th>
                         <th>Inicio</th>
                         <th>Fin</th>
@@ -132,7 +132,7 @@
                 document.querySelector('#historial-inicio').value= '';
                 document.querySelector('#historial-fin').value= '';
                 document.querySelector('#historial-nivel').value= '';
-                document.querySelector('#historial-titulo').value= '';
+                document.querySelector('#historial-título').value= '';
                 document.querySelector('#historial-cedula').value= '';
                 document.querySelector('#historial-certificado').value= '';
                 Swal.fire('Registro realizado correctamente', '', 'success');
@@ -169,7 +169,7 @@
                     let deleteButton = document.createElement('a');
 
                     let documentosTable = document.createElement('table');
-                    let titulo = document.createElement('tr');
+                    let título = document.createElement('tr');
                     let certificado = document.createElement('tr');
                     let cedula = document.createElement('tr');
 
@@ -178,7 +178,7 @@
                     let cedulaPreview = document.createElement('span');
 
                     opciones.setAttribute('style', 'text-align: center;');
-                    titulo.setAttribute('style', 'cursor: pointer;');
+                    título.setAttribute('style', 'cursor: pointer;');
                     certificado.setAttribute('style', 'cursor: pointer;');
                     cedula.setAttribute('style', 'cursor: pointer;');
                     tituloPreview.setAttribute('class', 'file-preview');
@@ -191,14 +191,14 @@
                     fin.innerHTML = new Date(element.fecha_fin).toLocaleDateString('es-MX');
                     nivel.innerHTML = element.nivel_escolar;
                     tituloPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20">`;
-                    titulo.innerHTML = `<span>Título</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="documentos/Historial/${element.titulo}" download="${element.titulo}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
+                    título.innerHTML = `<span>Título</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="documentos/Historial/${element.título}" download="${element.título}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
                     certificadoPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20">`;
                     certificado.innerHTML = `<span>Cerfiticado</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="documentos/Historial/${element.certificado}" download="${element.certificado}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
                     cedulaPreview.innerHTML = `<img src="https://cdn-icons-png.flaticon.com/512/4682/4682622.png" class="icon" alt="" height ="20" width="20">`;
                     cedula.innerHTML = `<span>Cédula</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="documentos/Historial/${element.cedula}" download="${element.cedula}"><img src="https://cdn-icons-png.flaticon.com/512/1092/1092004.png" class="icon" alt="" height ="20" width="20"></a>`;
                     deleteButton.innerHTML = `<img class="icon" src="https://cdn-icons-png.flaticon.com/512/8568/8568248.png" alt="" height ="40" width="40">`;
 
-                    titulo.appendChild(tituloPreview);
+                    título.appendChild(tituloPreview);
                     certificado.appendChild(certificadoPreview);
                     cedula.appendChild(cedulaPreview);
                     tr.appendChild(nombre);
@@ -206,7 +206,7 @@
                     tr.appendChild(inicio);
                     tr.appendChild(fin);
                     tr.appendChild(nivel);
-                    archivos.appendChild(titulo);
+                    archivos.appendChild(título);
                     archivos.appendChild(certificado);
                     archivos.appendChild(cedula);
                     tr.appendChild(archivos);
@@ -234,7 +234,7 @@
                     }
 
                     tituloPreview.addEventListener('click',(e)=>{
-                        let archivo = `documentos/Historial/${element.titulo}`;
+                        let archivo = `documentos/Historial/${element.título}`;
                         iframe.src ='{{ asset("") }}'+archivo;
                         modal.style.display = "block";
                         iframe.src = iframe.src;

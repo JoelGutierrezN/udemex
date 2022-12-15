@@ -20,7 +20,7 @@
         </style>
         <div class="mt-2" data-tab-id="4">
             <h3 class="tab--title">
-                    <label for="text-input"> Anexar constancias con registro de datos:</label>
+                    <label for="text-input">Anexar constancias con registro de datos:</label>
             </h3>
             <div class="">
                 <div><br><br>
@@ -66,7 +66,7 @@
                         
                      <br><br><br>
 
-                    <label style="font-size: 2rem;" for="text-input"> Capacitación solicitada en UDEMEX</label>
+                    <label style="font-size: 2rem;" for="text-input">Capacitación solicitada en UDEMEX</label>
 
 
                     <table id="table-capacitaciones" style="font-size: 1.3rem;">
